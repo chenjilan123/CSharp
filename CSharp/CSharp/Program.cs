@@ -9,14 +9,30 @@ namespace CSharp
         static void Main(string[] args)
         {
             var services = CreateServices()
-                .AddJet();
+                .AddVehicle();
 
-            var provider = services.BuildServiceProvider();
-            var jet = provider.GetService<Jet502>();
-            jet.Fly();
-            jet.Attack();
-            jet.Information();
+            using (var provider = services.BuildServiceProvider())
+            {
+                try
+                {
+                    var jet = provider.GetService<Jet502>();
+                    jet.Fly();
+                    jet.Attack();
+                    jet.Information();
+
+                    var airport = provider.GetService<Airport>();
+                    airport.Run();
+
+                    var bus = provider.GetService<IAirbus>();
+                    Console.WriteLine(bus.Id);
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex.ToString());
+                }
+            }
         } 
+
 
         private static IServiceCollection CreateServices()
         {
