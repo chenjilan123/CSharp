@@ -16,6 +16,7 @@ namespace CSharp
 
         public Jet502(IOptions<JetOptions> options)
         {
+            this.Name = "J20";
             this.OilBox = options.Value.OilBox;
             this.Code = options.Value.Code;
         }
