@@ -14,6 +14,8 @@ namespace CSharp
         public string OilBox { get; set; }
         public string Code { get; set; }
 
+        public int Missiles { get; set; }
+
         public Jet502(IOptions<JetOptions> options, IOptions<JetExtensionOptions> extensionOptions)
         {
             this.Name = "J20";
@@ -36,6 +38,7 @@ namespace CSharp
         public void Information()
         {
             Console.WriteLine($"Name: {Name}, Id: {Id}, Weight: {Weight.ToString("0.00")}");
+            Console.WriteLine($"Missiles: {Missiles}");
             Console.WriteLine($"Options: OilBox-{OilBox}, Code-{Code}");
         }
     }

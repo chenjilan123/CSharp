@@ -35,7 +35,8 @@ namespace CSharp
                     opt.Capacity = 150;
                     opt.Code = "UE5M3";
                 });
-                //.Configure<T2>(opt2 => ;)
+            //.Configure<T2>(opt2 => ;)
+
             return services;
         }
     }

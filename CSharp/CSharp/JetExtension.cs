@@ -10,7 +10,13 @@ namespace CSharp
         public static IServiceCollection AddJet(this IServiceCollection services)
         {
             //services.AddOptions<JetOptions>();
-            return services.AddSingleton<Jet502>();
+            services.AddSingleton<Jet502>();
+            //    .Decorate<Jet502>((jet, _) =>
+            //{
+            //    jet.Missiles = 50;
+            //    return jet;
+            //});
+            return services;
         }
     }
 }
