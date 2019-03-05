@@ -14,11 +14,13 @@ namespace CSharp
         public string OilBox { get; set; }
         public string Code { get; set; }
 
-        public Jet502(IOptions<JetOptions> options)
+        public Jet502(IOptions<JetOptions> options, IOptions<JetExtensionOptions> extensionOptions)
         {
             this.Name = "J20";
             this.OilBox = options.Value.OilBox;
             this.Code = options.Value.Code;
+            this.Weight = extensionOptions.Value.Weight;
+            this.Id = extensionOptions.Value.Id;
         }
 
         public void Fly()

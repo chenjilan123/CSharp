@@ -9,7 +9,7 @@ namespace CSharp
     {
         public static IServiceCollection AddJet(this IServiceCollection services)
         {
-            services.AddOptions<JetOptions>();
+            //services.AddOptions<JetOptions>();
             return services.AddSingleton<Jet502>();
         }
     }

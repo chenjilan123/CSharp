@@ -22,7 +22,7 @@ namespace CSharp
         {
             var services = new ServiceCollection()
                 .AddLogging(cfg => cfg.SetMinimumLevel(LogLevel.Trace))
-                .AddOptions()
+                //.AddOptions()
                 .Configure<JetOptions>(opt =>
                 {
                     opt.Id = 526;
