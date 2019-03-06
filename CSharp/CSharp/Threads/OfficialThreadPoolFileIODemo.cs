@@ -65,11 +65,11 @@ namespace CSharp.Threads
 
                 // Create two files and two State objects. 
                 FileStream fileWriter1 =
-                    new FileStream(@"C:\Test1@##.dat", FileMode.Create,
+                    new FileStream(@"D:\Test1@##.dat", FileMode.Create,
                     FileAccess.ReadWrite, FileShare.ReadWrite,
                     BufferSize, true);
                 FileStream fileWriter2 =
-                    new FileStream(@"C:\Test2@##.dat", FileMode.Create,
+                    new FileStream(@"D:\Test2@##.dat", FileMode.Create,
                     FileAccess.ReadWrite, FileShare.ReadWrite,
                     BufferSize, true);
                 State stateInfo1 = new State(fileWriter1, autoEvent);
