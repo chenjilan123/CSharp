@@ -8,27 +8,34 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
-            var timer = new System.Timers.Timer(3000);
-            timer.Elapsed += Timer_Elapsed;
-            timer.Start();
+            try
+            {
+                TimerLoop();
+                Thread.Sleep(5000);
+                ManagedThreadPool();
 
-            Console.WriteLine("Press \"Enter\" to quit");
-            Console.ReadLine();
-
-            timer.Stop();
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Main thread get a exception.");
+                Console.WriteLine(ex.ToString());
+            }
         }
 
-        private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        private static void TimerLoop()
         {
-            var id = Guid.NewGuid().ToString();
-            var round = 1;
-            while(true)
-            {
-                Console.WriteLine($"{id}: {round++}");
-                Thread.Sleep(5000);
-                ThreadPool.GetAvailableThreads(out int threads, out int completionPortThreads);
-                Console.WriteLine($"Threads: {threads}, CompletionPortThreads: {completionPortThreads}");
-            }
+            var timer = new Timer.TimerLoop();
+            timer.Run();
+        }
+
+        private static void ManagedThreadPool()
+        {
+            var managedThreadPool = new Threads.ManagedThreadPool();
+            managedThreadPool
+                .Information()
+                //.ThreadPoolException()
+                .RequestThread();
         }
     }
 }
