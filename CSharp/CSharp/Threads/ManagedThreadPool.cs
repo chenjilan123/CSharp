@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-
+using System.Threading.Tasks;
 using static System.Threading.ThreadPool;
 
 namespace CSharp.Threads
@@ -104,6 +104,15 @@ namespace CSharp.Threads
         #region RequestThread
         public ManagedThreadPool RequestThread()
         {
+            //1
+            Task.Run(() => Console.WriteLine());
+
+            //2
+            QueueUserWorkItem(_ => { });
+
+            //3
+            WaitHandle waitHandle = null;
+            RegisterWaitForSingleObject(waitHandle, null, null, 0, true);
 
             return this;
         }
