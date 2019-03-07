@@ -10,9 +10,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="NPOI">
-      <HintPath>Lib\NPOI.dll</HintPath>
-    </Reference>
+    <None Include="bin\Debug\netcoreapp2.2\Excel\cell.xls" />
+    <None Include="bin\Debug\netcoreapp2.2\Excel\empty.xls" />
+    <None Include="bin\Debug\netcoreapp2.2\Excel\summary.xls" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NPOI" Version="2.4.1" />
   </ItemGroup>
 
 </Project>
