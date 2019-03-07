@@ -5,4 +5,14 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Lib\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NPOI">
+      <HintPath>Lib\NPOI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
