@@ -89,6 +89,7 @@ namespace CSharp.Excel
             }
         }
 
+        #region 创建Excel
         public ExcelExporter CreaterExcel()
         {
             HSSFWorkbook workbook = CreateWorkbooWithSheet();
@@ -96,7 +97,9 @@ namespace CSharp.Excel
             Save(workbook, this.emptyFile);
             return this.CreateSummary();
         }
+        #endregion
 
+        #region 创建摘要
         /// <summary>
         /// Ref: DocummentSummaryInformation - https://docs.microsoft.com/zh-cn/windows/desktop/Stg/the-documentsummaryinformation-and-userdefined-property-sets
         /// Ref: SummaryInformation - https://docs.microsoft.com/zh-cn/windows/desktop/Msi/manage-summary-information
@@ -119,7 +122,9 @@ namespace CSharp.Excel
 
             return this.CreateCell();
         }
+        #endregion
 
+        #region 创建单元格
         public ExcelExporter CreateCell()
         {
             var workbook = CreateWorkbooWithSheet();
@@ -136,5 +141,6 @@ namespace CSharp.Excel
             Save(workbook, this.cellFile);
             return this;
         }
+        #endregion
     }
 }
