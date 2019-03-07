@@ -24,6 +24,8 @@ namespace CSharp.Excel
         private readonly string emptyFile = GetPath("empty.xls");
         private readonly string summaryFile = GetPath("summary.xls");
         private readonly string cellFile = GetPath("cell.xls");
+        private readonly string commentFile = GetPath("comment.xls"); 
+        private readonly string cellFormatFile = GetPath("cell format.xls"); 
 
         static ExcelExporter()
         {
@@ -71,6 +73,7 @@ namespace CSharp.Excel
             return this;
         }
 
+        #region 创建工作表
         private static HSSFWorkbook CreateWorkbooWithSheet()
         {
             var workbook = new HSSFWorkbook();
@@ -80,7 +83,9 @@ namespace CSharp.Excel
             workbook.CreateSheet("sheet4");
             return workbook;
         }
+        #endregion
 
+        #region 保存
         private void Save(HSSFWorkbook workbook, string filePath)
         {
             using (var fs = new FileStream(filePath, FileMode.Create))
@@ -88,6 +93,7 @@ namespace CSharp.Excel
                 workbook.Write(fs);
             }
         }
+        #endregion
 
         #region 创建Excel
         public ExcelExporter CreaterExcel()
@@ -139,6 +145,46 @@ namespace CSharp.Excel
             sheet.GetRow(0).CreateCell(1).SetCellValue("Halo-Ha");
 
             Save(workbook, this.cellFile);
+            return this.CreateComment();
+        }
+        #endregion
+
+        #region 创建批注
+        /// <summary>
+        /// 创建批注：
+        /// 位置: HSSFClientAnchor - dx1, dy1, dx2, dy2
+        /// 大小: HSSFClientAnchor - col1, row1, col2, row2
+        /// 文本: IComment.String
+        /// 作者: IComment.Author
+        /// </summary>
+        /// <returns></returns>
+        public ExcelExporter CreateComment()
+        {
+            var workbook = CreateWorkbooWithSheet();
+
+            var sheet = workbook.GetSheetAt(0);
+
+            var patr = sheet.CreateDrawingPatriarch();
+            var anchor = new HSSFClientAnchor(0, 0, 0, 0, 1, 2, 4, 4);
+            var comment = patr.CreateCellComment(anchor);
+            comment.String = new HSSFRichTextString("NPOI Demo string");
+            comment.Author = "NPOI Demo Author";
+            comment.Visible = true; //Default: false
+            var cell = sheet.CreateRow(1).CreateCell(1);
+            cell.CellComment = comment;
+
+            Save(workbook, this.commentFile);
+            return this.SetCellFormat();
+        }
+        #endregion
+
+        #region 设置单元格格式
+        public ExcelExporter SetCellFormat()
+        {
+            var workbook = CreateWorkbooWithSheet();
+
+
+            Save(workbook, this.cellFormatFile);
             return this;
         }
         #endregion
