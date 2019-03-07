@@ -1,4 +1,5 @@
-﻿using NPOI.HSSF.UserModel;
+﻿using CSharp.Excel;
+using NPOI.HSSF.UserModel;
 using System;
 
 namespace CSharp
@@ -7,7 +8,13 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
-            HSSFWorkbook workBook;
+            Excel();
+        }
+
+        private static void Excel()
+        {
+            var excelExporter = new ExcelExporter();
+            excelExporter.Export();
         }
     }
 }
