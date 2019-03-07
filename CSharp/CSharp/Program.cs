@@ -14,9 +14,7 @@ namespace CSharp
 
             try
             {
-                TimerLoop();
-                Thread.Sleep(5000);
-                ManagedThreadPool();
+                TaskParallel();
 
                 Console.ReadLine();
             }
@@ -35,11 +33,21 @@ namespace CSharp
 
         private static void ManagedThreadPool()
         {
+            TimerLoop();
+            Thread.Sleep(5000);
             var managedThreadPool = new Threads.ManagedThreadPool();
             managedThreadPool
                 .Information()
                 //.ThreadPoolException()
                 .RequestThread();
+        }
+
+        private static void TaskParallel()
+        {
+            var taskParallel = new Tasks.TaskParallel();
+            taskParallel
+                //.TaskIsThreadPool()
+                .ParellelTask();
         }
     }
 }
