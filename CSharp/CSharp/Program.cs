@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CSharp.BestPractice;
+using CSharp.Tasks;
+using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Timers;
 
@@ -8,14 +11,23 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
+            ////StopWatch
+            //var sw = Stopwatch.StartNew();
+            //Thread.Sleep(500);
+            //Console.WriteLine("First elapsed" + sw.Elapsed);
+            ////sw.Restart(); //Reset and start
+            //sw.Reset();
+            //sw.Start();
+            //Thread.Sleep(500);
+            //Console.WriteLine("Second elapsed" + sw.Elapsed);
+            //return;
+
             //File IO Demo
             //Threads.OfficialThreadPoolFileIODemo.Run();
             //return;
-
             try
             {
-                TaskParallel();
-
+                GetPositionDemo();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -25,12 +37,15 @@ namespace CSharp
             }
         }
 
+        #region TimerLoop
         private static void TimerLoop()
         {
             var timer = new Timer.TimerLoop();
             timer.Run();
         }
+        #endregion
 
+        #region ManagedThreadPool
         private static void ManagedThreadPool()
         {
             TimerLoop();
@@ -41,7 +56,9 @@ namespace CSharp
                 //.ThreadPoolException()
                 .RequestThread();
         }
+        #endregion
 
+        #region TaskParallel
         private static void TaskParallel()
         {
             var taskParallel = new Tasks.TaskParallel();
@@ -49,5 +66,34 @@ namespace CSharp
                 //.TaskIsThreadPool()
                 .ParellelTask();
         }
+        #endregion
+
+        #region UpdateAsync
+        private static void UpdateAsync()
+        {
+            var core = new UpdateAsync();
+
+            //Base
+            //Console.WriteLine("Enter method");
+            //var task = core.Begin();
+            //Console.WriteLine("Quit method");
+            //Console.WriteLine("Begin wait...");
+            //task.Wait();
+            //Console.WriteLine($"Result: {task.Result}");
+
+            //Parallel
+            core.ParallelProcess();
+
+
+        }
+        #endregion
+
+        #region GetPositionDemo
+        private static void GetPositionDemo()
+        {
+            var geoLocation = new GeoLocation();
+            geoLocation.GetPosition();
+        }
+        #endregion
     }
 }
