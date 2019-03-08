@@ -14,5 +14,15 @@ namespace CSharp
                 yield return dr;
             }
         }
+
+        public static List<DataRow> ToList(this DataTable table)
+        {
+            var list = new List<DataRow>();
+            foreach (DataRow dr in table.Rows)
+            {
+                list.Add(dr);
+            }
+            return list;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace CSharp.BestPractice
 {
     public class GeoLocation
     {                                          //        Async(s)   Speed    Sync   Speed
-        private const int MaxPostion1 = 1000;  //        57.08      17.1            9.2
+        private const int MaxPostion1 = 10;  //        57.08      17.1            9.2
         private const int MaxPostion2 = 5000;
         private const int MaxPostion3 = 10000;
         private const int MaxPostion4 = 50000;
@@ -39,14 +39,30 @@ namespace CSharp.BestPractice
             UpdatePosition(table);
             //PrintTable(table);
 
+            SavePosition(table).Wait();
+        }
 
+        private async Task SavePosition(DataTable table)
+        {
+            using (var fs = new FileStream("Position/resolved.txt", FileMode.OpenOrCreate, FileAccess.Write))
+            using (var sr = new StreamWriter(fs))
+            {
+                foreach (DataRow dr in table.Rows)
+                {
+                    var lon = (double)dr[Lon];
+                    var lat = (double)dr[Lat];
+                    await sr.WriteLineAsync($"{lon.ToString("0.000000")} {lat.ToString("0.000000")} {dr[Position1]} {dr[Position2]}");
+                }
+            }
         }
 
         private void PrintTable(DataTable table)
         {
             foreach (DataRow dr in table.Rows)
             {
-                Console.WriteLine($"Lon: {dr[Lon]}, Lat: {dr[Lat]}, Position1: {dr[Position1]}, Position2: {dr[Position2]}");
+                var lon = (double)dr[Lon];
+                var lat = (double)dr[Lat];
+                Console.WriteLine($"Lon: {lon.ToString("0.000000")}, Lat: {lat.ToString("0.000000")}, Position1: {dr[Position1]}, Position2: {dr[Position2]}");
             }
         }
 
@@ -101,18 +117,21 @@ namespace CSharp.BestPractice
                 Console.WriteLine("Begin get position async");
                 updateCnt = 0;
                 object lck = new object();
-                var result = Parallel.ForEach(table.AsEnumerable(), dr =>
+                var rows = table.ToList();
+                var result = Parallel.ForEach(rows, dr =>
                 {
                     try
                     {
+                        string pos;
                         if (updateCnt % 2 == 1)
                         {
-                            dr[Position1] = GisServerHelper.QueryAllLayerByPoint1((double)dr[Lon], (double)dr[Lat]);
+                            pos = GisServerHelper.QueryAllLayerByPoint1((double)dr[Lon], (double)dr[Lat]);
                         }
                         else
                         {
-                            dr[Position1] = GisServerHelper.QueryAllLayerByPoint2((double)dr[Lon], (double)dr[Lat]);
+                            pos = GisServerHelper.QueryAllLayerByPoint2((double)dr[Lon], (double)dr[Lat]);
                         }
+                        dr[Position1] = pos;
                         //lock (lck)
                         //{
                         updateCnt++;
