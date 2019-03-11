@@ -193,17 +193,31 @@ namespace CSharp.Excel
         #endregion
 
         #region xlsx
-        public XSSFWorkbook CreateWorkBook()
+        public void CreateWorkBook()
         {
-            var workbook = new XSSFWorkbook();
-            //workbook.CreateCellStyle();
-
-            using (var fs = new FileStream("Excel/empty.xlsx", FileMode.OpenOrCreate, FileAccess.Write))
+            var files = Directory.GetFiles("xslxTemplate");
+            foreach (var filePath in files)
             {
-                workbook.Write(fs);
-            }
+                if (!File.Exists(filePath))
+                {
+                    continue;
+                }
 
-            return workbook;
+                var file = new FileInfo(filePath);
+                var modePath = new FileStream(file.FullName, FileMode.Open, FileAccess.Read);
+                //IWorkbook workbook = new XSSFWorkbook(modePath);
+                IWorkbook workbook = new XSSFWorkbook(modePath);
+                var sheet = workbook.GetSheetAt(0);
+                IRow row = sheet.CreateRow(5);
+                ICell cell = row.CreateCell(5);
+                cell.SetCellValue("hello");
+
+                using (var fs = new FileStream($"Excel/{file.Name}", FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    workbook.Write(fs);
+                }
+
+            }
         }
         #endregion
     }

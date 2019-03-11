@@ -6,18 +6,88 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ExcelTemplate\" />
     <Folder Include="Lib\" />
+    <Folder Include="xslxTemplate\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="bin\Debug\netcoreapp2.2\ExcelTemplate\三级路面禁行明细.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\ExcelTemplate\串线经营明细.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\ExcelTemplate\报警明细.xls" />
+    <None Include="bin\Debug\netcoreapp2.2\ExcelTemplate\新建 XLSX 工作表.xlsx" />
     <None Include="bin\Debug\netcoreapp2.2\Excel\cell.xls" />
     <None Include="bin\Debug\netcoreapp2.2\Excel\comment.xls" />
     <None Include="bin\Debug\netcoreapp2.2\Excel\empty.xls" />
+    <None Include="bin\Debug\netcoreapp2.2\Excel\empty.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\Excel\empty1.xlsx" />
     <None Include="bin\Debug\netcoreapp2.2\Excel\summary.xls" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\串线经营明细.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\企业汇总.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\企业汇总_old.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\地区汇总.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\定时发送语音信息明细.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\报警明细.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\接入平台汇总.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\车辆不在线明细.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\车辆掉线明细.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\车辆汇总.xlsx" />
+    <None Include="bin\Debug\netcoreapp2.2\xslxTemplate\非法停车异常报警明细.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NPOI" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ExcelTemplate\三级路面禁行明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\串线经营明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\报警明细.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\报警明细.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\车辆不在线明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\串线经营明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\企业汇总.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\企业汇总_old.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\地区汇总.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\定时发送语音信息明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\报警明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\接入平台汇总.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\车辆不在线明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\车辆掉线明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\车辆汇总.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xslxTemplate\非法停车异常报警明细.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
