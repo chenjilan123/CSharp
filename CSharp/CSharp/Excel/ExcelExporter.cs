@@ -1,6 +1,7 @@
 ﻿using NPOI.HPSF;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -73,6 +74,7 @@ namespace CSharp.Excel
             return this;
         }
 
+        #region xls
         #region 创建工作表
         private static HSSFWorkbook CreateWorkbooWithSheet()
         {
@@ -186,6 +188,22 @@ namespace CSharp.Excel
 
             Save(workbook, this.cellFormatFile);
             return this;
+        }
+        #endregion
+        #endregion
+
+        #region xlsx
+        public XSSFWorkbook CreateWorkBook()
+        {
+            var workbook = new XSSFWorkbook();
+            //workbook.CreateCellStyle();
+
+            using (var fs = new FileStream("Excel/empty.xlsx", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                workbook.Write(fs);
+            }
+
+            return workbook;
         }
         #endregion
     }
