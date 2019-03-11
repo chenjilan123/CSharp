@@ -130,6 +130,7 @@ namespace CSharp.Threads
             //此处out参数TaskThreadId无意义。
             var ar = del.BeginInvoke(out int taskThreadId, AsynchronousTaskCallback, "Message to callback");
             //Console.WriteLine($"Thread is: {taskThreadId}");
+            //不Wait也可, EndInvoke时会轮询IsCompleted等待。
             ar.AsyncWaitHandle.WaitOne();
             var result = del.EndInvoke(out taskThreadId, ar);
             Console.WriteLine($"Result from asynchronous task, out param: {result}, thread id: {taskThreadId}");
@@ -143,6 +144,7 @@ namespace CSharp.Threads
         {
             Console.WriteLine("Task started...");
             Thread.Sleep(2000);
+            Console.WriteLine($"Is thread pool: {Thread.CurrentThread.IsThreadPoolThread}");
             threadId = Thread.CurrentThread.ManagedThreadId;
 
             Console.WriteLine("Task end...");
