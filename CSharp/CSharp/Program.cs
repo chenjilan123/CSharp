@@ -1,5 +1,6 @@
 ﻿using CSharp.BestPractice;
 using CSharp.Tasks;
+using CSharp.Threads;
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -27,7 +28,7 @@ namespace CSharp
             //return;
             try
             {
-                GetPositionDemo();
+                UnhandledException();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -99,6 +100,22 @@ namespace CSharp
             Console.WriteLine("Get Position Completed!");
 
 
+        }
+        #endregion
+
+        #region Monitor
+        private static void Monitor()
+        {
+            var monitor = new MonitorLock();
+            monitor.EnterLock();
+        }
+        #endregion
+
+        #region UnhandledException
+        private static void UnhandledException()
+        {
+            var core = new UnhandledException();
+            core.Throw();
         }
         #endregion
     }
