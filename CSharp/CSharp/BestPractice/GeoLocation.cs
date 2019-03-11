@@ -12,11 +12,13 @@ namespace CSharp.BestPractice
 {
     public class GeoLocation
     {                                          //        Async(s)   Speed    Sync   Speed
-        private const int MaxPostion1 = 10;  //        57.08      17.1            9.2
-        private const int MaxPostion2 = 5000;
-        private const int MaxPostion3 = 10000;
-        private const int MaxPostion4 = 50000;
-        private const int MaxPostion5 = 100000;
+        //private const int MaxPostion = 10;  //        57.08      17.1            9.2
+        //private const int MaxPostion = 1000;
+        //private const int MaxPostion = 5000;
+        //private const int MaxPostion = 10000;
+        //private const int MaxPostion = 50000;
+        private static int MaxPostion = 100000;
+        private static int GisServerNumber = 1;
         private const bool IsSync = false;
         private const string Position1 = "Position1";
         private const string Position2 = "Position2";
@@ -33,13 +35,47 @@ namespace CSharp.BestPractice
 
             //加载经纬度
             LoadLonLat(table).Wait();
+            //输入参数
+            InputParam();
             //PrintTable(table);
             //更新位置
             Console.WriteLine($"更新位置, 位置数：{table.Rows.Count}");
+            Console.WriteLine($"         数据量：{MaxPostion}");
+            Console.WriteLine($"         实例数：{GisServerNumber}");
             UpdatePosition(table);
             //PrintTable(table);
 
             SavePosition(table).Wait();
+        }
+
+        private void InputParam()
+        {
+            while (true)
+            {
+                Console.WriteLine("请输入数据量: ");
+                var s = Console.ReadLine();
+                if (int.TryParse(s, out MaxPostion))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("输入参数有误, 请重新输入。");
+                }
+            }
+            while(true)
+            {
+                Console.WriteLine("请输入实例数: ");
+                var s = Console.ReadLine();
+                if (int.TryParse(s, out GisServerNumber))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("输入参数有误, 请重新输入。");
+                }
+            }
         }
 
         private async Task SavePosition(DataTable table)
@@ -68,10 +104,6 @@ namespace CSharp.BestPractice
 
         private void UpdatePosition(DataTable table)
         {
-            //初始化Gis服务
-            Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Begin initialize gis service");
-            GisServerHelper.Initialize();
-            Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} End initialize gis service");
 
             //Print speed
             var updateCnt = 0;
@@ -79,19 +111,34 @@ namespace CSharp.BestPractice
             var isStop = false;
             Task.Factory.StartNew(() =>
             {
+                //平均速度
                 var avgSpeed = 0D;
+                //最高速度
+                var maxSpeed = 0D;
+                //最低速度
+                var minSpeed = Double.MinValue;
+                //当前速度
                 var curSpeed = 0D;
                 var begin = DateTime.Now;
                 var mode = IsSync ? "Sync" : "Async";
                 //Print sync speed
                 while (true)
                 {
-                    if (!isStop)
+                    if (isStop)
                     {
-                        avgSpeed = ((double)updateCnt) / (DateTime.Now - begin).TotalSeconds;
-                        curSpeed = updateCnt - lastCnt;
+                        break;
                     }
-                    Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}  {mode} get position AvgSpeed: {avgSpeed.ToString("0.0")} /s, CurrentSpeed: {curSpeed.ToString("0.0")} /s, count: {updateCnt}");
+                    avgSpeed = ((double)updateCnt) / (DateTime.Now - begin).TotalSeconds;
+                    curSpeed = updateCnt - lastCnt;
+                    if (curSpeed > maxSpeed)
+                    {
+                        maxSpeed = curSpeed;
+                    }
+                    if (curSpeed < minSpeed || minSpeed == Double.MinValue)
+                    {
+                        minSpeed = curSpeed;
+                    }
+                    Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}  {mode} get position AvgSpeed: {avgSpeed.ToString("0.0")} /s, CurrentSpeed: {curSpeed.ToString("0.0")} /s, MaxSpeed: {maxSpeed.ToString("0.0")}, count: {updateCnt}");
                     lastCnt = updateCnt;
                     Thread.Sleep(1000);
                 }
@@ -101,10 +148,12 @@ namespace CSharp.BestPractice
             //Sync
             if (IsSync)
             {
+                var gisHelper = new GisServer();
+                GisServer.Initialize(gisHelper);
                 Console.WriteLine("Begin get position sync");
                 foreach (DataRow dr in table.Rows)
                 {
-                    dr[Position2] = GisServerHelper.QueryAllLayerByPoint1((double)dr[Lon], (double)dr[Lat]);
+                    dr[Position2] = gisHelper.QueryAllLayerByPoint((double)dr[Lon], (double)dr[Lat]);
                     updateCnt++;
                 }
                 Console.WriteLine("End get position sync");
@@ -117,33 +166,56 @@ namespace CSharp.BestPractice
                 Console.WriteLine("Begin get position async");
                 updateCnt = 0;
                 object lck = new object();
-                var rows = table.ToList();
-                var result = Parallel.ForEach(rows, dr =>
+                TableGisHelper.ResolveGeoAsync(ref table, Lon, Lat, Position1, GisServerNumber, () =>
                 {
-                    try
+                    lock (lck)
                     {
-                        string pos;
-                        if (updateCnt % 2 == 1)
-                        {
-                            pos = GisServerHelper.QueryAllLayerByPoint1((double)dr[Lon], (double)dr[Lat]);
-                        }
-                        else
-                        {
-                            pos = GisServerHelper.QueryAllLayerByPoint2((double)dr[Lon], (double)dr[Lat]);
-                        }
-                        dr[Position1] = pos;
-                        //lock (lck)
-                        //{
                         updateCnt++;
-                        //}
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"GetPosition Error: {ex.ToString()}");
                     }
                 });
+
+
+                Console.WriteLine("Start again");
+                TableGisHelper.ResolveGeoAsync(ref table, Lon, Lat, Position1, GisServerNumber, () =>
+                {
+                    lock (lck)
+                    {
+                        updateCnt++;
+                    }
+                });
+                //var rows = table.ToList();
+                //var gisServers = new List<GisServer>();
+                //for (int i = 0; i < GisServerNumber; i++)
+                //{
+                //    var gisServer = new GisServer();
+                //    GisServer.Initialize(gisServer);
+                //    gisServers.Add(gisServer);
+                //}
+                //var result = Parallel.ForEach(rows, dr =>
+                //{
+                //    try
+                //    {
+                //        var drNow = dr;
+                //        var gisServerIndex = updateCnt % GisServerNumber;
+                //        var gisServer = gisServers[gisServerIndex];
+                //        var pos = gisServer.QueryAllLayerByPoint((double)drNow[Lon], (double)drNow[Lat]);
+                //        lock (lck)
+                //        {
+                //            //这里必须有锁, 不然会有Index was out of range异常
+                //            drNow[Position1] = pos;
+                //        }
+                //        lock (lck)
+                //        {
+                //            updateCnt++;
+                //        }
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        Console.WriteLine($"GetPosition Error: {ex.ToString()}");
+                //    }
+                //});
                 Console.WriteLine("End get position async");
-                Console.WriteLine($"Async time: {sw.Elapsed.TotalSeconds}s");
+                Console.WriteLine($"Async time: {sw.Elapsed.TotalSeconds}s, Count Confim: {updateCnt}");
             }
             isStop = true;
         }
@@ -163,7 +235,7 @@ namespace CSharp.BestPractice
                         drNew[Lon] = lon;
                         drNew[Lat] = lat;
                         table.Rows.Add(drNew);
-                        if (sr.EndOfStream || table.Rows.Count >= MaxPostion1)
+                        if (sr.EndOfStream || table.Rows.Count >= MaxPostion)
                         {
                             break;
                         }

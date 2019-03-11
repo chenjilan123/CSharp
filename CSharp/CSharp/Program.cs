@@ -93,6 +93,7 @@ namespace CSharp
         {
             var geoLocation = new GeoLocation();
             geoLocation.GetPosition();
+            Console.WriteLine("Get Position Completed!");
         }
         #endregion
     }
