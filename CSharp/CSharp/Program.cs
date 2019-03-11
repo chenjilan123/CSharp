@@ -28,7 +28,7 @@ namespace CSharp
             //return;
             try
             {
-                UnhandledException();
+                ManagedThreadPool();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -49,13 +49,14 @@ namespace CSharp
         #region ManagedThreadPool
         private static void ManagedThreadPool()
         {
-            TimerLoop();
-            Thread.Sleep(5000);
+            //TimerLoop();
+            //Thread.Sleep(5000);
             var managedThreadPool = new Threads.ManagedThreadPool();
             managedThreadPool
-                .Information()
+                //.Information()
                 //.ThreadPoolException()
-                .RequestThread();
+                .APM();
+                //.RequestThread();
         }
         #endregion
 

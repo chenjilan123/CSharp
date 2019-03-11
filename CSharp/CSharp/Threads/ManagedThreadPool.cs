@@ -117,5 +117,48 @@ namespace CSharp.Threads
             return this;
         }
         #endregion
+
+
+        #region APM(Simple ThreadPool)
+        /// <summary>
+        /// APM不可再.NET Core中使用
+        /// </summary>
+        private delegate string RunOnThreadPool(out int threadId);
+        public ManagedThreadPool APM()
+        {
+            RunOnThreadPool del = AsynchronousTask;
+            //此处out参数TaskThreadId无意义。
+            var ar = del.BeginInvoke(out int taskThreadId, AsynchronousTaskCallback, "Message to callback");
+            //Console.WriteLine($"Thread is: {taskThreadId}");
+            ar.AsyncWaitHandle.WaitOne();
+            var result = del.EndInvoke(out taskThreadId, ar);
+            Console.WriteLine($"Result from asynchronous task, out param: {result}, thread id: {taskThreadId}");
+
+            Thread.Sleep(5000);
+            Console.WriteLine("End.");
+            return this;
+        }
+
+        private string AsynchronousTask(out int threadId)
+        {
+            Console.WriteLine("Task started...");
+            Thread.Sleep(2000);
+            threadId = Thread.CurrentThread.ManagedThreadId;
+
+            Console.WriteLine("Task end...");
+
+            return "Message from asynchronous task.";
+        }
+
+        private void AsynchronousTaskCallback(IAsyncResult ar)
+        {
+            Console.WriteLine("Task callback start.");
+            Thread.Sleep(2000);
+            Console.WriteLine($"State: {ar.AsyncState}");
+            Console.WriteLine($"Is thread pool: {Thread.CurrentThread.IsThreadPoolThread}");
+
+            Console.WriteLine("Task callback end.");
+        }
+        #endregion
     }
 }
