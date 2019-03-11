@@ -121,7 +121,7 @@ namespace CSharp.Threads
 
         #region APM(Simple ThreadPool)
         /// <summary>
-        /// APM不可再.NET Core中使用
+        /// APM不可再.NET Core中使用, 再.NET Framework中使用正常。
         /// </summary>
         private delegate string RunOnThreadPool(out int threadId);
         public ManagedThreadPool APM()
