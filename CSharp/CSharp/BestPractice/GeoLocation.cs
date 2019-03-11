@@ -173,16 +173,6 @@ namespace CSharp.BestPractice
                         updateCnt++;
                     }
                 });
-
-
-                Console.WriteLine("Start again");
-                TableGisHelper.ResolveGeoAsync(ref table, Lon, Lat, Position1, GisServerNumber, () =>
-                {
-                    lock (lck)
-                    {
-                        updateCnt++;
-                    }
-                });
                 //var rows = table.ToList();
                 //var gisServers = new List<GisServer>();
                 //for (int i = 0; i < GisServerNumber; i++)

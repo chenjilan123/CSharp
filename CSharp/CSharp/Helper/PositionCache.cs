@@ -8,6 +8,7 @@ namespace CSharp.Helper
     public class PositionCache
     {
         private const string Precision = "0.0000";
+        private const int MaxCache = 1000000;
         private ConcurrentDictionary<string, string> _cache = null;
         public PositionCache()
         {
@@ -27,6 +28,10 @@ namespace CSharp.Helper
         public bool TryAdd(double lon, double lat, string pos)
         {
             var key = this.GetKey(lon, lat);
+            if (_cache.Count > MaxCache)
+            {
+                _cache.Clear();
+            }
             return (!_cache.ContainsKey(key)) && _cache.TryAdd(key, pos);
         }
 

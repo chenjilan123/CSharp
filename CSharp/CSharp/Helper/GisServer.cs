@@ -48,7 +48,7 @@ namespace CSharp.Helper
                 string sPos = string.Empty;
                 if (_posCache.TryGet(lon, lat, out sPos))
                 {
-                    Console.WriteLine("Get cached position");
+                    //Console.WriteLine("Get cached position");
                     return sPos;
                 }
                 var point = WebGis.QueryAllLayerByPointAsync(lon, lat).Result;
