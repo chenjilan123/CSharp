@@ -35,6 +35,7 @@ namespace CSharp
             collection.Add(4);
             foreach (var item in collection)
             {
+                //按添加顺序
                 Console.WriteLine(item);
             }
             return;
