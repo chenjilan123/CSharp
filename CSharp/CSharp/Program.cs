@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharp.Dictionarys;
+using System;
 using System.Collections.Generic;
 
 namespace CSharp
@@ -7,7 +8,21 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
+            RemoveSomeOfDictionary();
+        }
 
+        #region RemoveSomeOfDictionary
+        private static void RemoveSomeOfDictionary()
+        {
+            new RemoveSome()
+                .Remove();
+
+        }
+        #endregion
+
+        #region Jet
+        private static void Jet()
+        {
             var jetArr = new JetArray()
             {
                 new Jet() { Code = "NF5" },
@@ -24,6 +39,7 @@ namespace CSharp
                 Console.WriteLine(jet.Code);
             }
         }
+        #endregion
 
         #region EnumOrder
         private static void EnumOrder()
