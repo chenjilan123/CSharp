@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CSharp
 {
@@ -6,6 +7,7 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
+
             var jetArr = new JetArray()
             {
                 new Jet() { Code = "NF5" },
@@ -22,5 +24,21 @@ namespace CSharp
                 Console.WriteLine(jet.Code);
             }
         }
+
+        #region EnumOrder
+        private static void EnumOrder()
+        {
+            var collection = new List<int>();
+            collection.Add(1);
+            collection.Add(2);
+            collection.Add(3);
+            collection.Add(4);
+            foreach (var item in collection)
+            {
+                Console.WriteLine(item);
+            }
+            return;
+        }
+        #endregion
     }
 }
