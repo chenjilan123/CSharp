@@ -4,6 +4,7 @@ using CSharp.Threads;
 using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 
 namespace CSharp
@@ -12,6 +13,12 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
+            //Task
+            //RunTask();
+            //Thread.Sleep(100);
+            //Console.WriteLine("Hello World!");
+
+
             ////StopWatch
             //var sw = Stopwatch.StartNew();
             //Thread.Sleep(500);
@@ -28,7 +35,7 @@ namespace CSharp
             //return;
             try
             {
-                ManagedThreadPool();
+                TaskSchedulerr();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -37,6 +44,19 @@ namespace CSharp
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region Task
+        private static async void RunTask()
+        {
+            Thread.Sleep(500);
+
+            var task = Task.Run(() => Console.WriteLine("Hello"));
+            await task;
+
+            Console.WriteLine("Completed");
+            Thread.Sleep(500);
+        }
+        #endregion
 
         #region TimerLoop
         private static void TimerLoop()
@@ -55,7 +75,9 @@ namespace CSharp
             managedThreadPool
                 //.Information()
                 //.ThreadPoolException()
-                .APM();
+                //.Cancellation();
+                .Timeout();
+                //.APM();
                 //.RequestThread();
         }
         #endregion
@@ -117,6 +139,14 @@ namespace CSharp
         {
             var core = new UnhandledException();
             core.Throw();
+        }
+        #endregion
+
+        #region TaskSchedulerr
+        private static void TaskSchedulerr()
+        {
+            new TaskSchedulerr()
+                .Base();
         }
         #endregion
     }

@@ -118,7 +118,6 @@ namespace CSharp.Threads
         }
         #endregion
 
-
         #region APM(Simple ThreadPool)
         /// <summary>
         /// APM不可再.NET Core中使用, 再.NET Framework中使用正常。
@@ -160,6 +159,127 @@ namespace CSharp.Threads
             Console.WriteLine($"Is thread pool: {Thread.CurrentThread.IsThreadPoolThread}");
 
             Console.WriteLine("Task callback end.");
+        }
+        #endregion
+
+        #region Cancellation
+        public ManagedThreadPool Cancellation()
+        {
+            //using (var cts = new CancellationTokenSource())
+            //{
+            //    CancellationToken token = cts.Token;
+            //    ThreadPool.QueueUserWorkItem(_ =>
+            //    {
+            //        try
+            //        {
+            //            bool cancellationFlag = false;
+                        
+            //            //3
+            //            //token.Register(() =>
+            //            //{
+            //            //    Console.WriteLine("Cancel requested.");
+            //            //    cancellationFlag = true;
+            //            //});
+
+            //            while (!cancellationFlag)
+            //            {
+            //                //1
+            //                //if (token.IsCancellationRequested)
+            //                //{
+            //                //    Console.WriteLine("Cancel requested.");
+            //                //    break;
+            //                //}
+
+            //                //2
+            //                //token.ThrowIfCancellationRequested();
+
+            //                Thread.Sleep(50);
+            //            }
+            //            Console.WriteLine("Quit loop.");
+            //        }
+            //        catch (OperationCanceledException ex)
+            //        {
+            //            Console.WriteLine("Cancellation exception throwed - " + ex.ToString());
+            //        }
+            //    });
+            //    Thread.Sleep(3000);
+            //    Console.WriteLine("Cancel");
+            //    cts.Cancel();
+            //}
+
+
+            //Thread.Sleep(1000);
+            //Console.WriteLine();
+
+            using (var cts = new CancellationTokenSource())
+            {
+                var token = cts.Token;
+
+                ThreadPool.QueueUserWorkItem(_ =>
+                {
+                    Console.WriteLine("Wait cancel signal...");
+                    token.WaitHandle.WaitOne();
+                    Console.WriteLine("Received cancel signal."); 
+                });
+
+                Thread.Sleep(2000);
+                cts.Cancel();
+            }
+
+            return this;
+        }
+        #endregion
+
+        #region Timeout
+        public ManagedThreadPool Timeout()
+        {
+            const int timeout1 = 3000;
+            const int timeout2 = 5000;
+
+
+            using (var evt = new ManualResetEvent(false))
+            using (var cts = new CancellationTokenSource())
+            {
+                var worker = ThreadPool.RegisterWaitForSingleObject(evt
+                      , (state, isTimeOut) => WorkerOperationWait(cts, isTimeOut)
+                      , null, timeout2, true);
+                var token = cts.Token;
+                ThreadPool.QueueUserWorkItem(_ =>
+                {
+                    Thread.Sleep(4000);
+                    if (token.IsCancellationRequested)
+                    {
+                        //取消
+                        Console.WriteLine("Cancel work.");
+                    }
+                    else
+                    {
+                        //完成
+                        Console.WriteLine("Work completed");
+                        evt.Set();
+                    }
+                });
+
+                //若该时长大于工作时长，会有异常。
+                Thread.Sleep(6000);
+
+                worker.Unregister(evt);
+            }
+            Console.WriteLine("Completed");
+            return this;
+        }
+
+        private void WorkerOperationWait(CancellationTokenSource cts, bool isTimeOut)
+        {
+            if (isTimeOut)
+            {
+                cts.Cancel();
+                Console.WriteLine("Operation has been cancelled.");
+            }
+            else
+            {
+                Console.WriteLine("Operation completed success.");
+            }
         }
         #endregion
     }
