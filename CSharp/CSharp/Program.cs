@@ -8,6 +8,15 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
+            //int j = 5;
+            //int k = 6;
+            //int count = 0;
+            //for (int i = 0; i < k + 1; i++)
+            //{
+            //    count++;
+            //}
+            //Console.WriteLine(count);
+
             RemoveSomeOfDictionary();
         }
 
