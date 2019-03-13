@@ -36,7 +36,7 @@ namespace CSharp
             //return;
             try
             {
-                TaskSchedulerr();
+                TaskAsyncKeyword();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -156,6 +156,14 @@ namespace CSharp
         {
             new MultiTaskFramework()
                 .Main();
+        }
+        #endregion
+
+        #region TaskAsyncKeyword
+        private static void TaskAsyncKeyword()
+        {
+            new TaskAsyncKeyword()
+                .Base();
         }
         #endregion
     }
