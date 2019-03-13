@@ -1,4 +1,5 @@
 ﻿using CSharp.BestPractice;
+using CSharp.Core;
 using CSharp.Tasks;
 using CSharp.Threads;
 using System;
@@ -147,6 +148,14 @@ namespace CSharp
         {
             new TaskSchedulerr()
                 .Base();
+        }
+        #endregion
+
+        #region MultiTaskFramework
+        private static void MultiTaskFramework()
+        {
+            new MultiTaskFramework()
+                .Main();
         }
         #endregion
     }
