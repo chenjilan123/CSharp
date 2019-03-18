@@ -166,5 +166,23 @@ namespace CSharp
                 .Base();
         }
         #endregion
+
+        #region CustomAwaitable
+        private static void CustomAwaitable()
+        {
+            Task t = ProcessAsync();
+            t.Wait();
+        }
+        static async Task ProcessAsync()
+        {
+            var sync = new CustomAwaitable(true);
+            string result = await sync;
+            Console.WriteLine($"Result: {result}");
+
+            var async = new CustomAwaitable(false);
+            result = await async;
+            Console.WriteLine($"Result: {result}");
+        }
+        #endregion
     }
 }
