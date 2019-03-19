@@ -8,8 +8,12 @@ namespace CSharp.Performance
 {
     public class CompareInSingleThread
     {
+        const string Dictionary = "Dictionary";
+        const string ConcurrentDictionary = "ConcurrentDictionary";
+
         const int Iter = 1000000;
         const string Item = "Item";
+        static string CurrentItem;
 
         public void Compare()
         {
@@ -18,7 +22,7 @@ namespace CSharp.Performance
             var dic = new Dictionary<int, string>();
             var cdic = new ConcurrentDictionary<int, string>();
 
-            Work("Dictionary", i =>
+            Work(Dictionary, i =>
             {
                 lock (dic)
                 {
@@ -26,11 +30,24 @@ namespace CSharp.Performance
                 }
             });
 
-            Work("ConcurrentDictionary", i =>
+            Work(ConcurrentDictionary, i =>
             {
                 cdic[i] = Item;
             });
 
+            Console.WriteLine("Read in single thread");
+            Work(Dictionary, i =>
+            {
+                lock (dic)
+                {
+                    CurrentItem = dic[i];
+                }
+            });
+
+            Work(ConcurrentDictionary, i =>
+            {
+                CurrentItem = cdic[i];
+            });
             //var sw = new Stopwatch();
 
             //Console.WriteLine("  Dictionary...");
