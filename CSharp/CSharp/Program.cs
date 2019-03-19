@@ -1,4 +1,5 @@
-﻿using CSharp.Performance;
+﻿using CSharp.AsyncProcess;
+using CSharp.Performance;
 using System;
 
 namespace CSharp
@@ -7,7 +8,7 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
-            ComparePerformance();
+            ProcessAsyncByStack();
         }
 
 
@@ -16,6 +17,30 @@ namespace CSharp
         {
             new CompareInSingleThread()
                 .Compare();
+        }
+        #endregion
+
+        #region ProcessAsyncByQueue
+        private static void ProcessAsyncByQueue()
+        {
+            new ProcessAsyncByQueue()
+                .Run();
+        }
+        #endregion
+
+        #region ProcessAsyncByStack
+        private static void ProcessAsyncByStack()
+        {
+            new ProcessAsyncByStack()
+                .Run();
+        }
+        #endregion
+
+        #region Crawling
+        private static void Crawling()
+        {
+            new Crawling()
+                .Run();
         }
         #endregion
     }

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace CSharp.AsyncProcess
 {
-    public class ProcessAsync
+    class CustomTask
     {
-
+        public int Id { get; set; }
     }
 }
