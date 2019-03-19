@@ -41,9 +41,9 @@ namespace CSharp.AsyncProcess
         {
             for (int i = 1; i <= 20; i++)
             {
-                await Task.Delay(50);
-
                 #region Produce Framework
+                //模拟创建对象的耗时
+                await Task.Delay(50);
                 //Here lies the process for produce CustomTask
                 var workItem = new CustomTask { Id = i };
                 #endregion

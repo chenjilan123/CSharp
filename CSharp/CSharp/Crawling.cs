@@ -64,6 +64,7 @@ namespace CSharp
 
         static async Task<IEnumerable<string>> GetLinksFromContent(CrawlingTask task)
         {
+            //模拟网络I/O
             await GetRandomDelay();
             if (_contentEnulation.ContainsKey(task.UrlToCrawl))
             {
