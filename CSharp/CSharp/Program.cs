@@ -1,4 +1,5 @@
-﻿using CSharp.BestPractice;
+﻿using ConsoleApp1;
+using CSharp.BestPractice;
 using CSharp.Core;
 using CSharp.Tasks;
 using CSharp.Threads;
@@ -36,7 +37,7 @@ namespace CSharp
             //return;
             try
             {
-                TaskAsyncKeyword();
+                DynamicAwait();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -182,6 +183,14 @@ namespace CSharp
             var async = new CustomAwaitable(false);
             result = await async;
             Console.WriteLine($"Result: {result}");
+        }
+        #endregion
+
+        #region DynamicAwait
+        private static void DynamicAwait()
+        {
+            new DynamicAwait()
+                .Start();
         }
         #endregion
     }
