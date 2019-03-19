@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharp.Performance;
+using System;
 
 namespace CSharp
 {
@@ -6,7 +7,16 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World.");
+            ComparePerformance();
         }
+
+
+        #region ComparePerformance
+        private static void ComparePerformance()
+        {
+            new CompareInSingleThread()
+                .Compare();
+        }
+        #endregion
     }
 }
