@@ -38,7 +38,7 @@ namespace CSharp
             //return;
             try
             {
-                DynamicAwait();
+                PLINQ();
                 Console.ReadLine();
             }
             catch (Exception ex)
