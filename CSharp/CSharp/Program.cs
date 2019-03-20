@@ -1,6 +1,7 @@
 ﻿using ConsoleApp1;
 using CSharp.BestPractice;
 using CSharp.Core;
+using CSharp.PLINQs;
 using CSharp.Tasks;
 using CSharp.Threads;
 using System;
@@ -191,6 +192,14 @@ namespace CSharp
         {
             new DynamicAwait()
                 .Start();
+        }
+        #endregion
+
+        #region PLINQ
+        private static void PLINQ()
+        {
+            new ParallelApi()
+                .Invoke();
         }
         #endregion
     }
