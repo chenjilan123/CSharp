@@ -1,6 +1,7 @@
 ﻿using CSharp.AsyncProcess;
 using CSharp.Performance;
 using System;
+using System.Collections.Concurrent;
 
 namespace CSharp
 {
@@ -41,6 +42,15 @@ namespace CSharp
         {
             new Crawling()
                 .Run();
+        }
+        #endregion
+
+        #region BlockingCollection
+        private static void BlockingCollection()
+        {
+            //IProducerConsumerCollection i;
+            BlockingCollection<int> coll = new BlockingCollection<int>();
+            var enumerable = coll.GetConsumingEnumerable();
         }
         #endregion
     }
