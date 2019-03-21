@@ -38,7 +38,7 @@ namespace CSharp
             //return;
             try
             {
-                PLINQ();
+                PLINQApi();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -80,8 +80,8 @@ namespace CSharp
                 //.ThreadPoolException()
                 //.Cancellation();
                 .Timeout();
-                //.APM();
-                //.RequestThread();
+            //.APM();
+            //.RequestThread();
         }
         #endregion
 
@@ -195,11 +195,19 @@ namespace CSharp
         }
         #endregion
 
-        #region PLINQ
-        private static void PLINQ()
+        #region ParallelApi
+        private static void ParallelApi()
         {
             new ParallelApi()
                 .Invoke();
+        }
+        #endregion
+
+        #region PLINQApi
+        private static void PLINQApi()
+        {
+            new PLINQApi()
+                .Exception();
         }
         #endregion
     }
