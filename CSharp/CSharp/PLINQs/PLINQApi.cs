@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,9 +70,57 @@ namespace CSharp.PLINQs
         {
             var query = from t in GetTypes().AsParallel()
                         select t;
-            //var aggregator = query.Aggregate()
+            Console.WriteLine("Aggregate begin.");
+            var aggregator = query.Aggregate(
+                () => new ConcurrentDictionary<char, int>(),
+                Accumulate,
+                Merge,
+                total => total
+                );
 
+            Console.WriteLine("Aggregate end.");
+            //return this;
+            var dec = from s in aggregator.Keys
+                      orderby aggregator[s] descending
+                      select s;
+            foreach (var key in dec)
+            {
+                Console.WriteLine($"Char: {key}, Count: {aggregator[key]}");
+            }
             return this;
+        }
+
+        private ConcurrentDictionary<char, int> Accumulate(ConcurrentDictionary<char, int> total, string s)
+        {
+            foreach (var c in s)
+            {
+                if (total.ContainsKey(c))
+                {
+                    total[c] += 1;
+                }
+                else
+                {
+                    total[c] = 1;
+                }
+            }
+            Console.WriteLine($"Accumulate Task ,ThreadId: {Thread.CurrentThread.ManagedThreadId}, IsPool: {Thread.CurrentThread.IsThreadPoolThread}, KeyCount: {total.Count}");
+            return total;
+        }
+        private ConcurrentDictionary<char, int> Merge(ConcurrentDictionary<char, int> total, ConcurrentDictionary<char, int> merge)
+        {
+            foreach (var key in total.Keys)
+            {
+                if (merge.ContainsKey(key))
+                {
+                    merge[key] += total[key];
+                }
+                else
+                {
+                    merge[key] = total[key];
+                }
+            }
+            Console.WriteLine($"Merge Task ,ThreadId: {Thread.CurrentThread.ManagedThreadId}, IsPool: {Thread.CurrentThread.IsThreadPoolThread}, KeyCount: {merge.Count}");
+            return merge;
         }
         #endregion
 
