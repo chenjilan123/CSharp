@@ -1,5 +1,7 @@
-﻿using CSharp.BestPractice;
+﻿using ConsoleApp1;
+using CSharp.BestPractice;
 using CSharp.Core;
+using CSharp.PLINQs;
 using CSharp.Tasks;
 using CSharp.Threads;
 using System;
@@ -36,7 +38,7 @@ namespace CSharp
             //return;
             try
             {
-                TaskAsyncKeyword();
+                PLINQApi();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -78,8 +80,8 @@ namespace CSharp
                 //.ThreadPoolException()
                 //.Cancellation();
                 .Timeout();
-                //.APM();
-                //.RequestThread();
+            //.APM();
+            //.RequestThread();
         }
         #endregion
 
@@ -164,6 +166,48 @@ namespace CSharp
         {
             new TaskAsyncKeyword()
                 .Await();
+        }
+        #endregion
+
+        #region CustomAwaitable
+        private static void CustomAwaitable()
+        {
+            Task t = ProcessAsync();
+            t.Wait();
+        }
+        static async Task ProcessAsync()
+        {
+            var sync = new CustomAwaitable(true);
+            string result = await sync;
+            Console.WriteLine($"Result: {result}");
+
+            var async = new CustomAwaitable(false);
+            result = await async;
+            Console.WriteLine($"Result: {result}");
+        }
+        #endregion
+
+        #region DynamicAwait
+        private static void DynamicAwait()
+        {
+            new DynamicAwait()
+                .Start();
+        }
+        #endregion
+
+        #region ParallelApi
+        private static void ParallelApi()
+        {
+            new ParallelApi()
+                .Invoke();
+        }
+        #endregion
+
+        #region PLINQApi
+        private static void PLINQApi()
+        {
+            new PLINQApi()
+                .Exception();
         }
         #endregion
     }
