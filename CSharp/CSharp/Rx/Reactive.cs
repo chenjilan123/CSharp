@@ -14,7 +14,7 @@ namespace CSharp.Rx
         #region ObserveCollection
         public Reactive ObserveCollection()
         {
-            return this.Subject();
+            return this.CreateObserver();
 
             //Sequence
             var sw = Stopwatch.StartNew();
@@ -145,6 +145,33 @@ namespace CSharp.Rx
             return this;
         }
 
+        #endregion
+
+        #region CreateObserver
+        public Reactive CreateObserver()
+        {
+            var o = Observable.Return(0);
+            using (var sub = OutputToConsole(o)) ;
+            Console.WriteLine("-------------------------");
+
+            o = Observable.Empty<int>();
+            using (var sub = OutputToConsole(o)) ;
+            Console.WriteLine("-------------------------");
+
+            o = Observable.Repeat(500);
+            using (var sub = OutputToConsole(o.Take(5))) ;
+            Console.WriteLine("-------------------------");
+
+            o = Observable.Range(0, 5);
+            using (var sub = OutputToConsole(o.Take(5))) ;
+            Console.WriteLine("-------------------------");
+
+
+
+            return this;
+        }
+        #endregion
+
         private IDisposable OutputToConsole<T>(IObservable<T> sequence)
         {
             return sequence.Subscribe(
@@ -153,8 +180,6 @@ namespace CSharp.Rx
                 , () => Console.WriteLine("Completed")
                 );
         }
-        #endregion
-
 
         private IEnumerable<int> EnumerableEventSequence()
         {
