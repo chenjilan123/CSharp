@@ -2,6 +2,7 @@
 using CSharp.BestPractice;
 using CSharp.Core;
 using CSharp.PLINQs;
+using CSharp.Rx;
 using CSharp.Tasks;
 using CSharp.Threads;
 using System;
@@ -38,7 +39,7 @@ namespace CSharp
             //return;
             try
             {
-                PLINQApi();
+                Reactive();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -208,6 +209,18 @@ namespace CSharp
         {
             new PLINQApi()
                 .Exception();
+        }
+        #endregion
+
+        #region Reactive
+        private static void Reactive()
+        {
+            new Reactive().ObserveCollection();
+        }
+
+        private static void SubjectExample()
+        {
+            Rx.SubjectExample.Run();
         }
         #endregion
     }
