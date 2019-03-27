@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharp.xml;
+using System;
 
 namespace CSharp
 {
@@ -6,7 +7,8 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World.");
+            new EntityToXml()
+                .Serialize();
         }
     }
 }
