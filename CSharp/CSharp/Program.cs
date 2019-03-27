@@ -215,7 +215,7 @@ namespace CSharp
         #region Reactive
         private static void Reactive()
         {
-            new Reactive().ObserveCollection();
+            new Reactive().Run();
         }
 
         private static void SubjectExample()

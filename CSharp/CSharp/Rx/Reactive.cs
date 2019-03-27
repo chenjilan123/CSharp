@@ -6,16 +6,26 @@ using System.Reactive.Concurrency;
 using System.Threading;
 using System.Diagnostics;
 using System.Reactive.Subjects;
+using System.Reactive.Disposables;
+using System.Threading.Tasks;
+using System.Reactive;
+using System.Timers;
+using System.Reactive.Threading.Tasks;
 
 namespace CSharp.Rx
 {
     internal class Reactive
     {
+        #region Run
+        public Reactive Run()
+        {
+            return this.AsyncObservable();
+        }
+        #endregion
+
         #region ObserveCollection
         public Reactive ObserveCollection()
         {
-            return this.CreateObserver();
-
             //Sequence
             var sw = Stopwatch.StartNew();
             foreach (var i in EnumerableEventSequence())
@@ -166,12 +176,131 @@ namespace CSharp.Rx
             using (var sub = OutputToConsole(o.Take(5))) ;
             Console.WriteLine("-------------------------");
 
+            o = Observable.Create<int>(ob =>
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    ob.OnNext(i);
+                }
+                return Disposable.Empty;
+            });
+            using (var sub = OutputToConsole(o)) ;
+            Console.WriteLine("-------------------------");
+
+            IObservable<long> ol = Observable.Interval(TimeSpan.FromSeconds(0.5D));
+            using (var sub = OutputToConsole(ol))
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(4D));
+            }
+            Console.WriteLine("-------------------------");
+
+            ol = Observable.Timer(DateTimeOffset.Now.AddSeconds(2D));
+            using (var sub = OutputToConsole(ol))
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(3D));
+            }
+            Console.WriteLine("-------------------------");
 
 
             return this;
         }
         #endregion
 
+        #region LINQToObservable
+        public Reactive LINQToObservable()
+        {
+            IObservable<long> sequence = Observable.Interval(TimeSpan.FromMilliseconds(50D)).Take(21);
+
+            var evenNumbers = from n in sequence
+                              where n % 2 == 0
+                              select n;
+            var oddNumbers = from n in sequence
+                             where n % 2 == 1
+                             select n;
+            var combine = from n in evenNumbers.Concat(oddNumbers)
+                          select n;
+            var nums = (from n in sequence
+                        where n % 5 == 0
+                        select n)
+                       .Do(l => Console.WriteLine($"{l} was processed"));
+            using (var sub = OutputToConsole(evenNumbers, 0))
+            using (var sub1 = OutputToConsole(oddNumbers, 1))
+            //Combine 会等待even先完成，再输出odd。
+            using (var sub2 = OutputToConsole(combine, 2))
+            using (var sub3 = OutputToConsole(nums, 3))
+            {
+                Console.ReadLine();
+            }
+
+            return this;
+        }
+        #endregion
+
+        #region AsyncObservable
+        public Reactive AsyncObservable()
+        {
+            var o = LongRunOperationAsync("Task1");
+            using (var sub = OutputToConsole(o))
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(2D));
+            }
+            Console.WriteLine("----------------------------");
+
+            var t = LongRunOperationTaskAsync("Task2");
+            using (var sub = OutputToConsole(t.ToObservable()))
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(2D));
+            }
+            Console.WriteLine("----------------------------");
+
+
+
+            return this;
+        }
+
+        private Task<String> LongRunOperationTaskAsync(string name)
+        {
+            return Task.Run(() => LongRunOperation(name));
+        }
+
+        private IObservable<string> LongRunOperationAsync(string name)
+        {
+            return Observable.Start(() => LongRunOperation(name));
+        }
+        private string LongRunOperation(string name)
+        {
+            Thread.Sleep(TimeSpan.FromSeconds(1D));
+            return $"Task {name} is completed. Thread Id {Thread.CurrentThread.ManagedThreadId}";
+        }
+
+        private async Task<T> AwaitOnObservable<T>(IObservable<T> observable)
+        {
+            T obj = await observable;
+            Console.WriteLine($"{obj}");
+            return obj;
+        }
+        #endregion
+
+        #region Common
+        private IDisposable OutputToConsole(IObservable<EventPattern<ElapsedEventArgs>> sequence)
+        {
+            return sequence.Subscribe(
+                obj => Console.WriteLine($"{obj.EventArgs.SignalTime}")
+                , ex => Console.WriteLine($"Error: {ex.Message}")
+                , () => Console.WriteLine("Completed")
+                );
+        }
+        private IDisposable OutputToConsole<T>(IObservable<T> sequence, int innerLevel)
+        {
+            string delimiter = innerLevel == 0
+                ? string.Empty
+                : new string('-', innerLevel * 3);
+            return sequence.Subscribe(
+                obj => Console.WriteLine($"{delimiter}{obj}")
+                , ex => Console.WriteLine($"Error: {ex.Message}")
+                , () => Console.WriteLine($"{delimiter}Completed")
+                );
+        }
         private IDisposable OutputToConsole<T>(IObservable<T> sequence)
         {
             return sequence.Subscribe(
@@ -189,5 +318,6 @@ namespace CSharp.Rx
                 yield return i;
             }
         }
+        #endregion
     }
 }
