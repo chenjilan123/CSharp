@@ -1,6 +1,7 @@
 ﻿using ConsoleApp1;
 using CSharp.BestPractice;
 using CSharp.Core;
+using CSharp.IO;
 using CSharp.PLINQs;
 using CSharp.Rx;
 using CSharp.Tasks;
@@ -39,7 +40,7 @@ namespace CSharp
             //return;
             try
             {
-                Reactive();
+                AsyncIO();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -65,7 +66,7 @@ namespace CSharp
         #region TimerLoop
         private static void TimerLoop()
         {
-            var timer = new Timer.TimerLoop();
+            var timer = new Timers.TimerLoop();
             timer.Run();
         }
         #endregion
@@ -221,6 +222,13 @@ namespace CSharp
         private static void SubjectExample()
         {
             Rx.SubjectExample.Run();
+        }
+        #endregion
+
+        #region AsyncIO
+        private static void AsyncIO()
+        {
+            new AsyncIO().Run();
         }
         #endregion
     }

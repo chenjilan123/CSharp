@@ -239,6 +239,7 @@ namespace CSharp.Rx
         #region AsyncObservable
         public Reactive AsyncObservable()
         {
+            //Async observable
             var o = LongRunOperationAsync("Task1");
             using (var sub = OutputToConsole(o))
             {
@@ -246,6 +247,7 @@ namespace CSharp.Rx
             }
             Console.WriteLine("----------------------------");
 
+            //Task.ToObservable
             var t = LongRunOperationTaskAsync("Task2");
             using (var sub = OutputToConsole(t.ToObservable()))
             {
@@ -253,11 +255,47 @@ namespace CSharp.Rx
             }
             Console.WriteLine("----------------------------");
 
+            //Async Pattern
+            ////Async Operation is not suppert in .NET Core
+            //AsyncDelegate asyncMethod = LongRunOperation;
+            //var observableFactory = Observable.FromAsyncPattern<string, string>(asyncMethod.BeginInvoke, asyncMethod.EndInvoke);
+            //o = observableFactory("Task3");
+            //using (var sub = OutputToConsole(o))
+            //{
+            //    Thread.Sleep(TimeSpan.FromSeconds(2D));
+            //}
+            //Console.WriteLine("----------------------------");
 
+            ////Async Operation is not suppert in .NET Core
+            //o = observableFactory("Task4");
+            //AwaitOnObservable(o).Wait();
+            //Console.WriteLine("----------------------------");
+
+            //Event Pattern
+            using (var timer = new System.Timers.Timer(1000))
+            {
+                var ot = Observable.FromEventPattern<ElapsedEventHandler, ElapsedEventArgs>(
+                    h => timer.Elapsed += h,
+                    h => timer.Elapsed -= h);
+                timer.Start();
+
+                using (var sub1 = OutputToConsole(ot))
+                using (var sub2 = OutputToConsole(ot))
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(5D));
+                }
+                Console.WriteLine("----------------------------");
+                timer.Stop();
+            }
+
+
+            Console.WriteLine("End.");
 
             return this;
         }
 
+        delegate string AsyncDelegate(string name);
+        
         private Task<String> LongRunOperationTaskAsync(string name)
         {
             return Task.Run(() => LongRunOperation(name));

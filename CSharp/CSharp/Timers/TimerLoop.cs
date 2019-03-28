@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Timers;
 
-namespace CSharp.Timer
+namespace CSharp.Timers
 {
     public class TimerLoop
     {
