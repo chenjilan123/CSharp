@@ -5,8 +5,11 @@ namespace CSharp
 {
     class Program
     {
+        public static bool IsTrue { get; set; }
         static void Main(string[] args)
         {
+            //Console.WriteLine(IsTrue);
+
             new EntityToXml()
                 .Serialize();
         }
