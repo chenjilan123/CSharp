@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
@@ -96,11 +97,15 @@ namespace CSharp.IO
 
         private async Task ProcessAsynchronousIO(string dbName)
         {
-            const string ConnStr = "Data Source=;Initial Catalog=;Integrated Security=True";
+            const string ConnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True";
             string outputFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string dbFileName = Path.Combine(outputFolder, $"{dbName}.mdf");
             string dbLogFileName = Path.Combine(outputFolder, $"{dbName}.ldf");
+            string dbConnectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDBFileName={dbFileName};Integrated Security=True";
+            //using (var connection = new SqlConnection(ConnStr))
+            //{
 
+            //}
         }
         #endregion
 
