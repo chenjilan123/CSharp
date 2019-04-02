@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Xml;
 
 namespace CSharp
 {
@@ -18,6 +19,14 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
+            //var doc = new XmlDocument();
+            //doc.LoadXml("<?xml version=\"1.0\" encoding=\"utf-8\"?><Data><PlatProtocolName>GDOC</PlatProtocolName><Id>5</Id><Name>广东省公务车转发</Name><IsOpen>true</IsOpen><UpdateTime>2019-05-24 01:01:00</UpdateTime><Field1>100234</Field1><Field2>343xsdafjhk</Field2><Field3>100.43</Field3><Field4>false</Field4><Level>10</Level><Descript>Hello Bike</Descript><Order>50.2</Order><IsEnabled>true</IsEnabled><SpField1>2100234</SpField1><SpField2>2343xsdafjhk</SpField2><SpField3>2100.43</SpField3><SpField4>false</SpField4></Data>");
+            //var node = doc.CreateElement("Node1");
+            //node.InnerText = "hehe";
+            //doc.LastChild.AppendChild(node);
+            //Console.WriteLine(doc.InnerXml.ToString());
+            //return;
+
             //Task
             //RunTask();
             //Thread.Sleep(100);
