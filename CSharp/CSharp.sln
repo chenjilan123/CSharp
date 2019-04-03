@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp", "CSharp\CSharp.csproj", "{5087DFAA-E29D-42CB-BF9C-091A397BB4A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.xUnitTest", "CSharp.xUnitTest\CSharp.xUnitTest.csproj", "{687BDC15-321A-4B7B-8DE6-4654A6DC835C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Encrypt", "CSharp.Encrypt\CSharp.Encrypt.csproj", "{0008D21D-41D6-4499-B3BD-73D4AB62C72E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{5087DFAA-E29D-42CB-BF9C-091A397BB4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5087DFAA-E29D-42CB-BF9C-091A397BB4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5087DFAA-E29D-42CB-BF9C-091A397BB4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687BDC15-321A-4B7B-8DE6-4654A6DC835C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687BDC15-321A-4B7B-8DE6-4654A6DC835C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687BDC15-321A-4B7B-8DE6-4654A6DC835C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687BDC15-321A-4B7B-8DE6-4654A6DC835C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0008D21D-41D6-4499-B3BD-73D4AB62C72E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0008D21D-41D6-4499-B3BD-73D4AB62C72E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0008D21D-41D6-4499-B3BD-73D4AB62C72E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0008D21D-41D6-4499-B3BD-73D4AB62C72E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
