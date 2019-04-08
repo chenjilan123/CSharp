@@ -12,6 +12,7 @@ namespace CSharp.Server
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Connect("127.0.0.1", 8088);
 
+            
         }
     }
 }
