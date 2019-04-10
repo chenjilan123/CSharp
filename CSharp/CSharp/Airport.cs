@@ -18,7 +18,7 @@ namespace CSharp
         {
             for (int i = 0; i < Buses.Count; i++)
             {
-                Console.WriteLine($"Bus No.{i + 1} start working.");
+                Console.WriteLine($"Bus No.{i + 1} start working. Id: {Buses[i].Id}");
             }
         }
     }

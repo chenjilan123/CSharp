@@ -13,7 +13,7 @@ namespace CSharp
             services.AddSingleton<Jet502>();
             services.AddSingleton<IAirbus, EnlargedAirbus>();
             services.AddSingleton<IAirbus, EnlargedAirbus>();
-            services.AddSingleton<IAirbus, Airbus>(); //First
+            services.AddSingleton<IAirbus, Airbus>(); 
             services.AddSingleton<IAirbus, EnlargedAirbus>();
             services.AddSingleton<IAirbus, Airbus>(); //First
             services.AddSingleton<Airport>();
