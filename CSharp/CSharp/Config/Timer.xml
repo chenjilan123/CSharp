@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Timers>
+    <Timer Decsription="离线定时器" Name="DropLineTimer" Interval="30" Enable="true">
+      <DropLineTime>300</DropLineTime>
+      <UserId>administrator</UserId>
+    </Timer>
+    <Timer Decsription="太空探索定时器" Name="SpaceExploreTimer" Interval="30" Enable="true">
+      <Spaceship>ChangEr 2</Spaceship>
+      <Officer>FeiJunLong</Officer>
+    </Timer>
+  </Timers>
+  <Trigers>
+    <Triger Description="报表导出触发器" TrigerTime="13:00:00" Name="ReportExportTriger" Enable="true">
+      <ReportName>VehicleOfflineLog</ReportName>
+      <ExcelVerson>.xlsx</ExcelVerson>
+    </Triger>
+  </Trigers>
+</Root>

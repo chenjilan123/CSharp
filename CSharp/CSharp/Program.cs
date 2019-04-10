@@ -8,6 +8,12 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
+            Pilot();
+        }
+
+        #region Pilot
+        private static void Pilot()
+        {
             var services = CreateServices()
                 .AddVehicle();
 
@@ -31,8 +37,7 @@ namespace CSharp
                     Console.Error.WriteLine(ex.ToString());
                 }
             }
-        } 
-
+        }
 
         private static IServiceCollection CreateServices()
         {
@@ -55,5 +60,7 @@ namespace CSharp
 
             return services;
         }
+        #endregion
     }
 }
+
