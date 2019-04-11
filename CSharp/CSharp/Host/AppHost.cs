@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,9 +18,10 @@ namespace CSharp.Host
             var builder = new HostBuilder()
                 .ConfigureAppConfiguration((context, config) =>
                 {
-                    config.AddJsonFile("Config/appSetting.json", optional: false, reloadOnChange: true);
+                    config.SetBasePath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config"));
+                    config.AddJsonFile("appSetting.json", optional: false, reloadOnChange: true);
 
-                    var configuration = config.Build();
+                    //var configuration = config.Build();
                 })
                 .ConfigureServices((context, services) =>
                 {
