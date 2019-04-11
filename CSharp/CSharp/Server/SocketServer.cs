@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CSharp.Server
 {
@@ -10,15 +12,81 @@ namespace CSharp.Server
     {
         public void Run()
         {
+            //Run Server and Client
+            this.RunServerClient();
+
+            return;
+
+            //Best Practice
             this.RunPage();
             return;
 
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Connect("127.0.0.1", 8088);
-
-            
         }
 
+        #region RunServerClient
+        private void RunServerClient()
+        {
+            var tServer = RunServerAsync();
+            Thread.Sleep(200);
+            var tClient = RunClientAsync();
+
+            Task.WhenAll(tServer, tClient);
+
+            Console.ReadLine();
+        }
+        #endregion
+
+        #region RunClientAsync
+        private Task RunClientAsync()
+        {
+            return Task.Run(() => RunClient());
+        }
+
+        private async Task RunClient()
+        {
+            var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), 10011);
+            client.Connect(ep);
+
+            var arraySegment = new ArraySegment<byte>(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+
+            while (true)
+            {
+                var count = await client.SendAsync(arraySegment, SocketFlags.None);
+                Console.WriteLine($"Client send data: {count} bytes");
+
+                Thread.Sleep(3000);
+            }
+        }
+        #endregion
+
+        #region RunServerAsync
+        private Task RunServerAsync()
+        {
+            return Task.Run(() => RunServer());
+        }
+        private async Task RunServer()
+        {
+            var server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1}), 10011);
+            server.Bind(ep);
+            server.Listen(100);
+
+            var client = await server.AcceptAsync();
+
+            while (true)
+            {
+                var arraySegment = new ArraySegment<byte>();
+                var count = await client.ReceiveAsync(arraySegment, SocketFlags.None);
+
+                Console.WriteLine($"Server received data: {count} bytes");
+            }
+        }
+        #endregion
+
+        #region RunPage
         private void RunPage()
         {
             const string localHost = "127.0.0.1";
@@ -71,9 +139,8 @@ namespace CSharp.Server
                 }
                 while (bytes > 0);
             }
-
             Console.WriteLine(page);
-
         }
+        #endregion
     }
 }
