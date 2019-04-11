@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CSharp.Server
 {
@@ -39,6 +40,8 @@ namespace CSharp.Server
         #endregion
 
         #region RunClientAsync
+        private const int Port = 8088;
+
         private Task RunClientAsync()
         {
             return Task.Run(() => RunClient());
@@ -46,10 +49,13 @@ namespace CSharp.Server
 
         private async Task RunClient()
         {
+            return;
             var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), 10011);
+            var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), Port);
             client.Connect(ep);
-
+            Console.WriteLine($"Client connected: "+ Environment.NewLine +
+                              $"                    Remote endpoint: {client.RemoteEndPoint}" + Environment.NewLine +
+                              $"                     Local endpoint: {client.LocalEndPoint}");
             var arraySegment = new ArraySegment<byte>(new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
             while (true)
@@ -70,18 +76,46 @@ namespace CSharp.Server
         private async Task RunServer()
         {
             var server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1}), 10011);
+            var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1}), Port);
             server.Bind(ep);
             server.Listen(100);
 
             var client = await server.AcceptAsync();
-
+            Console.WriteLine($"Accept new socket: " + Environment.NewLine +
+                              $"                    Remote endpoint: {client.RemoteEndPoint}" + Environment.NewLine +
+                              $"                     Local endpoint: {client.LocalEndPoint}");
+            Console.WriteLine("             state:" + Environment.NewLine +
+                              $"                        IsConnected: {client.Connected}");
             while (true)
             {
-                var arraySegment = new ArraySegment<byte>();
-                var count = await client.ReceiveAsync(arraySegment, SocketFlags.None);
+                var buffer = new byte[1024];
+                var cnt = client.Receive(buffer);
 
-                Console.WriteLine($"Server received data: {count} bytes");
+                var data = new byte[cnt];
+                for (int i = 0; i < cnt; i++)
+                {
+                    data[i] = buffer[i];
+                }
+                var sb = new StringBuilder();
+                foreach (var b in data)
+                {
+                    sb.Append(b.ToString("X2"));
+                }
+                var s = sb.ToString();
+
+                Console.WriteLine($"Server received data: {data.Length} bytes");
+                Console.WriteLine($"                data: {sb.ToString()}");
+                Console.WriteLine();
+
+                if (!client.Connected)
+                {
+                    Console.WriteLine("Client disconnected.");
+                }
+
+                //无效？
+                //var arraySegment = new ArraySegment<byte>();
+                //var count = await client.ReceiveAsync(arraySegment, SocketFlags.None);
+                //Console.WriteLine($"Server received data: {count} bytes");
             }
         }
         #endregion
