@@ -1,14 +1,19 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CSharp.Host;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace CSharp
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Pilot();
+            AppHost.ConfigureHost().Wait();
+
+
+            Console.WriteLine("End");
         }
 
         #region Pilot
@@ -61,6 +66,7 @@ namespace CSharp
             return services;
         }
         #endregion
+
     }
 }
 

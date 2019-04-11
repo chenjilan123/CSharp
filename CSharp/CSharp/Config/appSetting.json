@@ -1,0 +1,15 @@
+{
+  "Level": 1,
+  "Voice": true,
+
+  "Pilot": {
+    "Name": "No1",
+    "Id": "DF4GcfX",
+    "Weight": 63,
+    "Checked": true
+  },
+
+  "InternalOption": {
+    "Message": "Heloo."
+  }
+}
