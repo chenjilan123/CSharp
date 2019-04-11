@@ -15,15 +15,11 @@ namespace CSharp.Server
         {
             //Run Server and Client
             this.RunServerClient();
-
             return;
 
             //Best Practice
             this.RunPage();
             return;
-
-            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            socket.Connect("127.0.0.1", 8088);
         }
 
         #region RunServerClient
@@ -49,7 +45,6 @@ namespace CSharp.Server
 
         private async Task RunClient()
         {
-            return;
             var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), Port);
             client.Connect(ep);
@@ -76,16 +71,42 @@ namespace CSharp.Server
         private async Task RunServer()
         {
             var server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1}), Port);
+            var ep = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), Port);
             server.Bind(ep);
+
+            //Listen
             server.Listen(100);
 
-            var client = await server.AcceptAsync();
-            Console.WriteLine($"Accept new socket: " + Environment.NewLine +
-                              $"                    Remote endpoint: {client.RemoteEndPoint}" + Environment.NewLine +
-                              $"                     Local endpoint: {client.LocalEndPoint}");
-            Console.WriteLine("             state:" + Environment.NewLine +
-                              $"                        IsConnected: {client.Connected}");
+            //Accept
+
+            await Accept(server);
+        }
+
+        private static async Task Accept(Socket server)
+        {
+            var tasks = new List<Task>();
+            while (true)
+            {
+                var client = await server.AcceptAsync();
+                Console.WriteLine($"Accept new socket: " + Environment.NewLine +
+                                  $"                    Remote endpoint: {client.RemoteEndPoint}" + Environment.NewLine +
+                                  $"                     Local endpoint: {client.LocalEndPoint}");
+                Console.WriteLine("             state:" + Environment.NewLine +
+                                  $"                        IsConnected: {client.Connected}");
+
+                //Receive
+                var task = ReceiveDataAsync(client);
+                tasks.Add(task);
+            }
+        }
+
+        private static Task ReceiveDataAsync(Socket client)
+        {
+            return Task.Run(() => ReceiveData(client));
+        }
+
+        private static Task ReceiveData(Socket client)
+        {
             while (true)
             {
                 var buffer = new byte[1024];
@@ -103,8 +124,8 @@ namespace CSharp.Server
                 }
                 var s = sb.ToString();
 
-                Console.WriteLine($"Server received data: {data.Length} bytes");
-                Console.WriteLine($"                data: {sb.ToString()}");
+                Console.WriteLine($"({Thread.CurrentThread.ManagedThreadId})Server received data: {data.Length} bytes");
+                Console.WriteLine($"                   data: {sb.ToString()}");
                 Console.WriteLine();
 
                 if (!client.Connected)
