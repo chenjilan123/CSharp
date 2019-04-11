@@ -135,7 +135,9 @@ namespace CSharp.Server
 
                 //无效？
                 //var arraySegment = new ArraySegment<byte>();
-                //var count = await client.ReceiveAsync(arraySegment, SocketFlags.None);
+                ////var count = 
+                //var count = client.ReceiveAsync(arraySegment, SocketFlags.None).ConfigureAwait(true).GetAwaiter().GetResult();
+                //Console.WriteLine("Receive Success..........");
                 //Console.WriteLine($"Server received data: {count} bytes");
             }
         }

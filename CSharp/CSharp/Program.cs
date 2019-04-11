@@ -1,4 +1,5 @@
-﻿using CSharp.Server;
+﻿using CSharp.Host;
+using CSharp.Server;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -21,5 +22,12 @@ namespace CSharp
         {
             new SocketServer().Run();
         }
+
+        #region Host
+        private static void Host()
+        {
+            new HostInformation().PrintInformation();
+        }
+        #endregion
     }
 }
