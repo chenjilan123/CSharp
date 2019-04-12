@@ -16,6 +16,10 @@ namespace CSharp
         static void Main(string[] args)
         {
             Socket();
+            return;
+
+            Host();
+            return;
         }
 
         static private void Socket()
