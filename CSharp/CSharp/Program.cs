@@ -17,6 +17,16 @@ namespace CSharp
             //    .Serialize();
         }
 
+        #region Math
+        private static void Math()
+        {
+            var i1 = System.Math.Ceiling(5.5D);
+            var i2 = System.Math.Ceiling(6.1);
+            var i3 = System.Math.Ceiling(6.9);
+            Console.WriteLine($"i1: {i1}-5, i2: {i2}-6, i3: {i3}-6");
+        }
+        #endregion
+
         #region SizeMeasure
         private static void SizeMeasure()
         {
