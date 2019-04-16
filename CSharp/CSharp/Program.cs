@@ -1,4 +1,6 @@
-﻿using CSharp.Host;
+﻿using CSharp.Client;
+using CSharp.Handler;
+using CSharp.Host;
 using CSharp.Ping;
 using CSharp.Server;
 using System;
@@ -16,15 +18,37 @@ namespace CSharp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Ping();
-            return;
-
-            Socket();
-            return;
-
-            Host();
-            return;
+            RunSocket();
         }
+
+        #region Socket1
+        private static void RunSocket()
+        {
+            string ope = null;
+            while (true)
+            {
+                Console.WriteLine("Run server or client ?");
+                ope = Console.ReadLine();
+                if (ope == "server" || ope == "client")
+                {
+                    break;
+                }
+                Console.WriteLine("Input error, please try again.");
+            }
+            var msgHandler = new SocketMsgHandler();
+            switch (ope)
+            {
+                case "server":
+                    new SocketServer1(msgHandler).Run();
+                    break;
+                case "client":
+                    new SocketClient1(msgHandler).Start();
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
 
         #region Socket
         static private void Socket()

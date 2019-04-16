@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Client\" />
     <Folder Include="Udp\" />
     <Folder Include="Tcp\" />
   </ItemGroup>
