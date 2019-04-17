@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace CSharp.Server
 {
@@ -25,34 +26,53 @@ namespace CSharp.Server
 
         private void Accept(IAsyncResult ar)
         {
-            var socket = ar.AsyncState as Socket;
-            var client = socket.EndAccept(ar);
+            try
+            {
+                var socket = ar.AsyncState as Socket;
+                var client = socket.EndAccept(ar);
 
-            Console.WriteLine($"客户端连接: {client.RemoteEndPoint.ToString()}");
+                Console.WriteLine($"客户端连接: {client.RemoteEndPoint.ToString()}");
 
-            var dataMessage = _encoding.GetBytes("欢迎您!");
-            client.BeginSend(dataMessage, 0, dataMessage.Length, SocketFlags.None, new AsyncCallback(Send), client);
-
+                var dataMessage = _encoding.GetBytes("欢迎您!");
+                client.BeginSend(dataMessage, 0, dataMessage.Length, SocketFlags.None, new AsyncCallback(Send), client);
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine($"Acep - SocketException: {ex.Message}");
+            }
         }
 
         private void Send(IAsyncResult ar)
         {
-            var client = ar.AsyncState as Socket;
-            client.EndSend(ar);
+            try
+            {
+                var client = ar.AsyncState as Socket;
+                client.EndSend(ar);
 
-            Console.WriteLine("消息发送成功");
-            var pack = new ReceivePack(client);
-            client.BeginReceive(pack.Data, 0, ReceivePack.DataSize, SocketFlags.None, new AsyncCallback(Receive), pack);
+                Console.WriteLine("消息发送成功");
+                var pack = new ReceivePack(client);
+                client.BeginReceive(pack.Data, 0, ReceivePack.DataSize, SocketFlags.None, new AsyncCallback(Receive), pack);
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine($"Send - SocketException: {ex.Message}");
+            }
         }
 
         private void Receive(IAsyncResult ar)
         {
-            var pack = ar.AsyncState as ReceivePack;
-            var dataLength = pack.Socket.EndReceive(ar);
-            var message = _encoding.GetString(pack.Data, 0, dataLength);
+            try
+            {
+                var pack = ar.AsyncState as ReceivePack;
+                var dataLength = pack.Socket.EndReceive(ar);
+                var message = _encoding.GetString(pack.Data, 0, dataLength);
 
-
-            Console.WriteLine($"客户：{message}");
+                Console.WriteLine($"客户：{message}");
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine($"Recv - SocketException: {ex.Message}");
+            }
         }
     }
 
