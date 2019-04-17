@@ -1,6 +1,8 @@
 ﻿using CSharp.Entity;
 using CSharp.xml;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace CSharp
@@ -10,13 +12,35 @@ namespace CSharp
         public static bool IsTrue { get; set; }
         static void Main(string[] args)
         {
+            Split();
+
             //Console.WriteLine(IsTrue);
-            SizeMeasure();
+            //SizeMeasure();
 
             //new EntityToXml()
             //    .Serialize();
         }
+        #region Split
+        private static void Split()
+        {
+            var input = "abcd,ab,c,ab,d,a,bc,a,b,,acd,";
+            foreach (var item in GetArray(input))
+            {
+                Console.WriteLine(item);
+            }
+        }
 
+        private static IEnumerable<string> GetArray(string input)
+        {
+            var current = 0;
+            while(current <= input.Length - 4)
+            {
+                var output = input.Substring(current, 4);
+                yield return output;
+                current += 5;
+            }
+        }
+        #endregion
         #region Math
         private static void Math()
         {
@@ -51,11 +75,13 @@ namespace CSharp
         }
         #endregion
 
+        #region InterfaceTest
         private static void InterfaceTest()
         {
             Intf i = new Imple();
             Console.WriteLine(i.ToString());
         }
+        #endregion
     }
 
     public interface Intf
