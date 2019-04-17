@@ -64,6 +64,8 @@ namespace CSharp.Server
             try
             {
                 var pack = ar.AsyncState as ReceivePack;
+
+                //BeginReceive堵塞时产生的异常在EndReceive时触发。
                 var dataLength = pack.Socket.EndReceive(ar);
                 var message = _encoding.GetString(pack.Data, 0, dataLength);
 
