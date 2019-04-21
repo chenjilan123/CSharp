@@ -17,6 +17,8 @@ namespace CSharp.NetFramework.Tcp
             var channel = new TcpServerChannel(8000);
             ChannelServices.RegisterChannel(channel, false);
             RemotingConfiguration.RegisterWellKnownServiceType(typeof(Monitor), "MonitorServer", WellKnownObjectMode.Singleton);
+
+            Console.WriteLine("Server has started...");
             Console.ReadLine();
         }
     }
