@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -66,7 +68,12 @@ namespace CSharp.Model
         public byte[] GetDesktopBitmapBytes()
         {
             var curBitmap = GetDesktopBitmap();
-            return new byte[0];
+
+            using (var ms = new MemoryStream())
+            {
+                curBitmap.Save(ms, ImageFormat.Bmp);
+                return ms.GetBuffer();
+            }
         }
 
         public Bitmap GetDesktopBitmap()

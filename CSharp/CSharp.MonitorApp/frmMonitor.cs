@@ -39,7 +39,18 @@ namespace CSharp.MonitorApp
                 var deskTopSize = _remoteMonitor.GetDesktopBitmapSize();
                 _bitmap = new Bitmap(deskTopSize.Width, deskTopSize.Height);
                 this.AutoScrollMinSize = deskTopSize;
-                UpdateDisplay();
+
+                var thread = new System.Threading.Thread(() =>
+                {
+                    while (!_control)
+                    {
+                        UpdateDisplay();
+                    }
+                })
+                {
+                    IsBackground = true
+                };
+                thread.Start();
             }
             catch (Exception)
             {
@@ -68,8 +79,13 @@ namespace CSharp.MonitorApp
             {
                 //若不放在finally里, 再try块内return后, 不会执行该内容。
                 System.Threading.Monitor.Exit(this);
-                System.Threading.Thread.Sleep(350);
+                System.Threading.Thread.Sleep(20);
             }
+        }
+
+        private void frmMonitor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this._control = true;
         }
     }
 }
