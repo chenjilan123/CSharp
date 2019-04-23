@@ -20,6 +20,7 @@ namespace CSharp
             //new EntityToXml()
             //    .Serialize();
         }
+
         #region Split
         private static void Split()
         {
@@ -33,7 +34,7 @@ namespace CSharp
         private static IEnumerable<string> GetArray(string input)
         {
             var current = 0;
-            while(current <= input.Length - 4)
+            while (current <= input.Length - 4)
             {
                 var output = input.Substring(current, 4);
                 yield return output;
@@ -41,6 +42,7 @@ namespace CSharp
             }
         }
         #endregion
+
         #region Math
         private static void Math()
         {
