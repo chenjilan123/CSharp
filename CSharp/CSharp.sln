@@ -5,9 +5,14 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp", "CSharp\CSharp.csproj", "{5087DFAA-E29D-42CB-BF9C-091A397BB4A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.xUnitTest", "CSharp.xUnitTest\CSharp.xUnitTest.csproj", "{687BDC15-321A-4B7B-8DE6-4654A6DC835C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp.xUnitTest", "CSharp.xUnitTest\CSharp.xUnitTest.csproj", "{687BDC15-321A-4B7B-8DE6-4654A6DC835C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Encrypt", "CSharp.Encrypt\CSharp.Encrypt.csproj", "{0008D21D-41D6-4499-B3BD-73D4AB62C72E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp.Encrypt", "CSharp.Encrypt\CSharp.Encrypt.csproj", "{0008D21D-41D6-4499-B3BD-73D4AB62C72E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{1CC35CB6-1A65-485B-8521-9708D9B5F193}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\Newtonsoft.Json.dll = Lib\Newtonsoft.Json.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
