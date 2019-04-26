@@ -21,6 +21,14 @@ namespace CSharp
             //    .Serialize();
         }
 
+        #region GetType
+        private static void GetNullType()
+        {
+            Intf intf = new Imple();
+            Console.WriteLine(intf.GetType());
+        }
+        #endregion
+
         #region Split
         private static void Split()
         {
