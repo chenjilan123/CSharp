@@ -10,5 +10,6 @@ namespace CSharp.Entity
         public string Identity { get; set; }
         public double Weight { get; set; }
         public double Height { get; set; }
+        public DateTime RegisterTime { get; set; }
     }
 }

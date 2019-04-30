@@ -11,5 +11,6 @@ namespace CSharp.Entity
         public int Code { get; set; }
         public string Name { get; set; }
         public List<Airport> Planes { get; set; }
+        public string[] Drivers { get; set; }
     }
 }

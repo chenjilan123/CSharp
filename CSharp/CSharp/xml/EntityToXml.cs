@@ -12,9 +12,10 @@ namespace CSharp.xml
 {
     public class EntityToXml
     {
+        #region Serialize
         public EntityToXml Serialize()
         {
-            return this.LoadAsDataSet();
+            //return this.LoadAsDataSet();
 
             var airports = new Airports()
             {
@@ -36,6 +37,7 @@ namespace CSharp.xml
                         },
                     },
                 },
+                Drivers = new[] { "Jack", "Mick", "Jodan" },
             };
             MemoryStream Stream = new MemoryStream();
             XmlWriterSettings settings = new XmlWriterSettings();
@@ -57,12 +59,38 @@ namespace CSharp.xml
                 //sr.Dispose();
                 //Stream.Dispose();
                 Console.WriteLine(str);
+
+                //                str = @"<data>
+                //    <Code>503</Code>
+                //    <Name>GGAirport</Name>
+                //    <Planes>
+                //        <Airport>
+                //            <Id>1</Id>
+                //            <Name>J20</Name>
+                //            <Flag>JE</Flag>
+                //            <MaxSpeed>625</MaxSpeed>
+                //            <Pilot>
+                //                <Identity>HuangHe</Identity>
+                //                <Weight>63.5</Weight>
+                //                <Height>175.4</Height>
+                //            </Pilot>
+                //        </Airport>
+                //    </Planes>
+                //    <Drivers>
+                //        <Driver>Jack</Driver>
+                //        <Driver>Mick</Driver>
+                //        <Driver>Jodan</Driver>
+                //    </Drivers>
+                //</data>";
+
                 var xEle = XElement.Parse(str);
                 Console.WriteLine(xEle);
             }
             return this;
         }
+        #endregion
 
+        #region LoadAsDataSet
         public EntityToXml LoadAsDataSet()
         {
             var xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Data><PlatProtocolName>HEWL</PlatProtocolName></Data>";
@@ -74,5 +102,53 @@ namespace CSharp.xml
             Console.WriteLine($"Tables in DataSet: {ds.Tables.Count}");
             return this;
         }
+        #endregion
+
+        #region SerializeWithNamedRoot
+        public EntityToXml SerializeWithNamedRoot()
+        {
+            var pilot = new Pilot
+            {
+                Height = 170.4,
+                Weight = 60.4,
+                Identity = "50IHX",
+            };
+            var airport = new Airport
+            {
+                Flag = "X1H3",
+                Id = 1,
+                MaxSpeed = 30.5D,
+                Name = "bilibi airport",
+                Pilot = pilot,
+            };
+            var xDoc = new XDocument();
+            var memory = new MemoryStream();
+
+            //XmlWriterSettings settings = new XmlWriterSettings();
+            //settings.OmitXmlDeclaration = true;
+            //settings.Indent = true;
+            //settings.IndentChars = "    ";
+            //settings.NewLineChars = "\r\n";
+            //settings.Encoding = Encoding.UTF8;
+            using (var writer = XmlWriter.Create(memory))
+            {
+                var serializer = new XmlSerializer(typeof(Airport));
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                ns.Add("", "");
+                serializer.Serialize(writer, airport, ns);
+
+                //xDoc.CreateReader();
+
+                memory.Position = 0;
+                StreamReader sr = new StreamReader(memory);
+                string str = sr.ReadToEnd();
+
+                Console.WriteLine(str);
+            }
+            return this;
+            //return this.Serialize();
+        }
+        #endregion
+
     }
 }

@@ -1,8 +1,10 @@
 ﻿using CSharp.Entity;
+using CSharp.json;
 using CSharp.xml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace CSharp
@@ -12,14 +14,39 @@ namespace CSharp
         public static bool IsTrue { get; set; }
         static void Main(string[] args)
         {
-            Split();
+            try
+            {
+                //Split();
 
-            //Console.WriteLine(IsTrue);
-            //SizeMeasure();
+                //Console.WriteLine(IsTrue);
+                //SizeMeasure();
 
-            //new EntityToXml()
-            //    .Serialize();
+                //new EntityToXml()
+                //    .Serialize();
+
+
+                new ResolveXml().Run();
+                return;
+
+                //new ParseString().Run();
+                //return;
+
+                //EntityToXml();
+                //return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.ReadLine();
         }
+
+        #region EntityToXml
+        private static void EntityToXml()
+        {
+            new EntityToXml().SerializeWithNamedRoot();
+        }
+        #endregion
 
         #region GetType
         private static void GetNullType()
