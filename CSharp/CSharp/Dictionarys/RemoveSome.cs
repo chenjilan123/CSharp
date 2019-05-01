@@ -10,7 +10,7 @@ namespace CSharp.Dictionarys
     {
         public RemoveSome Remove()
         {
-            var dic = new Dictionary<string, string>()
+            var dic = new Dictionary<string, string>
             {
                 { "6", "m" },
                 { "7", "n" },
