@@ -25,8 +25,8 @@ namespace CSharp
                 //    .Serialize();
 
 
-                new ResolveXml().Run();
-                return;
+                //new ResolveXml().Run();
+                //return;
 
                 //new ParseString().Run();
                 //return;
