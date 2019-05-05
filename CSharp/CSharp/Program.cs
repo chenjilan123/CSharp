@@ -1,6 +1,7 @@
 ﻿using CSharp.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CSharp
 {
@@ -9,15 +10,30 @@ namespace CSharp
         private const int PadLength = 30;
         static void Main(string[] args)
         {
-            Algorithm();
+            TestNullIEnumerable();
         }
 
+        #region TestNullIEnumerable
+        private static void TestNullIEnumerable()
+        {
+            foreach (var item in GetNUllIEnmerable())
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        private static IEnumerable<int> GetNUllIEnmerable()
+        {
+            return null;
+        }
+        #endregion
+
+        #region 平台里程算法
         static decimal _decIncrementMileage = decimal.Zero;   //平台里程统计：平台里程计算增量(平台里程 = 数据库里程 + 增量)
         static decimal _decPrevMileage = decimal.Zero;        //平台里程统计：前一条轨迹里程(平台)(有效)
         static decimal _decPrevDBMileage = decimal.Zero;      //平台里程统计：前一条轨迹里程(数据库)(不论有效无效)
         static DateTime _tPreGpsTime = default(DateTime);     //平台里程统计：前一条轨迹时间
-        #region 算法
-        private static void Algorithm()
+        private static void PlatMileageAlgorithm()
         {
             var arr = new List<Mileage>
             {
