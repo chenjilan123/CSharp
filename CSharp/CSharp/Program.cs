@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 
 namespace CSharp
 {
@@ -10,8 +11,41 @@ namespace CSharp
         private const int PadLength = 30;
         static void Main(string[] args)
         {
-            TestNullIEnumerable();
+            GetWebRequestParam();
         }
+
+        #region 获取Web请求参数
+        private static void GetWebRequestParam()
+        {
+            //var sUrl = "http://baidu.com/index.html?search=12x&key=504&mki=xxkfig";
+
+            var sUrl = "http://baidu.com/haha?sdaf3=&fds=3";
+            var param = GetPairs(sUrl).ToList();
+            foreach (var pair in param)
+            {
+                Console.WriteLine($"{pair.Key}: {pair.Value}");
+            }
+        }
+        private static IEnumerable<KeyValuePair<string, string>> GetPairs(string sUrl)
+        {
+            int iParamBegin = sUrl.IndexOf('?');
+            if (iParamBegin < 0)
+            {
+                yield break;
+            }
+            var sKeyPair = sUrl.Substring(iParamBegin + 1, sUrl.Length - iParamBegin - 1);
+            var arrPairs = sKeyPair.Split('&');
+            foreach (var sPair in arrPairs)
+            {
+                var keyValue = sPair.Split('=');
+                if (keyValue == null || keyValue.Length != 2)
+                {
+                    continue;
+                }
+                yield return new KeyValuePair<string, string>(keyValue[0], keyValue[1]);
+            }
+        }
+        #endregion
 
         #region TestNullIEnumerable
         private static void TestNullIEnumerable()
