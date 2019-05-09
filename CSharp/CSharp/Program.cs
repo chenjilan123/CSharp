@@ -11,8 +11,31 @@ namespace CSharp
         private const int PadLength = 30;
         static void Main(string[] args)
         {
-            GetWebRequestParam();
+            ParseTime();
         }
+
+        #region ParseTime
+        /// <summary>
+        /// 匹配时间
+        /// </summary>
+        private static void ParseTime()
+        {
+            string msg;
+            msg = !DateTime.TryParse("16:00:00", out var tTest) ? "Parse failure" : tTest.ToODBC();
+            Console.WriteLine($"TimeOfDay: {tTest.TimeOfDay.ToString()}");
+            Console.WriteLine($"     Time: {msg}");
+
+            var tsNow = DateTime.Now.TimeOfDay;
+            var tsBegin = TimeSpan.Parse("16:05:04");
+
+            Console.WriteLine($" Now: {tsNow}");
+            Console.WriteLine($"Then: {tsBegin}");
+
+            var sCompare = tsNow > tsBegin ? ">" : "<=";
+            Console.WriteLine($"{tsNow} {sCompare} {tsBegin}");
+
+        }
+        #endregion
 
         #region 获取Web请求参数
         private static void GetWebRequestParam()
