@@ -4,8 +4,11 @@ using CSharp.xml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace CSharp
 {
@@ -16,6 +19,8 @@ namespace CSharp
         {
             try
             {
+                XmlResolve();
+
                 //Split();
 
                 //Console.WriteLine(IsTrue);
@@ -23,7 +28,6 @@ namespace CSharp
 
                 //new EntityToXml()
                 //    .Serialize();
-
 
                 //new ResolveXml().Run();
                 //return;
@@ -40,6 +44,111 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region XmlResolve
+        private static void XmlResolve()
+        {
+            var s = xmlParam_1002X59;
+            var xDoc = new XmlDocument();
+            xDoc.LoadXml(s);
+
+            XmlNodeList xList = xDoc.SelectNodes("//PlatItem");
+            foreach (XmlElement element in xList)
+            {
+                if (element.GetAttribute("url") != "222.76.211.247:8088")
+                {
+                    continue;
+                }
+
+                //这样查会顺延到下个节点去找。
+                //var xlist = element.SelectSingleNode("//UserList");
+                //Console.WriteLine(xlist.InnerXml);
+
+                XmlNode xUserLst = null;
+                foreach (XmlNode node in element.ChildNodes)
+                {
+                    if (node.Name == "UserList")
+                    {
+                        xUserLst = node;
+                        break;
+                    }
+                }
+                if (xUserLst != null)
+                {
+                    Console.WriteLine(xUserLst.InnerXml);
+                }
+                else
+                {
+                    Console.WriteLine("404 Not found");
+                }
+            }
+        }
+
+        private const string xmlParam_1002X59 = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+<Param>
+  <PlatList>
+    <PlatItem url=""222.76.211.247:8088"">
+      <IsShowSystemName>True</IsShowSystemName>
+      <SystemName>锐讯卫星定位综合服务平台</SystemName>
+      <LogoUrl>
+      </LogoUrl>
+      <BgImgUrl>
+      </BgImgUrl>
+      <FontColor>
+      </FontColor>
+      <LoginButtonBgColor>
+      </LoginButtonBgColor>
+      <LoginButtonFontColor>
+      </LoginButtonFontColor>
+      <Ip>222.76.211.247</Ip>
+      <Port>8088</Port>
+      <UserList>
+        <User id=""admin"" pwd=""8B4D62C133480463636CE0EBBFAA1C47"" />
+      </UserList>
+    </PlatItem>
+    <PlatItem url=""124.225.212.14:8088"" >
+      <Ip>124.225.212.14</Ip>
+      <Port>8088</Port>
+      <IsShowSystemName>True</IsShowSystemName>
+      <SystemName>佳创天狮GPS智能管理平台</SystemName>
+      <BgImgUrl>
+      </BgImgUrl>
+      <FontColor>
+      </FontColor>
+      <LoginButtonBgColor>
+      </LoginButtonBgColor>
+      <LoginButtonFontColor>
+      </LoginButtonFontColor>
+      <LogoUrl>
+      </LogoUrl>
+    </PlatItem>
+    <PlatItem url=""192.168.3.99:8088"" >
+      <Ip>192.168.3.99</Ip>
+      <Port>8088</Port>
+      <IsShowSystemName>True</IsShowSystemName>
+      <SystemName>CGO8主动安全监控平台</SystemName>
+      <BgImgUrl>
+      </BgImgUrl>
+      <FontColor>
+      </FontColor>
+      <LoginButtonBgColor>
+      </LoginButtonBgColor>
+      <LoginButtonFontColor>
+      </LoginButtonFontColor>
+      <LogoUrl>
+      </LogoUrl>
+      <UserList>
+        <User id=""admin"" pwd=""000000"" />
+        <User id= ""admin"" pwd=""8B4D62C133480463636CE0EBBFAA1C47"" />
+        <User id=""admin"" pwd=""8B4D62C133480463636CE0EBBFAA1C47"" />
+      </UserList>
+    </PlatItem>
+  </PlatList>
+  <LastUrl>124.225.212.14:8088</LastUrl>
+  <LastLogonUser>admin</LastLogonUser>
+  <LastLogonPwd>8B4D62C133480463636CE0EBBFAA1C47</LastLogonPwd>
+</Param>";
+        #endregion
 
         #region EntityToXml
         private static void EntityToXml()
