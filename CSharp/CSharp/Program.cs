@@ -31,8 +31,21 @@ namespace CSharp
         {
             public void Run()
             {
-                ComputeMD5();
+                DecimalCompute();
             }
+
+            #region DecimalCompute
+            void DecimalCompute()
+            {
+                var t1 = new DateTime(1990, 1, 1, 1, 1, 10);
+                var t2 = new DateTime(1990, 1, 1, 1, 1, 30);
+                var mut = (t2 - t1).TotalMinutes;
+                //decimal x = 5m / 20m;
+                decimal x = 5m / (decimal)mut;
+                Console.WriteLine(x);
+                Console.WriteLine(x.ToString("0.0"));
+            }
+            #endregion
 
             #region ComputeMD5
             void ComputeMD5()
