@@ -1,0 +1,28 @@
+{
+    "Cmd": "GetTaxiType",
+    "Data": [
+        {
+            "TaxiTypeCode": 1,
+            "TaxiTypeName": "5座小轿车",
+            "PassengerNumber": 4
+        },
+        {
+            "TaxiTypeCode": 2,
+            "TaxiTypeName": "7座商务车",
+            "PassengerNumber": 6
+        },
+        {
+            "TaxiTypeCode": 3,
+            "TaxiTypeName": "中巴车",
+            "PassengerNumber": 19
+        },
+        {
+            "TaxiTypeCode": 4,
+            "TaxiTypeName": "大巴车",
+            "PassengerNumber": 59
+        }
+    ],
+    "Remark": "操作成功",
+    "Result": 1,
+    "T": 636943145546692635
+}

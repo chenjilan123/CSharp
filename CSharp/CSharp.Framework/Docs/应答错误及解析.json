@@ -1,0 +1,33 @@
+
+{
+   {
+    "Cmd": "VehicleInfos",
+    "Data": "",
+    "Remark": "-1003,服务器异常无效车牌号码;Color 字段是必需的。;LaunchDate 字段是 必需的。;POVehicleUseNature 字段是必需的。;AllocationUnit 字段是必需的。;AllocationNumber 字段是必需的。;TerminalInstallationDate 字段是必需的。;Supplier 字段是必需的。;DrivingLicence 字段是必需的。;Owner 字段是必需的。;ContactName 字段是必需的。;OfficePhone 字段是必需的。;Department 字段是必需的。;ContactMobile 字段是必需的。;Duty 字段是必需的。;Fax 字段是 必需的。;请输入正确的标签;",
+    "Result": -1003,
+    "T": 636943147491807135
+},
+
+
+{
+    "Cmd": "VehicleInfos",
+    "Data": "[{\"No\":0,\"Result\":-1010,\"EffectRows\":0,\"Remark\":\"Duplicate entry '闽A55555' for key 'Base_Taxi_PlateNo'\",\"DataResults\":null,\"TaxiModelList\":null,\"TaxiTypeList\":null}]",
+    "Remark": "操作成功",
+    "Result": 1,
+    "T": 636943183556343600
+}
+// System.InvalidOperationException: 数组的反序列化不支持类型“CSharp.Framework.Transfer.JsonModel.GPDCVehicleResultData” 。
+//    在 System.Web.Script.Serialization.ObjectConverter.ConvertListToObject(IList list, Type type, JavaScriptSerializer serializer, Boolean throwOnError, IList& convertedList)
+//    在 System.Web.Script.Serialization.ObjectConverter.ConvertObjectToTypeInternal(Object o, Type type, JavaScriptSerializer serializer, Boolean throwOnError, Object& convertedObject)
+//    在 System.Web.Script.Serialization.ObjectConverter.ConvertObjectToTypeMain(Object o, Type type, JavaScriptSerializer serializer, Boolean throwOnError, Object& convertedObject)
+//    在 System.Web.Script.Serialization.ObjectConverter.ConvertObjectToType(Object o, Type type, JavaScriptSerializer serializer)
+//    在 System.Web.Script.Serialization.JavaScriptSerializer.Deserialize[T
+// ](String input)
+//    在 CSharp.Framework.Helper.SerializeHelper.JsonToObject[T
+// ](String json) 位置 P:\GitHub\CSharp\CSharp\CSharp.Framework\Helper\SerializeHelper.cs:行号 124
+//    在 CSharp.Framework.Transfer.JsonModel.GDOCVehicleResult.GetDescription() 位置 P:\GitHub\CSharp\CSharp\CSharp.Framework\Transfer\JsonModel\GDOCVehicleResult.cs:行号 22
+//    在 CSharp.Framework.Transfer.GDOCSender`2.SendBatch(List`1 argsToSend) 位置 P:\GitHub\CSharp\CSharp\CSharp.Framework\Transfer\GDOCSender.cs:行号 101
+//    在 CSharp.Framework.Transfer.GDOCSender`2.Send(IEnumerable`1 argLst) 位置 P:\GitHub\CSharp\CSharp\CSharp.Framework\Transfer\GDOCSender.cs:行号 88
+//    在 CSharp.Framework.Transfer.AnalysisGDOCPosInfo.VehicleInfoTransmit() 位置 P:\GitHub\CSharp\CSharp\CSharp.Framework\Transfer\AnalysisGDOCPosInfo.cs:行号 172
+//    在 CSharp.Framework.Transfer.AnalysisGDOCPosInfo.OnWork() 位置 P:\GitHub\CSharp\CSharp\CSharp.Framework\Transfer\AnalysisGDOCPosInfo.cs:行号 53
+}

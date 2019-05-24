@@ -1,0 +1,1838 @@
+{
+    "Cmd": "GetTaxiModel",
+    "Data": [
+        {
+            "TaxiModelId": 11,
+            "TaxiModelName": "凯美瑞",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 16,
+            "TaxiModelName": "艾力绅",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 17,
+            "TaxiModelName": "汉兰达",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 18,
+            "TaxiModelName": "阁瑞斯",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 27,
+            "TaxiModelName": "柯斯达",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 20
+        },
+        {
+            "TaxiModelId": 28,
+            "TaxiModelName": "考斯特",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 20
+        },
+        {
+            "TaxiModelId": 31,
+            "TaxiModelName": "普拉多",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 38,
+            "TaxiModelName": "丰田RAV",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 43,
+            "TaxiModelName": "普瑞维亚",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 50,
+            "TaxiModelName": "海狮",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 13
+        },
+        {
+            "TaxiModelId": 52,
+            "TaxiModelName": "皇冠",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 53,
+            "TaxiModelName": "霸道",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 8
+        },
+        {
+            "TaxiModelId": 158,
+            "TaxiModelName": "卡罗拉",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 159,
+            "TaxiModelName": "RAV4荣放",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 160,
+            "TaxiModelName": "威驰",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 161,
+            "TaxiModelName": "威驰FS",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 162,
+            "TaxiModelName": "雷凌",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 163,
+            "TaxiModelName": "YARiSL 致享",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 164,
+            "TaxiModelName": "YARiSL 致炫",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 165,
+            "TaxiModelName": "丰田86",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 166,
+            "TaxiModelName": "埃尔法",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 167,
+            "TaxiModelName": "FJ酷路泽",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 168,
+            "TaxiModelName": "sienna",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 298,
+            "TaxiModelName": "四川丰田",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 24
+        },
+        {
+            "TaxiModelId": 480,
+            "TaxiModelName": "佳美",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 559,
+            "TaxiModelName": "陆地巡洋舰",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 8
+        },
+        {
+            "TaxiModelId": 593,
+            "TaxiModelName": "逸致",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 596,
+            "TaxiModelName": "GTM7180C",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 666,
+            "TaxiModelName": "RAV4",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 8
+        },
+        {
+            "TaxiModelId": 895,
+            "TaxiModelName": "哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇我哇哇哇哇哇哇哇哇哇哇",
+            "TaxiBrand": "丰田",
+            "MaxPassengerNumber": 999999999
+        },
+        {
+            "TaxiModelId": 3,
+            "TaxiModelName": "雅阁",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 6,
+            "TaxiModelName": "奥德赛",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 170,
+            "TaxiModelName": "缤智",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 171,
+            "TaxiModelName": "飞度",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 172,
+            "TaxiModelName": "冠道",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 173,
+            "TaxiModelName": "凌派",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 174,
+            "TaxiModelName": "锋范",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 175,
+            "TaxiModelName": "思域",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 176,
+            "TaxiModelName": "XR-V",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 177,
+            "TaxiModelName": "CR-V",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 178,
+            "TaxiModelName": "UR-V",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 179,
+            "TaxiModelName": "杰德",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 180,
+            "TaxiModelName": "思铂睿",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 182,
+            "TaxiModelName": "竞瑞",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 183,
+            "TaxiModelName": "哥瑞",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 521,
+            "TaxiModelName": "CR/VRD1",
+            "TaxiBrand": "本田",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 5,
+            "TaxiModelName": "GA6",
+            "TaxiBrand": "传祺",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 29,
+            "TaxiModelName": "GS4",
+            "TaxiBrand": "传祺",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 30,
+            "TaxiModelName": "GS8",
+            "TaxiBrand": "传祺",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 55,
+            "TaxiModelName": "传祺",
+            "TaxiBrand": "传祺",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 425,
+            "TaxiModelName": "GA8",
+            "TaxiBrand": "传祺",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 540,
+            "TaxiModelName": "GAC7180B8A4",
+            "TaxiBrand": "传祺",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 614,
+            "TaxiModelName": "GS8",
+            "TaxiBrand": "传祺",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 615,
+            "TaxiModelName": "GA5",
+            "TaxiBrand": "传祺",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 7,
+            "TaxiModelName": "GL8",
+            "TaxiBrand": "别克",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 67,
+            "TaxiModelName": "君越",
+            "TaxiBrand": "别克",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 287,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "别克",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 441,
+            "TaxiModelName": "君威",
+            "TaxiBrand": "别克",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 473,
+            "TaxiModelName": " 君越",
+            "TaxiBrand": "别克",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 8,
+            "TaxiModelName": "K5",
+            "TaxiBrand": "起亚",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 701,
+            "TaxiModelName": "YQZ6491E3",
+            "TaxiBrand": "起亚",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 9,
+            "TaxiModelName": "天籁",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 12,
+            "TaxiModelName": "轩逸",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 100,
+            "TaxiModelName": "奇骏",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 347,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 437,
+            "TaxiModelName": "凯普斯达",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 3
+        },
+        {
+            "TaxiModelId": 438,
+            "TaxiModelName": "ZN5040XXYB1Z4",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 595,
+            "TaxiModelName": "ZN5041XXYA2Z4",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 3
+        },
+        {
+            "TaxiModelId": 661,
+            "TaxiModelName": "碧莲",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 21
+        },
+        {
+            "TaxiModelId": 663,
+            "TaxiModelName": "D22",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 664,
+            "TaxiModelName": "ZN1032U2G3",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 669,
+            "TaxiModelName": "帕拉丁",
+            "TaxiBrand": "日产",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 10,
+            "TaxiModelName": "斯柯达",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 13,
+            "TaxiModelName": "迈腾",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 14,
+            "TaxiModelName": "帕萨特",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 78,
+            "TaxiModelName": "迈特威",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 184,
+            "TaxiModelName": "朗逸",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 185,
+            "TaxiModelName": "途观L",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 186,
+            "TaxiModelName": "凌渡",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 187,
+            "TaxiModelName": "途昂",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 188,
+            "TaxiModelName": "桑塔纳",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 189,
+            "TaxiModelName": "POLO",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 190,
+            "TaxiModelName": "辉昂",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 191,
+            "TaxiModelName": "途安L",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 192,
+            "TaxiModelName": "朗境",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 193,
+            "TaxiModelName": "朗行",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 194,
+            "TaxiModelName": "速腾",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 195,
+            "TaxiModelName": "捷达",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 196,
+            "TaxiModelName": "宝来",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 197,
+            "TaxiModelName": "大众CC",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 198,
+            "TaxiModelName": "高尔夫",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 199,
+            "TaxiModelName": "蔚领",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 200,
+            "TaxiModelName": "高尔夫·嘉旅",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 201,
+            "TaxiModelName": "途锐",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 202,
+            "TaxiModelName": "Tiguan",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 203,
+            "TaxiModelName": "甲壳虫",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 204,
+            "TaxiModelName": "蔚揽",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 205,
+            "TaxiModelName": "高尔夫（进口）",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 206,
+            "TaxiModelName": "尚酷",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 207,
+            "TaxiModelName": "夏朗",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 208,
+            "TaxiModelName": "凯路威",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 299,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 300,
+            "TaxiModelName": "大众汽车",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 445,
+            "TaxiModelName": "途观",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 453,
+            "TaxiModelName": "SVW71410BR",
+            "TaxiBrand": "大众",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 114,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 117,
+            "TaxiModelName": "金杯面包车",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 12
+        },
+        {
+            "TaxiModelId": 370,
+            "TaxiModelName": "格瑞斯",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 439,
+            "TaxiModelName": "SY6481G4SBG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 470,
+            "TaxiModelName": "SY6521GS1B",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 481,
+            "TaxiModelName": "SY5031XJHG/G2SBG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 488,
+            "TaxiModelName": "SY6521G4S3BG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 498,
+            "TaxiModelName": "SY6521MSIBG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 499,
+            "TaxiModelName": "SY6548MS3BH",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 14
+        },
+        {
+            "TaxiModelId": 504,
+            "TaxiModelName": "SY6521G2S1BG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 505,
+            "TaxiModelName": "SY6521MS3BG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 508,
+            "TaxiModelName": "SY6521G4S1BG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 533,
+            "TaxiModelName": "SY6521MS1BG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 536,
+            "TaxiModelName": "SY6521GS38BG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 537,
+            "TaxiModelName": "SY6521G2S3BG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 573,
+            "TaxiModelName": "SY6483W3B",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 604,
+            "TaxiModelName": "SY6483F3",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 670,
+            "TaxiModelName": "SY6521G2Z3BG",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 671,
+            "TaxiModelName": "海狮",
+            "TaxiBrand": "金杯",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 19,
+            "TaxiModelName": "索纳塔",
+            "TaxiBrand": "现代",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 293,
+            "TaxiModelName": "北京现代",
+            "TaxiBrand": "现代",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 336,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "现代",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 503,
+            "TaxiModelName": "北京现代BH6440MY",
+            "TaxiBrand": "现代",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 524,
+            "TaxiModelName": "北京现代BH7200A",
+            "TaxiBrand": "现代",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 525,
+            "TaxiModelName": "途胜",
+            "TaxiBrand": "现代",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 528,
+            "TaxiModelName": "ix35",
+            "TaxiBrand": "现代",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 20,
+            "TaxiModelName": "ZK6118HQY5Y(53座)",
+            "TaxiBrand": "宇通",
+            "MaxPassengerNumber": 54
+        },
+        {
+            "TaxiModelId": 24,
+            "TaxiModelName": "ZK6127H1(49座)",
+            "TaxiBrand": "宇通",
+            "MaxPassengerNumber": 50
+        },
+        {
+            "TaxiModelId": 307,
+            "TaxiModelName": "客车",
+            "TaxiBrand": "宇通",
+            "MaxPassengerNumber": 28
+        },
+        {
+            "TaxiModelId": 21,
+            "TaxiModelName": "KLQ6125Q1(53座)",
+            "TaxiBrand": "金龙",
+            "MaxPassengerNumber": 54
+        },
+        {
+            "TaxiModelId": 118,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "金龙",
+            "MaxPassengerNumber": 15
+        },
+        {
+            "TaxiModelId": 486,
+            "TaxiModelName": "KLQ6109E3",
+            "TaxiBrand": "金龙",
+            "MaxPassengerNumber": 45
+        },
+        {
+            "TaxiModelId": 511,
+            "TaxiModelName": "KLQ6119E3",
+            "TaxiBrand": "金龙",
+            "MaxPassengerNumber": 49
+        },
+        {
+            "TaxiModelId": 514,
+            "TaxiModelName": "KLQ6540QE4A",
+            "TaxiBrand": "金龙",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 541,
+            "TaxiModelName": "KLQ6110",
+            "TaxiBrand": "金龙",
+            "MaxPassengerNumber": 47
+        },
+        {
+            "TaxiModelId": 690,
+            "TaxiModelName": "XMQ6552BEG4",
+            "TaxiBrand": "金龙",
+            "MaxPassengerNumber": 15
+        },
+        {
+            "TaxiModelId": 22,
+            "TaxiModelName": "JNP6122M-1(51座)",
+            "TaxiBrand": "青年",
+            "MaxPassengerNumber": 52
+        },
+        {
+            "TaxiModelId": 23,
+            "TaxiModelName": "JNP6120KE(47座)",
+            "TaxiBrand": "青年",
+            "MaxPassengerNumber": 48
+        },
+        {
+            "TaxiModelId": 25,
+            "TaxiModelName": "JNP6137FE(59座)",
+            "TaxiBrand": "青年",
+            "MaxPassengerNumber": 60
+        },
+        {
+            "TaxiModelId": 328,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "江铃",
+            "MaxPassengerNumber": 14
+        },
+        {
+            "TaxiModelId": 587,
+            "TaxiModelName": "JX5040XXYDSLB2",
+            "TaxiBrand": "江铃",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 80,
+            "TaxiModelName": "奥迪A4",
+            "TaxiBrand": "奥迪",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 81,
+            "TaxiModelName": "奥迪A6",
+            "TaxiBrand": "奥迪",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 82,
+            "TaxiModelName": "奥迪A6L",
+            "TaxiBrand": "奥迪",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 368,
+            "TaxiModelName": "A6L",
+            "TaxiBrand": "奥迪",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 383,
+            "TaxiModelName": "A6",
+            "TaxiBrand": "奥迪",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 96,
+            "TaxiModelName": "昊锐",
+            "TaxiBrand": "斯柯达",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 97,
+            "TaxiModelName": "速派",
+            "TaxiBrand": "斯柯达",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 33,
+            "TaxiModelName": "帕杰罗",
+            "TaxiBrand": "三菱",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 545,
+            "TaxiModelName": "G4",
+            "TaxiBrand": "三菱",
+            "MaxPassengerNumber": 12
+        },
+        {
+            "TaxiModelId": 119,
+            "TaxiModelName": "雨花",
+            "TaxiBrand": "南京客车",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 111,
+            "TaxiModelName": "航天牌",
+            "TaxiBrand": "航天",
+            "MaxPassengerNumber": 2
+        },
+        {
+            "TaxiModelId": 112,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "荣威",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 451,
+            "TaxiModelName": "CSA6471AC",
+            "TaxiBrand": "荣威",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 539,
+            "TaxiModelName": "CSA7180AC",
+            "TaxiBrand": "荣威",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 108,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "汇众",
+            "MaxPassengerNumber": 15
+        },
+        {
+            "TaxiModelId": 485,
+            "TaxiModelName": "SH6531",
+            "TaxiBrand": "汇众",
+            "MaxPassengerNumber": 12
+        },
+        {
+            "TaxiModelId": 598,
+            "TaxiModelName": "SH6530G4",
+            "TaxiBrand": "汇众",
+            "MaxPassengerNumber": 12
+        },
+        {
+            "TaxiModelId": 113,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "载通",
+            "MaxPassengerNumber": 2
+        },
+        {
+            "TaxiModelId": 209,
+            "TaxiModelName": "撼路者",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 210,
+            "TaxiModelName": "全顺",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 211,
+            "TaxiModelName": "新世代全顺",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 15
+        },
+        {
+            "TaxiModelId": 212,
+            "TaxiModelName": "途睿欧",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 213,
+            "TaxiModelName": "蒙迪欧",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 214,
+            "TaxiModelName": "锐界",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 215,
+            "TaxiModelName": "福睿斯",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 216,
+            "TaxiModelName": "福克斯",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 217,
+            "TaxiModelName": "翼虎",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 218,
+            "TaxiModelName": "翼博",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 219,
+            "TaxiModelName": "金牛座",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 220,
+            "TaxiModelName": "MUSTANG",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 221,
+            "TaxiModelName": "探险者",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 222,
+            "TaxiModelName": "福特F-150",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 329,
+            "TaxiModelName": "江铃全顺",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 15
+        },
+        {
+            "TaxiModelId": 522,
+            "TaxiModelName": "麦柯斯",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 530,
+            "TaxiModelName": "全顺JX5634XJHZC",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 600,
+            "TaxiModelName": "JX5036XQCZJTA",
+            "TaxiBrand": "福特",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 225,
+            "TaxiModelName": "维特拉",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 226,
+            "TaxiModelName": "骁途",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 227,
+            "TaxiModelName": "启悦",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 228,
+            "TaxiModelName": "雨燕",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 229,
+            "TaxiModelName": "奥拓",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 230,
+            "TaxiModelName": "锋驭",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 231,
+            "TaxiModelName": "天语SX4",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 232,
+            "TaxiModelName": "北斗星",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 233,
+            "TaxiModelName": "吉姆尼",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 234,
+            "TaxiModelName": "北斗星X5",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 236,
+            "TaxiModelName": "英格尼斯",
+            "TaxiBrand": "铃木",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 237,
+            "TaxiModelName": "雷克萨斯ES",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 238,
+            "TaxiModelName": "雷克萨斯NX",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 239,
+            "TaxiModelName": "雷克萨斯RX",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 240,
+            "TaxiModelName": "雷克萨斯CT",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 241,
+            "TaxiModelName": "雷克萨斯LX",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 242,
+            "TaxiModelName": "雷克萨斯LS",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 243,
+            "TaxiModelName": "雷克萨斯IS",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 244,
+            "TaxiModelName": "雷克萨斯GX",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 245,
+            "TaxiModelName": "雷克萨斯LC",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 246,
+            "TaxiModelName": "雷克萨斯GS",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 247,
+            "TaxiModelName": "雷克萨斯RC",
+            "TaxiBrand": "雷克萨斯",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 248,
+            "TaxiModelName": "昂克赛拉",
+            "TaxiBrand": "马自达",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 249,
+            "TaxiModelName": "CX-5",
+            "TaxiBrand": "马自达",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 250,
+            "TaxiModelName": "CX-4",
+            "TaxiBrand": "马自达",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 251,
+            "TaxiModelName": "阿特兹",
+            "TaxiBrand": "马自达",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 252,
+            "TaxiModelName": "MX-5",
+            "TaxiBrand": "马自达",
+            "MaxPassengerNumber": 2
+        },
+        {
+            "TaxiModelId": 253,
+            "TaxiModelName": "CX-3",
+            "TaxiBrand": "马自达",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 254,
+            "TaxiModelName": "科沃兹",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 255,
+            "TaxiModelName": "探界者",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 256,
+            "TaxiModelName": "迈锐宝",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 257,
+            "TaxiModelName": "科鲁兹",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 258,
+            "TaxiModelName": "迈锐宝XL",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 259,
+            "TaxiModelName": "赛欧3",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 260,
+            "TaxiModelName": "创酷",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 261,
+            "TaxiModelName": "科帕奇",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 262,
+            "TaxiModelName": "乐风RV",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 263,
+            "TaxiModelName": "科迈罗",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 264,
+            "TaxiModelName": "索罗德",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 265,
+            "TaxiModelName": "库罗德",
+            "TaxiBrand": "雪佛兰",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 223,
+            "TaxiModelName": "H5",
+            "TaxiBrand": "红旗",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 224,
+            "TaxiModelName": "H7",
+            "TaxiBrand": "红旗",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 341,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "红旗",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 309,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "江淮",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 557,
+            "TaxiModelName": "GDY5030XJHL",
+            "TaxiBrand": "上元",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 574,
+            "TaxiModelName": "GDY5034XJHV",
+            "TaxiBrand": "上元",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 606,
+            "TaxiModelName": "GDY5030XJHTR",
+            "TaxiBrand": "上元",
+            "MaxPassengerNumber": 8
+        },
+        {
+            "TaxiModelId": 304,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "奔驰",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 679,
+            "TaxiModelName": "814D",
+            "TaxiBrand": "奔驰",
+            "MaxPassengerNumber": 12
+        },
+        {
+            "TaxiModelId": 345,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "通用",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 330,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "沃尔沃",
+            "MaxPassengerNumber": 2
+        },
+        {
+            "TaxiModelId": 672,
+            "TaxiModelName": "载通",
+            "TaxiBrand": "沃尔沃",
+            "MaxPassengerNumber": 2
+        },
+        {
+            "TaxiModelId": 346,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "道奇",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 424,
+            "TaxiModelName": "DN6512M",
+            "TaxiBrand": "道奇",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 317,
+            "TaxiModelName": "庆铃五十铃",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 349,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 442,
+            "TaxiModelName": "QL5040X8FAR",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 2
+        },
+        {
+            "TaxiModelId": 466,
+            "TaxiModelName": "NHR55ELWXS",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 518,
+            "TaxiModelName": "NKR77LLEACJAX1",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 2
+        },
+        {
+            "TaxiModelId": 535,
+            "TaxiModelName": "QL5040X8FWR",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 538,
+            "TaxiModelName": "NKR77PLLWCJAXS",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 569,
+            "TaxiModelName": "NHR55ELWXSB",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 586,
+            "TaxiModelName": "QL5040X8HWR",
+            "TaxiBrand": "五十铃",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 400,
+            "TaxiModelName": "SVW645INFD",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 403,
+            "TaxiModelName": "JNIUDHW41Z0",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 30
+        },
+        {
+            "TaxiModelId": 443,
+            "TaxiModelName": "NKR77LLCWCLAXS",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 471,
+            "TaxiModelName": "XML6177J13",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 49
+        },
+        {
+            "TaxiModelId": 509,
+            "TaxiModelName": "KLQ119E3",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 51
+        },
+        {
+            "TaxiModelId": 567,
+            "TaxiModelName": "SG田",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 599,
+            "TaxiModelName": "LFNH55819H9002406",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 20
+        },
+        {
+            "TaxiModelId": 603,
+            "TaxiModelName": "GDY5040XXY",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 688,
+            "TaxiModelName": "SY6521G221BG",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 689,
+            "TaxiModelName": "DAC7180B8A4",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 892,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "未知品牌",
+            "MaxPassengerNumber": 0
+        },
+        {
+            "TaxiModelId": 350,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "金旅",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 452,
+            "TaxiModelName": "XML6532E38",
+            "TaxiBrand": "金旅",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 475,
+            "TaxiModelName": "XML5031XJH18",
+            "TaxiBrand": "金旅",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 500,
+            "TaxiModelName": "XML6482E",
+            "TaxiBrand": "金旅",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 550,
+            "TaxiModelName": "XML6117J13",
+            "TaxiBrand": "金旅",
+            "MaxPassengerNumber": 51
+        },
+        {
+            "TaxiModelId": 558,
+            "TaxiModelName": "XML6532J58",
+            "TaxiBrand": "金旅",
+            "MaxPassengerNumber": 11
+        },
+        {
+            "TaxiModelId": 575,
+            "TaxiModelName": "XML6113J13",
+            "TaxiBrand": "金旅",
+            "MaxPassengerNumber": 47
+        },
+        {
+            "TaxiModelId": 609,
+            "TaxiModelName": "XML6700H23",
+            "TaxiBrand": "金旅",
+            "MaxPassengerNumber": 28
+        },
+        {
+            "TaxiModelId": 290,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "力帆",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 463,
+            "TaxiModelName": "LF5042XQCS",
+            "TaxiBrand": "力帆",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 301,
+            "TaxiModelName": "G10",
+            "TaxiBrand": "大通",
+            "MaxPassengerNumber": 15
+        },
+        {
+            "TaxiModelId": 476,
+            "TaxiModelName": "SH6571A3D4",
+            "TaxiBrand": "大通",
+            "MaxPassengerNumber": 15
+        },
+        {
+            "TaxiModelId": 531,
+            "TaxiModelName": "SH5030XQCA3D4",
+            "TaxiBrand": "大通",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 291,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "北京",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 292,
+            "TaxiModelName": "北京吉普",
+            "TaxiBrand": "北京",
+            "MaxPassengerNumber": 8
+        },
+        {
+            "TaxiModelId": 696,
+            "TaxiModelName": "BJ2032Z3C2U1",
+            "TaxiBrand": "北京",
+            "MaxPassengerNumber": 8
+        },
+        {
+            "TaxiModelId": 295,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "北方",
+            "MaxPassengerNumber": 53
+        },
+        {
+            "TaxiModelId": 355,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "长城",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 580,
+            "TaxiModelName": "风骏6",
+            "TaxiBrand": "长城",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 490,
+            "TaxiModelName": "轻客",
+            "TaxiBrand": "东风",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 642,
+            "TaxiModelName": "风行",
+            "TaxiBrand": "东风",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 643,
+            "TaxiModelName": "ZN6471V1K4",
+            "TaxiBrand": "东风",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 335,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "猎豹",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 494,
+            "TaxiModelName": "黑金刚",
+            "TaxiBrand": "猎豹",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 510,
+            "TaxiModelName": "飞腾",
+            "TaxiBrand": "猎豹",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 526,
+            "TaxiModelName": "CFA2030B",
+            "TaxiBrand": "猎豹",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 527,
+            "TaxiModelName": "囚车",
+            "TaxiBrand": "猎豹",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 501,
+            "TaxiModelName": "SFQ6123PSHL",
+            "TaxiBrand": "日野",
+            "MaxPassengerNumber": 45
+        },
+        {
+            "TaxiModelId": 286,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "依维柯",
+            "MaxPassengerNumber": 17
+        },
+        {
+            "TaxiModelId": 512,
+            "TaxiModelName": "NJ6593ER6",
+            "TaxiBrand": "依维柯",
+            "MaxPassengerNumber": 17
+        },
+        {
+            "TaxiModelId": 551,
+            "TaxiModelName": "NJ5048XJH39",
+            "TaxiBrand": "依维柯",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 515,
+            "TaxiModelName": "KLQ5030XJHQ4",
+            "TaxiBrand": "海格",
+            "MaxPassengerNumber": 6
+        },
+        {
+            "TaxiModelId": 552,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "海格",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 532,
+            "TaxiModelName": "得利卡",
+            "TaxiBrand": "东南",
+            "MaxPassengerNumber": 8
+        },
+        {
+            "TaxiModelId": 337,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "畅达",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 563,
+            "TaxiModelName": "HKL6540E4",
+            "TaxiBrand": "九龙",
+            "MaxPassengerNumber": 14
+        },
+        {
+            "TaxiModelId": 284,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "亚星",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 607,
+            "TaxiModelName": "YBL5110XYLE31",
+            "TaxiBrand": "亚星",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 294,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "北地",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 597,
+            "TaxiModelName": "HD5040XJHF5",
+            "TaxiBrand": "北地",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 610,
+            "TaxiModelName": "ND5040XJG/F5",
+            "TaxiBrand": "北地",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 665,
+            "TaxiModelName": "ND5052XGC-S5",
+            "TaxiBrand": "北地",
+            "MaxPassengerNumber": 4
+        },
+        {
+            "TaxiModelId": 338,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "白云",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 312,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "广客",
+            "MaxPassengerNumber": 9
+        },
+        {
+            "TaxiModelId": 310,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "富奇",
+            "MaxPassengerNumber": 5
+        },
+        {
+            "TaxiModelId": 283,
+            "TaxiModelName": "未知型号",
+            "TaxiBrand": "五菱",
+            "MaxPassengerNumber": 2
+        },
+        {
+            "TaxiModelId": 388,
+            "TaxiModelName": "赛纳",
+            "TaxiBrand": "雪铁龙",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 461,
+            "TaxiModelName": "XLG5048XJHCY5",
+            "TaxiBrand": "蓝港",
+            "MaxPassengerNumber": 7
+        },
+        {
+            "TaxiModelId": 893,
+            "TaxiModelName": "欧马可",
+            "TaxiBrand": "福田",
+            "MaxPassengerNumber": 0
+        }
+    ],
+    "Remark": "操作成功",
+    "Result": 1,
+    "T": 636943140305190660
+}
