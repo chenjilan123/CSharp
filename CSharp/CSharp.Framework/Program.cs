@@ -1,6 +1,9 @@
-﻿using System;
+﻿using CSharp.Framework.Email;
+using CSharp.Framework.Transfer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace CSharp.Framework
@@ -11,9 +14,10 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            DecimalCompute();
+            Transfer();
         }
 
+        #region Path
         private static void Path()
         {
             System.Uri uri = new Uri(typeof(string).Assembly.CodeBase);
@@ -31,6 +35,8 @@ namespace CSharp.Framework
             var pad = (key.Length / PadLength + 1) * PadLength;
             Console.WriteLine($"{key.PadLeft(pad, ' ')}: {msg}");
         }
+        #endregion
+
         #region DecimalCompute
         static void DecimalCompute()
         {
@@ -44,5 +50,73 @@ namespace CSharp.Framework
         }
         #endregion
 
+        #region Email
+        static void Email()
+        {
+            //内容不规范会被服务器判断为垃圾邮件
+            //new EmailHelper().SendEmail(Guid.NewGuid().ToString(), "不是垃圾邮件!", "你好", "", "357592895@qq.com", "h");
+
+            //成功
+            //new EmailHelper().SendEmail(Guid.NewGuid().ToString(), "第三方监控平台"
+            //    , "您好，这里是第三方监控平台，相关数据汇总详见附件，请及时查收处理。"
+            //    , ""
+            //    , "357592895@qq.com", "h");
+
+            //发送附件
+            const string sAttachPath = @"TopTimeServerTPM_导出报表文件.rar";
+            const string _40M = @"40M.rar";
+            const string _90M = @"90M.exe";
+            const string sAp = @"报警明细_日报_2019-05-21_636941020856560817.xlsx";
+            new EmailHelper().SendEmail(Guid.NewGuid().ToString(), "第三方监控平台"
+                , "您好，这里是第三方监控平台，相关数据汇总详见附件，请及时查收处理。"
+                , ""
+                , "357592895@qq.com", "h");
+        }
+        #endregion
+
+        #region Transfer
+        static void Transfer()
+        {
+            new AnalysisGDOCPosInfo().OnWork();
+        }
+        #endregion
+
+        #region Des
+        private static string quote =
+            "Things may come to those who wait, but only the " +
+            "things left by those who hustle. -- Abraham Lincoln";
+
+        static void Des()
+        {
+            AesCryptoServiceProvider aesCSP = new AesCryptoServiceProvider();
+
+            aesCSP.GenerateKey();
+            aesCSP.GenerateIV();
+            byte[] encQuote = EncryptString(aesCSP, quote);
+
+            Console.WriteLine("Encrypted Quote:\n");
+            Console.WriteLine(Convert.ToBase64String(encQuote));
+
+            Console.WriteLine("\nDecrypted Quote:\n");
+            Console.WriteLine(DecryptBytes(aesCSP, encQuote));
+        }
+
+        public static byte[] EncryptString(SymmetricAlgorithm symAlg, string inString)
+        {
+            byte[] inBlock = UnicodeEncoding.Unicode.GetBytes(inString);
+            ICryptoTransform xfrm = symAlg.CreateEncryptor();
+            byte[] outBlock = xfrm.TransformFinalBlock(inBlock, 0, inBlock.Length);
+
+            return outBlock;
+        }
+
+        public static string DecryptBytes(SymmetricAlgorithm symAlg, byte[] inBytes)
+        {
+            ICryptoTransform xfrm = symAlg.CreateDecryptor();
+            byte[] outBlock = xfrm.TransformFinalBlock(inBytes, 0, inBytes.Length);
+
+            return UnicodeEncoding.Unicode.GetString(outBlock);
+        }
+        #endregion
     }
 }

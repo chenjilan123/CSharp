@@ -1,0 +1,15 @@
+﻿邮箱服务器			邮箱账号					授权码
+smtp.qq.com			357592895@qq.com		mnlqtfdfrawsbiji
+smtp.163.com		cillili@163.com			q123456
+smtp.exmail.qq.com	chenjilan@c-go.com.cn	qt4go7ki3MdAtD8o
+imap.gmail.com		wanpidan1234@gmail.com	357592895
+
+
+qq邮箱支持25和587端口
+
+阿里云：
+	服务器过滤了25端口, 需使用其他端口。
+	qq邮箱和qq企业邮箱使用587。
+	163邮箱使用
+
+
