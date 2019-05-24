@@ -52,23 +52,29 @@
     <Compile Include="Helper\WebHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transfer\AnalysisGDOCPosInfo.cs" />
-    <Compile Include="Transfer\GDOCCmdList.cs" />
-    <Compile Include="Transfer\GDOCSender.cs" />
-    <Compile Include="Transfer\GDOCTypeList.cs" />
-    <Compile Include="Transfer\JsonModel\GDOCEmpty.cs" />
-    <Compile Include="Transfer\JsonModel\GDOCOrg.cs" />
-    <Compile Include="Transfer\JsonModel\GDOCPos.cs" />
-    <Compile Include="Transfer\JsonModel\GDOCResult.cs" />
-    <Compile Include="Transfer\JsonModel\GDOCVehicle.cs" />
-    <Compile Include="Transfer\JsonModel\GDOCVehicleResult.cs" />
+    <Compile Include="公务车数据转发\AnalysisGDOCPosInfo.cs" />
+    <Compile Include="公务车数据转发\GDOCCmdList.cs" />
+    <Compile Include="公务车数据转发\GDOCSender.cs" />
+    <Compile Include="公务车数据转发\GDOCTypeList.cs" />
+    <Compile Include="公务车数据转发\JsonModel\GDOCEmpty.cs" />
+    <Compile Include="公务车数据转发\JsonModel\GDOCOrg.cs" />
+    <Compile Include="公务车数据转发\JsonModel\GDOCPos.cs" />
+    <Compile Include="公务车数据转发\JsonModel\GDOCResult.cs" />
+    <Compile Include="公务车数据转发\JsonModel\GDOCVehicle.cs" />
+    <Compile Include="公务车数据转发\JsonModel\GDOCVehicleResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="公务车数据转发\Docs\公务车转发.png" />
     <Content Include="Email\account.txt" />
-    <None Include="Transfer\TexiModel.json" />
+    <None Include="公务车数据转发\Docs\TaxiModel.json" />
+    <None Include="公务车数据转发\Docs\TaxiType.json" />
+    <None Include="公务车数据转发\Docs\广东省公务用车管理平台数据接入标准V1.6.020190319191656.pdf" />
+    <None Include="公务车数据转发\Docs\广东省公务用车管理平台数据接入标准V1.7.0.pdf" />
+    <None Include="公务车数据转发\Docs\应答错误及解析.json" />
+    <None Include="公务车数据转发\TexiModel.json" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Transfer\TaxiType.json" />
+    <None Include="公务车数据转发\TaxiType.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
