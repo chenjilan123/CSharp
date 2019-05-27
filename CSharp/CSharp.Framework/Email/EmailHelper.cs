@@ -1,4 +1,4 @@
-﻿#define qqEnterprise
+﻿#define qqEnterprise2
 
 using System;
 using System.Collections.Generic;
@@ -24,10 +24,17 @@ namespace CSharp.Framework.Email
         private const string emailSever = "smtp.163.com";
         private const string emailFrom = "13625024073@163.com";
         private const string passWord = "amnenriyiwamzcfy"; //该密码为授权码, 非邮箱密码
-#elif qqEnterprise
+#elif qqEnterprise1
         private const string emailSever = "smtp.exmail.qq.com";
         private const string emailFrom = "chenjilan@c-go.com.cn";
         private const string passWord = "qt4go7ki3MdAtD8o"; //该密码为授权码, 非邮箱密码
+
+
+#elif qqEnterprise2
+        private const string emailSever = "smtp.exmail.qq.com";
+        private const string emailFrom = "tpm@c-go.com.cn";
+        private const string passWord = "HaNeuXSTiLhDQPbM"; //该密码为授权码, 非邮箱密码
+
 #elif gmail_无效
         private const string emailSever = "smtp.gmail.com";
         private const string emailFrom = "wanpidan1234@gmail.com";
@@ -99,7 +106,7 @@ namespace CSharp.Framework.Email
                 smtpServer.EnableSsl = true;
                 smtpServer.Credentials = new NetworkCredential(emailFrom, passWord);
                 smtpServer.Host = emailSever;
-                //smtpServer.Port = 465; //25, 587, 465
+                smtpServer.Port = 587; //25, 587, 465
 
                 //加这段之前用公司邮箱发送报错：根据验证过程，远程证书无效
                 //加上后解决问题

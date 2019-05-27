@@ -8,7 +8,7 @@ namespace CSharp.Framework.Transfer.JsonModel
 {
     public class GDOCVehicleResult : GDOCResult
     {
-        private GPDCVehicleResultData _data;
+        private GPDCVehicleResultData[] _data;
         public string Data { get; set; }
 
         public override string GetDescription()
@@ -19,9 +19,9 @@ namespace CSharp.Framework.Transfer.JsonModel
             }
             if (_data == null)
             {
-                _data = SerializeHelper.JsonToObject<GPDCVehicleResultData>(Data);
+                _data = SerializeHelper.JsonToObject<GPDCVehicleResultData[]>(Data);
             }
-            return string.Format("{0}, No: {1}, Result: {2}, ErrectRows: {3}", base.GetDescription(), _data.No, _data.Result, _data.EffectRows);
+            return string.Format("{0}, No: {1}, Result: {2}, ErrectRows: {3}", base.GetDescription(), _data[0].No, _data[0].Result, _data[0].EffectRows);
         }
     }
 
@@ -30,5 +30,9 @@ namespace CSharp.Framework.Transfer.JsonModel
         public int No { get; set; }
         public int Result { get; set; }
         public int EffectRows { get; set; }
+        //public string Remark { get; set; }
+        //public string DataResults { get; set; }
+        //public string TaxiModelList { get; set; }
+        //public string TaxiTypeList { get; set; }
     }
 }

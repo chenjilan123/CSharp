@@ -45,11 +45,11 @@ namespace CSharp.Framework.Transfer
             var result = GetResponse(sArgs, false);
             if (result != null)
             {
-                Console.WriteLine(string.Format("结束发送数据, Cmd: {0}, Result: {1}", this.Cmd, result.GetDescription()));
+                Console.WriteLine(string.Format("结束发送数据, 指令: {0}, 应答: {1}", this.Cmd, result.GetDescription()));
             }
             else
             {
-                Console.WriteLine(string.Format("结束发送数据 - 无应答, Cmd: {0}", this.Cmd));
+                Console.WriteLine(string.Format("结束发送数据 - 无应答, 指令: {0}", this.Cmd));
             }
         }
 
@@ -59,11 +59,11 @@ namespace CSharp.Framework.Transfer
             var result = GetResponse(sArgs, false);
             if (result != null)
             {
-                Console.WriteLine(string.Format("结束发送数据, Cmd: {0}, Result: {1}", this.Cmd, result.GetDescription()));
+                Console.WriteLine(string.Format("结束发送数据, 指令: {0}, 应答: {1}", this.Cmd, result.GetDescription()));
             }
             else
             {
-                Console.WriteLine(string.Format("结束发送数据 - 无应答, Cmd: {0}", this.Cmd));
+                Console.WriteLine(string.Format("结束发送数据 - 无应答, 指令: {0}", this.Cmd));
             }
         }
 
@@ -93,16 +93,16 @@ namespace CSharp.Framework.Transfer
         #region 批量发送
         private void SendBatch(List<T1> argsToSend)
         {
-            Console.WriteLine(string.Format("开始发送数据, Cmd: {0}, Count: {1}", this.Cmd, argsToSend.Count));
+            Console.WriteLine(string.Format("开始发送数据, 指令: {0}, Count: {1}", this.Cmd, argsToSend.Count));
             var sArgs = SerializeHelper.ObjectToJson(argsToSend);
             var result = GetResponse(sArgs, true);
             if (result != null)
             {
-                Console.WriteLine(string.Format("结束发送数据, Cmd: {0}, Count: {1}, Result: {2}", this.Cmd, argsToSend.Count, result.GetDescription()));
+                Console.WriteLine(string.Format("结束发送数据, 指令: {0}, Count: {1}, 应答: {2}", this.Cmd, argsToSend.Count, result.GetDescription()));
             }
             else
             {
-                Console.WriteLine(string.Format("结束发送数据 - 无应答, Cmd: {0}, Count: {1}", this.Cmd, argsToSend.Count));
+                Console.WriteLine(string.Format("结束发送数据 - 无应答, 指令: {0}, Count: {1}", this.Cmd, argsToSend.Count));
             }
             argsToSend.Clear();
         }

@@ -191,7 +191,7 @@ namespace CSharp.Framework.Transfer
                 Displacement = 0.0F,
                 Color = "Z",
                 GearBox = 1,    
-                LaunchDate = "20180523",
+                LaunchDate = DateTime.MinValue.ToString("yyyyMMdd"),
                 ReleaseStatus = 1,
                 TerminalId = GetTerminalID(TerminalID),
                 POVehicleUseNature = "6",
@@ -201,20 +201,7 @@ namespace CSharp.Framework.Transfer
                 Identification = 0,
                 IsAccessPlatform = 1,
                 VehicleStatus = 0,
-                TerminalInstallationDate = "20180523", //平台有
-
-                //AllocationUnit = string.Empty,
-                //AllocationNumber = string.Empty,
-                //Supplier = string.Empty,
-                //DrivingLicence = string.Empty, //平台有
-                //Owner = string.Empty, //平台有
-                ////AccumulatedMileage = 0f,
-                //ContactName = string.Empty,
-                //OfficePhone = string.Empty,
-                //Department = string.Empty,
-                //ContactMobile = string.Empty,
-                //duty = string.Empty,
-                //Fax = string.Empty,
+                TerminalInstallationDate = DateTime.MinValue.ToString("yyyyMMdd"), //平台有
 
                 AllocationUnit = "0",
                 AllocationNumber = "0",
@@ -224,7 +211,7 @@ namespace CSharp.Framework.Transfer
                 ContactName = "阳顶天", //联系人姓名
                 OfficePhone = "0", //
                 Department = "0",
-                ContactMobile = "15123456789", //联系人手机
+                ContactMobile = "15000000000", //联系人手机
                 duty = "0",
                 Fax = "0",
 
@@ -249,8 +236,8 @@ namespace CSharp.Framework.Transfer
             var posList = new List<GDOCPos>();
             var pos = new GDOCPos()
             {
-                TerminalId = TerminalID,
-                PlateNo = PlatNum,
+                TerminalId = "20X450012",//TerminalID,
+                PlateNo = "闽B54A43",//PlatNum,
                 Longitude = 117.501231,
                 Latitude = 27.405012,
                 LocTime = DateTime.Now.ToString("yyyyMMddHHmmss"),

@@ -1,6 +1,7 @@
 ﻿using CSharp.Framework.Email;
 using CSharp.Framework.Transfer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -14,7 +15,17 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            Transfer();
+            var hs = new Hashtable();
+            hs.Add("fff", 1);
+            hs.Add("hafg", 1);
+            //hs.Add("hafg", 1);
+            //hs.Add("fff", 1);
+            foreach (var item in hs.Keys)
+            {
+                Console.WriteLine(item);
+            }
+
+            //Transfer();// 
         }
 
         #region Path
@@ -116,6 +127,24 @@ namespace CSharp.Framework
             byte[] outBlock = xfrm.TransformFinalBlock(inBytes, 0, inBytes.Length);
 
             return UnicodeEncoding.Unicode.GetString(outBlock);
+        }
+        #endregion
+
+        #region Aggregate
+        static void Aggregate()
+        {
+            var lst = new List<string>
+            {
+                "500x", "ppxl", "hehehehe"
+            };
+
+            var s = lst.Aggregate("",
+            (rst, cur) =>
+            {
+                rst += ",'" + cur + "'";
+                return rst;
+            });
+            Console.WriteLine(s.Trim(','));
         }
         #endregion
     }
