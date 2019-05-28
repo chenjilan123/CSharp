@@ -8,9 +8,12 @@ namespace CSharp.NetFramework.Gis
 {
     public class WebGis
     {
+        GisService.MapService service = new GisService.MapService();
         public string GetLocation(double dLon, double dLat)
         {
-            return string.Empty;
+            var sLoc = service.QueryAllLayerByPoint(dLon, dLat);
+            Console.WriteLine(sLoc);
+            return sLoc;
         }
     }
 }

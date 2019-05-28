@@ -1,4 +1,5 @@
-﻿using CSharp.NetFramework.Tcp;
+﻿using CSharp.NetFramework.Gis;
+using CSharp.NetFramework.Tcp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace CSharp.NetFramework
     {
         static void Main(string[] args)
         {
-            StartMonitor();
+            GisService();
         }
 
         #region StartTcpChannel
@@ -46,6 +47,13 @@ namespace CSharp.NetFramework
         private static void StartMonitor()
         {
             new TcpMonitorServer().Start();
+        }
+        #endregion
+
+        #region GisService
+        static void GisService()
+        {
+            new WebGis().GetLocation(117.50, 27.50);
         }
         #endregion
     }
