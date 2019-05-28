@@ -15,17 +15,17 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            var hs = new Hashtable();
-            hs.Add("fff", 1);
-            hs.Add("hafg", 1);
-            //hs.Add("hafg", 1);
+            //var hs = new Hashtable();
             //hs.Add("fff", 1);
-            foreach (var item in hs.Keys)
-            {
-                Console.WriteLine(item);
-            }
+            //hs.Add("hafg", 1);
+            ////hs.Add("hafg", 1);
+            ////hs.Add("fff", 1);
+            //foreach (var item in hs.Keys)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
-            //Transfer();// 
+            Transfer();
         }
 
         #region Path
