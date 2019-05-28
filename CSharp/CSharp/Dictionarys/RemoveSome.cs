@@ -8,9 +8,7 @@ namespace CSharp.Dictionarys
 {
     public class RemoveSome
     {
-        public RemoveSome Remove()
-        {
-            var dic = new Dictionary<string, string>
+        private Dictionary<string, string> dic = new Dictionary<string, string>
             {
                 { "6", "m" },
                 { "7", "n" },
@@ -24,7 +22,8 @@ namespace CSharp.Dictionarys
                 { "2", "f" },
                 { "5", "a" },
             };
-
+        public RemoveSome Remove()
+        {
             var keys = dic.Keys.ToArray();
             int remove = (int)(((double)keys.Length) * 0.5);
             foreach (var key in keys)
