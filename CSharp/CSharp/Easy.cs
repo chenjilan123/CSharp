@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -121,8 +122,57 @@ namespace CSharp
         /// <returns></returns>
         public bool JudgeCircle(string moves)
         {
+            //①统计R,L,U,D的数目,若count(R)=count(L)且count(U)=count(D), 则能返回
+            //②分别统计水平和垂直方向的相对移动步数，若相对移动步数均为0，则回到原点。
+            int horizone = 0, vertical = 0;
+            foreach (var move in moves.ToUpper())
+                switch (move)
+                {
+                    case 'U': vertical++; break;
+                    case 'D': vertical--; break;
+                    case 'R': horizone++; break;
+                    case 'L': horizone--; break;
+                    default: break;
+                }
+            return horizone == 0 && vertical == 0;
+        }
 
-            return false;
+        /// <summary>
+        /// ref: 可变步数, 可定制步数。
+        /// </summary>
+        /// <param name="moves"></param>
+        /// <returns></returns>
+        public bool JudgeCircleAdvance(string moves)
+        {
+            var verticalPoint = 0;
+            var horizonPoint = 0;
+            var verticalDict = new Dictionary<char, int>();
+            verticalDict.Add('U', 1);
+            verticalDict.Add('D', -1);
+
+            var horizonDict = new Dictionary<char, int>();
+            horizonDict.Add('L', 1);
+            horizonDict.Add('R', -1);
+
+            char[] movs = moves.ToArray();
+
+            foreach (char m in movs)
+            {
+                if (verticalDict.ContainsKey(m))
+                {
+                    verticalPoint += verticalDict[m];
+                }
+            }
+
+            foreach (char m in movs)
+            {
+                if (horizonDict.ContainsKey(m))
+                {
+                    horizonPoint += horizonDict[m];
+                }
+            }
+
+            return (horizonPoint == 0 && verticalPoint == 0);
         }
         #endregion
     }

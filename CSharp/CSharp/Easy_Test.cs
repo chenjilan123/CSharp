@@ -43,5 +43,15 @@ namespace CSharp
 
             Assert.Equal(except, result);
         }
+
+        [Theory]
+        [InlineData("RLUD", true)]
+        [InlineData("RLU", false)]
+        [InlineData("RRRUUULLLDDD", true)]
+        void JudgeCircle(string moves, bool except)
+        {
+            var result = _solution.JudgeCircle(moves);
+            Assert.Equal(except, result);
+        }
     }
 }
