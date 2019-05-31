@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CSharp.Framework</RootNamespace>
     <AssemblyName>CSharp.Framework</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -66,6 +69,7 @@
   <ItemGroup>
     <Content Include="公务车数据转发\Docs\公务车转发.png" />
     <Content Include="Email\account.txt" />
+    <None Include="app.config" />
     <None Include="公务车数据转发\Docs\TaxiModel.json" />
     <None Include="公务车数据转发\Docs\TaxiType.json" />
     <None Include="公务车数据转发\Docs\广东省公务用车管理平台数据接入标准V1.6.020190319191656.pdf" />

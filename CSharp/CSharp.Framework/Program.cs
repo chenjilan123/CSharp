@@ -15,6 +15,14 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
+            var ts = DateTime.Now - new DateTime(2019, 5, 30, 16, 0, 0);
+            //var s = string.Format(@"{0:h\小\时m\分s\秒}", DateTime.Now);
+
+            //.NET 3.5不支持该格式化
+            var s = string.Format(@"{0:h\小\时m\分s\秒}", ts);
+            //var s = string.Format(@"{0}小时{1}分{2}秒", ts.Hours.ToString(), ts.Minutes.ToString(), ts.Seconds.ToString());
+            Console.WriteLine(s);
+            return;
             //var hs = new Hashtable();
             //hs.Add("fff", 1);
             //hs.Add("hafg", 1);
