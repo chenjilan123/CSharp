@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -90,7 +91,7 @@ namespace CSharp
             for (int i = 1; i < strs.Length; i++, current = 0)
             {
                 var curStr = strs[i];
-                while(curStr.Length > current && first.Length > current && curStr[current] == first[current]) current++;
+                while (curStr.Length > current && first.Length > current && curStr[current] == first[current]) current++;
                 if (current == 0) return "";
                 if (current < max) max = current;
             }
@@ -173,6 +174,277 @@ namespace CSharp
             }
 
             return (horizonPoint == 0 && verticalPoint == 0);
+        }
+        #endregion
+
+        #region 存在重复元素
+        /// <summary>
+        /// 给定一个整数数组，判断是否存在重复元素。
+        /// 如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public bool ContainsDuplicate(int[] nums)
+        {
+            //①用列表: 超时
+            //var list = new List<int>();
+            //foreach (var num in nums)
+            //{
+            //    if (list.Contains(num)) return true;
+            //    list.Add(num);
+            //}
+            //return false;
+
+            //②用哈希表
+            var hash = new Hashtable();
+            foreach (var num in nums)
+            {
+                if (hash.Contains(num)) return true;
+                hash.Add(num, 0);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 参考
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public bool ContainsDuplicateAdvance(int[] nums)
+        {
+            var hash = new HashSet<int>();
+            foreach (var num in nums)
+            {
+                if (hash.Contains(num)) return true;
+                hash.Add(num);
+            }
+            return false;
+        }
+        #endregion
+
+        #region 存在重复元素II
+        /// <summary>
+        /// 给定一个整数数组和一个整数 k，判断数组中是否存在两个不同的索引 i 和 j，使得 nums [i] = nums [j]，并且 i 和 j 的差的绝对值最大为 k。
+        /// 
+        /// 关键: 使用字典, 建立[值-索引]关系。
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public bool ContainsNearbyDuplicate(int[] nums, int k)
+        {
+            //双遍历, 找出所有匹配的组合。
+            //int dupNum = 0;
+            //for (int i = 0; i < nums.Length; i++)
+            //    for (int j = i + 1; j <= i + k && j < nums.Length; j++)
+            //        if (nums[i] == nums[j]) dupNum++;
+            //return dupNum >= 1;
+
+            //双遍历, 找出一个符合要求的即返回true: 超时
+            //for (int i = 0; i < nums.Length; i++)
+            //    for (int j = i + 1; j <= i + k && j < nums.Length; j++)
+            //        if (nums[i] == nums[j]) return true;
+            //return false;
+
+            //保存k个值。
+            //遍历数组, 若缓存中包含当前项, 说明正确。
+            //超时
+            //var lst = new List<int>();
+            //foreach (var num in nums)
+            //{
+            //    if (lst.Contains(num)) return true;
+            //    lst.Add(num);
+            //    if (lst.Count > k) lst.RemoveAt(0);
+            //}
+            //return false;
+
+            //用数组保存k个值: 超时
+            //if (k == 0) return false;
+            //var arr = new int[k];
+            //for (int i = 0; i < k; i++)
+            //    arr[i] = int.MinValue;
+            //var index = 0;
+            //foreach (var num in nums)
+            //{
+            //    if (arr.Contains(num)) return true;
+            //    arr[index] = num;
+            //    if (++index == k)
+            //        index = 0;
+            //}
+            //return false;
+
+            //建立[值-索引]字典, 搜索很快。
+            var dic = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (dic.ContainsKey(nums[i]) && i - dic[nums[i]] <= k) return true;
+                dic[nums[i]] = i;
+            }
+            return false;
+        }
+
+        public bool ContainsNearbyDuplicateAdvance(int[] nums, int k)
+        {
+            //用字典, 比用列表，数组快得多。
+            HashSet<int> set = new HashSet<int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (i > k) set.Remove(nums[i - k - 1]);
+                if (!set.Add(nums[i])) return true;
+            }
+            return false;
+        }
+        #endregion
+
+        //满足某种条件的数
+        #region 计数质数
+        /// <summary>
+        /// 统计所有小于非负整数 n 的质数的数量。
+        ///     一、不统计偶数
+        ///     二、统计时，只比较该数/2以下的数。
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public int CountPrimes(int n)
+        {
+            /// 面向测试编程
+            /// 写排名第一的那个答案的真他娘的是个人才，把特么20个测试用例全部写进去了。牛逼。
+            /// 其实这也是一种思路，如果这种运算非常频繁的，而内存又比较充足，这种方法就是非常好的方式
+            if (n <= 2) return 0;
+            var hsPrime = new HashSet<int>();
+            hsPrime.Add(2);
+            //不统计偶数
+            for (int i = 3; i < n; i += 2)
+            {
+                var max = (int)Math.Sqrt(i);
+                var bIsPrime = true;
+                foreach (var prime in hsPrime)
+                {
+                    if (prime > max) continue;
+                    if (i % prime == 0)
+                    {
+                        bIsPrime = false;
+                        break;
+                    }
+                }
+                if (bIsPrime) hsPrime.Add(i);
+            }
+            return hsPrime.Count;
+        }
+
+        /// <summary>
+        /// 厄拉多塞筛法. 比如说求20以内质数的个数,首先0,1不是质数.2是第一个质数,然后把20以内所有2的倍数划去.2后面紧跟的数即为下一个质数3,
+        /// 然后把3所有的倍数划去.3后面紧跟的数即为下一个质数5,再把5所有的倍数划去.以此类推.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public int CountPrimesAdvance(int n)
+        {
+            //var hsNoPrime = new HashSet<int>();
+            //var hsPrime = new HashSet<int>();
+            //var max = (int)Math.Sqrt(n);
+            //for (int i = 2; i < n; i++)
+            //{
+            //    if (!hsNoPrime.Contains(i))
+            //    {
+            //        hsPrime.Add(i);
+            //        if (i <= max)
+            //        {
+            //            AddNoPrime(hsNoPrime, i, n);
+            //        }
+            //    }
+            //}
+            //return hsPrime.Count;
+
+            //可以不用统计质数值
+            // =>
+
+            //引用
+            bool[] arr = new bool[n];
+            int count = 0;
+            for (int i = 2; i < n; ++i)
+            {
+                if (!arr[i])
+                {
+                    ++count;
+                    for (int j = i; j < n; j += i)
+                        arr[j] = true;
+                }
+            }
+            return count;
+        }
+        //private void AddNoPrime(HashSet<int> hsNoPrime, int prime, int max)
+        //{
+        //    var noPrime = prime * 2;
+        //    while(noPrime < max)
+        //    {
+        //        hsNoPrime.Add(noPrime);
+        //        noPrime += prime;
+        //    }
+        //}
+        #endregion
+        #region 丑数
+        /// <summary>
+        /// 编写一个程序判断给定的数是否为丑数。
+        /// 丑数就是只包含质因数 2, 3, 5 的整数。
+        /// 1也是丑数
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public bool IsUgly(int num)
+        {
+            if (num <= 0) return false; //测试用例12, 零是正整数？
+            var arr = new[] { 2, 3, 5 };
+            for (int i = 0; i < arr.Length; i++)
+                while (num % arr[i] == 0) num /= arr[i];
+            return num == 1;
+        }
+        #endregion
+
+        #region 移除链表元素
+        /// <summary>
+        /// 删除链表中等于给定值 val 的所有节点。
+        ///     示例： 
+        ///         输入: 1->2->6->3->4->5->6, val = 6
+        ///         输出: 1->2->3->4->5
+        /// </summary>
+        /// <param name="head"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public ListNode RemoveElements(ListNode head, int val)
+        {
+            head = new ListNode(0) { next = head };
+            var prev = head;
+            var cur = prev.next;
+            while (cur != null)
+            {
+                if (cur.val == val) prev.next = cur.next;
+                else prev = cur;
+                cur = cur.next;
+            }
+            return head.next;
+        }
+
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int x) { val = x; }
+        }
+
+
+        /// <summary>
+        /// 参考：递归
+        /// </summary>
+        /// <param name="head"></param>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public ListNode RemoveElementsAdvance(ListNode head, int val)
+        {
+            if (head == null) return head;
+            if (head.val == val) return RemoveElementsAdvance(head.next, val);
+            head.next = RemoveElementsAdvance(head.next, val);
+            return head;
         }
         #endregion
     }
