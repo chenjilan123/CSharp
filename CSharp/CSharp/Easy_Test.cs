@@ -124,6 +124,8 @@ namespace CSharp
         [InlineData(38, 12)]
         [InlineData(49999, 5132)]
         [InlineData(499990, 41538)]
+        [InlineData(100000000, 5761455)]
+        [InlineData(1000000000, 50847534)]
         public void CountPrimes(int n, int except)
         {
             //2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37

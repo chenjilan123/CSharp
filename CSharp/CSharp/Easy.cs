@@ -371,15 +371,15 @@ namespace CSharp
                 }
             return count;
         }
-        //private void AddNoPrime(HashSet<int> hsNoPrime, int prime, int max)
-        //{
-        //    var noPrime = prime * 2;
-        //    while(noPrime < max)
-        //    {
-        //        hsNoPrime.Add(noPrime);
-        //        noPrime += prime;
-        //    }
-        //}
+        private void AddNoPrime(HashSet<int> hsNoPrime, int prime, int max)
+        {
+            var noPrime = prime * 2;
+            while (noPrime < max)
+            {
+                hsNoPrime.Add(noPrime);
+                noPrime += prime;
+            }
+        }
         #endregion
         #region 丑数
         /// <summary>
