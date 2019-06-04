@@ -165,7 +165,8 @@ namespace CSharp
         }
 
         /// <summary>
-        /// 计算
+        /// 递归法计算
+        ///     缺点: 时间复杂度大
         /// </summary>
         /// <param name="cur"></param>
         /// <param name="s"></param>
