@@ -161,7 +161,7 @@ namespace CSharp
         /// <returns></returns>
         public int NumDecodings(string s)
         {
-            return Compute(0, s);
+            return (int)Compute(0, s);
         }
 
         /// <summary>
@@ -170,7 +170,8 @@ namespace CSharp
         /// <param name="cur"></param>
         /// <param name="s"></param>
         /// <returns></returns>
-        private int Compute(int cur, string s)
+        //private long Compute(int cur, string s)
+        private long Compute(int cur, string s)
         {
             //if (cur == s.Length - 1) return s[cur] == '*' ? 9 : 1; 
             if (cur >= s.Length) return 1; //递归结束条件
@@ -184,7 +185,11 @@ namespace CSharp
                 case '*': combine = CombineOne(cur, s) + CombineTwo(cur, s); single = 9; break;
                 default: break;
             }
-            return single * Compute(cur + 1, s) + (combine == 0 ? 0 : combine * Compute(cur + 2, s));
+            //此处var会自动匹配到long。
+            //若result为int, 会匹配为int, 因为递归操作。
+            var result = single * Compute(cur + 1, s) + (combine == 0 ? 0 : combine * Compute(cur + 2, s));
+            if (result >= model) result %= model;
+            return result;
         }
 
         /// <summary>
