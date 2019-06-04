@@ -79,10 +79,12 @@ namespace CSharp
         #region 解码方法 2
         [Theory]
         [InlineData("*", 9)]
-        [InlineData("0", 1)]
-        [InlineData("1", 2)]
+        [InlineData("0", 0)]
+        [InlineData("1", 1)]
         [InlineData("1*", 18)]
-        [InlineData("1**", 162)]
+        [InlineData("**", 96)]
+        [InlineData("1**", 177)]
+        [InlineData("*1*1*0", 404)] //少考虑了0的特殊性, 零是不可以单独编码的。
         public void NumDecodings(string s, int except)
         {
             var result = _solution.NumDecodings(s);

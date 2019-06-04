@@ -85,6 +85,66 @@ namespace CSharp
         #endregion
 
         #region 解码方法 2
+        Dictionary<int, char> dicDecoding = new Dictionary<int, char>
+        {
+            [1] = 'A',
+            [2] = 'B',
+            [3] = 'C',
+            [4] = 'D',
+            [5] = 'E',
+            [6] = 'F',
+            [7] = 'G',
+            [8] = 'H',
+            [9] = 'I',
+            [10] = 'J',
+            [11] = 'K',
+            [12] = 'L',
+            [13] = 'M',
+            [14] = 'N',
+            [15] = 'O',
+            [16] = 'P',
+            [17] = 'Q',
+            [18] = 'R',
+            [19] = 'S',
+            [20] = 'T',
+            [21] = 'U',
+            [22] = 'V',
+            [23] = 'W',
+            [24] = 'X',
+            [25] = 'Y',
+            [26] = 'Z',
+        };
+        Dictionary<char, int> dicEncoding = new Dictionary<char, int>
+        {
+            ['A'] = 1,
+            ['B'] = 2,
+            ['C'] = 3,
+            ['D'] = 4,
+            ['E'] = 5,
+            ['F'] = 6,
+            ['G'] = 7,
+            ['H'] = 8,
+            ['I'] = 9,
+            ['J'] = 10,
+            ['K'] = 11,
+            ['L'] = 12,
+            ['M'] = 13,
+            ['N'] = 14,
+            ['O'] = 15,
+            ['P'] = 16,
+            ['Q'] = 17,
+            ['R'] = 18,
+            ['S'] = 19,
+            ['T'] = 20,
+            ['U'] = 21,
+            ['V'] = 22,
+            ['W'] = 23,
+            ['X'] = 24,
+            ['Y'] = 25,
+            ['Z'] = 26,
+        };
+        const int model = 1000000000 + 7;
+
         /// <summary>
         /// 一条包含字母 A-Z 的消息通过以下的方式进行了编码：
         ///     'A' -> 1
@@ -101,34 +161,65 @@ namespace CSharp
         /// <returns></returns>
         public int NumDecodings(string s)
         {
-            const int model = 1000000000 + 7;
-            var dicPossible = new Dictionary<string, int>
-            {
-                ["1*"] = 81,
-                ["2*"] = 1,
-                ["3*"] = 9,
-            };
-            var star = 0;
-            var posNum = 0;
-            foreach (var c in s)
-            {
-                if (c >= '1' && c <= '9') posNum++;
-                else if (c == '*') star++;
-            }
-
-            var result = 1;
-            for (int i = 0; i < star; i++)
-            {
-                result *= 9;
-                if (result >= model) result %= model;
-            }
-            for (int i = 0; i < posNum; i++)
-            {
-                result *= 2;
-                if (result > model) result %= model;
-            }
-            return result;
+            return Compute(0, s);
         }
+
+        /// <summary>
+        /// 计算
+        /// </summary>
+        /// <param name="cur"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private int Compute(int cur, string s)
+        {
+            //if (cur == s.Length - 1) return s[cur] == '*' ? 9 : 1; 
+            if (cur >= s.Length) return 1; //递归结束条件
+            int combine = 0;
+            int single = 1;
+            switch (s[cur])
+            {
+                case '0': return 0;
+                case '1': combine = CombineOne(cur, s); break;
+                case '2': combine = CombineTwo(cur, s); break;
+                case '*': combine = CombineOne(cur, s) + CombineTwo(cur, s); single = 9; break;
+                default: break;
+            }
+            return single * Compute(cur + 1, s) + (combine == 0 ? 0 : combine * Compute(cur + 2, s));
+        }
+
+        /// <summary>
+        /// 组合1
+        /// </summary>
+        /// <param name="cur"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private int CombineOne(int cur, string s)
+        {
+            if (cur + 1 >= s.Length) return 0;
+            if (s[cur + 1] == '*') return 9;
+            return 1;
+        }
+
+        /// <summary>
+        /// 组合2
+        ///     只返回能结合的可能情况, 不能结合就返回0
+        /// </summary>
+        /// <param name="cur"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private int CombineTwo(int cur, string s)
+        {
+            if (cur + 1 >= s.Length) return 0;
+            if (s[cur + 1] == '*') return 6;
+            if (s[cur + 1] > '6') return 0;
+            return 1;
+        }
+
+        //注: 
+        //var v1 = single * Compute(cur + 1, s);
+        ////var v2 = 1 + combine == 0 ? 0 : combine * Compute(cur + 2, s); //任何数+(?:)都等于(?:)的结果, 不是预期的。
+        //var v2 = combine == 0 ? 0 : combine * Compute(cur + 2, s);
+        //return v1 + v2;
         #endregion
     }
 }
