@@ -15,6 +15,9 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
+            CRC();
+            return;
+
             var ts = DateTime.Now - new DateTime(2019, 5, 30, 16, 0, 0);
             //var s = string.Format(@"{0:h\小\时m\分s\秒}", DateTime.Now);
 
@@ -35,6 +38,59 @@ namespace CSharp.Framework
 
             Transfer();
         }
+
+        #region CRC
+        static void CRC()
+        {
+            //Get byte array from string.
+            var msgContent =
+                "0000040200000123920000A98AC70100010000000000C3F643393030353100000000000000000000000000019204000001CC5452414E535F545950453A3D37323B56494E3A3DC3F64339303035313B5452414354494F4E3A3D33303B545241494C45525F56494E3A3DC3F64339303035353B56454849434C455F4E4154494F4E414C4954593A3D3335303538323B56454849434C455F545950453A3D33323B5254504E3A3D31353135303031303B4F574552535F4E414D453A3DC3F6D4CBBCAFCDC53B4F574552535F4F5249475F49443A3D313031303130303130313B574F4552535F54454C3A3D31383132333435363738393B52544F4C4E3A3D3132333435363737373B56454849434C455F4D4F44453A3DB1BCB3DB41383B56454849434C455F434F4C4F523A3D313B56454849434C455F4F5249475F49443A3D32373031303B4452495645525F494E464F3A3DBCDDCABBD4B131BAC53B4755415244535F494E464F3A3DD1BAD4CBD4B131BAC53B415050524F5645445F544F4E4E4147453A3D35303B44475F545950453A3D30323230313B434152474F5F4E414D453A3DD4ADD3CD3B434152474F5F544F4E4E4147453A3D34323B5452414E53504F52545F4F524947494E3A3DBFA8CBFEB6FB3B5452414E53504F52545F4445533A3DD4C6C4CF3B5453534C3A3D313236313438363539317C313236343838383939";
+                //"0000007500000198140000A98AC70100010000000000B2E2413930303031000000000000000000000000000114020000003F010080000000005CB42ABA11F6EFBA00000008BDF4BCB1B1A8BEAF00010100010000000682512101CB998E0043004300000000001E03220000000000000000";
+
+            var msgBytes = new List<byte>();
+            for (int i = 0; i < msgContent.Length / 2; i++)
+                msgBytes.Add(byte.Parse(msgContent.Substring(i * 2, 2), System.Globalization.NumberStyles.HexNumber));
+            //foreach (var b in msgBytes)
+            //    Console.Write(b.ToString("X2"));
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine(msgContent);
+
+            var crc = GetCRCByte(msgBytes);
+            Console.WriteLine(crc);
+            var crcBytes = GetBytes(crc);
+            foreach (var b in crcBytes)
+                Console.Write(b.ToString("X2"));
+            Console.WriteLine();
+        }
+        static short GetCRCByte(List<byte> data)
+        {
+            int crc_reg = 0xFFFF;//TODO:????网上初始值为 0
+            short current;
+            for (int i = 0; i < data.Count; i++)
+            {
+                current = (short)(data[i] << 8);
+                for (int j = 0; j < 8; j++)
+                {
+                    if ((short)(crc_reg ^ current) < 0)
+                        crc_reg = (short)((crc_reg << 1) ^ 0x1021);
+                    else
+                        crc_reg <<= 1;
+                    current <<= 1;
+                }
+            }
+            return (short)crc_reg;
+        }
+        static byte[] GetBytes(short value)
+        {
+            byte[] reBytes = BitConverter.GetBytes(value);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(reBytes);
+            }
+            return reBytes;
+        }
+        #endregion
 
         #region Path
         private static void Path()
