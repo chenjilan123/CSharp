@@ -7,6 +7,7 @@ namespace CSharp
 {
     public class Difficulty
     {
+        #region 天际线问题
         /// <summary>
         /// 天际线问题
         ///     城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。现在，假设您获得了城市风光照片（图A）上显示的所有建筑物的位置和高度，请编写一个程序以输出由这些建筑物形成的天际线（图B）。
@@ -81,5 +82,53 @@ namespace CSharp
             }
             #endregion
         }
+        #endregion
+
+        #region 解码方法 2
+        /// <summary>
+        /// 一条包含字母 A-Z 的消息通过以下的方式进行了编码：
+        ///     'A' -> 1
+        ///     'B' -> 2
+        ///     ...
+        ///     'Z' -> 26
+        /// 除了上述的条件以外，现在加密字符串可以包含字符 '*'了，字符'*'可以被当做1到9当中的任意一个数字。
+        /// 
+        /// 给定一条包含数字和字符'*'的加密信息，请确定解码方法的总数。
+        /// 
+        /// 同时，由于结果值可能会相当的大，所以你应当对109 + 7取模。（翻译者标注：此处取模主要是为了防止溢出）
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public int NumDecodings(string s)
+        {
+            const int model = 1000000000 + 7;
+            var dicPossible = new Dictionary<string, int>
+            {
+                ["1*"] = 81,
+                ["2*"] = 1,
+                ["3*"] = 9,
+            };
+            var star = 0;
+            var posNum = 0;
+            foreach (var c in s)
+            {
+                if (c >= '1' && c <= '9') posNum++;
+                else if (c == '*') star++;
+            }
+
+            var result = 1;
+            for (int i = 0; i < star; i++)
+            {
+                result *= 9;
+                if (result >= model) result %= model;
+            }
+            for (int i = 0; i < posNum; i++)
+            {
+                result *= 2;
+                if (result > model) result %= model;
+            }
+            return result;
+        }
+        #endregion
     }
 }

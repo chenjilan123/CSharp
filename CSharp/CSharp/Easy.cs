@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharp.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -363,14 +364,11 @@ namespace CSharp
             bool[] arr = new bool[n];
             int count = 0;
             for (int i = 2; i < n; ++i)
-            {
                 if (!arr[i])
                 {
                     ++count;
-                    for (int j = i; j < n; j += i)
-                        arr[j] = true;
+                    for (int j = i; j < n; j += i) arr[j] = true;
                 }
-            }
             return count;
         }
         //private void AddNoPrime(HashSet<int> hsNoPrime, int prime, int max)
@@ -425,13 +423,6 @@ namespace CSharp
             return head.next;
         }
 
-        public class ListNode
-        {
-            public int val;
-            public ListNode next;
-            public ListNode(int x) { val = x; }
-        }
-
 
         /// <summary>
         /// 参考：递归
@@ -445,6 +436,57 @@ namespace CSharp
             if (head.val == val) return RemoveElementsAdvance(head.next, val);
             head.next = RemoveElementsAdvance(head.next, val);
             return head;
+        }
+        #endregion
+
+        #region 反转链表
+        /// <summary>
+        /// 反转一个单链表。
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public ListNode ReverseList(ListNode head)
+        {
+            //if (head == null) return null;
+            //var reverse = new ListNode(head.val);
+            //while (head.next != null)
+            //{
+            //    reverse = new ListNode(head.next.val) { next = reverse };
+            //    head = head.next;
+            //}
+            //return reverse;
+
+            if (head == null) return null;
+            ListNode prev = null;
+            ListNode next = head.next;
+            while (next != null)
+            {
+                head.next = prev;
+                prev = head;
+                head = next;
+                next = head.next;
+            }
+            head.next = prev;
+            return head;
+        }
+
+        public ListNode ReverseListAdvance(ListNode head)
+        {
+            return Reverse(head, null);
+        }
+        /// <summary>
+        /// 递归, 节约了对象资源
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="prev"></param>
+        /// <returns></returns>
+        private ListNode Reverse(ListNode node, ListNode prev)
+        {
+            if (node == null)
+                return prev;
+            ListNode next = node.next;
+            node.next = prev;
+            return Reverse(next, node);
         }
         #endregion
     }

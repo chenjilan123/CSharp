@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSharp.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
@@ -177,22 +178,22 @@ namespace CSharp
         /// Severity	Code	Description	Project	File	Line	Suppression State
         /// Error CS1654  Cannot modify members of 'test' because it is a 'foreach iteration variable'	CSharp H:\C#\CSharp\CSharp\CSharp\Easy_Test.cs	170	Active
         /// </summary>
-        //private struct ListNodeElementTest
-        private class ListNodeElementTest
+        //private struct RemoveElementsTest
+        private class RemoveElementsTest
         {
             public ListNode head;
             public int val;
             public ListNode except;
         }
-        private IEnumerable<ListNodeElementTest> GetListNodeElementTest()
+        private IEnumerable<RemoveElementsTest> GetListNodeElementTest()
         {
-            yield return new ListNodeElementTest()
+            yield return new RemoveElementsTest()
             {
                 val = 1,
                 head = new ListNode(1),
                 except = null,
             };
-            yield return new ListNodeElementTest()
+            yield return new RemoveElementsTest()
             {
                 val = 3,
                 head = new ListNode(1)
@@ -213,7 +214,7 @@ namespace CSharp
                     }
                 },
             };
-            yield return new ListNodeElementTest()
+            yield return new RemoveElementsTest()
             {
                 val = 1,
                 head = new ListNode(1)
@@ -234,7 +235,7 @@ namespace CSharp
                     }
                 },
             };
-            yield return new ListNodeElementTest()
+            yield return new RemoveElementsTest()
             {
                 val = 1,
                 head = new ListNode(1)
@@ -242,6 +243,79 @@ namespace CSharp
                     next = new ListNode(1)
                 },
                 except = null,
+            };
+        }
+        #endregion
+
+        #region 反转链表
+        [Fact]
+        public void ReverseList()
+        {
+            foreach (var test in GetReverseListTest())
+            {
+                //var result = _solution.RemoveElements(test.head, test.val);
+                var result = _solution.ReverseList(test.head);
+
+                if (result == null)
+                {
+                    Assert.True(test.except == null);
+                    continue;
+                }
+                while (test.except.next != null)
+                {
+                    Assert.Equal(result.next.val, test.except.next.val);
+
+                    result = result.next;
+                    test.except = test.except.next;
+                }
+            }
+        }
+
+        private class ReverseListTest
+        {
+            public ListNode head;
+            public ListNode except;
+        }
+        private IEnumerable<ReverseListTest> GetReverseListTest()
+        {
+            yield return new ReverseListTest()
+            {
+                head = new ListNode(1),
+                except = new ListNode(1),
+            };
+            yield return new ReverseListTest()
+            {
+                head = new ListNode(1)
+                {
+                    next = new ListNode(2)
+                    {
+                        next = new ListNode(3)
+                        {
+                            next = new ListNode(4)
+                        }
+                    }
+                },
+                except = new ListNode(4)
+                {
+                    next = new ListNode(3)
+                    {
+                        next = new ListNode(2)
+                        {
+                            next = new ListNode(1)
+                        }
+                    }
+                },
+            };
+            yield return new ReverseListTest()
+            {
+                head = new ListNode(1)
+                {
+                    next = new ListNode(1)
+                },
+                except = new ListNode(1)
+                {
+                    next = new ListNode(1)
+                },
             };
         }
         #endregion

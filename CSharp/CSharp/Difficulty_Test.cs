@@ -75,5 +75,19 @@ namespace CSharp
             }
         }
         #endregion
+
+        #region 解码方法 2
+        [Theory]
+        [InlineData("*", 9)]
+        [InlineData("0", 1)]
+        [InlineData("1", 2)]
+        [InlineData("1*", 18)]
+        [InlineData("1**", 162)]
+        public void NumDecodings(string s, int except)
+        {
+            var result = _solution.NumDecodings(s);
+            Assert.Equal(except, result);
+        }
+        #endregion
     }
 }
