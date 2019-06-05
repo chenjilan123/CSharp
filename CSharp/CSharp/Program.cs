@@ -19,24 +19,7 @@ namespace CSharp
         {
             try
             {
-                XmlResolve();
-
-                //Split();
-
-                //Console.WriteLine(IsTrue);
-                //SizeMeasure();
-
-                //new EntityToXml()
-                //    .Serialize();
-
-                //new ResolveXml().Run();
-                //return;
-
-                //new ParseString().Run();
-                //return;
-
-                //EntityToXml();
-                //return;
+                BuildXmlData();
             }
             catch (Exception ex)
             {
@@ -44,6 +27,13 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region BuildXmlData
+        static void BuildXmlData()
+        {
+            new BuildXmlData().Build();
+        }
+        #endregion
 
         #region XmlResolve
         private static void XmlResolve()
