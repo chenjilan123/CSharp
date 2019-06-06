@@ -24,9 +24,6 @@ namespace CSharp.xml
                 , new XElement("Set"
                     , new XElement("Member", 1)
                     , new XElement("Member", true)));
-
-
-            
             Console.WriteLine($"Unformatted: \n{xEle.ToString(SaveOptions.DisableFormatting)}");
             Console.WriteLine($"  formatted: \n{xEle}");
         }
