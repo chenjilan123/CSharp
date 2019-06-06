@@ -15,7 +15,11 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            CRC();
+            long i = 3;
+            Console.WriteLine(i.ToString("X1"));
+            Console.WriteLine(i.ToString("X2"));
+            Console.WriteLine(i.ToString("X3"));
+            Console.WriteLine(i.ToString("X4"));
             return;
 
             var ts = DateTime.Now - new DateTime(2019, 5, 30, 16, 0, 0);
@@ -38,6 +42,22 @@ namespace CSharp.Framework
 
             Transfer();
         }
+
+        #region GetUtcTime
+        static void GetUtcTime()
+        {
+            //var t = DateTime.FromFileTimeUtc(1263085674);
+
+            var t = new DateTime(1263085674);
+
+            Console.WriteLine(t.ToString("yyyy-MM-dd HH:mm:ss"));
+            //var t = new DateTime(2010, 1, 9, 9, 7, 54);
+
+            //return (long)(t.ToUniversalTime() - DateTime.MinValue).TotalSeconds;
+            //DateTime.UtcNow.ToFileTimeUtc();
+            //DateTime.Now.ToFileTimeUtc();
+        }
+        #endregion
 
         #region CRC
         const string ValideteString =
