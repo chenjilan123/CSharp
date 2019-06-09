@@ -1,5 +1,6 @@
 ﻿using CSharp.Framework.Email;
 using CSharp.Framework.Transfer;
+using CSharp.Helper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,11 +16,7 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            long i = 3;
-            Console.WriteLine(i.ToString("X1"));
-            Console.WriteLine(i.ToString("X2"));
-            Console.WriteLine(i.ToString("X3"));
-            Console.WriteLine(i.ToString("X4"));
+            EncodeTest();
             return;
 
             var ts = DateTime.Now - new DateTime(2019, 5, 30, 16, 0, 0);
@@ -42,6 +39,24 @@ namespace CSharp.Framework
 
             Transfer();
         }
+        #region 编码测试
+        static void EncodeTest()
+        {
+            var bytes = BinaryHelper.GetGBKBytes("MARK_STATUS:=0X00;EVENT_TYPE:=0X02;ALARM_GRADE:=0X02;AHEAD_SPEED:=0X00;AHEAD_DISTANCE:=0X00;DIVERGE_TYPE:=0X01;ROAD_SIGN_TYPE:=0X00;ROAD_SIGN_DATA:=0X00;SPEED:=0X47;ALTITUDE:=98;LONGITUDE:=113989118;LATITUDE:=37997353;VEHICLE_STATUS:=1025;ALARM_ID:=0X303039313432341906091605220005000A995D");
+            Console.WriteLine(bytes.Length);
+        }
+        #endregion
+
+        #region ToStringWithX
+        private static void ToStringWithX()
+        {
+            long i = 3;
+            Console.WriteLine(i.ToString("X1"));
+            Console.WriteLine(i.ToString("X2"));
+            Console.WriteLine(i.ToString("X3"));
+            Console.WriteLine(i.ToString("X4"));
+        }
+        #endregion
 
         #region GetUtcTime
         static void GetUtcTime()

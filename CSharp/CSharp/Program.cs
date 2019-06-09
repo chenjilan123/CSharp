@@ -18,7 +18,7 @@ namespace CSharp
         {
             try
             {
-                new Helper().Run();
+
             }
             catch (Exception ex)
             {
