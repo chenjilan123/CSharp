@@ -10,11 +10,17 @@ namespace CSharp
     {
         public static void Main(string[] args)
         {
+            Reflection(); return;
+
             AppHost.ConfigureHost().Wait();
-
-
             Console.WriteLine("End");
         }
+        #region Reflection
+        static void Reflection()
+        {
+            new Reflection.Core().Play();
+        }
+        #endregion
 
         #region Pilot
         private static void Pilot()
