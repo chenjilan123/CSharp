@@ -6,7 +6,7 @@ namespace CSharp.UserConsole
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine(-2 % 3);
         }
     }
 }
