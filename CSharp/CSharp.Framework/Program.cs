@@ -16,7 +16,7 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            EncodeTest();
+            GetUtcTime();
             return;
 
             var ts = DateTime.Now - new DateTime(2019, 5, 30, 16, 0, 0);
@@ -63,9 +63,17 @@ namespace CSharp.Framework
         {
             //var t = DateTime.FromFileTimeUtc(1263085674);
 
-            var t = new DateTime(1263085674);
+            //var t = DateTime.UtcNow;
+            var tUtcZero = new DateTime(1970, 1, 1);
+            var t = new DateTime(2010, 1, 10, 9, 7, 54).ToUniversalTime();
+            var l = (t - tUtcZero).TotalSeconds;
+            Console.WriteLine($"Seconds: {l}");
+            Console.WriteLine($"  Ticks: {t.Ticks}");
+            Console.WriteLine($" Second: {t.Second}");
+            Console.WriteLine(TimeZone.CurrentTimeZone.StandardName);
 
-            Console.WriteLine(t.ToString("yyyy-MM-dd HH:mm:ss"));
+            Console.WriteLine($"  Local: {tUtcZero.AddSeconds((double)l).ToLocalTime()}");
+            //Console.WriteLine($"   Test: {t}");
             //var t = new DateTime(2010, 1, 9, 9, 7, 54);
 
             //return (long)(t.ToUniversalTime() - DateTime.MinValue).TotalSeconds;
