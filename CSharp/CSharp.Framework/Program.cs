@@ -72,6 +72,8 @@ namespace CSharp.Framework
             Console.WriteLine($" Second: {t.Second}");
             Console.WriteLine(TimeZone.CurrentTimeZone.StandardName);
 
+
+            l = 0x000000005CFDEE4E;
             Console.WriteLine($"  Local: {tUtcZero.AddSeconds((double)l).ToLocalTime()}");
             //Console.WriteLine($"   Test: {t}");
             //var t = new DateTime(2010, 1, 9, 9, 7, 54);
