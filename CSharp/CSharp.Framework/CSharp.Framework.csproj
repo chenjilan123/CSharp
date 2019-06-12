@@ -81,5 +81,8 @@
   <ItemGroup>
     <None Include="公务车数据转发\TaxiType.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SqlTech\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
