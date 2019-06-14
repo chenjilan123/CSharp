@@ -355,6 +355,7 @@ namespace CSharp
         #endregion
 
         #region 二叉树
+
         #region 对称二叉树
         [Theory]
         [InlineData(new int[] { 1, 2, 2, 3, 4, 4, 3 }, true)]
@@ -486,5 +487,6 @@ namespace CSharp
         public bool except;
     }
     #endregion
-    #endregion
+
+        #endregion
 }

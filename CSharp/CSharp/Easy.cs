@@ -640,12 +640,7 @@ namespace CSharp
         /// <returns></returns>
         public bool HasPathSum(TreeNode root, int sum)
         {
-            //if (root == null) return false;
-            //sum -= root.val;
-            //if (sum == 0 && (root.left == null || root.right == null)) return true;
-            //return HasPathSum(root.left, sum) || HasPathSum(root.right, sum);
-            
-            //根节点为空, 则错误
+            //递归
             if (root == null) return false;
             if (root.left == null && root.right == null) return sum == root.val;
             sum -= root.val;
