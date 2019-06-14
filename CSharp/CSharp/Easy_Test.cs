@@ -11,6 +11,19 @@ namespace CSharp
     {
         private Easy _solution = new Easy();
 
+        #region 构建通用测试用例
+        [Theory]
+        [InlineData(1, true, 3D)]
+        private void Test(int i, bool b, double d)
+        {
+            var curMethod = System.Reflection.MethodInfo.GetCurrentMethod();
+            var param = curMethod.GetParameters();
+            Assert.True(typeof(int).IsEquivalentTo(param[0].ParameterType));
+            Assert.True(typeof(bool).IsEquivalentTo(param[1].ParameterType));
+            Assert.True(typeof(double).IsEquivalentTo(param[2].ParameterType));
+        }
+        #endregion
+
         #region 两数之和
         [Theory]
         [InlineData(new int[] { 1, 4 }, 5, new int[] { 0, 1 })]
@@ -125,7 +138,7 @@ namespace CSharp
         [InlineData(49999, 5132)]
         [InlineData(499990, 41538)]
         [InlineData(100000000, 5761455)]
-        [InlineData(1000000000, 50847534)]
+        //[InlineData(1000000000, 50847534)] //18sec
         public void CountPrimes(int n, int except)
         {
             //2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37
@@ -321,5 +334,157 @@ namespace CSharp
             };
         }
         #endregion
+
+        #region 最大子序和
+        [Theory]
+        [InlineData(new[] { -3, 1, -2, 5, -1, -2, -1, 4, 3, -1, -1, 5 }, 11)]
+        [InlineData(new[] { 1 }, 1)]
+        [InlineData(new[] { -1 }, -1)]
+        [InlineData(new[] { -2 }, -2)]
+        [InlineData(new[] { -2, -1 }, -1)]
+        [InlineData(new[] { -2, -1, -3 }, -1)]
+        [InlineData(new[] { -2, -1, 3 }, 3)]
+        [InlineData(new[] { 2, -1, -3 }, 2)]
+        public void MaxSubArray(int[] nums, int except)
+        {
+            //var result = _solution.MaxSubArray(nums);
+            var result = _solution.MaxSubArrayAdvance(nums);
+            //var result = _solution.MaxSubArrayRef(nums);
+            Assert.Equal(except, result);
+        }
+        #endregion
+
+        #region 二叉树
+        #region 对称二叉树
+        [Theory]
+        [InlineData(new int[] { 1, 2, 2, 3, 4, 4, 3 }, true)]
+        ///    1
+        ///   / \
+        ///  2   2
+        /// / \ / \
+        ///3  4 4  3
+        public void IsSymmetric(int[] data, bool except)
+        {
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(2)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(4),
+                },
+                right = new TreeNode(2)
+                {
+                    left = new TreeNode(4),
+                    right = new TreeNode(3),
+                },
+            };
+            var result = _solution.IsSymmetric(root);
+            Assert.Equal(except, result);
+        }
+        #endregion
+
+        #region 路径总和
+        [Fact]
+        public void HasPathSum()
+        {
+            //TreeNode root = new TreeNode(5)
+            //{
+            //    left = new TreeNode(4)
+            //    {
+            //        left = new TreeNode(11)
+            //        {
+            //            left = new TreeNode(7),
+            //            right = new TreeNode(2),
+            //        }
+            //    },
+            //    right = new TreeNode(8)
+            //    {
+            //        left = new TreeNode(13),
+            //        right = new TreeNode(4)
+            //        {
+            //            right = new TreeNode(1)
+            //        },
+            //    }
+            //};
+            //var sum = 22;
+            //var except = true;
+            foreach (var testData in HashPathSumTestData.GetTestData())
+            {
+                var result = _solution.HasPathSum(testData.root, testData.sum);
+                Assert.Equal(testData.except, result);
+            }
+        }
     }
+
+    public class HashPathSumTestData
+    {
+        public static IEnumerable<HashPathSumTestData> GetTestData()
+        {
+            ///                   5
+            ///                  / \
+            ///                 4   8
+            ///                /   / \
+            ///               11  13  4
+            ///              /  \      \
+            ///             7    2      1
+            yield return new HashPathSumTestData()
+            {
+                root = TreeNode.GetTreeNode(new int?[] { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, null, null, 1 }),
+                sum = 22,
+                except = true,
+            };
+
+            ///                    7
+            ///                  /   \
+            ///                 3     4
+            ///                / \   / \  
+            ///               2   1 -4  7
+            yield return new HashPathSumTestData()
+            {
+                root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
+                sum = 12,
+                except = true,
+            };
+            yield return new HashPathSumTestData()
+            {
+                root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
+                sum = 10,
+                except = false,
+            };
+            yield return new HashPathSumTestData()
+            {
+                root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
+                sum = 7,
+                except = true,
+            };
+
+            yield return new HashPathSumTestData()
+            {
+                //只包含根节点的不算。
+                root = TreeNode.GetTreeNode(new int?[] { 1, 2 }),
+                sum = 1,
+                except = false,
+            };
+            yield return new HashPathSumTestData()
+            {
+                //只包含根节点的不算。
+                root = TreeNode.GetTreeNode(new int?[] { 1, null, 2 }),
+                sum = 1,
+                except = false,
+            };
+            yield return new HashPathSumTestData()
+            {
+                //只包含根节点的不算。
+                root = TreeNode.GetTreeNode(new int?[] { 1, 2, null, 3, null, 4, null, 5 }),
+                sum = 6,
+                except = false,
+            };
+        }
+
+        public TreeNode root;
+        public int sum;
+        public bool except;
+    }
+    #endregion
+    #endregion
 }

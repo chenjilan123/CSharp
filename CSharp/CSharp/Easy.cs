@@ -381,6 +381,7 @@ namespace CSharp
             }
         }
         #endregion
+
         #region 丑数
         /// <summary>
         /// 编写一个程序判断给定的数是否为丑数。
@@ -398,6 +399,7 @@ namespace CSharp
             return num == 1;
         }
         #endregion
+        //===============
 
         #region 移除链表元素
         /// <summary>
@@ -442,6 +444,7 @@ namespace CSharp
         #region 反转链表
         /// <summary>
         /// 反转一个单链表。
+        ///     分析:https://leetcode-cn.com/articles/reverse-linked-list/
         /// </summary>
         /// <param name="head"></param>
         /// <returns></returns>
@@ -489,5 +492,167 @@ namespace CSharp
             return Reverse(next, node);
         }
         #endregion
+
+        #region 最大子序和
+        /// <summary>
+        /// 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int MaxSubArray(int[] nums)
+        {
+            return MaxSubArrayDirect(nums);
+        }
+
+        /// <summary>
+        /// 直接法
+        /// </summary>
+        public int MaxSubArrayDirect(int[] nums)
+        {
+            var max = nums[0];
+            var sum = 0;
+            for (int len = 1; len <= nums.Length; len++)
+            {
+                var end = nums.Length - len;
+                for (int i = 0; i <= end; i++)
+                {
+                    var j = 0;
+                    while (j < len)
+                    {
+                        sum += nums[j + i];
+                        j++;
+                    }
+                    if (sum > max)
+                    {
+                        max = sum;
+                    }
+                    sum = 0;
+                }
+            }
+            return max;
+        }
+
+        /// <summary>
+        /// 分治法
+        ///     不考虑溢出
+        ///     时间复杂度: O(nlogn)
+        ///     空间复杂度：I(n)?
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int MaxSubArrayAdvance(int[] nums)
+        {
+            if (nums.Length == 1) return nums[0];
+            var l = MaxSubArrayAdvance(nums.Take(nums.Length / 2).ToArray());
+            var r = MaxSubArrayAdvance(nums.Skip(nums.Length / 2).ToArray());
+
+            var sum = 0;
+            var ml = nums[nums.Length / 2 - 1];
+            for (int i = nums.Length / 2 - 1; i >= 0; i--)
+            {
+                sum += nums[i];
+                ml = Math.Max(ml, sum);
+            }
+            sum = 0;
+            var mr = nums[nums.Length / 2];
+            for (int i = nums.Length / 2; i < nums.Length; i++)
+            {
+                sum += nums[i];
+                mr = Math.Max(mr, sum);
+            }
+            return Math.Max(Math.Max(l, r), ml + mr);
+        }
+
+        /// <summary>
+        /// 参考
+        ///     时间复杂度: O(n)
+        ///     空间复杂度：I(l)?
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public int MaxSubArrayRef(int[] nums)
+        {
+            //int max = nums[0], val = 0;
+            //for (int i = 0; i < nums.Length; i++)
+            //{
+            //    val = val + nums[i];
+            //    max = val > max ? val : max;
+            //    val = 0 > val ? 0 : val;
+            //}
+            //return max;
+
+            int max = nums[0], pre = nums[0];
+            for (int i = 1; i < nums.Length; i++)
+            {
+                pre = Math.Max(pre + nums[i], nums[i]);
+                max = Math.Max(max, pre);
+            }
+            return max;
+        }
+        #endregion
+
+        //二叉树
+        #region 对称二叉树
+        /// <summary>
+        /// 给定一个二叉树，检查它是否是镜像对称的。
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public bool IsSymmetric(TreeNode root)
+        {
+            //递归
+            //  时间复杂度：O(n)
+            //  空间复杂度：O(n)
+            if (root == null) return true;
+            return IsSymmetric(root.left, root.right);
+            //参考
+            //少一行代码，多了一倍运算（多一层）
+            //return IsSymmetric(root, root);
+        }
+
+        public bool IsSymmetric(TreeNode left, TreeNode right)
+        {
+            //考虑重写Equal或"=="，用于对称判断
+            if (left == null || right == null || left.val != right.val) return left == right;
+            return IsSymmetric(left.left, right.right) && IsSymmetric(left.right, right.left);
+
+        }
+        #endregion
+
+        #region 路径总和
+        /// <summary>
+        /// 给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，这条路径上所有节点值相加等于目标和。
+        ///  说明: 叶子节点是指没有子节点的节点
+        ///  示例: 
+        ///     给定如下二叉树，以及目标和 sum = 22
+        ///                   5
+        ///                  / \
+        ///                 4   8
+        ///                /   / \
+        ///               11  13  4
+        ///              /  \      \
+        ///             7    2      1
+        ///    
+        ///     只包含根节点的总和不算
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="sum"></param>
+        /// <returns></returns>
+        public bool HasPathSum(TreeNode root, int sum)
+        {
+            //if (root == null) return false;
+            //sum -= root.val;
+            //if (sum == 0 && (root.left == null || root.right == null)) return true;
+            //return HasPathSum(root.left, sum) || HasPathSum(root.right, sum);
+            
+            //根节点为空, 则错误
+            if (root == null) return false;
+            if (root.left == null && root.right == null) return sum == root.val;
+            sum -= root.val;
+            return HasPathSum(root.left, sum)
+                || HasPathSum(root.right, sum);
+        }
+        #endregion
+        //==============
     }
 }
