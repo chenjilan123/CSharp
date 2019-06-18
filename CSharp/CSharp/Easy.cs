@@ -591,7 +591,8 @@ namespace CSharp
         }
         #endregion
 
-        //二叉树
+        #region 二叉树
+
         #region 对称二叉树
         /// <summary>
         /// 给定一个二叉树，检查它是否是镜像对称的。
@@ -648,6 +649,25 @@ namespace CSharp
                 || HasPathSum(root.right, sum);
         }
         #endregion
-        //==============
+
+        #endregion
+
+        #region x 的平方根
+        /// <summary>
+        /// 实现 int sqrt(int x) 函数。
+        /// 计算并返回 x的平方根，其中 x 是非负整数。
+        /// 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public int MySqrt(int x)
+        {
+            //内置函数
+            //return (int)Math.Sqrt(x);
+            long i = 0;
+            while (i * i++ <= x) ;
+            return (int)(i - 2);
+        }
+        #endregion
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CSharp.Model;
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using Xunit;
 
@@ -8,6 +10,11 @@ namespace CSharp
     public class Middle_Test
     {
         private Middle _solution = new Middle();
+        private DynamicAssert _assert;
+        public Middle_Test()
+        {
+            _assert = new DynamicAssert(_solution);
+        }
 
         #region 朋友圈
         private struct CircleNumExcept
@@ -73,5 +80,121 @@ namespace CSharp
         }
         #endregion
 
+        #region 路径总和 II
+        [Fact]
+        public void PathSum()
+        {
+            TreeNode root = null;
+            int sum = 0;
+            IList<IList<int>> except;
+
+            var result = _solution.PathSum(root, sum);
+        }
+
+        public class PathSumTestData
+        {
+            public IEnumerable<PathSumTestData> GetTestData()
+            {
+                //yield return new PathSumTestData()
+                //{
+                //    root = 
+                //}
+                yield break;
+            }
+
+            public TreeNode root;
+            public int sum;
+            public IList<IList<int>> except;
+        }
+        #endregion
+
+        #region 二叉树
+
+        #region 两数相加
+        [Fact]
+        public void AddTwoNumbers()
+        {
+            foreach (var test in AddTwoNumbersTestData.GetTestData())
+            {
+                ListNode except = test.except;
+                var result = _solution.AddTwoNumbers(test.l1, test.l2);
+
+                while(except != null)
+                {
+                    Assert.NotNull(result);
+                    Assert.Equal(except.val, result.val);
+
+                    result = result.next;
+                    except = except.next;
+                }
+            }
+
+        }
+
+        public class AddTwoNumbersTestData
+        {
+            public static IEnumerable<AddTwoNumbersTestData> GetTestData()
+            {
+                yield return new AddTwoNumbersTestData()
+                {
+                    l1 = ListNode.CreateNode(new[] { 1 }),
+                    l2 = ListNode.CreateNode(new[] { 8 }),
+                    except = ListNode.CreateNode(new[] { 9 }),
+                };
+                yield return new AddTwoNumbersTestData()
+                {
+                    l1 = ListNode.CreateNode(new[] { 1 }),
+                    l2 = ListNode.CreateNode(new[] { 9 }),
+                    except = ListNode.CreateNode(new[] { 0, 1 }),
+                };
+                yield return new AddTwoNumbersTestData()
+                {
+                    l1 = ListNode.CreateNode(new[] { 1, 9, 9 }),
+                    l2 = ListNode.CreateNode(new[] { 9 }),
+                    except = ListNode.CreateNode(new[] { 0, 0, 0, 1 }),
+                };
+                yield return new AddTwoNumbersTestData()
+                {
+                    l1 = ListNode.CreateNode(new[] { 1, 8 }),
+                    l2 = ListNode.CreateNode(new[] { 9 }),
+                    except = ListNode.CreateNode(new[] { 0, 9 }),
+                };
+                yield return new AddTwoNumbersTestData()
+                {
+                    l1 = ListNode.CreateNode(new[] { 1, 2, 3 }),
+                    l2 = ListNode.CreateNode(new[] { 2, 3, 4 }),
+                    except = ListNode.CreateNode(new[] { 3, 5, 7 }),
+                };
+                yield return new AddTwoNumbersTestData()
+                {
+                    l1 = ListNode.CreateNode(new[] { 5, 2, 3 }),
+                    l2 = ListNode.CreateNode(new[] { 2, 3, 4 }),
+                    except = ListNode.CreateNode(new[] { 7, 5, 7 }),
+                };
+            }
+
+            public ListNode l1;
+            public ListNode l2;
+            public ListNode except;
+        }
+        #endregion
+
+        #endregion
+
+        #region 无重复字符的最长子串
+        [Theory]
+        [InlineData("abcdeeg", 5)]
+        [InlineData("efwwkef", 4)]
+        [InlineData("abcdefg", 7)]
+        [InlineData("aaaaa", 1)]
+        [InlineData("", 0)]
+        [InlineData("afdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieasafdsaklfeieas"
+            , 8)]
+        public void LengthOfLongestSubstring(string s, int except)
+        {
+            _assert.AssertMethod(MethodInfo.GetCurrentMethod(), s, except);
+        }
+        #endregion
+        
     }
 }

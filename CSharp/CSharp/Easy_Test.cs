@@ -1,6 +1,7 @@
 ﻿using CSharp.Model;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using Xunit;
 using static CSharp.Easy;
@@ -10,6 +11,11 @@ namespace CSharp
     public class Easy_Test
     {
         private Easy _solution = new Easy();
+        private DynamicAssert _assert;
+        public Easy_Test()
+        {
+            _assert = new DynamicAssert(_solution);
+        }
 
         #region 构建通用测试用例
         [Theory]
@@ -139,12 +145,14 @@ namespace CSharp
         [InlineData(499990, 41538)]
         [InlineData(100000000, 5761455)]
         //[InlineData(1000000000, 50847534)] //18sec
-        public void CountPrimes(int n, int except)
+        public void CountPrimesAdvance(int n, int except)
+        //public void CountPrimes(int n, int except)
         {
+            _assert.AssertMethod(MethodInfo.GetCurrentMethod(), n, except);
             //2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37
             //var result = _solution.CountPrimes(n); 
-            var result = _solution.CountPrimesAdvance(n);
-            Assert.Equal(except, result);
+            //var result = _solution.CountPrimesAdvance(n);
+            //Assert.Equal(except, result);
         }
         #endregion
 
@@ -415,78 +423,100 @@ namespace CSharp
                 Assert.Equal(testData.except, result);
             }
         }
-    }
 
-    public class HashPathSumTestData
-    {
-        public static IEnumerable<HashPathSumTestData> GetTestData()
+        public class HashPathSumTestData
         {
-            ///                   5
-            ///                  / \
-            ///                 4   8
-            ///                /   / \
-            ///               11  13  4
-            ///              /  \      \
-            ///             7    2      1
-            yield return new HashPathSumTestData()
+            public static IEnumerable<HashPathSumTestData> GetTestData()
             {
-                root = TreeNode.GetTreeNode(new int?[] { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, null, null, 1 }),
-                sum = 22,
-                except = true,
-            };
+                ///                   5
+                ///                  / \
+                ///                 4   8
+                ///                /   / \
+                ///               11  13  4
+                ///              /  \      \
+                ///             7    2      1
+                yield return new HashPathSumTestData()
+                {
+                    root = TreeNode.GetTreeNode(new int?[] { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, null, null, 1 }),
+                    sum = 22,
+                    except = true,
+                };
 
-            ///                    7
-            ///                  /   \
-            ///                 3     4
-            ///                / \   / \  
-            ///               2   1 -4  7
-            yield return new HashPathSumTestData()
-            {
-                root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
-                sum = 12,
-                except = true,
-            };
-            yield return new HashPathSumTestData()
-            {
-                root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
-                sum = 10,
-                except = false,
-            };
-            yield return new HashPathSumTestData()
-            {
-                root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
-                sum = 7,
-                except = true,
-            };
+                ///                    7
+                ///                  /   \
+                ///                 3     4
+                ///                / \   / \  
+                ///               2   1 -4  7
+                yield return new HashPathSumTestData()
+                {
+                    root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
+                    sum = 12,
+                    except = true,
+                };
+                yield return new HashPathSumTestData()
+                {
+                    root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
+                    sum = 10,
+                    except = false,
+                };
+                yield return new HashPathSumTestData()
+                {
+                    root = TreeNode.GetTreeNode(new int?[] { 7, 3, 4, 2, 1, -4, 7 }),
+                    sum = 7,
+                    except = true,
+                };
 
-            yield return new HashPathSumTestData()
-            {
-                //只包含根节点的不算。
-                root = TreeNode.GetTreeNode(new int?[] { 1, 2 }),
-                sum = 1,
-                except = false,
-            };
-            yield return new HashPathSumTestData()
-            {
-                //只包含根节点的不算。
-                root = TreeNode.GetTreeNode(new int?[] { 1, null, 2 }),
-                sum = 1,
-                except = false,
-            };
-            yield return new HashPathSumTestData()
-            {
-                //只包含根节点的不算。
-                root = TreeNode.GetTreeNode(new int?[] { 1, 2, null, 3, null, 4, null, 5 }),
-                sum = 6,
-                except = false,
-            };
+                yield return new HashPathSumTestData()
+                {
+                    //只包含根节点的不算。
+                    root = TreeNode.GetTreeNode(new int?[] { 1, 2 }),
+                    sum = 1,
+                    except = false,
+                };
+                yield return new HashPathSumTestData()
+                {
+                    //只包含根节点的不算。
+                    root = TreeNode.GetTreeNode(new int?[] { 1, null, 2 }),
+                    sum = 1,
+                    except = false,
+                };
+                yield return new HashPathSumTestData()
+                {
+                    //只包含根节点的不算。
+                    root = TreeNode.GetTreeNode(new int?[] { 1, 2, null, 3, null, 4, null, 5 }),
+                    sum = 6,
+                    except = false,
+                };
+            }
+
+            public TreeNode root;
+            public int sum;
+            public bool except;
         }
-
-        public TreeNode root;
-        public int sum;
-        public bool except;
-    }
-    #endregion
+        #endregion
 
         #endregion
+
+        #region x的平方根
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(1, 1)]
+        [InlineData(2, 1)]
+        [InlineData(3, 1)]
+        [InlineData(4, 2)]
+        [InlineData(5, 2)]
+        [InlineData(9, 3)]
+        [InlineData(10, 3)]
+        [InlineData(100, 10)]
+        [InlineData(101, 10)]
+        [InlineData(120, 10)]
+        [InlineData(121, 11)]
+        [InlineData(2147395600, 46340)]
+        public void MySqrt(int x, int except)
+        {
+            var result = _solution.MySqrt(x);
+            Assert.Equal(except, result);
+        }
+        #endregion
+    }
 }

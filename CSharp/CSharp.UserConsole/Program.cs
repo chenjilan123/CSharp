@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace CSharp.UserConsole
@@ -8,6 +9,11 @@ namespace CSharp.UserConsole
         static void Main(string[] args)
         {
             //Console.WriteLine(-2 % 3);
+
+            IList<int> lst = new int[] { 1 };
+            lst.Add(5);
+            Console.WriteLine(lst.Count);
+            return;
 
             // null == null => True
             int? v = null;
