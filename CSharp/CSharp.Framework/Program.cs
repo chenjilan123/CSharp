@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,34 +17,44 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            GetUtcTime();
-            return;
-
-            var ts = DateTime.Now - new DateTime(2019, 5, 30, 16, 0, 0);
-            //var s = string.Format(@"{0:h\小\时m\分s\秒}", DateTime.Now);
-
-            //.NET 3.5不支持该格式化
-            var s = string.Format(@"{0:h\小\时m\分s\秒}", ts);
-            //var s = string.Format(@"{0}小时{1}分{2}秒", ts.Hours.ToString(), ts.Minutes.ToString(), ts.Seconds.ToString());
-            Console.WriteLine(s);
-            return;
-            //var hs = new Hashtable();
-            //hs.Add("fff", 1);
-            //hs.Add("hafg", 1);
-            ////hs.Add("hafg", 1);
-            ////hs.Add("fff", 1);
-            //foreach (var item in hs.Keys)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            Transfer();
+            DynamicExtension();
         }
+
+        #region DynamicExtension
+        static void DynamicExtension()
+        {
+            var cur = MethodInfo.GetCurrentMethod();
+            Console.WriteLine(cur.Name);
+
+            var methods = typeof(Program).GetMethods(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            //var methods = typeof(Program).GetMethods();
+            foreach (var method in methods)
+            {
+                Console.WriteLine($"Method name:{method.Name.PadRight(20, ' ')}\t\tIsStatic:{method.IsStatic}\t\tIsPrivate:{method.IsPrivate}\t\tIsPublic:{method.IsPublic}");
+            }
+        }
+        #endregion
+
         #region 编码测试
         static void EncodeTest()
         {
             var bytes = BinaryHelper.GetGBKBytes("MARK_STATUS:=0X00;EVENT_TYPE:=0X02;ALARM_GRADE:=0X02;AHEAD_SPEED:=0X00;AHEAD_DISTANCE:=0X00;DIVERGE_TYPE:=0X01;ROAD_SIGN_TYPE:=0X00;ROAD_SIGN_DATA:=0X00;SPEED:=0X47;ALTITUDE:=98;LONGITUDE:=113989118;LATITUDE:=37997353;VEHICLE_STATUS:=1025;ALARM_ID:=0X303039313432341906091605220005000A995D");
             Console.WriteLine(bytes.Length);
+        }
+        #endregion
+
+        #region HashtableOrder
+        static void HashtableOrder()
+        {
+            var hs = new Hashtable();
+            hs.Add("fff", 1);
+            hs.Add("hafg", 1);
+            //hs.Add("hafg", 1);
+            //hs.Add("fff", 1);
+            foreach (var item in hs.Keys)
+            {
+                Console.WriteLine(item);
+            }
         }
         #endregion
 
@@ -55,6 +66,19 @@ namespace CSharp.Framework
             Console.WriteLine(i.ToString("X2"));
             Console.WriteLine(i.ToString("X3"));
             Console.WriteLine(i.ToString("X4"));
+        }
+        #endregion
+
+        #region TimeSpanFormat
+        static void TimeSpanFormat()
+        {
+            var ts = DateTime.Now - new DateTime(2019, 5, 30, 16, 0, 0);
+            //var s = string.Format(@"{0:h\小\时m\分s\秒}", DateTime.Now);
+
+            //.NET 3.5不支持该格式化
+            var s = string.Format(@"{0:h\小\时m\分s\秒}", ts);
+            //var s = string.Format(@"{0}小时{1}分{2}秒", ts.Hours.ToString(), ts.Minutes.ToString(), ts.Seconds.ToString());
+            Console.WriteLine(s);
         }
         #endregion
 
@@ -196,10 +220,10 @@ namespace CSharp.Framework
             //    , "357592895@qq.com", "h");
 
             //发送附件
-            const string sAttachPath = @"TopTimeServerTPM_导出报表文件.rar";
-            const string _40M = @"40M.rar";
-            const string _90M = @"90M.exe";
-            const string sAp = @"报警明细_日报_2019-05-21_636941020856560817.xlsx";
+            //const string sAttachPath = @"TopTimeServerTPM_导出报表文件.rar";
+            //const string _40M = @"40M.rar";
+            //const string _90M = @"90M.exe";
+            //const string sAp = @"报警明细_日报_2019-05-21_636941020856560817.xlsx";
             new EmailHelper().SendEmail(Guid.NewGuid().ToString(), "第三方监控平台"
                 , "您好，这里是第三方监控平台，相关数据汇总详见附件，请及时查收处理。"
                 , ""
