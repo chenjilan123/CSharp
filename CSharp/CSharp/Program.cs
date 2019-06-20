@@ -19,7 +19,7 @@ namespace CSharp
         {
             try
             {
-                BuildXmlData();
+
             }
             catch (Exception ex)
             {
@@ -27,6 +27,37 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region LogicOr
+        static void LogicOr()
+        {
+            var u = 0x2000;
+            u |= 0x8000;
+            Console.WriteLine(u.ToString("X"));
+        }
+        #endregion
+
+        #region SplitAndParse
+        static void SplitAndParse()
+        {
+            var trimChars = new char[] { '0', 'x', 'X' };
+            var i = int.Parse("0x0EF1".TrimStart(trimChars), System.Globalization.NumberStyles.HexNumber);
+            Console.WriteLine(i);
+            return;
+
+            var sFilterAlarm = "0x0001;0x0002;0x0003";
+            var filterAlarm =
+                sFilterAlarm
+                .Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))
+                .ToList();
+
+            foreach (var alarm in filterAlarm)
+            {
+                Console.WriteLine(alarm);
+            }
+        }
+        #endregion
 
         #region BuildXmlData
         static void BuildXmlData()
