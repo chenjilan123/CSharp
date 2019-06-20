@@ -66,12 +66,8 @@ namespace CSharp.Framework.Email
                 myMail.From = new MailAddress(emailFrom, emailFromName, enc);
                 for (int i = 0; i < mailList.Length; i++)
                 {
-                    //mad = new MailAddress(mailList[i], mailNameList[i], enc);
-                    //if (!myMail.To.Contains(mad))
-                    //{
                     myMail.To.Add(new MailAddress(mailList[i], mailNameList[i], enc));
                     Logger.TimerLog.Info(string.Format("第{0}个 收件人：{1}，收件人名：{2}", i + 1, mailList[i],mailNameList[i]));
-                    //}
                 }
                 for (int i = 0; i < mailAttachList.Length; i++)
                 {
@@ -108,11 +104,15 @@ namespace CSharp.Framework.Email
                 smtpServer.Host = emailSever;
                 smtpServer.Port = 587; //25, 587, 465
 
-                //加这段之前用公司邮箱发送报错：根据验证过程，远程证书无效
-                //加上后解决问题
-//                ServicePointManager.ServerCertificateValidationCallback =
-//delegate (Object obj, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors) { return true; };
+            //加这段之前用公司邮箱发送报错：根据验证过程，远程证书无效s
+            //加上后解决问题
+            //                ServicePointManager.ServerCertificateValidationCallback =
+            //delegate (Object obj, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors) { return true; };
 
+            //D:\Top7_TPM\TopTimeServerTPM_导出报表文件\企业汇总_月报_2019-05-01_2019-05-31_636949584351810231.xlsx,
+            //D:\Top7_TPM\TopTimeServerTPM_导出报表文件\接入平台汇总_月报_2019-05-01_2019-05-31_636949584847933033.xlsx,
+              //  D:\Top7_TPM\TopTimeServerTPM_导出报表文件\车辆汇总_月报_2019-05-01_2019-05-31_636949585333821513.xlsx,
+            //    D:\Top7_TPM\TopTimeServerTPM_导出报表文件\地区汇总_月报_2019-05-01_2019-05-31_636949586028538472.xlsx
                 smtpServer.Send(myMail);
 
                 Logger.TimerLog.Info(string.Format("邮件id：{0} 收件人：{1}，主题：{2}，内容：{3}, 发送成功",id, mailTo,myMail.Subject,myMail.Body));

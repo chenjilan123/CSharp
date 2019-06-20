@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 
 namespace CSharp.Framework
 {
@@ -17,7 +18,7 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            DynamicExtension();
+            Email();
         }
 
         #region DynamicExtension
@@ -224,10 +225,15 @@ namespace CSharp.Framework
             //const string _40M = @"40M.rar";
             //const string _90M = @"90M.exe";
             //const string sAp = @"报警明细_日报_2019-05-21_636941020856560817.xlsx";
-            new EmailHelper().SendEmail(Guid.NewGuid().ToString(), "第三方监控平台"
-                , "您好，这里是第三方监控平台，相关数据汇总详见附件，请及时查收处理。"
-                , ""
+
+            while (true)
+            {
+                new EmailHelper().SendEmail(Guid.NewGuid().ToString(), "第三方监控平台"
+                , "您好，第三方监控平台测试。"
+                , "报警明细_日报_2019-06-18_两客一危_636965136070493296.xlsx"
                 , "357592895@qq.com", "h");
+                Thread.Sleep(5000);
+            }
         }
         #endregion
 
