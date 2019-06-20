@@ -164,5 +164,65 @@ namespace CSharp
         }
 
         #endregion
+
+        #region 寻找两个有序数组的中位数
+        /// <summary>
+        /// 在统计中，中位数被用来：
+        ///  将一个集合划分为两个长度相等的子集，其中一个子集中的元素总是大于另一个子集中的元素。
+        /// </summary>
+        /// <param name="nums1"></param>
+        /// <param name="nums2"></param>
+        /// <returns></returns>
+        public double FindMedianSortedArrays(int[] nums1, int[] nums2)
+        {
+            if (nums1.Length > nums2.Length)
+            {
+                var temp = nums1;
+                nums1 = nums2;
+                nums2 = temp;
+            }
+            var m = nums1.Length;
+            var n = nums2.Length;
+
+            var i = 0;
+            var j = 0;
+            var min = 0;
+            var max = m;
+            while(true)
+            {
+                i = (min + max) / 2;
+                j = (m + n + 1) / 2 - i;
+                if (i > min && nums1[i - 1] > nums2[j])
+                {
+                    max = i - 1;
+                }
+                else if (i < max && nums2[j - 1] > nums1[i])
+                {
+                    min = i + 1;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            var left = 0;
+            if (i == 0) left = nums2[j - 1];
+            else if (j == 0) left = nums1[i - 1];
+            else left = Math.Max(nums1[i - 1], nums2[j - 1]);
+
+            if ((m + n) % 2 == 1)
+            {
+                return left;
+            }
+            else
+            {
+                var right = 0;
+                if (i == m) right = nums2[j];
+                else if (j == n) right = nums1[i];
+                else right = Math.Min(nums1[i], nums2[j]);
+                return ((double)(left + right)) / 2;
+            }
+        }
+        #endregion
     }
 }

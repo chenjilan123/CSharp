@@ -296,7 +296,6 @@ namespace CSharp
             return false;
         }
         #endregion
-
         //满足某种条件的数
         #region 计数质数
         /// <summary>
@@ -400,7 +399,6 @@ namespace CSharp
         }
         #endregion
         //===============
-
         #region 移除链表元素
         /// <summary>
         /// 删除链表中等于给定值 val 的所有节点。

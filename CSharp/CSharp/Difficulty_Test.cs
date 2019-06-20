@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using Xunit;
 
@@ -9,6 +10,11 @@ namespace CSharp
     {
         Difficulty _solution = new Difficulty();
 
+        private DynamicAssert _assert;
+        public Difficulty_Test()
+        {
+            _assert = new DynamicAssert(_solution);
+        }
 
         #region 天际线
         [Fact]
@@ -93,6 +99,22 @@ namespace CSharp
         {
             var result = _solution.NumDecodings(s);
             Assert.Equal(except, result);
+        }
+        #endregion
+
+        #region 寻找两个有序数组的中位数
+        [Theory]
+        [InlineData(new[] { 1, 3 }, new[] { 2, 4 }, 2.5)]
+        [InlineData(new[] { 1, 2 }, new[] { 3 }, 2.0)]
+        [InlineData(new[] { 1 }, new int[] { }, 1.0)]
+        [InlineData(new int[] { }, new [] { 5 }, 5.0)]
+        [InlineData(new int[] { }, new [] { 5, 7, 9 }, 7.0)]
+        [InlineData(new int[] { }, new [] { 5, 7, 9, 10 }, 8.0)]
+        [InlineData(new[] { 5, 7, 9 }, new int[] { }, 7.0)]
+        [InlineData(new[] { 5, 7, 9, 10 }, new int[] { }, 8.0)]
+        public void FindMedianSortedArrays(int[] nums1, int[] nums2, double except)
+        {
+            _assert.AssertMethod(MethodInfo.GetCurrentMethod(), nums1, nums2, except);
         }
         #endregion
     }

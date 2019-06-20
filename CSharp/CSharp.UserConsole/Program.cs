@@ -8,6 +8,11 @@ namespace CSharp.UserConsole
     {
         static void Main(string[] args)
         {
+            var i = 10;
+            i /= 2 + 3;
+            Console.WriteLine(i);
+            return;
+
             //Console.WriteLine(-2 % 3);
 
             IList<int> lst = new int[] { 1 };
