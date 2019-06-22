@@ -197,5 +197,126 @@ namespace CSharp
             //return ans;
         }
         #endregion
+
+        #region 最长回文子串
+        /// <summary>
+        /// 最长回文子串
+        ///     回文字符串: 正读和反读都相同的字符串
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public string LongestPalindrome(string s)
+        {
+            var cur = string.Empty;
+            for (int i = 0; i < s.Length; i++)
+            {
+                var s1 = GetPalindrome(s, i, i);
+                var s2 = GetPalindrome(s, i, i + 1);
+
+                s1 = s1.Length > s2.Length ? s1 : s2;
+                if (s1.Length > cur.Length)
+                {
+                    cur = s1;
+                }
+            }
+            return cur;
+        }
+
+        private string GetPalindrome(string s, int left, int right)
+        {
+            if (right >= s.Length) return string.Empty;
+            while (left >= 0 && right < s.Length)
+            {
+                if (s[left] != s[right])
+                {
+                    break;
+                }
+                left--;
+                right++;
+            }
+            left++;
+            right--;
+            var length = right - left + 1;
+            return s.Substring(left, length);
+        }
+        #endregion
+
+        #region Z字形变换
+        /// <summary>
+        /// 将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。
+        /// 比如输入字符串为 "LEETCODEISHIRING" 行数为 3 时，排列如下
+        /// L   C   I   R
+        /// E T O E S I I G
+        /// E   D   H   N
+        /// 
+        /// 输入: s = "LEETCODEISHIRING", numRows = 4
+        /// 输出: "LDREOEIIECIHNTSG"
+        ///     L     D     R
+        ///     E   O E   I I
+        ///     E C   I H   N
+        ///     T     S     G
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="numRows"></param>
+        /// <returns></returns>
+        public string Convert(string s, int numRows)
+        {
+            //①用矩阵表示当前形状
+            //if (numRows == 1) return s;
+            ////二维转换
+            //var numCols = (int)Math.Floor(((double)s.Length) / numRows) + 1;
+            //var matrix = new char[numRows, s.Length];
+            //var lastRow = numRows - 1;
+            //var rowIndex = 0;
+            //var colIndex = 0;
+            //var pos = true;
+            ////排列出Z型
+            //for (int i = 0; i < s.Length; i++)
+            //{
+            //    matrix[rowIndex, colIndex] = s[i];
+            //    if (rowIndex == lastRow)
+            //    {
+            //        pos = false;
+            //    }
+            //    else if (rowIndex == 0)
+            //    {
+            //        pos = true;
+            //    }
+            //    if (pos) rowIndex++;
+            //    else
+            //    {
+            //        colIndex++;
+            //        rowIndex--;
+            //    }
+            //}
+            ////组合字符串
+            //var sb = new StringBuilder(s.Length);
+            //foreach (var c in matrix) if (c != '\0') sb.Append(c);
+            //return sb.ToString();
+
+
+
+            //②用StringBuilder数组表示每一行的当前值(未体现形状)
+            if (numRows == 1) return s;
+            //二维转换
+            var matrix = new StringBuilder[numRows];
+            for (int i = 0; i < numRows; i++)
+                matrix[i] = new StringBuilder();
+            var lastRow = numRows - 1;
+            var rowIndex = 0;
+            var pos = false;
+            //排列出Z型
+            foreach (var c in s)
+            {
+                matrix[rowIndex].Append(c);
+                if (rowIndex == lastRow || rowIndex == 0) pos = !pos;
+                rowIndex += pos ? 1 : -1;
+            }
+            //组合字符串
+            var sb = new StringBuilder(s.Length);
+            foreach (var sbSub in matrix) sb.Append(sbSub);
+            return sb.ToString();
+        }
+        #endregion
     }
 }

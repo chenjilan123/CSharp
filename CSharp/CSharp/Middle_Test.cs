@@ -195,6 +195,34 @@ namespace CSharp
             _assert.AssertMethod(MethodInfo.GetCurrentMethod(), s, except);
         }
         #endregion
-        
+
+        #region 最长回文子串
+        [Theory]
+        //奇数长度
+        [InlineData("", "")]
+        [InlineData("a", "a")]
+        [InlineData("abc", "a")]
+        [InlineData("abcdede", "ded")]
+        [InlineData("abxs1sxba", "abxs1sxba")]
+        ///偶数长度
+        [InlineData("abba", "abba")]
+        [InlineData("cdabba", "abba")]
+        [InlineData("cdabbaccabb", "bbaccabb")]
+        public void LongestPalindrome(string s, string except)
+        {
+            _assert.AssertMethod(MethodInfo.GetCurrentMethod(), s, except);
+        }
+        #endregion
+
+        #region Z字形变换
+        [Theory]
+        [InlineData("LEETCODEISHIRING", 3, "LCIRETOESIIGEDHN")]
+        [InlineData("LEETCODEISHIRING", 4, "LDREOEIIECIHNTSG")]
+        [InlineData("AB", 1, "AB")]
+        public void Convert(string s, int numRows, string except)
+        {
+            _assert.AssertMethod(MethodInfo.GetCurrentMethod(), s, numRows, except);
+        }
+        #endregion
     }
 }

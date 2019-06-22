@@ -8,6 +8,11 @@ namespace CSharp.UserConsole
     {
         static void Main(string[] args)
         {
+            //char数组默认值为'\0'
+            var arr = new char[5];
+            foreach (var c in arr) Console.WriteLine(c == '\0');
+            return;
+
             var i = 10;
             i /= 2 + 3;
             Console.WriteLine(i);
