@@ -8,6 +8,9 @@ namespace CSharp.UserConsole
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(long.MaxValue);
+            return;
+
             //char数组默认值为'\0'
             var arr = new char[5];
             foreach (var c in arr) Console.WriteLine(c == '\0');
