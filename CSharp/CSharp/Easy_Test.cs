@@ -518,5 +518,28 @@ namespace CSharp
             Assert.Equal(except, result);
         }
         #endregion
+
+        #region 回文数
+        [Theory]
+        [InlineData(1, true)]
+        [InlineData(-1, false)]
+        [InlineData(2, true)]
+        [InlineData(0, true)]
+        [InlineData(13, false)]
+        [InlineData(11, true)]
+        [InlineData(121, true)]
+        [InlineData(12121, true)]
+        [InlineData(12521, true)]
+        [InlineData(-12521, false)]
+        [InlineData(147959741, true)]
+        [InlineData(-147959741, false)]
+        [InlineData(147959743, false)]
+        [InlineData(74321, false)]
+        [InlineData(-74321, false)]
+        public void IsPalindrome(int x, bool except)
+        {
+            _assert.AssertMethod(MethodInfo.GetCurrentMethod(), x, except);
+        }
+        #endregion
     }
 }

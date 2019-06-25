@@ -228,6 +228,7 @@ namespace CSharp
         #region 字符串转换整数 (atoi)
         [Theory]
         [InlineData("", 0)]
+        [InlineData(null, 0)]
         [InlineData("sdad", 0)]
         [InlineData("42", 42)]
         [InlineData("-42", -42)]
@@ -236,6 +237,7 @@ namespace CSharp
         [InlineData("-1000000000000000", int.MinValue)]
         [InlineData("-10000000000000000000", int.MinValue)]
         [InlineData("-000000000000000000044444444", -44444444)]
+        [InlineData("+000000000000000000044444444", 44444444)]
         [InlineData("100000000000000", int.MaxValue)]
         public void MyAtoi(string str, int except)
         {

@@ -667,5 +667,30 @@ namespace CSharp
             return (int)(i - 2);
         }
         #endregion
+
+        #region 回文数
+        public bool IsPalindrome(int x)
+        {
+            //①一行实现
+            //return x.ToString() == new string(x.ToString().Reverse().ToArray());
+
+            //②
+            //var s = x.ToString();
+            //for (int i = 0; i < s.Length / 2; i++)
+            //    if (s[i] != s[s.Length - 1 - i ]) return false;
+            //return true;
+
+            //3不使用字符串
+            if (x < 0) return false;
+            var y = 0;
+            var temp = x;
+            while(x > 0)
+            {
+                y = y * 10 + x % 10;
+                x /= 10;
+            }
+            return temp == y;
+        }
+        #endregion
     }
 }

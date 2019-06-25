@@ -8,6 +8,9 @@ namespace CSharp.UserConsole
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(-125 % 10);
+            return;
+
             Console.WriteLine(long.MaxValue);
             return;
 

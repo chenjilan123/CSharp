@@ -334,23 +334,31 @@ namespace CSharp
         /// <returns></returns>
         public int MyAtoi(string str)
         {
+            //耗时较多
             if (string.IsNullOrEmpty(str)) return 0;
-            var sb = new StringBuilder();
-            foreach (var c in str)
-            {
-                if (sb.Length == 0 && (Char.IsWhiteSpace(c) || c == '0')) continue;
-                if (sb.Length == 0 && c == '-')
-                {
-                    sb.Append(c);
-                    continue;
-                }
-                if (!(c >= '0' && c <= '9') || sb.Length > 11) break;
-                if (!char.IsWhiteSpace(c)) sb.Append(c);
-            }
-            long.TryParse(sb.ToString(), out var l);
-            if (l > int.MaxValue) l = int.MaxValue;
-            else if (l < int.MinValue) l = int.MinValue;
-            return (int)l;
+            var match = System.Text.RegularExpressions.Regex.Match(str, @"^\s*(?<Sig>[\+-]?)0*(?<Num>\d+)"); //0个或多个空格起始, 接+或-号, 再接数字
+            if (!match.Success) return 0;
+            var num = match.Groups["Sig"].Value + match.Groups["Num"].Value;
+            if (int.TryParse(num, out var result)) return result;
+            return num.IndexOf('-') == 0 ? int.MinValue : int.MaxValue;
+
+            //if (string.IsNullOrEmpty(str)) return 0;
+            //var sb = new StringBuilder();
+            //foreach (var c in str)
+            //{
+            //    if (sb.Length == 0 && (Char.IsWhiteSpace(c) || c == '0')) continue;
+            //    if (sb.Length == 0 && c == '-')
+            //    {
+            //        sb.Append(c);
+            //        continue;
+            //    }
+            //    if (!(c >= '0' && c <= '9') || sb.Length > 11) break;
+            //    if (!char.IsWhiteSpace(c)) sb.Append(c);
+            //}
+            //long.TryParse(sb.ToString(), out var l);
+            //if (l > int.MaxValue) l = int.MaxValue;
+            //else if (l < int.MinValue) l = int.MinValue;
+            //return (int)l;
         }
         #endregion
     }
