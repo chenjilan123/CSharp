@@ -4,6 +4,7 @@ using CSharp.Helper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -18,8 +19,98 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            Email();
+            BCD_String();
         }
+
+        #region LambdaParse
+        static void LambdaParse()
+        {
+            Action<string> action = s => s += "1";
+            Func<string, string> func = s => s += "1";
+            //Action
+            LambdaParse(action);
+            //Func
+            LambdaParse(func);
+            //Func => Func > Action
+            LambdaParse(s => s += "1");
+        }
+
+        static void LambdaParse(Action<string> action)
+        {
+
+        }
+        static void LambdaParse(Func<string, string> func)
+        {
+
+        }
+        #endregion
+
+        #region BCD_String
+        static void BCD_String()
+        {
+            var t = new DateTime(1990, 2, 1, 10, 20, 30);
+            var bcd = StringToBCD(t.ToString("yyMMddHHmmss"));
+            foreach (var b in bcd)
+            {
+                Console.Write(b.ToString("X2"));
+            }
+            Console.WriteLine();
+        }
+        static DateTime BCDToDateTime(byte[] bytes, int startIndex, int length, string format)
+        {
+            DateTime dateTime;
+            try
+            {
+                //string sDateTime = "";
+                string sDateTime = BinaryHelper.BCDToString(bytes, startIndex, length);
+                bool bResult = DateTime.TryParseExact(sDateTime, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime);
+                if (!bResult)
+                    dateTime = DateTime.Now;
+            }
+            catch
+            {
+                dateTime = DateTime.Now;
+            }
+            return dateTime;
+        }
+        static byte[] StringToBCD(string value)
+        {
+            int iLength = value.Length / 2;
+            byte[] ret = new byte[iLength];
+            for (int i = 0; i < iLength; i++)
+                ret[i] = Convert.ToByte(value.Substring(i * 2, 2), 16);
+            return ret;
+
+        }
+        #endregion
+
+        #region DicAdd
+        static void DicAdd()
+        {
+            var dic = new Dictionary<string, int>();
+            dic.Add("h", 1);
+            dic["h"]++;
+            dic["h"]++;
+            dic["h"]++;
+            Console.WriteLine(dic["h"]);
+        }
+        #endregion
+
+        #region Overflow
+        static void Overflow()
+        {
+            int i = -24575;
+            short s = (short)i;
+            Console.WriteLine(s.ToString("x"));
+            Console.WriteLine(s);
+
+            short h = -24575;//(short)0xFFFFA001;
+            //short j = (short)0xa001; //直接报错
+            short j = (short)i; //溢出(j的值为0xFFFFA001溢出了，short也是按int方式显示的。)
+            Console.WriteLine(h.ToString("x"));
+            Console.WriteLine(j.ToString("x"));
+        }
+        #endregion
 
         #region DynamicExtension
         static void DynamicExtension()
