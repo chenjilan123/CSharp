@@ -103,7 +103,7 @@ namespace CSharp
 
         public string LongestCommonPrefixAdvance(string[] strs)
         {
-            //TODO: 优化
+            //优化
             //参考: https://leetcode-cn.com/problems/longest-common-prefix/comments/3427
             //1、纵向扫描：从下标0开始，判断每一个字符串的下标0，判断是否全部相同。直到遇到不全部相同的下标。时间性能为O(n*m)。
             //2、横向扫描：前两个字符串找公共子串，将其结果和第三个字符串找公共子串……直到最后一个串。时间性能为O(n * m)。

@@ -7,7 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp", "CSharp\CSharp.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp.UserConsole", "CSharp.UserConsole\CSharp.UserConsole.csproj", "{0F08F5E6-8A1A-4D26-A8FA-A42CF9F52535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Algorithm", "CSharp.Algorithm\CSharp.Algorithm.csproj", "{3EC0EDEE-199F-4BAB-B829-D4C3D1D47655}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp.Algorithm", "CSharp.Algorithm\CSharp.Algorithm.csproj", "{3EC0EDEE-199F-4BAB-B829-D4C3D1D47655}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{9F0976BD-F0D4-48E9-8310-DD6C716C7EB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{84274F43-3FD1-485D-B87C-C17B095FB8E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Performance", "Performance", "{E2635F27-8F83-4467-BC17-99E6AB7F63FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Performance", "CSharp.Performance\CSharp.Performance.csproj", "{0F8A74B7-8B15-467D-8D80-6306736FBB9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +35,19 @@ Global
 		{3EC0EDEE-199F-4BAB-B829-D4C3D1D47655}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC0EDEE-199F-4BAB-B829-D4C3D1D47655}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC0EDEE-199F-4BAB-B829-D4C3D1D47655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F8A74B7-8B15-467D-8D80-6306736FBB9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8A74B7-8B15-467D-8D80-6306736FBB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8A74B7-8B15-467D-8D80-6306736FBB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8A74B7-8B15-467D-8D80-6306736FBB9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F663D877-08B1-48CD-83F8-129EF09D1787} = {9F0976BD-F0D4-48E9-8310-DD6C716C7EB3}
+		{0F08F5E6-8A1A-4D26-A8FA-A42CF9F52535} = {84274F43-3FD1-485D-B87C-C17B095FB8E1}
+		{3EC0EDEE-199F-4BAB-B829-D4C3D1D47655} = {9F0976BD-F0D4-48E9-8310-DD6C716C7EB3}
+		{0F8A74B7-8B15-467D-8D80-6306736FBB9F} = {E2635F27-8F83-4467-BC17-99E6AB7F63FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D36FC663-C262-4B12-98FC-156D39EA83D3}
