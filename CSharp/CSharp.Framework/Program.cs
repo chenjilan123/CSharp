@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -21,8 +22,42 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            GetFiles();
+            StructSize();
         }
+
+        #region StructSize
+        static void StructSize()
+        {
+            var @struct = new Struct001();
+            Console.WriteLine(Marshal.SizeOf(@struct));
+            //Console.WriteLine(Marshal.SizeOf(typeof(Struct001)));
+            //Console.WriteLine(Marshal.SizeOf<Struct001>());
+            //Console.WriteLine(Marshal.SizeOf<Struct001>(@struct));
+            //Console.WriteLine(Marshal.SizeOf<bool>());
+            //Console.WriteLine(Marshal.SizeOf<byte>());
+            ////Console.WriteLine(Marshal.SizeOf<DateTime>());
+            //Console.WriteLine(Marshal.SizeOf<int>());
+            //Console.WriteLine(Marshal.SizeOf<uint>());
+            //Console.WriteLine(Marshal.SizeOf<long>());
+            //Console.WriteLine(Marshal.SizeOf<ulong>());
+            //Console.WriteLine(Marshal.SizeOf<float>());
+            //Console.WriteLine(Marshal.SizeOf<double>());
+            //Console.WriteLine(Marshal.SizeOf<decimal>());
+        }
+
+        //private class Struct001
+        private struct Struct001
+        {
+            //public int Value1; //4
+            //public int Value2; //4
+            //public long Value3; //8
+            //public float Value4; //4-8
+            //public float Value5; //4-8
+            //public float Value6; //4-8
+            //public float Value7; //4-8
+            //public decimal Value8; //16
+        }
+        #endregion
 
         #region GetFiles
         static void GetFiles()
