@@ -19,7 +19,7 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            BCD_String();
+            Transfer();
         }
 
         #region LambdaParse

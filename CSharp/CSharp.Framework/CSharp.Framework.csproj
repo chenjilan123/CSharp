@@ -49,6 +49,7 @@
     <Compile Include="Email\EmailHelper.cs" />
     <Compile Include="Email\Logger.cs" />
     <Compile Include="Email\TimerLog.cs" />
+    <Compile Include="Face\FaceMatch.cs" />
     <Compile Include="Helper\BinaryHelper.cs" />
     <Compile Include="Helper\SecurityHelper.cs" />
     <Compile Include="Helper\SerializeHelper.cs" />
