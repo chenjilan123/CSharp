@@ -5,11 +5,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace CSharp.Framework
 {
@@ -19,8 +21,42 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            Transfer();
+            GetFiles();
         }
+
+        #region GetFiles
+        static void GetFiles()
+        {
+            var search = "CSharp*";
+            var path = Path.Combine(Application.StartupPath, search);
+            var curDir = new DirectoryInfo(Application.StartupPath);
+            Console.WriteLine($"Current Directory: {curDir.FullName}");
+            var files = curDir.GetFiles(search, SearchOption.TopDirectoryOnly);
+            foreach (var file in files)
+            {
+                Console.WriteLine($"    Matched Files: {file}");
+            }
+
+        }
+        #endregion
+
+        #region TryParseFailureValue
+        static void TryParseFailureValue()
+        {
+            var i = 10;
+            int.TryParse("0x1", NumberStyles.HexNumber, null, out i);
+            int.TryParse("0x1", out i);
+            Console.WriteLine(i);
+
+            var t = DateTime.Now;
+            DateTime.TryParse("xx", out t); //UTC零点
+            Console.WriteLine($"Time: {t.ToLocalTime()}, Kind: {t.Kind}"); //UTC标识
+            Console.WriteLine($"Time: {t}, Kind: {t.Kind}"); 
+            Console.WriteLine($"Time: {DateTime.Now.ToLocalTime()}, Kind: {DateTime.Now.Kind}"); 
+            Console.WriteLine($"Time: {DateTime.Now}, Kind: {DateTime.Now.Kind}"); 
+
+        }
+        #endregion
 
         #region LambdaParse
         static void LambdaParse()
@@ -266,8 +302,8 @@ namespace CSharp.Framework
         }
         #endregion
 
-        #region Path
-        private static void Path()
+        #region PathTest
+        private static void PathTest()
         {
             System.Uri uri = new Uri(typeof(string).Assembly.CodeBase);
             string runtimePath = System.IO.Path.GetDirectoryName(uri.LocalPath);
