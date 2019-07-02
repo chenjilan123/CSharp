@@ -48,6 +48,8 @@ namespace CSharp.Framework
         //private class Struct001
         private struct Struct001
         {
+            //public IntPtr Ptr; //8
+            //public DateTime Value0; //8
             //public int Value1; //4
             //public int Value2; //4
             //public long Value3; //8
