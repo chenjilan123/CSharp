@@ -8,6 +8,10 @@ namespace CSharp.UserConsole
     {
         static void Main(string[] args)
         {
+            Console.WriteLine((char)('}' - 2));
+            Console.WriteLine('}' - 2);
+            return;
+
             Console.WriteLine(-125 % 10);
             return;
 

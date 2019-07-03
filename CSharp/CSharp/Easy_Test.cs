@@ -541,5 +541,27 @@ namespace CSharp
             _assert.AssertMethod(MethodInfo.GetCurrentMethod(), x, except);
         }
         #endregion
+
+        #region 有效的括号
+        [Theory]
+        [InlineData("", true)]
+        [InlineData("(", false)]
+        [InlineData(")", false)]
+        [InlineData("{", false)]
+        [InlineData("}", false)]
+        [InlineData("[", false)]
+        [InlineData("]", false)]
+        [InlineData("{", false)]
+        [InlineData("{}", true)]
+        [InlineData("()", true)]
+        [InlineData("[]", true)]
+        [InlineData("{[}]", false)]
+        [InlineData("([{}])", true)]
+        [InlineData("([{}]){}(())", true)]
+        public void IsValid(string s, bool except)
+        {
+            _assert.AssertMethod(MethodInfo.GetCurrentMethod(), s, except);
+        }
+        #endregion
     }
 }

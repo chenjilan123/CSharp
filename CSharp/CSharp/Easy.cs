@@ -692,5 +692,37 @@ namespace CSharp
             return temp == y;
         }
         #endregion
+
+        #region 有效的括号
+        /// <summary>
+        /// 有效的括号
+        ///     给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+        ///     有效字符串需满足：
+        ///     左括号必须用相同类型的右括号闭合。
+        ///     左括号必须以正确的顺序闭合。
+        ///     注意空字符串可被认为是有效字符串。
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public bool IsValid(string s)
+        {
+            var map = new Dictionary<char, char>()
+            {
+                { '}', '{' },
+                { ']', '[' },
+                { ')', '(' },
+            };
+            var stack = new Stack<char>();
+            foreach (var c in s)
+            {
+                if (c == '{' || c == '[' || c == '(') stack.Push(c);
+                //前者快?
+                //if (!map.ContainsKey(c)) stack.Push(c);
+                else if (stack.Count <= 0 || stack.Peek() != map[c]) return false;
+                else stack.Pop();
+            }
+            return stack.Count == 0;
+        }
+        #endregion
     }
 }
