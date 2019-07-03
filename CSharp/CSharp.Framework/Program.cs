@@ -1,4 +1,5 @@
 ﻿using CSharp.Framework.Email;
+using CSharp.Framework.Face;
 using CSharp.Framework.Transfer;
 using CSharp.Helper;
 using System;
@@ -22,8 +23,12 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            StructSize();
+            ArcFace();
         }
+
+        #region ArcFace
+        static void ArcFace() => new ArcFaceTest().Run();
+        #endregion
 
         #region StructSize
         static void StructSize()

@@ -18,14 +18,13 @@ namespace CSharp
         {
             try
             {
-
+                ParseTime();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
-
         #region Helper
         private class Helper
         {
@@ -395,6 +394,12 @@ namespace CSharp
         /// </summary>
         private static void ParseTime()
         {
+            var t1 = new DateTime(1970, 1, 1).AddSeconds(1562112000);
+            var t2 = new DateTime(1970, 1, 1).AddSeconds(1593734400);
+            Console.WriteLine(t1);
+            Console.WriteLine(t2);
+            return;
+
             string msg;
             msg = !DateTime.TryParse("16:00:00", out var tTest) ? "Parse failure" : tTest.ToODBC();
             Console.WriteLine($"TimeOfDay: {tTest.TimeOfDay.ToString()}");

@@ -34,9 +34,28 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -49,7 +68,21 @@
     <Compile Include="Email\EmailHelper.cs" />
     <Compile Include="Email\Logger.cs" />
     <Compile Include="Email\TimerLog.cs" />
-    <Compile Include="Face\FaceMatch.cs" />
+    <Compile Include="Face\ArcFaceTest.cs" />
+    <Compile Include="Face\IArcFace.cs" />
+    <Compile Include="Face\V2_2\ASF_API.cs" />
+    <Compile Include="Face\V2_2\Constant\ASF_ApiKey.cs" />
+    <Compile Include="Face\V2_2\Constant\ASF_DetectMode.cs" />
+    <Compile Include="Face\V2_2\Constant\ASF_ImagePixelFormat.cs" />
+    <Compile Include="Face\V2_2\Constant\ASF_Operation.cs" />
+    <Compile Include="Face\V2_2\Constant\ASF_OrientPriority.cs" />
+    <Compile Include="Face\V2_2\Data\ASF_ActiveFileInfo.cs" />
+    <Compile Include="Face\V2_2\Data\ASF_MultiFaceInfo.cs" />
+    <Compile Include="Face\V2_2\Data\ImageInfo.cs" />
+    <Compile Include="Face\V2_2\Data\MRECT.cs" />
+    <Compile Include="Face\V2_2\Error\ASF_ErrorCode.cs" />
+    <Compile Include="Face\V2_2\ImageUtil.cs" />
+    <Compile Include="Face\V2_2\MemoryUtil.cs" />
     <Compile Include="Helper\BinaryHelper.cs" />
     <Compile Include="Helper\SecurityHelper.cs" />
     <Compile Include="Helper\SerializeHelper.cs" />
@@ -69,8 +102,113 @@
     <Compile Include="公务车数据转发\JsonModel\GDOCVehicleResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\inc\amcomdef.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\inc\ammem.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\inc\arcsoft_fsdk_face_detection.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\inc\asvloffscreen.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\inc\merror.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\lib\libarcsoft_fsdk_face_detection.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\releasenotes.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\samplecode\samplecode.cpp" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\inc\amcomdef.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\inc\ammem.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\inc\arcsoft_fsdk_face_recognition.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\inc\asvloffscreen.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\inc\merror.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\lib\libarcsoft_fsdk_face_recognition.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\releasenotes.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\samplecode\samplecode.cpp" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\inc\amcomdef.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\inc\arcsoft_face_sdk.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\inc\asvloffscreen.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\inc\merror.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\lib\X64\libarcsoft_face.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\lib\X64\libarcsoft_face_engine.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\releasenotes.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\samplecode\samplecode.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\inc\amcomdef.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\inc\arcsoft_face_sdk.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\inc\asvloffscreen.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\inc\merror.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\lib\X64\libarcsoft_face.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\lib\X64\libarcsoft_face_engine.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\releasenotes.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\samplecode\samplecode.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\inc\amcomdef.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\inc\arcsoft_face_sdk.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\inc\asvloffscreen.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\inc\merror.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\lib\X64\libarcsoft_face.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\lib\X64\libarcsoft_face_engine.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\releasenotes.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\samplecode\samplecode.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\inc\amcomdef.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\inc\arcsoft_face_sdk.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\inc\asvloffscreen.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\inc\merror.h" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\lib\Win32\libarcsoft_face.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\lib\Win32\libarcsoft_face_engine.dll" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\releasenotes.txt" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\samplecode\samplecode.cpp" />
+    <Content Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\samplecode\samplecode.txt" />
+    <Content Include="Face\Image\cr7_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Face\Image\cr7_2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Face\Image\cr7_3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Face\Image\HG_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Face\Image\m10_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Face\Image\m10_2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Face\Image\m10_3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Face\Image\RM_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Face\V2_0\libarcsoft_face.dll" />
+    <Content Include="Face\V2_0\libarcsoft_face_engine.dll" />
+    <Content Include="Face\V2_2\Lib\amcomdef.h" />
+    <Content Include="Face\V2_2\Lib\arcsoft_face_sdk.h" />
+    <Content Include="Face\V2_2\Lib\asvloffscreen.h" />
+    <Content Include="Face\V2_2\Lib\merror.h" />
+    <Content Include="Face\V2_2\Lib\releasenotes.txt" />
+    <Content Include="Face\V2_2\Lib\samplecode.cpp" />
+    <Content Include="Face\V2_2\Lib\x64\libarcsoft_face.dll" />
+    <Content Include="Face\V2_2\Lib\x64\libarcsoft_face_engine.dll" />
+    <Content Include="Face\V2_2\Lib\x86\libarcsoft_face.dll" />
+    <Content Include="Face\V2_2\Lib\x86\libarcsoft_face_engine.dll" />
     <Content Include="公务车数据转发\Docs\公务车转发.png" />
     <Content Include="Email\account.txt" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_AGE_ESTIMATION_1.1.0.240_VS2013_WIN32_06292018.zip" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018.zip" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\doc\ARCSOFT_FACE_DETECTION_DEVELOPER%27S_GUIDE.pdf" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_DETECTION_1.1.0.240_VS2013_WIN32_06292018\lib\libarcsoft_fsdk_face_detection.lib" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018.zip" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\doc\ARCSOFT_FACE_RECOGNITION_DEVELOPER%27S_GUIDE.pdf" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_RECOGNITION_1.1.0.240_VS2013_WIN32_06292018\lib\libarcsoft_fsdk_face_recognition.lib" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_FACE_TRACKING_1.1.0.240_VS2013_WIN32_06292018.zip" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_V1.1_Medium\ARCSOFT_FSDK_GENDER_ESTIMATION_1.1.0.240_VS2013_WIN32_06292018.zip" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\doc\ARCSOFT_ARC_FACE_DEVELOPER%27S_GUIDE.pdf" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_x64_V2.0\lib\X64\libarcsoft_face_engine.lib" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\doc\ARCSOFT_ARC_FACE_DEVELOPER%27S_GUIDE.pdf" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_x64_V2.1\lib\X64\libarcsoft_face_engine.lib" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\doc\ARCSOFT_ARC_FACE_DEVELOPER%27S_GUIDE.pdf" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_x64_V2.2\lib\X64\libarcsoft_face_engine.lib" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\doc\ARCSOFT_ARC_FACE_DEVELOPER%27S_GUIDE.pdf" />
+    <None Include="AI\ArcSoft_ArcFace_Windows_x86_V2.2\lib\Win32\libarcsoft_face_engine.lib" />
+    <None Include="AI\ARCSOFT_ARC_FACE_DEVELOPER%27S_GUIDE_V2.2.pdf" />
+    <None Include="AI\ARCSOFT_FACE_DETECTION_DEVELOPER%27S_GUIDE_V1.1.pdf" />
+    <None Include="AI\ARCSOFT_FACE_RECOGNITION_DEVELOPER%27S_GUIDE_V1.1.pdf" />
     <None Include="app.config" />
     <None Include="公务车数据转发\Docs\TaxiModel.json" />
     <None Include="公务车数据转发\Docs\TaxiType.json" />
@@ -83,6 +221,7 @@
     <None Include="公务车数据转发\TaxiType.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Face\V1_1\" />
     <Folder Include="SqlTech\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
