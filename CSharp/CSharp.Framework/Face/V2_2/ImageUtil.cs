@@ -293,7 +293,7 @@ namespace CSharp.Framework.Face.V2_2
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                //Console.WriteLine(e);
             }
             return null;
         }

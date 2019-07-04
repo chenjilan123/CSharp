@@ -32,6 +32,7 @@ namespace CSharp.Framework.Face
             Console.ReadLine();
         }
 
+        #region TestSelfApi
         void TestSelfApi()
         {
             if (_faceApi.Initialize(ASF_ApiKey.AppId, ASF_ApiKey.SDKKey_V2_2_x64))
@@ -42,10 +43,42 @@ namespace CSharp.Framework.Face
             {
                 Console.WriteLine("初始化引擎失败");
             }
-            
 
+            //var featureLst = _faceApi.GetFaceFeature(GetImage());
+            //if (featureLst == null || featureLst.Count <= 0)
+            //{
+            //    Console.WriteLine("捕捉脸部特征值失败");
+            //    return;
+            //}
+            //Console.WriteLine($"捕捉脸部特征值成功, 脸数: {featureLst.Count}");
+            //foreach (var feature in featureLst)
+            //{
+            //    Console.WriteLine($"\t特征长度: {feature.Length}");
+            //}
+
+            //var person1 = cr7_1;
+            //var person2 = cr7_2;
+            //var person1 = cr7_2;
+            //var person2 = cr7_1;
+            var person1 = m10_2;
+            var person2 = m10_3;
+            //var person2 = m10_2;
+
+            var feature1 = _faceApi.GetFaceFeature(GetImage(person1))[0];
+            var feature2 = _faceApi.GetFaceFeature(GetImage(person2))[0];
+
+            if (_faceApi.Compare(feature1, feature2, 0.4F))
+            {
+                Console.WriteLine("通过");
+            }
+            else
+            {
+                Console.WriteLine("不通过");
+            }
         }
+        #endregion
 
+        #region 测试外部方法
         /// <summary>
         /// 测试外部方法
         /// </summary>
@@ -154,18 +187,24 @@ namespace CSharp.Framework.Face
             }
 
         }
+        #endregion
 
+        const string cr7_1 = "cr7_1.jpg";
+        const string cr7_2 = "cr7_2.jpg";
+        const string cr7_3 = "cr7_3.jpg";
+        const string cr7_4 = "cr7_4.jpg";
+        const string m10_1 = "m10_1.jpg";
+        const string m10_2 = "m10_2.jpg";
+        const string m10_3 = "m10_3.jpg";
+        const string RM_1 = "RM_1.jpg";
+        const string HG_1 = "HG_1.jpg";
         private Image GetImage()
         {
-            const string cr7_1 = "cr7_1.jpg";
-            const string cr7_2 = "cr7_2.jpg";
-            const string cr7_3 = "cr7_3.jpg";
-            const string m10_1 = "m10_1.jpg";
-            const string m10_2 = "m10_2.jpg";
-            const string m10_3 = "m10_3.jpg";
-            const string RM_1 = "RM_1.jpg";
-            const string HG_1 = "HG_1.jpg";
-            return Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), $@"Face\Image\{HG_1}"));
+            return Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), $@"Face\Image\{RM_1}"));
+        }
+        private Image GetImage(string fileName)
+        {
+            return Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), $@"Face\Image\{fileName}"));
         }
 
         private ImageInfo GetImageInfo(Image img)

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharp.Framework.Face
+namespace CSharp.Framework.Face.V2_2
 {
     public interface IArcFace
     {

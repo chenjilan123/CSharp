@@ -69,7 +69,7 @@
     <Compile Include="Email\Logger.cs" />
     <Compile Include="Email\TimerLog.cs" />
     <Compile Include="Face\ArcFaceTest.cs" />
-    <Compile Include="Face\IArcFace.cs" />
+    <Compile Include="Face\V2_2\IArcFace.cs" />
     <Compile Include="Face\V2_2\ASF_API.cs" />
     <Compile Include="Face\V2_2\Constant\ASF_ApiKey.cs" />
     <Compile Include="Face\V2_2\Constant\ASF_DetectMode.cs" />

@@ -14,6 +14,16 @@ namespace CSharp.Framework.Face.V2_2.Data
         public int faceNum;
         public IntPtr faceID;
 
+        public List<MRECT> GetFaceArea()
+        {
+            if (faceNum == 0) return null;
+            var lst = new List<MRECT>();
+            for (int i = 0; i < faceNum; i++)
+            {
+                lst.Add(Marshal.PtrToStructure<MRECT>(faceRect + 16 * i));
+            }
+            return lst;
+        }
         public void PrintInfo()
         {
             Console.WriteLine("脸部信息: ");
@@ -21,7 +31,9 @@ namespace CSharp.Framework.Face.V2_2.Data
             var rectSize = Marshal.SizeOf<MRECT>();
             for (int i = 0; i < faceNum; i++)
             {
-                var rect = Marshal.PtrToStructure<MRECT>(faceRect + rectSize * i);
+                var ptr = faceRect + rectSize * i;
+                Console.WriteLine(ptr.ToString());
+                var rect = Marshal.PtrToStructure<MRECT>(ptr);
                 var orient = Marshal.PtrToStructure<int>(faceOrient + 4 * i);
                 Console.WriteLine($"\t\tFace{i + 1} - Left: {rect.left}, Right: {rect.right}, Top: {rect.top}, Bottom: {rect.bottom}, Orient: {orient}");
             }
