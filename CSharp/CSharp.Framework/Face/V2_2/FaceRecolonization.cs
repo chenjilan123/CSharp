@@ -93,7 +93,7 @@ namespace CSharp.Framework.Face.V2_2
         /// <param name="img2"></param>
         /// <param name="confidenceLevel"></param>
         /// <returns></returns>
-        public bool Compare(byte[] featureData1, byte[] featureData2, float confidenceLevel)
+        public float CompareFace(byte[] featureData1, byte[] featureData2)
         {
             var feature1 = new ASF_FaceFeature();
             var feature2 = new ASF_FaceFeature();
@@ -111,10 +111,10 @@ namespace CSharp.Framework.Face.V2_2
             var result = ASF_API.Compare(_hEngine, p1, p2, ref outLevel);
             if ((int)ASF_ErrorCode.MOK != result)
             {
-                return false;
+                return 0.0F;
             }
             Console.WriteLine($"相似度: {outLevel}");
-            return outLevel >= confidenceLevel;
+            return outLevel;
         }
 
     }

@@ -29,8 +29,7 @@ namespace CSharp.Framework.Face.V2_2
         /// </summary>
         /// <param name="feature1">特征值1</param>
         /// <param name="feature2">特征值2</param>
-        /// <param name="confidenceLevel">相似度, 取值范围[0,1]</param>
-        /// <returns></returns>
-        bool Compare(byte[] feature1, byte[] feature2, float confidenceLevel);
+        /// <returns>相似度, 取值范围[0,1]</returns>
+        float CompareFace(byte[] feature1, byte[] feature2);
     }
 }

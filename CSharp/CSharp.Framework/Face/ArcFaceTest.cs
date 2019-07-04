@@ -67,7 +67,8 @@ namespace CSharp.Framework.Face
             var feature1 = _faceApi.GetFaceFeature(GetImage(person1))[0];
             var feature2 = _faceApi.GetFaceFeature(GetImage(person2))[0];
 
-            if (_faceApi.Compare(feature1, feature2, 0.4F))
+            var confidenceLevel = _faceApi.CompareFace(feature1, feature2);
+            if (0.4F <= confidenceLevel)
             {
                 Console.WriteLine("通过");
             }
