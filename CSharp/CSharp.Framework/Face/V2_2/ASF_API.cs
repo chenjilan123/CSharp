@@ -27,6 +27,11 @@ namespace CSharp.Framework.Face.V2_2
         #endregion
 
         #region 获取激活文件信息
+        /// <summary>
+        /// 获取激活文件信息
+        /// </summary>
+        /// <param name="activeFileInfo">激活文件信息</param>
+        /// <returns></returns>
         [DllImport("libarcsoft_face_engine.dll", EntryPoint = "ASFGetActiveFileInfo")]
         public static extern int GetActiveFileInfo(IntPtr activeFileInfo);
         #endregion
@@ -76,11 +81,33 @@ namespace CSharp.Framework.Face.V2_2
         #endregion
 
         #region 单人脸特征提取
+        /// <summary>
+        /// 单人脸特征提取
+        /// </summary>
+        /// <param name="hEngine">引擎句柄</param>
+        /// <param name="width">图片宽度，为 4 的倍数</param>
+        /// <param name="height">
+        /// 图片高度，YUYV/I420/NV21/NV12 格式为 2 的倍数；
+        /// BGR24/GRAY 格式无限制
+        /// </param>
+        /// <param name="format">颜色空间格式</param>
+        /// <param name="imgData">图片数据</param>
+        /// <param name="faceInfo">单张人脸信息</param>
+        /// <param name="feature">人脸特征</param>
+        /// <returns></returns>
         [DllImport("libarcsoft_face_engine.dll", EntryPoint = "ASFFaceFeatureExtract")]
         public static extern int ExtractFeature(IntPtr hEngine, int width, int height, int format, IntPtr imgData, IntPtr faceInfo, IntPtr feature);
         #endregion
 
         #region 人脸特征比对
+        /// <summary>
+        /// 人脸特征比对
+        /// </summary>
+        /// <param name="hEngine">引擎句柄</param>
+        /// <param name="feature1">人脸特征值</param>
+        /// <param name="feature2">人脸特征值</param>
+        /// <param name="confidenceLevel">比对结果，相似度</param>
+        /// <returns></returns>
         [DllImport("libarcsoft_face_engine.dll", EntryPoint = "ASFFaceFeatureCompare")]
         public static extern int Compare(IntPtr hEngine, IntPtr feature1, IntPtr feature2, ref float confidenceLevel);
         #endregion

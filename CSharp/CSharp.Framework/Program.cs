@@ -1,5 +1,6 @@
 ﻿using CSharp.Framework.Email;
 using CSharp.Framework.Face;
+using CSharp.Framework.Face.V2_2;
 using CSharp.Framework.Transfer;
 using CSharp.Helper;
 using System;
@@ -27,7 +28,7 @@ namespace CSharp.Framework
         }
 
         #region ArcFace
-        static void ArcFace() => new ArcFaceTest().Run();
+        static void ArcFace() => new ArcFaceTest(new FaceRecolonization()).Run();
         #endregion
 
         #region StructSize

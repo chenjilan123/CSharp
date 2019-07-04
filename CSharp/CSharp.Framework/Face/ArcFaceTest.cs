@@ -9,21 +9,41 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharp.Framework.Face
 {
     public class ArcFaceTest
     {
+        private IArcFace _faceApi;
+
+        public ArcFaceTest(IArcFace faceApi)
+        {
+            _faceApi = faceApi;
+        }
+
         public void Run()
         {
-            this.TestExternalMethod();
+            //this.TestExternalMethod();
+
+            this.TestSelfApi();
 
             //Console.WriteLine("按Enter键退出。");
             Console.ReadLine();
+        }
+
+        void TestSelfApi()
+        {
+            if (_faceApi.Initialize(ASF_ApiKey.AppId, ASF_ApiKey.SDKKey_V2_2_x64))
+            {
+                Console.WriteLine("初始化引擎成功");
+            }
+            else
+            {
+                Console.WriteLine("初始化引擎失败");
+            }
+            
+
         }
 
         /// <summary>
@@ -89,32 +109,53 @@ namespace CSharp.Framework.Face
             //捕捉脸部位置
             var detectedFaces = IntPtr.Zero;
             detectedFaces = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_MultiFaceInfo>());
-            var imgInfo = GetImg();
+            var img = GetImage();
+            var imgInfo = GetImageInfo(img);
 
             var detectFacesResult = ASF_API.DetectFaces(hEngine, imgInfo.width, imgInfo.height, imgInfo.format, imgInfo.imgData, detectedFaces);
-            if ((int)ASF_ErrorCode.MOK == detectFacesResult)
+            if ((int)ASF_ErrorCode.MOK != detectFacesResult)
             {
-                Console.WriteLine("捕捉脸部位置成功");
-                var faceInfo = Marshal.PtrToStructure<ASF_MultiFaceInfo>(detectedFaces);
-                //var faceInfo = (ASF_MultiFaceInfo)Marshal.PtrToStructure(detectedFaces, typeof(ASF_MultiFaceInfo));
-                faceInfo.PrintInfo();
+                Console.WriteLine($"捕捉脸部位置失败, 错误码: {detectFacesResult}");
+                return;
+            }
+            Console.WriteLine("捕捉脸部位置成功");
+            var faceInfo = Marshal.PtrToStructure<ASF_MultiFaceInfo>(detectedFaces);
+            //var faceInfo = (ASF_MultiFaceInfo)Marshal.PtrToStructure(detectedFaces, typeof(ASF_MultiFaceInfo));
+            faceInfo.PrintInfo();
+            //提取脸部信息
+            var rectSize = Marshal.SizeOf<MRECT>();
+            var imgPathLst = new List<string>();
+            for (int i = 0; i < faceInfo.faceNum; i++)
+            {
+                var rect = Marshal.PtrToStructure<MRECT>(faceInfo.faceRect + rectSize * i);
+                var faceImg = ImageUtil.CutImage(img, rect.left, rect.top, rect.right, rect.bottom);
+                var fileName = Path.Combine(Directory.GetCurrentDirectory(), $"Face\\{DateTime.Now.ToString("yyMMddHHmmss")}.jpg");
+                faceImg.Save(fileName);
+                Console.WriteLine($"保存脸部图片: {fileName}");
+                imgPathLst.Add(fileName);
+            }
+
+            ASF_SingleFaceInfo singleFaceInfo;
+            IntPtr ptrFeature = FaceUtil.ExtractFeature(hEngine, Image.FromFile(imgPathLst[0]), out singleFaceInfo);
+            var faceFeature = Marshal.PtrToStructure<ASF_FaceFeature>(ptrFeature);
+            Console.WriteLine(faceFeature.featureSize);
+
+            //比较脸部信息
+            float compareLevel = 0.0F;
+            var compareResult = ASF_API.Compare(hEngine, ptrFeature, ptrFeature, ref compareLevel);
+            if ((int)ASF_ErrorCode.MOK != compareResult)
+            {
+                Console.WriteLine("比较脸部信息失败");
+                return;
             }
             else
             {
-                Console.WriteLine($"捕捉脸部位置失败, 错误码: {detectFacesResult}");
+                Console.WriteLine($"比较脸部信息成功, 相似度: {compareLevel}");
             }
-            //提取脸部信息
-
-
-
-            //比较脸部信息
-
-
 
         }
 
-
-        private ImageInfo GetImg()
+        private Image GetImage()
         {
             const string cr7_1 = "cr7_1.jpg";
             const string cr7_2 = "cr7_2.jpg";
@@ -124,8 +165,11 @@ namespace CSharp.Framework.Face
             const string m10_3 = "m10_3.jpg";
             const string RM_1 = "RM_1.jpg";
             const string HG_1 = "HG_1.jpg";
+            return Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), $@"Face\Image\{HG_1}"));
+        }
 
-            var img = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), $@"Face\Image\{RM_1}"));
+        private ImageInfo GetImageInfo(Image img)
+        {
             ImageUtil.ScaleImage(img, img.Width, img.Height);
             var imgInfo = ImageUtil.ReadBMP(img);
             return imgInfo;

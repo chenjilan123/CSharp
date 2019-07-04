@@ -29,10 +29,12 @@ namespace CSharp.Framework.Face.V2_2.Data
             {
                 //测试溢出位
                 Console.WriteLine("\t\t溢出位置: ");
-                var i = 11;
-                var rect = Marshal.PtrToStructure<MRECT>(faceRect + rectSize * i);
-                var orient = Marshal.PtrToStructure<int>(faceOrient + 4 * i);
-                Console.WriteLine($"\t\tFace{i + 1} - Left: {rect.left}, Right: {rect.right}, Top: {rect.top}, Bottom: {rect.bottom}, Orient: {orient}");
+                for (int i = faceNum; i < faceNum + 2; i++)
+                {
+                    var rect = Marshal.PtrToStructure<MRECT>(faceRect + rectSize * i);
+                    var orient = Marshal.PtrToStructure<int>(faceOrient + 4 * i);
+                    Console.WriteLine($"\t\tFace{i + 1} - Left: {rect.left}, Right: {rect.right}, Top: {rect.top}, Bottom: {rect.bottom}, Orient: {orient}");
+                }
             }
         }
     }
