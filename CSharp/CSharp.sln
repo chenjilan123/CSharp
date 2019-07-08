@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp", "CSharp\CSharp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Netframework", "CSharp.Netframework\CSharp.Netframework.csproj", "{5AB34F2C-3705-4CAE-B1E6-DEAC3AC6FD35}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.UnityIoC", "CSharp.UnityIoC\CSharp.UnityIoC.csproj", "{34C48503-6E29-435A-8C0D-F358C252ED8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5AB34F2C-3705-4CAE-B1E6-DEAC3AC6FD35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AB34F2C-3705-4CAE-B1E6-DEAC3AC6FD35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AB34F2C-3705-4CAE-B1E6-DEAC3AC6FD35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C48503-6E29-435A-8C0D-F358C252ED8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C48503-6E29-435A-8C0D-F358C252ED8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C48503-6E29-435A-8C0D-F358C252ED8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C48503-6E29-435A-8C0D-F358C252ED8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
