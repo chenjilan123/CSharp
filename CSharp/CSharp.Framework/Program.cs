@@ -24,8 +24,29 @@ namespace CSharp.Framework
 
         static void Main(string[] args)
         {
-            ArcFace();
+            try
+            {
+                Console.WriteLine(Math.Truncate(1.001));
+                Console.WriteLine(Math.Round(5.153214, 3));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            Console.ReadLine();
         }
+
+        #region EnqueueNull
+        static void EnqueueNull()
+        {
+            var que = new Queue<MainMenu>();
+            que.Enqueue(null);
+            Console.WriteLine(que.Count);
+            var m = que.Dequeue();
+            Console.WriteLine(que.Count);
+            Console.WriteLine(m == null);
+        }
+        #endregion
 
         #region ArcFace
         static void ArcFace() => new ArcFaceTest(new FaceRecolonization()).Run();

@@ -26,6 +26,9 @@ namespace CSharp.Framework.Face
         {
             //this.TestExternalMethod();
 
+            Console.WriteLine($"Is64BitOperatingSystem: {Environment.Is64BitOperatingSystem}");
+            Console.WriteLine($"        Is64BitProcess: {Environment.Is64BitProcess}");
+
             this.TestSelfApi();
 
             //Console.WriteLine("按Enter键退出。");
@@ -127,12 +130,12 @@ namespace CSharp.Framework.Face
 
 #if !Version_2_0
             //激活文件信息
-            var ptrActiveFileInfo = Marshal.AllocHGlobal(Marshal.SizeOf<ASF_ActiveFileInfo>());
+            var ptrActiveFileInfo = Marshal.AllocHGlobal(MemoryUtil.SizeOf<ASF_ActiveFileInfo>());
             var activeFileInfoResult = ASF_API.GetActiveFileInfo(ptrActiveFileInfo);
             if ((int)ASF_ErrorCode.MOK == activeFileInfoResult)
             {
                 Console.WriteLine("获取激活文件信息成功");
-                var activeFileInfos = Marshal.PtrToStructure<ASF_ActiveFileInfo>(ptrActiveFileInfo);
+                var activeFileInfos = MemoryUtil.PtrToStructure<ASF_ActiveFileInfo>(ptrActiveFileInfo);
                 activeFileInfos.PrintInfo();
             }
             else
@@ -153,15 +156,15 @@ namespace CSharp.Framework.Face
                 return;
             }
             Console.WriteLine("捕捉脸部位置成功");
-            var faceInfo = Marshal.PtrToStructure<ASF_MultiFaceInfo>(detectedFaces);
+            var faceInfo = MemoryUtil.PtrToStructure<ASF_MultiFaceInfo>(detectedFaces);
             //var faceInfo = (ASF_MultiFaceInfo)Marshal.PtrToStructure(detectedFaces, typeof(ASF_MultiFaceInfo));
             faceInfo.PrintInfo();
             //提取脸部信息
-            var rectSize = Marshal.SizeOf<MRECT>();
+            var rectSize = MemoryUtil.SizeOf<MRECT>();
             var imgPathLst = new List<string>();
             for (int i = 0; i < faceInfo.faceNum; i++)
             {
-                var rect = Marshal.PtrToStructure<MRECT>(faceInfo.faceRect + rectSize * i);
+                var rect = MemoryUtil.PtrToStructure<MRECT>(faceInfo.faceRect + rectSize * i);
                 var faceImg = ImageUtil.CutImage(img, rect.left, rect.top, rect.right, rect.bottom);
                 var fileName = Path.Combine(Directory.GetCurrentDirectory(), $"Face\\{DateTime.Now.ToString("yyMMddHHmmss")}.jpg");
                 faceImg.Save(fileName);
@@ -171,7 +174,7 @@ namespace CSharp.Framework.Face
 
             ASF_SingleFaceInfo singleFaceInfo;
             IntPtr ptrFeature = FaceUtil.ExtractFeature(hEngine, Image.FromFile(imgPathLst[0]), out singleFaceInfo);
-            var faceFeature = Marshal.PtrToStructure<ASF_FaceFeature>(ptrFeature);
+            var faceFeature = MemoryUtil.PtrToStructure<ASF_FaceFeature>(ptrFeature);
             Console.WriteLine(faceFeature.featureSize);
 
             //比较脸部信息

@@ -20,7 +20,7 @@ namespace CSharp.Framework.Face.V2_2.Data
             var lst = new List<MRECT>();
             for (int i = 0; i < faceNum; i++)
             {
-                lst.Add(Marshal.PtrToStructure<MRECT>(faceRect + 16 * i));
+                lst.Add(MemoryUtil.PtrToStructure<MRECT>(faceRect + 16 * i));
             }
             return lst;
         }
@@ -28,13 +28,13 @@ namespace CSharp.Framework.Face.V2_2.Data
         {
             Console.WriteLine("脸部信息: ");
             Console.WriteLine($"\t个数: {faceNum}");
-            var rectSize = Marshal.SizeOf<MRECT>();
+            var rectSize = MemoryUtil.SizeOf<MRECT>();
             for (int i = 0; i < faceNum; i++)
             {
                 var ptr = faceRect + rectSize * i;
                 Console.WriteLine(ptr.ToString());
-                var rect = Marshal.PtrToStructure<MRECT>(ptr);
-                var orient = Marshal.PtrToStructure<int>(faceOrient + 4 * i);
+                var rect = MemoryUtil.PtrToStructure<MRECT>(ptr);
+                var orient = MemoryUtil.PtrToStructure<int>(faceOrient + 4 * i);
                 Console.WriteLine($"\t\tFace{i + 1} - Left: {rect.left}, Right: {rect.right}, Top: {rect.top}, Bottom: {rect.bottom}, Orient: {orient}");
             }
 
@@ -43,8 +43,8 @@ namespace CSharp.Framework.Face.V2_2.Data
                 Console.WriteLine("\t\t溢出位置: ");
                 for (int i = faceNum; i < faceNum + 2; i++)
                 {
-                    var rect = Marshal.PtrToStructure<MRECT>(faceRect + rectSize * i);
-                    var orient = Marshal.PtrToStructure<int>(faceOrient + 4 * i);
+                    var rect = MemoryUtil.PtrToStructure<MRECT>(faceRect + rectSize * i);
+                    var orient = MemoryUtil.PtrToStructure<int>(faceOrient + 4 * i);
                     Console.WriteLine($"\t\tFace{i + 1} - Left: {rect.left}, Right: {rect.right}, Top: {rect.top}, Bottom: {rect.bottom}, Orient: {orient}");
                 }
             }

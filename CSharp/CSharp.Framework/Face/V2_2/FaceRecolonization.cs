@@ -23,7 +23,8 @@ namespace CSharp.Framework.Face.V2_2
         /// <returns></returns>
         public bool Initialize(string appId, string sdkKey)
         {
-            var activeResult = ASF_API.OnlineActivation(appId, sdkKey);
+            //var activeResult = ASF_API.OnlineActivation(appId, sdkKey);
+            var activeResult = ASF_API.Activation(appId, sdkKey);
             if ((int)ASF_ErrorCode.MOK != activeResult && (int)ASF_ErrorCode.MERR_ASF_ALREADY_ACTIVATED != activeResult)
             {
                 return false;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define NET_40
+
+using System;
 using System.Runtime.InteropServices;
 
 namespace CSharp.Framework.Face.V2_2
@@ -56,7 +58,11 @@ namespace CSharp.Framework.Face.V2_2
         /// <returns>转化后的对象</returns>
         public static T PtrToStructure<T>(IntPtr ptr)
         {
+#if NET_40
+            return (T)Marshal.PtrToStructure(ptr, typeof(T));
+#else
             return Marshal.PtrToStructure<T>(ptr);
+#endif
         }
 
         /// <summary>
@@ -76,7 +82,11 @@ namespace CSharp.Framework.Face.V2_2
         /// <returns>类型的大小</returns>
         public static int SizeOf<T>()
         {
+#if NET_40
+            return Marshal.SizeOf(typeof(T));
+#else
             return Marshal.SizeOf<T>();
+#endif
         }
     }
 }
