@@ -131,8 +131,6 @@
     <Content Include="Face\Image\RM_1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Face\V2_0\libarcsoft_face.dll" />
-    <Content Include="Face\V2_0\libarcsoft_face_engine.dll" />
     <Content Include="Face\V2_2\Lib\amcomdef.h" />
     <Content Include="Face\V2_2\Lib\arcsoft_face_sdk.h" />
     <Content Include="Face\V2_2\Lib\asvloffscreen.h" />
@@ -141,8 +139,6 @@
     <Content Include="Face\V2_2\Lib\samplecode.cpp" />
     <Content Include="Face\V2_2\Lib\x64\libarcsoft_face.dll" />
     <Content Include="Face\V2_2\Lib\x64\libarcsoft_face_engine.dll" />
-    <Content Include="Face\V2_2\Lib\x86\libarcsoft_face.dll" />
-    <Content Include="Face\V2_2\Lib\x86\libarcsoft_face_engine.dll" />
     <Content Include="公务车数据转发\Docs\公务车转发.png" />
     <Content Include="Email\account.txt" />
     <None Include="AI\ARCSOFT_ARC_FACE_DEVELOPER%27S_GUIDE_V2.2.pdf" />
@@ -161,6 +157,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Face\V1_1\" />
+    <Folder Include="Face\V2_0\" />
+    <Folder Include="Face\V2_2\Lib\x86\" />
     <Folder Include="SqlTech\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
