@@ -7,11 +7,12 @@ namespace CSharp.UnityIoC
     {
         static void Main(string[] args)
         {
-            IUnityContainer register = new Unity.UnityContainer();
-            //register.RegisterType<ILogger>
-
             var container = new Unity.UnityContainer();
+            container.RegisterType<Par>();
+            //container.RegisterType<Son>();
 
+            var par = container.Resolve<Par>();
+            Console.WriteLine(par.HasSon());
         }
     }
 }
