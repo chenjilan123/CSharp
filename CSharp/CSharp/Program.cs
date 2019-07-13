@@ -19,6 +19,16 @@ namespace CSharp
             try
             {
                 PadZero();
+                decimal m
+                    = 412423.51121524M
+                    //= 43544587.15343534543512454m; // False
+                    //= 5.403231M;  //True
+                    ;
+                double d = (double)m;
+
+                Console.WriteLine(m);
+                Console.WriteLine(d);
+                Console.WriteLine(m == (decimal)d);
             }
             catch (Exception ex)
             {

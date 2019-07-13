@@ -26,8 +26,7 @@ namespace CSharp.Framework
         {
             try
             {
-                Console.WriteLine(Math.Truncate(1.001));
-                Console.WriteLine(Math.Round(5.153214, 3));
+                StructConstruct();
             }
             catch (Exception ex)
             {
@@ -35,6 +34,77 @@ namespace CSharp.Framework
             }
             Console.ReadLine();
         }
+
+        #region StructConstruct
+        static void StructConstruct()
+        {
+            Home home = new Home();
+            Console.WriteLine(home.Computer.Value);
+        }
+        private struct Home
+        {
+            public Computer Computer;
+        }
+        private struct Computer
+        {
+            public int Value => 5;
+        }
+        #endregion
+
+        #region ReverseRow
+        static void ReverseRow()
+        {
+            //while (true)
+            {
+                Console.WriteLine("请输入文件地址: ");
+                //var sPath = Console.ReadLine();
+                //var sPath = @"C:\Users\11\Desktop\机场-公园.txt";
+                var sPath = @"C:\Users\11\Desktop\绿地-公园.txt";
+                if (File.Exists(sPath))
+                {
+                    var fileInfo = new FileInfo(sPath);
+                    var lines = GetLines(fileInfo).Reverse();
+
+                    var text = lines.Aggregate<string>((s1, s2) => s1 + "\n" + s2);
+                    Console.WriteLine(text);
+                    SaveReverseLines(fileInfo, text);
+                }
+                else
+                {
+                    Console.WriteLine("文件不存在。");
+                }
+            }
+        }
+
+        private static void SaveReverseLines(FileInfo fileInfo, string sText)
+        {
+            var bytes = Encoding.ASCII.GetBytes(sText);
+            using (var sw = fileInfo.OpenWrite())
+            {
+                sw.Write(bytes, 0, bytes.Length);
+            }
+        }
+
+        static IEnumerable<string> GetLines(FileInfo fileInfo)
+        {
+            using (var sr = fileInfo.OpenText())
+            {
+                while (!sr.EndOfStream)
+                {
+                    yield return sr.ReadLine();
+                }
+                yield return sr.ReadLine();
+            }
+        }
+        #endregion
+
+        #region Round
+        static void Round()
+        {
+            Console.WriteLine(Math.Truncate(1.001));
+            Console.WriteLine(Math.Round(5.153214, 3));
+        }
+        #endregion
 
         #region EnqueueNull
         static void EnqueueNull()
@@ -115,9 +185,9 @@ namespace CSharp.Framework
             var t = DateTime.Now;
             DateTime.TryParse("xx", out t); //UTC零点
             Console.WriteLine($"Time: {t.ToLocalTime()}, Kind: {t.Kind}"); //UTC标识
-            Console.WriteLine($"Time: {t}, Kind: {t.Kind}"); 
-            Console.WriteLine($"Time: {DateTime.Now.ToLocalTime()}, Kind: {DateTime.Now.Kind}"); 
-            Console.WriteLine($"Time: {DateTime.Now}, Kind: {DateTime.Now.Kind}"); 
+            Console.WriteLine($"Time: {t}, Kind: {t.Kind}");
+            Console.WriteLine($"Time: {DateTime.Now.ToLocalTime()}, Kind: {DateTime.Now.Kind}");
+            Console.WriteLine($"Time: {DateTime.Now}, Kind: {DateTime.Now.Kind}");
 
         }
         #endregion
@@ -303,8 +373,8 @@ namespace CSharp.Framework
         #region CRC
         const string ValideteString =
             "0000005B00010501920000A98AC70100010000000000C3F6433930303531000000000000000000000000000192020000002500070607E314322805EE511000E9F3730050004000005010016713880000001F00000FFF";
-            //格式有问题                                                                                                                    0和1之间有个符号
-            //"0000005B00010501920000A98AC70100010000000000C3F6433930303531000000000000000000000000000192020000002500050607E311453006C3EF5A0‭15798FE‬0047004600002C510050228C0000000100000000";
+        //格式有问题                                                                                                                    0和1之间有个符号
+        //"0000005B00010501920000A98AC70100010000000000C3F6433930303531000000000000000000000000000192020000002500050607E311453006C3EF5A0‭15798FE‬0047004600002C510050228C0000000100000000";
 
         static void CRC()
         {

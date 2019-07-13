@@ -64,7 +64,7 @@ namespace CSharp.Framework.Face
             //var person1 = cr7_2;
             //var person2 = cr7_1;
             var person1 = m10_2;
-            var person2 = m10_3;
+            var person2 = errorImg;
             //var person2 = m10_2;
 
             var feature1 = _faceApi.GetFaceFeature(GetImage(person1))[0];
@@ -193,6 +193,7 @@ namespace CSharp.Framework.Face
         }
         #endregion
 
+        const string errorImg = "510223198207153111.jpg";
         const string cr7_1 = "cr7_1.jpg";
         const string cr7_2 = "cr7_2.jpg";
         const string cr7_3 = "cr7_3.jpg";
