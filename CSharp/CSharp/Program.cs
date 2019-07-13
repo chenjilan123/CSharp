@@ -18,13 +18,22 @@ namespace CSharp
         {
             try
             {
-                ParseTime();
+                PadZero();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region PadZero
+        private static void PadZero()
+        {
+            Console.WriteLine($"{10000:D4}");
+            Console.WriteLine($"{15:D4}");
+        }
+        #endregion
+
         #region Helper
         private class Helper
         {
