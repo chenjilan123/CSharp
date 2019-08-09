@@ -21,8 +21,57 @@ namespace CSharp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            UdpBroadcast();
+            TestWebApiService();
         }
+        #region WebApi
+        static void TestWebApiService()
+        {
+            const string url = "https://localhost:44340/api/Book";
+            var client = new WebApiService();
+            var result = client.TakeServicesMethod(url, "1", 3000);
+            if (string.IsNullOrEmpty(result))
+            {
+                Console.WriteLine("Http调用失败");
+            }
+            else
+            {
+                Console.WriteLine("Http调用成功");
+                Console.WriteLine("应答：");
+                Console.WriteLine(result);
+            }
+        }
+
+        static void WebApi()
+        {
+            const string url = "https://localhost:44340/api/Book";
+            try
+            {
+                var client = new WebApiClient(url);
+                Console.WriteLine(client.Request());
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine("WebException Happended");
+                Console.WriteLine($"Status: {ex.Status}");
+                Console.WriteLine(ex.ToString());
+
+                WebApi(url, 5000);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception Happended");
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        static void WebApi(string url, int timeOut)
+        {
+            Console.WriteLine("请求失败，重新发送请求");
+            var client = new WebApiClient(url);
+            client.TimeOut = timeOut;
+            Console.WriteLine(client.Request());
+        }
+        #endregion
 
         #region UdpBroadcast
         private static void UdpBroadcast()
