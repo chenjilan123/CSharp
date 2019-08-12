@@ -18,17 +18,7 @@ namespace CSharp
         {
             try
             {
-                PadZero();
-                decimal m
-                    = 412423.51121524M
-                    //= 43544587.15343534543512454m; // False
-                    //= 5.403231M;  //True
-                    ;
-                double d = (double)m;
-
-                Console.WriteLine(m);
-                Console.WriteLine(d);
-                Console.WriteLine(m == (decimal)d);
+                DecimalCompute();
             }
             catch (Exception ex)
             {
@@ -36,11 +26,33 @@ namespace CSharp
             }
         }
 
+        #region DecimalCompute
+        static void DecimalCompute()
+        {
+            var v1 = 298.2M;
+            var v2 = 362.3M;
+
+            var v3 = (v2 - v1) / (decimal)0.33333;
+
+            Console.WriteLine(v3);
+        }
+        #endregion
+
         #region PadZero
         private static void PadZero()
         {
             Console.WriteLine($"{10000:D4}");
             Console.WriteLine($"{15:D4}");
+
+            decimal m
+                = 412423.51121524M
+                //= 43544587.15343534543512454m; // False
+                //= 5.403231M;  //True
+                ;
+            double d = (double)m;
+            Console.WriteLine(m);
+            Console.WriteLine(d);
+            Console.WriteLine(m == (decimal)d);
         }
         #endregion
 
