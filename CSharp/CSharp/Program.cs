@@ -21,8 +21,21 @@ namespace CSharp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            TestWebApiService();
+            AliSms();
         }
+
+        #region AliSms
+        static void AliSms()
+        {
+            //Console.WriteLine("{0}-{1}--{3}", 0, 1, 2, 3);
+            //return;
+
+            //Console.WriteLine("{{ {0}  }}", 1);
+
+            //new Sms.AliSmsClient().Send();
+        }
+        #endregion
+
         #region WebApi
         static void TestWebApiService()
         {
