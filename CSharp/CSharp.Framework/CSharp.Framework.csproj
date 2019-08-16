@@ -71,6 +71,8 @@
     <Compile Include="Email\Logger.cs" />
     <Compile Include="Email\TimerLog.cs" />
     <Compile Include="Face\ArcFaceTest.cs" />
+    <Compile Include="Face\V2_2\Error\ASF_ErrorDescription.cs" />
+    <Compile Include="Face\V2_2\FaceOriented.cs" />
     <Compile Include="Face\V2_2\IArcFace.cs" />
     <Compile Include="Face\V2_2\ASF_API.cs" />
     <Compile Include="Face\V2_2\Constant\ASF_ApiKey.cs" />
@@ -145,9 +147,9 @@
     <Content Include="Face\V2_2\Lib\x64\libarcsoft_face_engine.dll" />
     <Content Include="公务车数据转发\Docs\公务车转发.png" />
     <Content Include="Email\account.txt" />
-    <None Include="AI\ARCSOFT_ARC_FACE_DEVELOPER%27S_GUIDE_V2.2.pdf" />
-    <None Include="AI\ARCSOFT_FACE_DETECTION_DEVELOPER%27S_GUIDE_V1.1.pdf" />
-    <None Include="AI\ARCSOFT_FACE_RECOGNITION_DEVELOPER%27S_GUIDE_V1.1.pdf" />
+    <None Include="AIDocs\ARCSOFT_ARC_FACE_DEVELOPER%27S_GUIDE_V2.2.pdf" />
+    <None Include="AIDocs\ARCSOFT_FACE_DETECTION_DEVELOPER%27S_GUIDE_V1.1.pdf" />
+    <None Include="AIDocs\ARCSOFT_FACE_RECOGNITION_DEVELOPER%27S_GUIDE_V1.1.pdf" />
     <None Include="app.config" />
     <None Include="公务车数据转发\Docs\TaxiModel.json" />
     <None Include="公务车数据转发\Docs\TaxiType.json" />

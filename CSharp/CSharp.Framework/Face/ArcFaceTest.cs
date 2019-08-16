@@ -13,32 +13,53 @@ using System.Runtime.InteropServices;
 
 namespace CSharp.Framework.Face
 {
-    public class ArcFaceTest
+    public class ArcFaceTest : IDisposable
     {
-        private IArcFace _faceApi;
+        const string errorImg = "510223198207153111.jpg";
+        const string cr7_1 = "cr7_1.jpg";
+        const string cr7_2 = "cr7_2.jpg";
+        const string cr7_3 = "cr7_3.jpg";
+        const string cr7_4 = "cr7_4.jpg";
+        const string cr7_5 = "cr7_5.jpg";
+        const string m10_1 = "m10_1.jpg";
+        const string m10_2 = "m10_2.jpg";
+        const string m10_3 = "m10_3.jpg";
+        const string RM_1 = "RM_1.jpg";
+        const string org_1 = "org_1.jpg";
+        const string t1 = "t1.jpg";
 
-        public ArcFaceTest(IArcFace faceApi)
+        //HG
+        const string HG_1 = "HG_1.jpg";
+        const string HG_2 = "HG_2.jpg";
+        const string front = "front.jpg";
+        const string f1 = "f1.jpg";
+        const string f2 = "f2.jpg";
+        const string f3 = "f3.jpg";
+        const string left = "left.jpg";
+        const string left2 = "left2.jpg";
+        const string left3 = "left3.jpg";
+        const string right = "right.jpg";
+        const string right1 = "right1.jpg";
+        const string right2 = "right2.jpg";
+        const string r3 = "r3.jpg";
+        const string r4 = "r4.jpg";
+        private IArcFace _apiFront; 
+        private IArcFace _apiLeft; 
+        private IArcFace _apiRight; 
+
+        #region 构造函数
+        public ArcFaceTest()
         {
-            _faceApi = faceApi;
-        }
+            var sdkKey = Environment.Is64BitProcess ? ASF_ApiKey.SDKKey_V2_2_x64 : ASF_ApiKey.SDKKey_V2_2_x86;
 
-        public void Run()
-        {
-            //this.TestExternalMethod();
 
-            Console.WriteLine($"Is64BitOperatingSystem: {Environment.Is64BitOperatingSystem}");
-            Console.WriteLine($"        Is64BitProcess: {Environment.Is64BitProcess}");
+            _apiFront = new FaceRecolonization(ASF_ApiKey.AppId, sdkKey, FaceOriented.正面);
+            _apiLeft = new FaceRecolonization(ASF_ApiKey.AppId, sdkKey, FaceOriented.左侧);
+            _apiRight = new FaceRecolonization(ASF_ApiKey.AppId, sdkKey, FaceOriented.右侧);
 
-            this.TestSelfApi();
-
-            //Console.WriteLine("按Enter键退出。");
-            Console.ReadLine();
-        }
-
-        #region TestSelfApi
-        void TestSelfApi()
-        {
-            if (_faceApi.Initialize(ASF_ApiKey.AppId, ASF_ApiKey.SDKKey_V2_2_x64))
+            if (_apiFront.Initialize()
+                && _apiLeft.Initialize()
+                && _apiRight.Initialize())
             {
                 Console.WriteLine("初始化引擎成功");
             }
@@ -46,6 +67,122 @@ namespace CSharp.Framework.Face
             {
                 Console.WriteLine("初始化引擎失败");
             }
+
+        }
+
+        ~ArcFaceTest()
+        {
+            if (_apiFront.UnInitialize()
+                && _apiLeft.UnInitialize()
+                && _apiRight.UnInitialize())
+            {
+                Console.WriteLine("卸载引擎成功");
+            }
+            else
+            {
+                Console.WriteLine("卸载引擎失败");
+            }
+            Console.WriteLine("析构完成");
+            //if (_apiFront.UnInitialize()
+            //    && _apiLeft.UnInitialize()
+            //    && _apiRight.UnInitialize())
+            //{
+            //    Console.WriteLine("卸载引擎成功");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("卸载引擎失败");
+            //}
+        }
+        #endregion
+        
+        #region 运行
+        public void Run()
+        {
+            //this.TestExternalMethod();
+
+            try
+            {
+                Console.WriteLine($"Is64BitOperatingSystem: {Environment.Is64BitOperatingSystem}");
+                Console.WriteLine($"        Is64BitProcess: {Environment.Is64BitProcess}");
+
+                this.TestSelfApi();
+
+                //Console.WriteLine("按Enter键退出。");
+                //Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                Console.WriteLine();
+            }
+        }
+        #endregion
+
+        #region 提取特征值
+        void ExtractFeature()
+        {
+            //ExtractFeature(cr7_4);
+
+            ExtractFeature(org_1);
+
+            //ExtractFeature(RM_1);
+        }
+
+        void ExtractFeature(string sFileName)
+        {
+            try
+            {
+                var features = ExtractFeatures(sFileName);
+                Console.WriteLine($"  捕捉到{features.Count}张人脸。");
+                for (int i = 0; i < features.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}: 数据大小: {features[i].Length}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
+        private List<byte[]> ExtractFeatures(string sFilePath)
+        {
+            var img = GetImage(sFilePath);
+            return _apiFront.GetFaceFeature(img);
+        }
+        #endregion
+
+        #region TestSelfApi
+        void TestSelfApi()
+        {
+            //Console.WriteLine("使用0°接口");
+            //Console.WriteLine("正面照比较");
+            //CompareFace(_apiFront, HG_1, _apiFront, front);
+            //Console.WriteLine("左侧照比较");
+            //CompareFace(_apiFront, HG_1, _apiFront, left);
+            //Console.WriteLine("右侧照比较");
+            //CompareFace(_apiFront, HG_1, _apiFront, right);
+
+            //Console.WriteLine("使用同角度接口");
+            //Console.WriteLine("正面照比较");
+            //CompareFace(_apiFront, HG_1, _apiFront, front);
+            Console.WriteLine("左侧照比较");
+            //CompareFace(_apiFront, HG_1, _apiFront, left3);
+            //CompareFace(_apiFront, f1, _apiFront, left3);
+            //CompareFace(_apiFront, f2, _apiFront, left3);
+            //CompareFace(_apiFront, f3, _apiFront, left3);
+            Console.WriteLine("右侧照比较");
+            //CompareFace(_apiFront, errorImg, _apiRight, t1);
+            CompareFace(_apiFront, errorImg, _apiRight, HG_2);
+            //CompareFace(_apiFront, errorImg, _apiFront, HG_2);
+            //CompareFace(_apiFront, errorImg, _apiRight, HG_2);
+            //CompareFace(_apiFront, f2, _apiFront, right1);
+            //CompareFace(_apiFront, f3, _apiFront, right1);
+            //CompareFace(_apiFront, front, _apiFront, right1);
 
             //var featureLst = _faceApi.GetFaceFeature(GetImage());
             //if (featureLst == null || featureLst.Count <= 0)
@@ -58,19 +195,28 @@ namespace CSharp.Framework.Face
             //{
             //    Console.WriteLine($"\t特征长度: {feature.Length}");
             //}
+        }
 
-            //var person1 = cr7_1;
-            //var person2 = cr7_2;
-            //var person1 = cr7_2;
-            //var person2 = cr7_1;
-            var person1 = m10_2;
-            var person2 = errorImg;
-            //var person2 = m10_2;
-
-            var feature1 = _faceApi.GetFaceFeature(GetImage(person1))[0];
-            var feature2 = _faceApi.GetFaceFeature(GetImage(person2))[0];
-
-            var confidenceLevel = _faceApi.CompareFace(feature1, feature2);
+        void CompareFace(IArcFace api1, string img1, IArcFace api2, string img2)
+        {
+            var features1 = api1.GetFaceFeature(GetImage(img1));
+            var features2 = api2.GetFaceFeature(GetImage(img2));
+            if (null == features1 || 0 == features1.Count)
+            {
+                Console.WriteLine("未获取到特征值1，退出比较。");
+                return;
+            }
+            if (null == features2 || 0 == features2.Count)
+            {
+                Console.WriteLine("未获取到特征值2，退出比较。");
+                return;
+            }
+            Console.WriteLine($"图片1特征值：{features1.Count}, 图片2特征值: {features2.Count}");
+            var feature1 = features1[0];
+            var feature2 = features2[0];
+            var confidenceLevel = _apiRight.CompareFace(feature1, feature2);
+            //_apiLeft.CompareFace(feature1, feature2);
+            //_apiRight.CompareFace(feature1, feature2);
             if (0.4F <= confidenceLevel)
             {
                 Console.WriteLine("通过");
@@ -193,16 +339,7 @@ namespace CSharp.Framework.Face
         }
         #endregion
 
-        const string errorImg = "510223198207153111.jpg";
-        const string cr7_1 = "cr7_1.jpg";
-        const string cr7_2 = "cr7_2.jpg";
-        const string cr7_3 = "cr7_3.jpg";
-        const string cr7_4 = "cr7_4.jpg";
-        const string m10_1 = "m10_1.jpg";
-        const string m10_2 = "m10_2.jpg";
-        const string m10_3 = "m10_3.jpg";
-        const string RM_1 = "RM_1.jpg";
-        const string HG_1 = "HG_1.jpg";
+        #region 获取图像
         private Image GetImage()
         {
             return Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), $@"Face\Image\{RM_1}"));
@@ -251,5 +388,13 @@ namespace CSharp.Framework.Face
                 return null;
             }
         }
+        #endregion
+
+        #region 解构
+        public void Dispose()
+        {
+            Console.WriteLine("解构完成");
+        }
+        #endregion
     }
 }

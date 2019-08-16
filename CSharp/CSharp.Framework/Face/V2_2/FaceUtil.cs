@@ -1,4 +1,5 @@
 ﻿using CSharp.Framework.Face.V2_2.Data;
+using CSharp.Framework.Face.V2_2.Error;
 using System;
 using System.Drawing;
 
@@ -67,7 +68,15 @@ namespace CSharp.Framework.Face.V2_2
 
             IntPtr pFaceFeature = MemoryUtil.Malloc(MemoryUtil.SizeOf<ASF_FaceFeature>());
             int retCode = ASF_API.ExtractFeature(pEngine, imageInfo.width, imageInfo.height, imageInfo.format, imageInfo.imgData, pSingleFaceInfo, pFaceFeature);
-            Console.WriteLine("FR Extract Feature result:" + retCode);
+
+            if (Enum.TryParse<ASF_ErrorCode>(retCode.ToString(), out var result))
+            {
+                Console.WriteLine($"FR Extract Feature. Result:{ASF_ErrorDescription.GetErrorDescription(result)}, Code: {(int)result}");
+            }
+            else
+            {
+                Console.WriteLine($"FR Extract Feature. Undefined retcode.");
+            }
 
             if (retCode != 0)
             {

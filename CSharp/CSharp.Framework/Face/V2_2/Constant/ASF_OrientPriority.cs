@@ -13,5 +13,12 @@ namespace CSharp.Framework.Face.V2_2.Constant
         ASF_OP_270_ONLY = 0x3, // 仅检测 270 度
         ASF_OP_180_ONLY = 0x4, // 仅检测 180 度
         ASF_OP_0_HIGHER_EXT = 0x5, // 全角度检测
+
+        //ASF_OC_0 = 0x1,
+        //ASF_OC_90 = 0x1,
+        //ASF_OC_270 = 0x1,
+        //ASF_OC_180 = 0x1,
+        //ASF_OC_0 = 0x1,
+        //ASF_OC_0 = 0x1,
     }
 }

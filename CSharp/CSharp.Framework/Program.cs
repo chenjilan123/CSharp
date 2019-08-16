@@ -6,6 +6,7 @@ using CSharp.Helper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -26,14 +27,30 @@ namespace CSharp.Framework
         {
             try
             {
-                StructConstruct();
+                ArcFace();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
-            Console.ReadLine();
+            //Console.ReadLine();
         }
+        #region OrAndOut
+        static void OrAndOut()
+        {
+            //if (OrAndOut(10, out int iError) | OrAndOut(5, out iError) | OrAndOut(7, out iError)) //8
+            if (OrAndOut(10, out int iError) || OrAndOut(5, out iError) || OrAndOut(7, out iError)) //11
+            {
+                Console.WriteLine(iError);
+            }
+
+        }
+        static bool OrAndOut(int input, out int iError)
+        {
+            iError = input + 1;
+            return input == 10;
+        }
+        #endregion
 
         #region StructConstruct
         static void StructConstruct()
@@ -119,7 +136,7 @@ namespace CSharp.Framework
         #endregion
 
         #region ArcFace
-        static void ArcFace() => new ArcFaceTest(new FaceRecolonization()).Run();
+        static void ArcFace() => new ArcFaceTest().Run();
         #endregion
 
         #region StructSize
@@ -161,7 +178,7 @@ namespace CSharp.Framework
         #region GetFiles
         static void GetFiles()
         {
-            var search = "CSharp*";
+            var search = "CSharp.*";
             var path = Path.Combine(Application.StartupPath, search);
             var curDir = new DirectoryInfo(Application.StartupPath);
             Console.WriteLine($"Current Directory: {curDir.FullName}");

@@ -12,10 +12,14 @@ namespace CSharp.Framework.Face.V2_2
         /// <summary>
         /// 初始化
         /// </summary>
-        /// <param name="appId"></param>
-        /// <param name="sdkKey"></param>
         /// <returns></returns>
-        bool Initialize(string appId, string sdkKey);
+        bool Initialize();
+
+        /// <summary>
+        /// 卸载
+        /// </summary>
+        /// <returns></returns>
+        bool UnInitialize();
 
         /// <summary>
         /// 获取脸部特征值

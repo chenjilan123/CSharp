@@ -4,6 +4,8 @@ using CSharp.Framework.Face.V2_2.Error;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -15,31 +17,65 @@ namespace CSharp.Framework.Face.V2_2
     {
         private IntPtr _hEngine;
 
+        private string _sAppId;
+        private string _sSDKKey;
+        private ASF_OrientPriority _iOrientPriority;
+
+        public FaceRecolonization(string sAppId, string sSDKKey, FaceOriented faceOriented)
+        {
+            this._sAppId = sAppId;
+            this._sSDKKey = sSDKKey;
+
+            switch (faceOriented)
+            {
+                case FaceOriented.左侧:
+                    _iOrientPriority = ASF_OrientPriority.ASF_OP_90_ONLY;
+                    break;
+                case FaceOriented.右侧:
+                    _iOrientPriority = ASF_OrientPriority.ASF_OP_270_ONLY;
+                    break;
+                case FaceOriented.正面:
+                default:
+                    _iOrientPriority = ASF_OrientPriority.ASF_OP_0_ONLY;
+                    break;
+            }
+        }
+
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="appId"></param>
         /// <param name="sdkKey"></param>
         /// <returns></returns>
-        public bool Initialize(string appId, string sdkKey)
+        public bool Initialize()
         {
             //var activeResult = ASF_API.OnlineActivation(appId, sdkKey);
-            var activeResult = ASF_API.Activation(appId, sdkKey);
+            var activeResult = ASF_API.Activation(_sAppId, _sSDKKey);
             if ((int)ASF_ErrorCode.MOK != activeResult && (int)ASF_ErrorCode.MERR_ASF_ALREADY_ACTIVATED != activeResult)
             {
                 return false;
             }
             var detectMode = ASF_DetectMode.Image;
-            var detectFaceOrientPriority = ASF_OrientPriority.ASF_OP_0_ONLY;
-            var detectFaceScaleVal = 30;
-            var detectFaceMaxNum = 50;
-            var combinedMask = ASF_Operation.ASF_FACE_DETECT | ASF_Operation.ASF_FACERECOGNITION;
-            var initResult = ASF_API.InititalEngine(detectMode, detectFaceOrientPriority, detectFaceScaleVal, detectFaceMaxNum, combinedMask, ref _hEngine);
-            if ((int)ASF_ErrorCode.MOK != initResult)
+            var detectFaceOrientPriority = _iOrientPriority;
+            var detectFaceScaleVal = 16;
+            var detectFaceMaxNum = 10;
+            ASF_Operation combinedMask;
+            if (_iOrientPriority == ASF_OrientPriority.ASF_OP_0_ONLY)
             {
-                return false;
+                combinedMask = ASF_Operation.ASF_FACE_DETECT | ASF_Operation.ASF_FACERECOGNITION;
             }
-            return true;
+            else
+            {
+                combinedMask = ASF_Operation.ASF_FACE_DETECT | ASF_Operation.ASF_FACERECOGNITION;
+            }
+            var initResult = ASF_API.InititalEngine(detectMode, detectFaceOrientPriority, detectFaceScaleVal, detectFaceMaxNum, combinedMask, ref _hEngine);
+            return (int)ASF_ErrorCode.MOK == initResult;
+        }
+
+        public bool UnInitialize()
+        {
+            var uninitResult = ASF_API.UnInititalEngine(_hEngine);
+            return (int)ASF_ErrorCode.MOK == uninitResult;
         }
 
         /// <summary>
@@ -54,6 +90,7 @@ namespace CSharp.Framework.Face.V2_2
             {
                 originalImage = ImageUtil.ScaleImage(originalImage, originalImage.Width - (originalImage.Width % 4), originalImage.Height);
             }
+            //originalImage.Save(Guid.NewGuid().ToString(), ImageFormat.Jpeg);
             ASF_MultiFaceInfo multiFaceInfo = FaceUtil.DetectFace(_hEngine, originalImage);
 
             if (multiFaceInfo.faceNum <= 0)
@@ -62,7 +99,8 @@ namespace CSharp.Framework.Face.V2_2
             }
             var featureLst = new List<byte[]>();
             var rectSize = MemoryUtil.SizeOf<MRECT>();
-            var faceAreas = multiFaceInfo.GetFaceArea();
+            //MRECT rect = MemoryUtil.PtrToStructure<MRECT>(multiFaceInfo.faceRect);
+            var faceAreas = multiFaceInfo.GetFaceArea(); //这个不能用，有错误
             for (int i = 0; i < multiFaceInfo.faceNum; i++)
             {
                 //这种方法, 后面的操作会导致指针返回值出错。
@@ -73,8 +111,16 @@ namespace CSharp.Framework.Face.V2_2
                 var faceImage = ImageUtil.CutImage(originalImage, rect.left, rect.top, rect.right, rect.bottom);
                 if (faceImage == null)
                 {
-                    continue;
+                    faceImage = originalImage;
                 }
+                var dir = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "EXT" + DateTime.Now.ToString("yyyyMMddHHmmssfff")));
+                if (!dir.Exists)
+                {
+                    dir.Create();
+                }
+                //multiFaceInfo.PrintInfo();
+                originalImage.Save(Path.Combine(dir.FullName, "Ori_" + Guid.NewGuid().ToString() + ".jpg"), ImageFormat.Jpeg);
+                faceImage.Save(Path.Combine(dir.FullName, "Cut_" + Guid.NewGuid().ToString() + ".jpg"), ImageFormat.Jpeg);
                 ASF_SingleFaceInfo singleFaceInfo;
                 //捕捉脸部信息
                 IntPtr ptrFeature = FaceUtil.ExtractFeature(_hEngine, faceImage, out singleFaceInfo);
@@ -117,6 +163,5 @@ namespace CSharp.Framework.Face.V2_2
             Console.WriteLine($"相似度: {outLevel}");
             return outLevel;
         }
-
     }
 }

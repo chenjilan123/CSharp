@@ -62,6 +62,11 @@ namespace CSharp.Framework.Face.V2_2
         public static extern int InititalEngine(ASF_DetectMode detectMode, ASF_OrientPriority detectFaceOrientPriority, int detectFaceScaleVal, int detectFaceMaxNum, ASF_Operation combinedMask, ref IntPtr hEngine);
         #endregion
 
+        #region 卸载引擎
+        [DllImport("libarcsoft_face_engine.dll", EntryPoint = "ASFUninitEngine", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int UnInititalEngine(IntPtr hEngine);
+        #endregion
+
         #region 人脸检测
         /// <summary>
         /// 人脸检测
