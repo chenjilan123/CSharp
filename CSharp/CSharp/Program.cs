@@ -1,12 +1,16 @@
 ﻿using CSharp.Client;
+using CSharp.Client.HEZD;
 using CSharp.Handler;
 using CSharp.Host;
+using CSharp.Model;
 using CSharp.Ping;
 using CSharp.Server;
 using CSharp.Tcp;
 using CSharp.Udp;
 using CSharp.Udp.Broadcast;
+using CSharp.Utility;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -21,8 +25,35 @@ namespace CSharp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            AliSms();
+            HEZDSender();
         }
+
+        #region HEZDSender
+        static void HEZDSender()
+        {
+            var alarmLst = new List<AlarmData>()
+            {
+                new AlarmData()
+                {
+                    AlarmName = "超速报警",
+                    Duration = 50,
+                    BeginAlarmTime = DateTime.Parse("2019-08-19 12:00:00"),
+                    EndAlarmTime = DateTime.Parse("2019-08-19 12:01:00"),
+                    BeginLongitude = 127.015712D,
+                    BeginLatitude = 27.514214,
+                    EndLongitude = 127.016712D,
+                    EndLatitude = 27.513214,
+                    AlarmFlag = 4,
+                    PlateNum = "闽A12345",
+                    SimNum = "18012345678",
+                }
+            };
+            var jsonSerializer = new NewtonSerializer();
+            var gisService = new CgoService();
+            IHEZDSender sender = new HEZDHttp(jsonSerializer, gisService);
+            sender.PostAlarm(alarmLst);
+        }
+        #endregion
 
         #region AliSms
         static void AliSms()
