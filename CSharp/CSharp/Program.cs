@@ -25,7 +25,7 @@ namespace CSharp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            HEZDSender();
+            WebApi();
         }
 
         #region HEZDSender
