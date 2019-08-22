@@ -18,7 +18,7 @@ namespace CSharp
         {
             try
             {
-                DecimalCompute();
+
             }
             catch (Exception ex)
             {

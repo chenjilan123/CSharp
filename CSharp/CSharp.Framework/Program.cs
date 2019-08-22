@@ -27,7 +27,7 @@ namespace CSharp.Framework
         {
             try
             {
-                ArcFace();
+                HashOrder();
             }
             catch (Exception ex)
             {
@@ -35,6 +35,50 @@ namespace CSharp.Framework
             }
             //Console.ReadLine();
         }
+
+
+        #region HashOrder
+        static void HashOrder()
+        {
+            var hash = new Hashtable();
+
+            //var str = "127.0.0.1:19096:3440719e-6e90-447a-ab49-880d134b1a83|127.0.0.1:49096:8a2b1723-e659-4eda-94a4-35ac758ec7a6|127.0.0.1:59096:|127.0.0.1:59196:|127.0.0.1:29096:a94b4129-9c3e-4495-af55-6176a1dedadd|127.0.0.1:9096:d4a6d783-e9a3-4254-9dec-b0c67b2ecf19|127.0.0.1:39096:e32484b6-dca9-421a-a559-42540f299b03";
+            var str = "127.0.0.1:19096|127.0.0.1:49096|127.0.0.1:59096|127.0.0.1:59196|127.0.0.1:29096|127.0.0.1:9096|127.0.0.1:39096";
+
+            int i = 0;
+            foreach (var item in str.Split('|').Reverse())
+            //foreach (var item in str.Split('|'))
+            {
+                hash.Add(item, item);
+                //hash.Add(item, i++);
+            }
+            Console.WriteLine($"数目：{hash.Count}");
+            Console.WriteLine("键：");
+            foreach (var item in hash.Keys)
+            {
+                Console.WriteLine(item);
+            }
+            var enumerator = hash.Keys.GetEnumerator();
+            enumerator.MoveNext();
+            Console.WriteLine($"键首项: {enumerator.Current}");
+            foreach (var item in hash.Keys)
+            {
+                Console.WriteLine($"键首项: {item}");
+                break;
+            }
+            Console.WriteLine("值：");
+            foreach (var item in hash.Values)
+            {
+                Console.WriteLine(item);
+            }
+            foreach (var item in hash.Values)
+            {
+                Console.WriteLine($"值首项: {item}");
+                break;
+            }
+        }
+        #endregion
+
         #region OrAndOut
         static void OrAndOut()
         {
