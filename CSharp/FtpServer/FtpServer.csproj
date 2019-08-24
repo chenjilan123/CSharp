@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>FtpServer</RootNamespace>
     <AssemblyName>FtpServer</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,8 +32,21 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FubarDev.FtpServer, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\FubarDev.FtpServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FubarDev.FtpServer.Abstractions, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\FubarDev.FtpServer.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="FubarDev.FtpServer.Commands, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\FubarDev.FtpServer.Commands.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +58,21 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Lib\FubarDev.FtpServer.deps.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\FubarDev.FtpServer.Abstractions.dll" />
+    <Content Include="Lib\FubarDev.FtpServer.Abstractions.pdb" />
+    <Content Include="Lib\FubarDev.FtpServer.Abstractions.xml" />
+    <Content Include="Lib\FubarDev.FtpServer.Commands.dll" />
+    <Content Include="Lib\FubarDev.FtpServer.Commands.pdb" />
+    <Content Include="Lib\FubarDev.FtpServer.Commands.xml" />
+    <Content Include="Lib\FubarDev.FtpServer.dll" />
+    <Content Include="Lib\FubarDev.FtpServer.pdb" />
+    <Content Include="Lib\FubarDev.FtpServer.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
