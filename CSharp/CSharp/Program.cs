@@ -11,8 +11,11 @@ using CSharp.Udp.Broadcast;
 using CSharp.Utility;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace CSharp
@@ -75,110 +78,112 @@ namespace CSharp
                 Console.WriteLine(x.ToString("0.0"));
             }
             #endregion
+        }
+        #endregion
 
-            #region ComputeMD5
-            void ComputeMD5()
+        #region ComputeMD5
+        void ComputeMD5()
+        {
+            var arrFileList = new[] { "F:\\tools\\ODTwithODAC122010.zip", "F:\\tools\\NDP471-DevPack-ENU.exe", "F:\\tools\\TeamViewer_12.1.10277.0.exe" };
+
+            foreach (var sFullName in arrFileList)
             {
-                var arrFileList = new[] { "F:\\tools\\ODTwithODAC122010.zip", "F:\\tools\\NDP471-DevPack-ENU.exe", "F:\\tools\\TeamViewer_12.1.10277.0.exe" };
-
-                foreach (var sFullName in arrFileList)
+                var fileInfo = new FileInfo(sFullName);
+                if (!fileInfo.Exists)
                 {
-                    var fileInfo = new FileInfo(sFullName);
-                    if (!fileInfo.Exists)
-                    {
-                        Console.WriteLine($"File [{fileInfo.FullName}] doesn't exists.");
-                    }
-                    var sw = Stopwatch.StartNew();
-                    var s1 = GetMD5HashFromFile(fileInfo.FullName).ToUpper();
-                    var s2 = FileToMD5Hash(fileInfo.FullName);
-
-
-                    //var retVal = BinaryHelper.GetASCIIString(s1);
-                    //StringBuilder sb = new StringBuilder();
-
-                    //for (int i = 0; i < retVal.Length; i++)
-                    //{
-                    //    sb.Append(retVal[i].ToString("x2"));
-                    //}
-                    //Console.WriteLine(sb.ToString());
-
-                    sw.Stop();
-                    Console.WriteLine(fileInfo);
-                    Console.WriteLine($"  FileName: {fileInfo.FullName}");
-                    Console.WriteLine($"FileLength: {fileInfo.Length} bytes");
-                    Console.WriteLine($" Time: {sw.Elapsed.TotalSeconds.ToString("0.000")}");
-                    Console.WriteLine($"Value1: {s1}");
-                    Console.WriteLine($"Value2: {s2}");
-
-                    //ToBCD
-                    var sbMD5_1 = new StringBuilder();
-                    foreach (var b in Encoding.UTF8.GetBytes(s1))
-                    {
-                        sbMD5_1.Append(b.ToString("X2"));
-                    }
-                    Console.WriteLine($"MD5 64_1: {sbMD5_1.ToString()}");
-                    var sbMD5_2 = new StringBuilder();
-                    foreach (var b in BinaryHelper.GetASCIIString(s2))
-                    {
-                        sbMD5_2.Append(b.ToString("X2"));
-                    }
-                    Console.WriteLine($"MD5 64_2: {sbMD5_2.ToString()}");
+                    Console.WriteLine($"File [{fileInfo.FullName}] doesn't exists.");
                 }
+                var sw = Stopwatch.StartNew();
+                var s1 = GetMD5HashFromFile(fileInfo.FullName).ToUpper();
+                var s2 = FileToMD5Hash(fileInfo.FullName);
+
+
+                //var retVal = BinaryHelper.GetASCIIString(s1);
+                //StringBuilder sb = new StringBuilder();
+
+                //for (int i = 0; i < retVal.Length; i++)
+                //{
+                //    sb.Append(retVal[i].ToString("x2"));
+                //}
+                //Console.WriteLine(sb.ToString());
+
+                sw.Stop();
+                Console.WriteLine(fileInfo);
+                Console.WriteLine($"  FileName: {fileInfo.FullName}");
+                Console.WriteLine($"FileLength: {fileInfo.Length} bytes");
+                Console.WriteLine($" Time: {sw.Elapsed.TotalSeconds.ToString("0.000")}");
+                Console.WriteLine($"Value1: {s1}");
+                Console.WriteLine($"Value2: {s2}");
+
+                //ToBCD
+                var sbMD5_1 = new StringBuilder();
+                foreach (var b in Encoding.UTF8.GetBytes(s1))
+                {
+                    sbMD5_1.Append(b.ToString("X2"));
+                }
+                Console.WriteLine($"MD5 64_1: {sbMD5_1.ToString()}");
+                var sbMD5_2 = new StringBuilder();
+                //foreach (var b in BinaryHelper.GetASCIIString(s2))
+                //{
+                //    sbMD5_2.Append(b.ToString("X2"));
+                //}
+                Console.WriteLine($"MD5 64_2: {sbMD5_2.ToString()}");
             }
-            /// <summary>
-            /// 获取文件MD5值
-            /// </summary>
-            /// <param name="fileName">文件绝对路径</param>
-            /// <returns>MD5值</returns>
-            public static string GetMD5HashFromFile(string fileName)
+        }
+        /// <summary>
+        /// 获取文件MD5值
+        /// </summary>
+        /// <param name="fileName">文件绝对路径</param>
+        /// <returns>MD5值</returns>
+        public static string GetMD5HashFromFile(string fileName)
+        {
+            try
             {
-                try
-                {
-                    FileStream file = new FileStream(fileName, FileMode.Open);
-                    System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-                    byte[] retVal = md5.ComputeHash(file);
-                    file.Close();
+                FileStream file = new FileStream(fileName, FileMode.Open);
+                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(file);
+                file.Close();
 
-                    StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
 
-                    for (int i = 0; i < retVal.Length; i++)
-                    {
-                        sb.Append(retVal[i].ToString("x2"));
-                    }
-                    //return BinaryHelper.ToASCIIString(retVal, 0, retVal.Length);
-                    return sb.ToString();
-                }
-                catch (Exception ex)
+                for (int i = 0; i < retVal.Length; i++)
                 {
-                    throw new Exception("GetMD5HashFromFile() fail,error:" + ex.Message);
+                    sb.Append(retVal[i].ToString("x2"));
                 }
+                //return BinaryHelper.ToASCIIString(retVal, 0, retVal.Length);
+                return sb.ToString();
             }
-            public static string FileToMD5Hash(string sFileName)
+            catch (Exception ex)
             {
-                var bFile = File.ReadAllBytes(sFileName);
-                byte[] result = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5"))
-            .ComputeHash(bFile);
-                StringBuilder output = new StringBuilder(16);
-                for (int i = 0; i < result.Length; i++)
-                {
-                    output.Append((result[i]).ToString("X2",
-                    System.Globalization.CultureInfo.InvariantCulture));
-                }
-                return output.ToString();
+                throw new Exception("GetMD5HashFromFile() fail,error:" + ex.Message);
             }
-            public static string StringToMD5Hash(string inputString)
+        }
+        public static string FileToMD5Hash(string sFileName)
+        {
+            var bFile = File.ReadAllBytes(sFileName);
+            byte[] result = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5"))
+        .ComputeHash(bFile);
+            StringBuilder output = new StringBuilder(16);
+            for (int i = 0; i < result.Length; i++)
             {
-                byte[] result = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5"))
-                .ComputeHash(Encoding.UTF8.GetBytes(inputString));
-                StringBuilder output = new StringBuilder(16);
-                for (int i = 0; i < result.Length; i++)
-                {
-                    output.Append((result[i]).ToString("X2",
-                    System.Globalization.CultureInfo.InvariantCulture));
-                }
-                return output.ToString();
+                output.Append((result[i]).ToString("X2",
+                System.Globalization.CultureInfo.InvariantCulture));
             }
-            #endregion
+            return output.ToString();
+        }
+        public static string StringToMD5Hash(string inputString)
+        {
+            byte[] result = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5"))
+            .ComputeHash(Encoding.UTF8.GetBytes(inputString));
+            StringBuilder output = new StringBuilder(16);
+            for (int i = 0; i < result.Length; i++)
+            {
+                output.Append((result[i]).ToString("X2",
+                System.Globalization.CultureInfo.InvariantCulture));
+            }
+            return output.ToString();
+        }
+        #endregion
 
         #region UdpBroadcast
         private static void UdpBroadcast()
