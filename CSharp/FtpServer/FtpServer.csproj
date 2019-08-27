@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>FtpServer</RootNamespace>
     <AssemblyName>FtpServer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -73,6 +73,12 @@
     <Content Include="Lib\FubarDev.FtpServer.dll" />
     <Content Include="Lib\FubarDev.FtpServer.pdb" />
     <Content Include="Lib\FubarDev.FtpServer.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FtpClient\FtpClient.csproj">
+      <Project>{59d09a06-ba38-4364-bc58-2764fd8cc7d4}</Project>
+      <Name>FtpClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
