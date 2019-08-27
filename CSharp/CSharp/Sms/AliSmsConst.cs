@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define XG
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,7 +14,7 @@ namespace CSharp.Sms
         ///3、签名不合法(不存在或被拉黑)
         ///4、账户余额不足
         ///5、模板变量缺少对应参数值
-
+#if !XG
         internal const string AccessKeyId = "LTAIyXQzxcVhfE26";
         internal const string AccessKeySecret = "xjyLY5XE30XB6yexAGAdpcpwbyfdPW";
         internal const string PhoneNumbers = "15980217471";
@@ -33,5 +35,13 @@ namespace CSharp.Sms
         //  ""alarm"": ""(报警类型名称)"",
         //  ""speed"": ""(车速)""
         //}";
+#else
+        internal const string AccessKeyId = "LTAIDPIXar5akNvy";
+        internal const string AccessKeySecret = "EykxULuW76mnHZOd6waZFsXKqbvrP8";
+        internal const string PhoneNumbers = "15980217471";
+        internal const string SignName = "星冠平台车辆报警通知";
+        internal const string TemplateCode = "SMS_172356099";
+        internal const string TemplateParam = "{\"platenum\":\"闽A12345\",\"time\":\"2019-08-27\",\"address\":\"福建省福州市\",\"alarm\":\"超速报警\",\"speed\":\"70km/h\"}";
+#endif
     }
 }
