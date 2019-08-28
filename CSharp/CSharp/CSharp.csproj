@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\aliyun-net-sdk-core\aliyun-net-sdk-core.vs2017.csproj" />
     <ProjectReference Include="..\CSharp.Model\CSharp.Model.csproj" />
   </ItemGroup>
 

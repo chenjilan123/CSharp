@@ -41,7 +41,7 @@ namespace CSharp.Sms
         internal const string PhoneNumbers = "15980217471";
         internal const string SignName = "星冠平台车辆报警通知";
         internal const string TemplateCode = "SMS_172356099";
-        internal const string TemplateParam = "{\"platenum\":\"闽A12345\",\"time\":\"2019-08-27\",\"address\":\"福建省福州市\",\"alarm\":\"超速报警\",\"speed\":\"70km/h\"}";
+        internal const string TemplateParam = "{\"platenum\":\"闽A12345蓝\",\"time\":\"2019-08-27 12:00:50\",\"address\":\"福建省福州市仓山区建新镇福建农林大学\",\"alarm\":\"超速报警\",\"speed\":\"70km/h\"}";
 #endif
     }
 }
