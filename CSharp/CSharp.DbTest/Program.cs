@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -16,7 +17,7 @@ namespace CSharp.DbTest
         {
             try
             {
-                TenMinTask();
+                ParameterLack();
             }
             catch (Exception ex)
             {
@@ -34,20 +35,32 @@ namespace CSharp.DbTest
                 conn.Open();
                 using(var cmd = factory.CreateCommand())
                 {
+                    cmd.CommandTimeout = 600;
+                    cmd.Connection = conn;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "spRpt_GetVehicleOfflineDetail_New";
                     cmd.Parameters.Add(new SqlParameter("@userId", "admin"));
                     cmd.Parameters.Add(new SqlParameter("@orgId", 1));
                     cmd.Parameters.Add(new SqlParameter("@hasChild", 1));
-                    cmd.Parameters.Add(new SqlParameter("@vehicleId", 0));
-                    cmd.Parameters.Add(new SqlParameter("@AccState", 0));
-                    cmd.Parameters.Add(new SqlParameter("@sign1", 0));
+                    cmd.Parameters.Add(new SqlParameter("@vehicleId", SqlDbType.Int) { Value = 0 });
+                    cmd.Parameters.Add(new SqlParameter("@AccState", "0"));
+                    cmd.Parameters.Add(new SqlParameter("@sign1", "0"));
                     cmd.Parameters.Add(new SqlParameter("@Speed", ""));
-                    cmd.Parameters.Add(new SqlParameter("@sign2", 0));
+                    cmd.Parameters.Add(new SqlParameter("@sign2", "0"));
                     cmd.Parameters.Add(new SqlParameter("@OfflineTime", 1440));
-                    cmd.Parameters.Add(new SqlParameter("@ShowPosition", 0));
+                    cmd.Parameters.Add(new SqlParameter("@ShowPosition", "0"));
                     cmd.Parameters.Add(new SqlParameter("@pageStart", 1));
                     cmd.Parameters.Add(new SqlParameter("@pageEnd", 100000));
+
+                    var adapter = factory.CreateDataAdapter();
+                    adapter.SelectCommand = cmd;
+                    var tb = new DataTable();
+                    adapter.Fill(tb);
+
+                    foreach (DataRow dr in tb.Rows)
+                    {
+                        Console.WriteLine(dr[0]);
+                    }
                 }
             }
         }
