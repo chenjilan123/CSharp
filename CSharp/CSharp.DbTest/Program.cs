@@ -24,6 +24,35 @@ namespace CSharp.DbTest
             }
         }
 
+        #region ParameterLack
+        static void ParameterLack()
+        {
+            DbProviderFactory factory = SqlClientFactory.Instance;
+            using (DbConnection conn = factory.CreateConnection())
+            {
+                conn.ConnectionString = "Data Source=192.168.3.87;Initial Catalog=TopDB_TPM;uid=sa;pwd=top@db123";
+                conn.Open();
+                using(var cmd = factory.CreateCommand())
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "spRpt_GetVehicleOfflineDetail_New";
+                    cmd.Parameters.Add(new SqlParameter("@userId", "admin"));
+                    cmd.Parameters.Add(new SqlParameter("@orgId", 1));
+                    cmd.Parameters.Add(new SqlParameter("@hasChild", 1));
+                    cmd.Parameters.Add(new SqlParameter("@vehicleId", 0));
+                    cmd.Parameters.Add(new SqlParameter("@AccState", 0));
+                    cmd.Parameters.Add(new SqlParameter("@sign1", 0));
+                    cmd.Parameters.Add(new SqlParameter("@Speed", ""));
+                    cmd.Parameters.Add(new SqlParameter("@sign2", 0));
+                    cmd.Parameters.Add(new SqlParameter("@OfflineTime", 1440));
+                    cmd.Parameters.Add(new SqlParameter("@ShowPosition", 0));
+                    cmd.Parameters.Add(new SqlParameter("@pageStart", 1));
+                    cmd.Parameters.Add(new SqlParameter("@pageEnd", 100000));
+                }
+            }
+        }
+        #endregion
+
         #region TenMinTask
         static void TenMinTask()
         {
