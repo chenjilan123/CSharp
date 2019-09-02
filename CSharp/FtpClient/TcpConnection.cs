@@ -1,26 +1,29 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace FtpClient
 {
-    public class Connection
+    public class TcpConnection
     {
         private readonly TcpClient _client;
+        private readonly IPEndPoint _ep;
         private Stream _dataStream;
         public event Action<byte[], int> OnReceiveData;
         public bool IsClosed { get; set; }
-        public Connection()
+        public TcpConnection(IPEndPoint ep)
         {
             _client = new TcpClient(AddressFamily.InterNetwork);
+            _ep = ep;
         }
 
         #region 启动
         public async Task StartAsync()
         {
-            await _client.ConnectAsync("127.0.0.1", 21).ConfigureAwait(false);
-            Console.WriteLine("启动成功");
+            await _client.ConnectAsync(_ep.Address, _ep.Port).ConfigureAwait(false);
+            Console.WriteLine($"启动成功: {_client.Client.RemoteEndPoint}");
             try
             {
                 Task tReceive;
@@ -38,7 +41,7 @@ namespace FtpClient
         private async Task ReceiveAsync(Stream stream)
         {
             var buffer = new byte[1024];
-            Console.WriteLine("开始接受数据");
+            //Console.WriteLine("开始接受数据");
             while (true)
             {
                 var count = await stream.ReadAsync(buffer, 0, buffer.Length);
@@ -55,7 +58,7 @@ namespace FtpClient
         #region 发送
         public async Task SendAsync(byte[] buffer, int offset, int count)
         {
-            Console.WriteLine($"开始发送数据: {count}bytes");
+            //Console.WriteLine($"开始发送数据: {count}bytes");
             await _dataStream.WriteAsync(buffer, offset, count);
         }
         #endregion
