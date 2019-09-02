@@ -10,6 +10,7 @@ namespace FtpClient
         private readonly TcpClient _client;
         private Stream _dataStream;
         public event Action<byte[], int> OnReceiveData;
+        public bool IsClosed { get; set; }
         public Connection()
         {
             _client = new TcpClient(AddressFamily.InterNetwork);
@@ -41,6 +42,11 @@ namespace FtpClient
             while (true)
             {
                 var count = await stream.ReadAsync(buffer, 0, buffer.Length);
+                if (count == 0)
+                {
+                    IsClosed = true;
+                    break;
+                }
                 OnReceiveData(buffer, count);
             }
         }
