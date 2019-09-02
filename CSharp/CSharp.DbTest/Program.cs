@@ -17,7 +17,8 @@ namespace CSharp.DbTest
         {
             try
             {
-                ParameterLack();
+                Console.WriteLine("HEheda");
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
