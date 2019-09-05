@@ -19,7 +19,7 @@ namespace CSharp
         {
             try
             {
-
+                SelectXmlElement();
             }
             catch (Exception ex)
             {
@@ -27,6 +27,28 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region SelectXmlElement
+        static void SelectXmlElement()
+        {
+            //var s = "<Destinations><Poi><PoiName>测试</PoiName><Longitude>119.290000</Longitude><Latitude>26.030000</Latitude></Poi><Poi><PoiName>测试1</PoiName><Longitude>119.270000</Longitude><Latitude>26.010000</Latitude></Poi><Poi><PoiName>测试1</PoiName><Longitude>119.270000</Longitude><Latitude>26.010000</Latitude></Poi></Destinations>";
+            //var xElement = XElement.Parse(s);
+            //foreach (var item in xElement.Elements("Poi"))
+            //{
+            //    Console.WriteLine(item);
+            //}
+            var lst = new List<string>
+            {
+                "1",
+                "2",
+                "3",
+            };
+
+            //以某符号作分隔。
+            var c = ';';
+            Console.WriteLine(lst.Aggregate((prev, cur) => $"{prev}{c}{cur}"));
+        }
+        #endregion
 
         #region LogicOr
         static void LogicOr()
