@@ -27,13 +27,20 @@ namespace CSharp
         {
             try
             {
-                AliSms();
+                NServer();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region NServer
+        static void NServer()
+        {
+            new NServer().StartAsync().Wait();
+        }
+        #endregion
 
         #region HEZDSender
         static void HEZDSender()
