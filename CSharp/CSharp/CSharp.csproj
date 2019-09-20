@@ -15,4 +15,8 @@
     <ProjectReference Include="..\CSharp.Model\CSharp.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tcp\NFactory\NJTB\" />
+  </ItemGroup>
+
 </Project>
