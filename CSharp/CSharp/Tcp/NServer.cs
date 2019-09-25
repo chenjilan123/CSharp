@@ -26,18 +26,19 @@ namespace CSharp.Tcp
             {
                 var client = await server.AcceptTcpClientAsync();
                 Console.WriteLine("New client accepted");
-                var nClient = CreateClient();
-                nClient.Client = client;
+                var nClient = CreateClient(client);
                 await nClient.StartAsync();
             }
         }
 
-        private NClient CreateClient()
+        private NClient CreateClient(TcpClient client)
         {
-            var handler = new NHandler();
+            var pipeSend = new Pipe();
+            var handler = new NHandler(pipeSend.Writer);
             var channel = new NChannel(handler);
-            var client = new NClient(channel);
-            return client;
+            var nClient = new NClient(channel, pipeSend.Reader);
+            nClient.Client = client;
+            return nClient;
         }
     }
 }

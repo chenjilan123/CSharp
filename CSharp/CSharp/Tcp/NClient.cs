@@ -14,25 +14,64 @@ namespace CSharp.Tcp
     public class NClient
     {
         public TcpClient Client { get; set; }
-        public PipeReader Reader { get; set; }
-        public PipeWriter Writer { get; set; }
+
+        private PipeReader Reader { get; set; }
+        private PipeWriter Writer { get; set; }
+        /// <summary>
+        /// 发送管道
+        /// </summary>
+        private PipeReader SendReader { get; }
+        /// <summary>
+        /// 是否完成
+        /// </summary>
+        private bool IsComplete = false;
 
         public NChannel Channel { get; }
 
-        public NClient(NChannel channel)
+        public NClient(NChannel channel, PipeReader sendReader)
         {
             this.Channel = channel;
 
             var pipe = new Pipe();
-            Reader = pipe.Reader;
-            Writer = pipe.Writer;
+            this.Reader = pipe.Reader;
+            this.Writer = pipe.Writer;
+
+            this.SendReader = sendReader;
         }
 
         public Task StartAsync()
         {
             var t1 = PrepareHandleAsync();
             var t2 = ReceiveAsync();
+            var t3 = SendAsync();
             return Task.CompletedTask;
+        }
+
+        private async Task SendAsync()
+        {
+            var stream = Client.GetStream();
+            try
+            {
+                while (!IsComplete)
+                {
+                    var result = await SendReader.ReadAsync();
+                    var buffer = result.Buffer;
+                    var position = buffer.Start;
+
+                    while (buffer.TryGet(ref position, out var memory) && stream.CanWrite)
+                    {
+                        await stream.WriteAsync(memory);
+                    }
+                    SendReader.AdvanceTo(buffer.End);
+                    if (result.IsCanceled || result.IsCompleted) break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"NClient.SendAsync: {ex.ToString()}");
+            }
+            SendReader.Complete();
+            Console.WriteLine("Send completed.");
         }
 
         private async Task PrepareHandleAsync()
@@ -44,7 +83,7 @@ namespace CSharp.Tcp
                 var position = buffer.Start;
                 while (buffer.TryGet(ref position, out var memory))
                 {
-                    this.Channel.Push(memory);
+                    this.Channel.Push(memory.Span);
                 }
                 Reader.AdvanceTo(buffer.End);
                 if (result.IsCanceled || result.IsCompleted) break;
@@ -81,6 +120,7 @@ namespace CSharp.Tcp
             {
                 Console.WriteLine(ex.ToString());
             }
+            this.IsComplete = true;
             Console.WriteLine("Receive completed.");
             Writer.Complete();
         }
