@@ -50,11 +50,13 @@ namespace CSharp.Tcp
                     Console.WriteLine("Send failed bacause the channel is canceled or completed");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
+                return null;
 
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"NHandler.Send: {ex.ToString()}");
+                return null;
             }
         }
     }
