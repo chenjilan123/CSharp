@@ -28,7 +28,7 @@ namespace CSharp
         {
             try
             {
-                WebService();
+                AliSms();
             }
             catch (Exception ex)
             {
