@@ -35,6 +35,11 @@ namespace CSharp
             }
         }
 
+        protected internal void Add()
+        {
+
+        }
+
         #region NServer
         static void NServer()
         {
