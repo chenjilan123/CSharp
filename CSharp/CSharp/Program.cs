@@ -9,7 +9,6 @@ using CSharp.Tcp;
 using CSharp.Udp;
 using CSharp.Udp.Broadcast;
 using CSharp.Utility;
-using CSharp.WebService;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,12 +37,10 @@ namespace CSharp
             }
         }
 
-        #region WebService
-        static void WebService()
+        protected internal void Add()
         {
-            new CAMSservice().SendAsync().Wait();
+
         }
-        #endregion
 
         #region NServer
         static void NServer()
