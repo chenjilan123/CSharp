@@ -6,6 +6,9 @@ namespace CSharp.SourceManager
 {
     public class ImageSource
     {
-
+        public void GetImage()
+        {
+            
+        }
     }
 }
