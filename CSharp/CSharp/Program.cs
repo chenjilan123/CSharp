@@ -28,6 +28,8 @@ namespace CSharp
         {
             try
             {
+                //int? value = Nullable<int> default(int?);
+                //Console.WriteLine(value.ToString());
                 AliSms();
             }
             catch (Exception ex)
