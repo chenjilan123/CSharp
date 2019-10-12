@@ -19,7 +19,7 @@ namespace CSharp
         {
             try
             {
-                SelectXmlElement();
+                SourceManager();
             }
             catch (Exception ex)
             {
@@ -27,6 +27,13 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+        #region SourceManager
+        static void SourceManager()
+        {
+            //new CSharp.Manifest.Class1().Hello();
+            new Resource.ImageResource().GetImage();
+        }
+        #endregion
 
         #region SelectXmlElement
         static void SelectXmlElement()

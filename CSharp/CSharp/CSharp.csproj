@@ -6,7 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\map.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\map.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSharp.Manifest\CSharp.Manifest.csproj" />
   </ItemGroup>
 
 </Project>
