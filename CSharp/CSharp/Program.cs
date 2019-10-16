@@ -1,4 +1,5 @@
-﻿using CSharp.Client;
+﻿using CSharp.AliCloudOss;
+using CSharp.Client;
 using CSharp.Client.HEZD;
 using CSharp.Handler;
 using CSharp.Host;
@@ -29,7 +30,7 @@ namespace CSharp
             {
                 //int? value = Nullable<int> default(int?);
                 //Console.WriteLine(value.ToString());
-                AliSms();
+                Oss();
             }
             catch (Exception ex)
             {
@@ -41,6 +42,12 @@ namespace CSharp
         {
 
         }
+        #region Oss
+        static void Oss()
+        {
+            new AliYunOss().GetBucket();
+        }
+        #endregion
 
         #region NServer
         static void NServer()
