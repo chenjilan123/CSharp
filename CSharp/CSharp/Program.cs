@@ -4,6 +4,7 @@ using CSharp.xml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -19,7 +20,7 @@ namespace CSharp
         {
             try
             {
-                SourceManager();
+                JTB();
             }
             catch (Exception ex)
             {
@@ -27,6 +28,35 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region JTB
+        static void JTB()
+        {
+            var s = new JTB.J808Command().GetDescription();
+            Console.WriteLine(s);
+        }
+        #endregion
+
+        #region StringFormat
+        static void StringFormat()
+        {
+            // Define cultures whose formatting conventions are to be used.
+            CultureInfo[] cultures = { CultureInfo.CreateSpecificCulture("en-US"),
+                                 CultureInfo.CreateSpecificCulture("fr-FR"),
+                                 CultureInfo.CreateSpecificCulture("es-ES") };
+            string[] specifiers = { "G", "C", "D4", "E2", "F", "N", "P", "X2" };
+            ushort value = 22042;
+            foreach (string specifier in specifiers)
+            {
+                foreach (CultureInfo culture in cultures)
+                    Console.WriteLine("{0,2} format using {1} culture: {2, 16}",
+                                      specifier, culture.Name,
+                                      value.ToString(specifier, culture));
+                Console.WriteLine();
+            }
+        }
+        #endregion
+
         #region SourceManager
         static void SourceManager()
         {
