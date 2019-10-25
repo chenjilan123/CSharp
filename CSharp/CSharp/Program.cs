@@ -1,4 +1,5 @@
 ﻿using CSharp.Entity;
+using CSharp.File;
 using CSharp.json;
 using CSharp.xml;
 using System;
@@ -20,7 +21,7 @@ namespace CSharp
         {
             try
             {
-                JTB();
+                ImageFormat();
             }
             catch (Exception ex)
             {
@@ -28,6 +29,12 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+        #region ImageFormat
+        static void ImageFormat()
+        {
+            new ImageFormatSave().SaveImage();
+        }
+        #endregion
 
         #region JTB
         static void JTB()
