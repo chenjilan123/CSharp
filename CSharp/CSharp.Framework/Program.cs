@@ -27,7 +27,7 @@ namespace CSharp.Framework
         {
             try
             {
-                HashOrder();
+                OpenFolder();
             }
             catch (Exception ex)
             {
@@ -36,6 +36,14 @@ namespace CSharp.Framework
             //Console.ReadLine();
         }
 
+        #region OpenFolder
+        static void OpenFolder()
+        {
+            var file = new FileInfo("CSharp.Framework.exe");
+
+            System.Diagnostics.Process.Start("explorer.exe", file.DirectoryName);
+        }
+        #endregion
 
         #region HashOrder
         static void HashOrder()
