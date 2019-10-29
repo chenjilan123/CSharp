@@ -1,0 +1,95 @@
+﻿[
+  {
+    "Type": "J808",
+    "Version": "V2013",
+    "Commands": [
+      //终端通用应答
+      {
+        "Name": "终端通用应答",
+        "MsgId": 1,
+        "Fields": [
+          {
+            "Name": "应答流水号",
+            "Type": "WORD"
+          },
+          {
+            "Name": "应答ID",
+            "Type": "WORD"
+          },
+          {
+            "Name": "结果",
+            "Type": "BYTE"
+          }
+        ]
+      },
+      //平台通用应答
+      {
+        "Name": "平台通用应答",
+        "MsgId": 32769,
+        "Fields": [
+          {
+            "Name": "应答流水号",
+            "Type": "WORD"
+          },
+          {
+            "Name": "应答ID",
+            "Type": "WORD"
+          },
+          {
+            "Name": "结果",
+            "Type": "BYTE"
+          }
+        ]
+      },
+      //终端心跳
+      {
+        "Name": "终端心跳",
+        "MsgId": 2,
+        "Fields": [
+
+        ]
+      },
+      {
+        "Name": "驾驶员身份信息采集上报",
+        "MsgId": 1794,
+        "Fields": [
+          {
+            "Name": "状态",
+            "Type": "BYTE"
+          },
+          {
+            "Name": "时间",
+            "Type": "BCD[n]",
+            "Length": 6
+          },
+          {
+            "Name": "IC卡读取结果",
+            "Type": "BYTE"
+          },
+          {
+            "Name": "驾驶员姓名",
+            "Type": "STRING"
+          },
+          {
+            "Name": "从业资格证编码",
+            "Type": "STRING",
+            "Length": 20
+          },
+          {
+            "Name": "发证机构名称",
+            "Type": "STRING"
+          },
+          {
+            "Name": "证件有效期",
+            "Type": "BCD[n]",
+            "Length": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Type": "J808",
+    "Version": "V2019"
+  }
+]

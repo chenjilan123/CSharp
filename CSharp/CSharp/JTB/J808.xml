@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <JTBCommand>
   <CommandSet Type="J808" Version="J2013">
-    <Command Name="" MessageId="">
-      <Field Type="UInt32"></Field>
-      <Field Type="Int32"></Field>
-      <Field Type="Bool"></Field>
+    <Command Name="哔哔" MessageId="">
+      <Field Type="UInt32" Name="哈哈"></Field>
+      <Field Type="Int32" Name="呵呵"></Field>
+      <Field Type="Bool" Name=""></Field>
+      <Field Type="List"></Field>
+    </Command>
+    <Command Name="xswl" MessageId="">
+      <Field Type="UInt32" Name="哈哈"></Field>
+      <Field Type="Int32" Name="呵呵"></Field>
+      <Field Type="Bool" Name=""></Field>
       <Field Type="List"></Field>
     </Command>
   </CommandSet>

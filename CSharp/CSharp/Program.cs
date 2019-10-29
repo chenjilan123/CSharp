@@ -1,6 +1,7 @@
 ﻿using CSharp.Entity;
 using CSharp.File;
 using CSharp.json;
+using CSharp.JTB;
 using CSharp.xml;
 using System;
 using System.Collections;
@@ -9,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -21,7 +23,7 @@ namespace CSharp
         {
             try
             {
-                ImageFormat();
+                JTB_();
             }
             catch (Exception ex)
             {
@@ -36,11 +38,75 @@ namespace CSharp
         }
         #endregion
 
-        #region JTB
-        static void JTB()
+        #region JTB_
+        static void JTB_()
         {
-            var s = new JTB.J808Command().GetDescription();
-            Console.WriteLine(s);
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            //Encoding Gb2312 = Encoding.GetEncoding("gb2312");
+            //var s1 = "哈";
+            //var s2 = "哈哈";
+            //var s1Len = Gb2312.GetBytes(s1).Length;
+            //var s2Len = Gb2312.GetBytes(s2).Length;
+            //Console.WriteLine(s1.PadRight(6 - s1Len + s1.Length, '1'));
+            //Console.WriteLine(s2.PadRight(6 - s2Len + s2.Length, '1'));
+            //return;
+
+            JTB.J808ProtocolRulerProvider.Instance.Load();
+
+            //var s = new JTB.J808Command().GetDescription();
+            //Console.WriteLine(s);
+
+            //var command = JTB.J808ProtocolRulerProvider.Instance.GetJ808V2013Command(33029);
+            //foreach (var field in command.Fields)
+            //{
+            //    Console.WriteLine($"Type: {field.Type}, Name: {field.Name}, Length: {field.Length}");
+            //}
+
+            var command = new J808Command();
+            var serializer = new JTBSerializer();
+
+            //驾驶员身份信息采集上报
+            var data = new byte[]
+            {
+                //状态
+                0x01,
+                //时间
+                0x19, 0x10, 0x29, 0x14, 0x06, 0x05,
+                //IC卡读取结果
+                0x00,
+                //驾驶员姓名长度
+                0x06,
+                //驾驶员姓名
+                0xC7, 0xF1, 0xD4, 0xC6, 0xB7, 0xC9,
+                //从业资格证编码
+                0x33, 0x35, 0x30, 0x31, 0x32, 0x33, 0x34, 0x34, 0x34, 0x30, 0x30, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                //发证机构名称长度
+                0x0C,
+                //发证机构名称
+                0xB8, 0xA3, 0xBD, 0xA8, 0xCA, 0xA1, 0xBD, 0xBB, 0xCD, 0xA8, 0xCC, 0xFC,
+                //证件有效期
+                0x20, 0x24, 0x10, 0x01
+            };
+            command.Id = 0x0702;
+
+            //终端通用应答
+            data = new byte[]
+            {
+                0xF4,
+                0xF3,
+                0x55,
+                0x44,
+                0x00
+            };
+            command.Id = 0x0001;
+
+            //终端心跳
+            data = new byte[0];
+            command.Id = 0x0002;
+
+            var cmd = serializer.Deserialize(command, data);
+            Console.WriteLine(cmd.GetDescription());
         }
         #endregion
 
