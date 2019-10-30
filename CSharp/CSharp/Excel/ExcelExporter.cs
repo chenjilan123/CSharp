@@ -25,8 +25,8 @@ namespace CSharp.Excel
         private readonly string emptyFile = GetPath("empty.xls");
         private readonly string summaryFile = GetPath("summary.xls");
         private readonly string cellFile = GetPath("cell.xls");
-        private readonly string commentFile = GetPath("comment.xls"); 
-        private readonly string cellFormatFile = GetPath("cell format.xls"); 
+        private readonly string commentFile = GetPath("comment.xls");
+        private readonly string cellFormatFile = GetPath("cell format.xls");
 
         static ExcelExporter()
         {
@@ -195,6 +195,34 @@ namespace CSharp.Excel
         #region xlsx
         public void CreateWorkBook()
         {
+            //IWorkbook workbook = new XSSFWorkbook();
+            //workbook.CreateSheet("Sheet A1");
+            //workbook.CreateSheet("Sheet A2");
+            //workbook.CreateSheet("Sheet A3");
+            //var sheet = workbook.GetSheetAt(0);
+            ////sheet.SetDefaultColumnStyle();
+            //IRow row = sheet.CreateRow(5);
+            //ICell cell = row.CreateCell(5);
+            //cell.SetCellValue("hello");
+
+            //FileStream sw = File.Create("test.xlsx");
+            //workbook.Write(sw);
+            //sw.Close();
+            //return;
+
+            //var workbook1 = new XSSFWorkbook("报警明细.xls");
+            ////using (var fs = new FileStream("车辆不在线明细.xlsx", FileMode.OpenOrCreate, FileAccess.Write))
+            ////{
+            ////    workbook1.Write(fs);
+            ////}
+            //FileStream sw = File.Create("test.xlsx");
+            //workbook1.Write(sw);
+            //sw.Close();
+            ////workbook1.Close();
+
+            //SetCellValuesInXlsx();
+            //return;
+
             var files = Directory.GetFiles("xslxTemplate");
             foreach (var filePath in files)
             {
@@ -203,21 +231,86 @@ namespace CSharp.Excel
                     continue;
                 }
 
-                var file = new FileInfo(filePath);
-                var modePath = new FileStream(file.FullName, FileMode.Open, FileAccess.Read);
+                //var file = new FileInfo(filePath);
+                //var modePath = new FileStream(file.FullName, FileMode.Open, FileAccess.ReadWrite);
+                //IWorkbook workbook = new XSSFWorkbook(filePath);
                 //IWorkbook workbook = new XSSFWorkbook(modePath);
-                IWorkbook workbook = new XSSFWorkbook(modePath);
-                var sheet = workbook.GetSheetAt(0);
-                IRow row = sheet.CreateRow(5);
-                ICell cell = row.CreateCell(5);
-                cell.SetCellValue("hello");
+                //var sheet = workbook.GetSheetAt(0);
+                //sheet.SetDefaultColumnStyle()
+                //IRow row = sheet.CreateRow(5);
+                //ICell cell = row.CreateCell(5);
+                //cell.SetCellValue("hello");
 
-                using (var fs = new FileStream($"Excel/{file.Name}", FileMode.OpenOrCreate, FileAccess.Write))
+                //var sheetName = "hehe";
+                //ISheet outputSheet = workbook?.GetSheet(sheetName) ?? workbook?.CreateSheet(sheetName);
+
+                IWorkbook workbook;
+                using (var fs = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Read))
                 {
-                    workbook.Write(fs);
+                    workbook = WorkbookFactory.Create(fs);
+                    fs.Close();
                 }
 
+                //var sheetName = "hehe";
+                //ISheet outputSheet = workbook?.GetSheet(sheetName) ?? workbook?.CreateSheet(sheetName);
+
+                //ISheet s1 = workbook.GetSheetAt(2);
+                //IRow row = s1.CreateRow(5);
+                //ICell cell = row.CreateCell(5);
+                //cell.SetCellValue("hello");
+
+                ISheet s1 = workbook.GetSheetAt(3);
+                //Console.WriteLine(s1.SheetName);
+
+                var row = s1.GetRow(0);
+                //导致错误
+                row.
+                row.HeightInPoints = 10;
+
+                var sFile = $"Excel/{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.tmp";
+                using (var fs = new FileStream(sFile, FileMode.Create, FileAccess.Write))
+                {
+                    workbook.Write(fs);
+                    fs.Close();
+                }
+
+                File.Move(sFile, sFile.Substring(0, sFile.Length - 4) + ".xlsx");
             }
+        }
+
+        void SetCellValuesInXlsx()
+        {
+            //IWorkbook workbook = new XSSFWorkbook();
+            //ISheet sheet1 = workbook.CreateSheet("Sheet1");
+            //sheet1.CreateRow(0).CreateCell(0).SetCellValue("This is a Sample");
+            //int x = 1;
+            //for (int i = 1; i <= 15; i++)
+            //{
+            //    IRow row = sheet1.CreateRow(i);
+            //    for (int j = 0; j < 15; j++)
+            //    {
+            //        row.CreateCell(j).SetCellValue(x++);
+            //    }
+            //}
+            //FileStream sw = File.Create("test.xlsx");
+            //workbook.Write(sw);
+            //sw.Close();
+
+            IWorkbook workbook = new XSSFWorkbook("test.xlsx");
+            ISheet sheet1 = workbook.GetSheet("Sheet1");
+            sheet1.CreateRow(0).CreateCell(0).SetCellValue("This is a Sample");
+            int x = 1;
+            for (int i = 1; i <= 15; i++)
+            {
+                IRow row = sheet1.CreateRow(i);
+                for (int j = 0; j < 15; j++)
+                {
+                    row.CreateCell(j).SetCellValue(x++);
+                }
+            }
+            FileStream sw = File.Create("test1.xlsx");
+            workbook.Write(sw);
+            sw.Close();
         }
         #endregion
     }
