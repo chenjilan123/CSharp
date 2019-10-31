@@ -21,11 +21,15 @@ namespace CSharp
 
         private static void Excel()
         {
-            var excelExporter = new ExcelExporter();
+            //Aspose
+            new AsposeExporter().Export();
+            return;
+
+            //NPOI
+            var excelExporter = new NPOIExcelExporter();
             //excelExporter
             //    .CreaterExcel()
             //    .Export();
-
             excelExporter
                 .CreateWorkBook();
         }

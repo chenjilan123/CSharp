@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Folder Include="ExcelTemplate\" />
-    <Folder Include="Lib\" />
     <Folder Include="xslxTemplate\" />
   </ItemGroup>
 
@@ -36,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.Cells" Version="19.10.0" />
     <PackageReference Include="NPOI" Version="2.4.1" />
   </ItemGroup>
 
