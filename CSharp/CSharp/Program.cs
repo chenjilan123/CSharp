@@ -30,7 +30,7 @@ namespace CSharp
             {
                 //int? value = Nullable<int> default(int?);
                 //Console.WriteLine(value.ToString());
-                Oss();
+                AliSms();
             }
             catch (Exception ex)
             {

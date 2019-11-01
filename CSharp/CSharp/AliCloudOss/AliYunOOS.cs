@@ -30,7 +30,7 @@ namespace CSharp.AliCloudOss
             //https://help.aliyun.com/document_detail/32016.html?spm=a2c4g.11186623.2.20.7e496aaehDImcH#concept-32016-zh
             //var url = client.GeneratePresignedUri("1011007", "api-ms-win-core-file-l1-1-0.dll", expiration);
             //var url = client.GeneratePresignedUri("1011007", "api-ms-win-core-file-l1-1-0.dll", expiration, SignHttpMethod.Put);
-            Console.WriteLine(url);
+            //Console.WriteLine(url);
         }
 
         public void CreateBucket()
