@@ -18,13 +18,19 @@ namespace CSharp
         {
             try
             {
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region StaticIntial
+        static void StaticIntial()
+        {
+            StaticCls.PrintI2();
+        }
+        #endregion
 
         #region DecimalCompute
         static void DecimalCompute()
