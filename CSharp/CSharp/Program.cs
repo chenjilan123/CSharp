@@ -23,11 +23,7 @@ namespace CSharp
         {
             try
             {
-<<<<<<< HEAD
                 Code();
-=======
-                JTB_();
->>>>>>> fe2d0302a17b58329233c29ce8799d0caeebe76e
             }
             catch (Exception ex)
             {
@@ -35,14 +31,14 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
         #region ImageFormat
         static void ImageFormat()
         {
             new ImageFormatSave().SaveImage();
         }
         #endregion
-
-<<<<<<< HEAD
+        
         #region Code
         static void Code()
         {
@@ -87,11 +83,7 @@ namespace CSharp
         #endregion
 
         #region JTB
-        static void JTB()
-=======
-        #region JTB_
         static void JTB_()
->>>>>>> fe2d0302a17b58329233c29ce8799d0caeebe76e
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
