@@ -17,6 +17,10 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+<<<<<<< HEAD
+=======
+    <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
+>>>>>>> fe2d0302a17b58329233c29ce8799d0caeebe76e
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.6.0" />
   </ItemGroup>
 
@@ -25,7 +29,20 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="JTB\Xsl\" />
   </ItemGroup>
 
+=======
+    <None Update="JTB\J808.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="JTB\JTB.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+>>>>>>> fe2d0302a17b58329233c29ce8799d0caeebe76e
 </Project>
