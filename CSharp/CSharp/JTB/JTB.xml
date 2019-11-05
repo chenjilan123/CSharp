@@ -2,31 +2,28 @@
 <JTBCommand>
   <CommandSet Type="J808" Version="J2013">
     <Command Name="" MessageId="">
-      <Field Type="UInt32"></Field>
-      <Field Type="Int32"></Field>
-      <Field Type="Bool"></Field>
-      <Field Type="List"></Field>
+      <Field Type="UInt32" Name=""/>
+      <Field Type="Int32" />
+      <Field Type="Bool" />
+      <Field Type="String" />
+      <Field Type="FString" />
+      <Field Type="Files" />
+      <Field Type="Videos" />
+      <Field Type="Regions" />
+      <Field Type="Paths" />
+      <Field Type="MD5" />
     </Command>
   </CommandSet>
   <CommandSet Type="J809" Version="J2013">
     <Command Name="" MessageId="">
-      <Field Type="UInt32"></Field>
-      <Field Type="Int32"></Field>
-      <Field Type="Bool"></Field>
     </Command>
   </CommandSet>
   <CommandSet Type="J808" Version="J2019">
     <Command Name="" MessageId="">
-      <Field Type="UInt32"></Field>
-      <Field Type="Int32"></Field>
-      <Field Type="Bool"></Field>
     </Command>
   </CommandSet>
   <CommandSet Type="J809" Version="J2019">
     <Command Name="" MessageId="">
-      <Field Type="UInt32" Name=""></Field>
-      <Field Type="Int32"></Field>
-      <Field Type="Bool"></Field>
     </Command>
   </CommandSet>
 </JTBCommand>

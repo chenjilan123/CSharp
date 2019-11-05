@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<?xml-stylesheet type='text/xsl' href='ExamCards.xsl' ?>
+<UnitsExamCards>
+  <ExamCard>
+    <StudentCode>16123454</StudentCode>
+    <StudentName><![CDATA[孟XX]]></StudentName>
+    <Sex>男</Sex>
+    <ExamCode>C8001229692</ExamCode>
+    <CertificateName>身份证</CertificateName>
+    <CertificateCode>345678198304010036</CertificateCode>
+    <ExamUnitName><![CDATA[上海市普陀区业余大学]]></ExamUnitName>
+    <ExamUnitCode>310004</ExamUnitCode>
+    <Photo>photo\hehe</Photo>
+    <ExamArrange>
+      <Arrange_CE>
+        <ExamSubject>
+          <SubjectName><![CDATA[大学英语B]]></SubjectName>
+          <ExamTime>2014年09月13日 16:30 - 18:00</ExamTime>
+          <RoomName><![CDATA[222室（七机房）]]></RoomName>
+          <SeatNO>26</SeatNO>
+          <ExamSite>
+            <Address><![CDATA[上海市普陀区曹杨路805号]]></Address>
+            <Busline>
+              <![CDATA[乘706、743、950、768、62、740、838、562路到三汽公司站下，
+乘轨道交通3号、4号线到曹杨路站下，乘94、44、876、143、63路到曹杨六村站下。]]>
+            </Busline>
+            <Tel><![CDATA[021-32240841]]></Tel>
+          </ExamSite>
+        </ExamSubject>
+      </Arrange_CE>
+    </ExamArrange>
+  </ExamCard>
+</UnitsExamCards>

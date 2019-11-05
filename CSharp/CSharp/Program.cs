@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -20,7 +21,7 @@ namespace CSharp
         {
             try
             {
-                JTB();
+                Code();
             }
             catch (Exception ex)
             {
@@ -28,6 +29,49 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Code
+        static void Code()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            var c = "4D41524B5F5354415455533A3D305830303B4556454E545F545950453A3D305830323B414C41524D5F47524144453A3D305830323B41484541445F53504545443A3D305830303B41484541445F44495354414E43453A3D305830303B444956455247455F545950453A3D305830313B524F41445F5349474E5F545950453A3D305830303B524F41445F5349474E5F444154413A3D305830303B53504545443A3D305835303B414C5449545544453A3D303B4C4F4E4749545544453A3D3131343530373231303B4C415449545544453A3D33373939353630373B56454849434C455F5354415455533A3D313032353B414C41524D5F49443A3D30583330344234413437343534373433313931313032313632353235303030353030000101000100000006D33DCA0243C4570050000000000000000100000000000000000000";
+            var data = StrToToHexByte(c);
+            //foreach (var b in data)
+            //{
+            //    if (b == 0x5E || b == 0x5A)
+            //    {
+            //        Console.WriteLine("hehe");
+            //        return;
+            //    }
+            //}
+            var gb2312 = Encoding.GetEncoding("GB2312");
+            var s = gb2312.GetString(data);
+            Console.Write(s);
+            Console.WriteLine();
+            var desc = "MARK_STATUS:=0X00;EVENT_TYPE:=0X02;ALARM_GRADE:=0X02;AHEAD_SPEED:=0X00;AHEAD_DISTANCE:=0X00;DIVERGE_TYPE:=0X01;ROAD_SIGN_TYPE:=0X00;ROAD_SIGN_DATA:=0X00;SPEED:=0X50;ALTITUDE:=0;LONGITUDE:=114507210;LATITUDE:=37995607;VEHICLE_STATUS:=1025;ALARM_ID:=0X304B4A47454743191102162525000500";
+            var dec = gb2312.GetBytes(desc);
+            foreach (var b in dec)
+            {
+                Console.Write(b.ToString("X2"));
+            }
+        }
+
+        /// <summary> 
+        /// 字符串转16进制字节数组 
+        /// </summary> 
+        /// <param name="hexString"></param> 
+        /// <returns></returns> 
+        static byte[] StrToToHexByte(string hexString)
+        {
+            hexString = hexString.Replace(" ", "");
+            if ((hexString.Length % 2) != 0)
+                hexString = "0" + hexString;
+            byte[] returnBytes = new byte[hexString.Length / 2];
+            for (int i = 0; i < returnBytes.Length; i++)
+                returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            return returnBytes;
+        }
+        #endregion
 
         #region JTB
         static void JTB()
