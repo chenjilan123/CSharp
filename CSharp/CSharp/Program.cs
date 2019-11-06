@@ -24,11 +24,7 @@ namespace CSharp
         {
             try
             {
-<<<<<<< HEAD
                 ProtocolBuffer();
-=======
-                Code();
->>>>>>> ff530e895511d7bed20366a241620de11f4fe16b
             }
             catch (Exception ex)
             {
@@ -36,15 +32,12 @@ namespace CSharp
             }
             Console.ReadLine();
         }
-<<<<<<< HEAD
         #region ProtocolBuffer
         static void ProtocolBuffer()
         {
             new ProtocolBufferProgram().Run();
         }
         #endregion
-=======
->>>>>>> ff530e895511d7bed20366a241620de11f4fe16b
 
         #region ImageFormat
         static void ImageFormat()
