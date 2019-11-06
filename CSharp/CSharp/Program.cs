@@ -18,12 +18,35 @@ namespace CSharp
         {
             try
             {
+                QuesQues();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region QuesQues
+        static void QuesQues()
+        {
+            var obj = GetObject();
+            if (obj is int i)
+            {
+                Console.WriteLine($"Int: {i}");
+            }
+            if (obj is string s)
+            {
+                Console.WriteLine($"String: {s}");
+            }
+        }
+
+        static Object GetObject()
+        {
+            object obj = 5;
+            obj = null;
+            return obj ?? "Halo";
+        }
+        #endregion
 
         #region Covariance 
         static void Covariance()
