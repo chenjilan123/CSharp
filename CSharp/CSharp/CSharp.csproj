@@ -27,6 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="JTB\Xsl\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="JTB\J808.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
