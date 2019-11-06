@@ -25,6 +25,28 @@ namespace CSharp
             }
         }
 
+        #region Covariance 
+        static void Covariance()
+        {
+            IEnumerable<string> a = new List<string>();
+            IEnumerable<object> b;
+            b = a;
+
+            //GenericClass<string> a1 = new GenericClass<string>();
+            //GenericClass<object> a2;
+            //a2 = a1;
+
+            GenericInterface<string> c = null;
+            GenericInterface<object> d;
+            //Error
+            //d = c;
+
+            Convariance<string> e = null;
+            Convariance<object> f;
+            f = e;
+        }
+        #endregion
+
         #region StaticIntial
         static void StaticIntial()
         {
