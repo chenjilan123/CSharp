@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <JTBCommand>
   <CommandSet Type="J808" Version="J2013">
+<<<<<<< HEAD:CSharp/CSharp/JTB/JTB.xml
+    <Command Name="" MessageId="">
+      <Field Type="UInt32" Name=""/>
+      <Field Type="Int32" />
+      <Field Type="Bool" />
+      <Field Type="String" />
+      <Field Type="FString" />
+      <Field Type="Files" />
+      <Field Type="Videos" />
+      <Field Type="Regions" />
+      <Field Type="Paths" />
+      <Field Type="MD5" />
+=======
     <Command Name="哔哔" MessageId="">
       <Field Type="UInt32" Name="哈哈"></Field>
       <Field Type="Int32" Name="呵呵"></Field>
@@ -12,27 +25,19 @@
       <Field Type="Int32" Name="呵呵"></Field>
       <Field Type="Bool" Name=""></Field>
       <Field Type="List"></Field>
+>>>>>>> fe2d0302a17b58329233c29ce8799d0caeebe76e:CSharp/CSharp/JTB/J808.xml
     </Command>
   </CommandSet>
   <CommandSet Type="J809" Version="J2013">
     <Command Name="" MessageId="">
-      <Field Type="UInt32"></Field>
-      <Field Type="Int32"></Field>
-      <Field Type="Bool"></Field>
     </Command>
   </CommandSet>
   <CommandSet Type="J808" Version="J2019">
     <Command Name="" MessageId="">
-      <Field Type="UInt32"></Field>
-      <Field Type="Int32"></Field>
-      <Field Type="Bool"></Field>
     </Command>
   </CommandSet>
   <CommandSet Type="J809" Version="J2019">
     <Command Name="" MessageId="">
-      <Field Type="UInt32" Name=""></Field>
-      <Field Type="Int32"></Field>
-      <Field Type="Bool"></Field>
     </Command>
   </CommandSet>
 </JTBCommand>
