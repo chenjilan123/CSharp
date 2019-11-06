@@ -9,6 +9,7 @@ namespace CSharp.JTB
         private static readonly Encoding Gb2312 = Encoding.GetEncoding("gb2312");
 
         private readonly List<FieldDescription> Fields;
+        public string Name { get; set; }
         public ushort Id { get; set; }
         public ushort Property { get; set; }
         public string Phone { get; set; }
@@ -16,9 +17,12 @@ namespace CSharp.JTB
 
         public J808Command()
         {
-            Property = 0x8010;
-            Phone = "13800000050";
             Fields = new List<FieldDescription>();
+        }
+
+        public void SetName(string name)
+        {
+            this.Name = name;
         }
 
         public void AppendField(string name, string value)
@@ -35,6 +39,14 @@ namespace CSharp.JTB
             return
                 $"|--------------------------------------------------------------------|" +
                 Environment.NewLine +
+                $"   消息名称：{this.Name}" +
+                Environment.NewLine +
+                $"|--------------------------------------------------------------------|" +
+                Environment.NewLine +
+                $"   消息头" +
+                Environment.NewLine +
+                "|--------------------------------------------------------------------|" +
+                Environment.NewLine +
                 $"| 消息ID " +
                 $"| 消息体属性 15   11   7    3   " +
                 $"|       手机号 " +
@@ -47,7 +59,7 @@ namespace CSharp.JTB
                 $"|      {OrderId.ToString().PadLeft(5, ' ')} " +
                 $"|" +
                 Environment.NewLine +
-                $"|--------------------------------------------------------------------|" + 
+                $"|--------------------------------------------------------------------|" +
                 Environment.NewLine;
         }
 
@@ -55,19 +67,26 @@ namespace CSharp.JTB
         {
             var header = GetHeaderDescription();
             var sb = new StringBuilder(header);
-            sb.Append($"|  数据体                                                            |{Environment.NewLine}"
+            sb.Append($"   消息体"
+                + Environment.NewLine
                 + "|--------------------------------------------------------------------|" +
             Environment.NewLine);
-            foreach (var field in Fields)
+            if (null == Fields || Fields.Count <= 0)
             {
-                var nameLen = Gb2312.GetBytes(field.Name).Length;
-                var valueLen = Gb2312.GetBytes(field.Value).Length;
-                var name = field.Name.PadLeft(28 - nameLen + field.Name.Length);
-                var value = field.Value.PadRight(38 - valueLen + field.Value.Length);
-                var l1 = name.Length;
-                sb.Append($"|{name}: {value}|{Environment.NewLine}");
+                sb.Append($"|                               空                                   |{Environment.NewLine}");
             }
-
+            else
+            {
+                foreach (var field in Fields)
+                {
+                    var nameLen = Gb2312.GetBytes(field.Name).Length;
+                    var valueLen = Gb2312.GetBytes(field.Value).Length;
+                    var name = field.Name.PadLeft(28 - nameLen + field.Name.Length);
+                    var value = field.Value.PadRight(38 - valueLen + field.Value.Length);
+                    var l1 = name.Length;
+                    sb.Append($"|{name}: {value}|{Environment.NewLine}");
+                }
+            }
             sb.Append($"|--------------------------------------------------------------------|" +
             Environment.NewLine);
             return sb.ToString();

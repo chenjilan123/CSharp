@@ -2,6 +2,7 @@
 using CSharp.File;
 using CSharp.json;
 using CSharp.JTB;
+using CSharp.Pb;
 using CSharp.xml;
 using System;
 using System.Collections;
@@ -23,7 +24,7 @@ namespace CSharp
         {
             try
             {
-                JTB_();
+                ProtocolBuffer();
             }
             catch (Exception ex)
             {
@@ -31,6 +32,13 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+        #region ProtocolBuffer
+        static void ProtocolBuffer()
+        {
+            new ProtocolBufferProgram().Run();
+        }
+        #endregion
+
         #region ImageFormat
         static void ImageFormat()
         {
@@ -63,7 +71,11 @@ namespace CSharp
             //    Console.WriteLine($"Type: {field.Type}, Name: {field.Name}, Length: {field.Length}");
             //}
 
-            var command = new J808Command();
+            var command = new J808Command
+            {
+                Property = 0x8010,
+                Phone = "13800000050",
+            };
             var serializer = new JTBSerializer();
 
             //驾驶员身份信息采集上报

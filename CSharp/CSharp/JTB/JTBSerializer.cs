@@ -11,6 +11,8 @@ namespace CSharp.JTB
         public ICommand Deserialize(J808Command command, IEnumerable<byte> data)
         {
             var commandResolver = JTB.J808ProtocolRulerProvider.Instance.GetJ808V2013Command(command.Id);
+            if (null == commandResolver) return null;
+            command.Name = commandResolver.Name;
             var enumerator = data.GetEnumerator();
             foreach (var field in commandResolver.Fields)
             {
