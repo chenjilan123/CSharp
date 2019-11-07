@@ -45,6 +45,9 @@ namespace CSharp
             object obj = 5;
             obj = null;
             return obj ?? "Halo";
+            //等价
+            //return obj == null ? "Halo" : obj;
+            //return obj != null ? obj : "Halo";
         }
         #endregion
 
