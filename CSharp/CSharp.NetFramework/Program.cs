@@ -1,4 +1,5 @@
-﻿using CSharp.NetFramework.Gis;
+﻿using CSharp.Netframework.Sms.OneNet;
+using CSharp.NetFramework.Gis;
 using CSharp.NetFramework.Tcp;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,32 @@ namespace CSharp.NetFramework
     {
         static void Main(string[] args)
         {
-            GisService();
+            OneNetSms();
         }
+
+        #region OneNetSms
+        static void OneNetSms()
+        {
+            while (true)
+            {
+                Console.Write("请输入sicode: ");
+                var sicode = Console.ReadLine();
+
+                //const string sicode = "F0CC35DC-0D8E-4FC9-9249-6C2A6A7690D9";
+                try
+                {
+                    var appendParam = "captcha=500101&expireTime=5&signId=101044";
+                    Console.WriteLine("发送短信中...");
+                    var result = new OneNetClient(sicode).SendSms("15980217471", "11423", appendParam);
+                    Console.WriteLine($"结果: {result.Result}, 描述: {result.ResultInfo}, 错误信息: {result.ErrorInfo}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+        }
+        #endregion
 
         #region StartTcpChannel
         private static void StartTcpChannel()

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace CSharp.Utility
+namespace CSharp.Netframework.Utility
 {
-    public class NewtonSerializer : ISerializer
+    public class NewtonSerializer 
     {
         private readonly JsonSerializer _serializer = new JsonSerializer();
 

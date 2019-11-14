@@ -6,6 +6,7 @@ using CSharp.Host;
 using CSharp.Model;
 using CSharp.Ping;
 using CSharp.Server;
+using CSharp.Sms.OneNet;
 using CSharp.Tcp;
 using CSharp.Udp;
 using CSharp.Udp.Broadcast;
@@ -28,9 +29,7 @@ namespace CSharp
         {
             try
             {
-                //int? value = Nullable<int> default(int?);
-                //Console.WriteLine(value.ToString());
-                AliSms();
+                OneNetSms();
             }
             catch (Exception ex)
             {
@@ -38,10 +37,36 @@ namespace CSharp
             }
         }
 
-        protected internal void Add()
+        #region OneNetSms
+        static void OneNetSms()
         {
-
+            const string sicode = "F0CC35DC-0D8E-4FC9-9249-6C2A6A7690D9";
+            var customParams = new Dictionary<string, string>
+            {
+                { "code", "505641" },
+                { "time", "5" },
+            };
+            try
+            {
+                var result = new OneNetClient(sicode).SendSms("15980217471", "111423", customParams);
+                Console.WriteLine($"Result: {result.Result}, ResultInfo: {result.ResultInfo}, ErrorInfo: {result.ErrorInfo}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
+        #endregion
+
+        #region Nullable
+        protected internal void Nullable()
+        {
+            //int? value = new Nullable<int>();
+            int? value = default(int?);
+            Console.WriteLine(value.ToString());
+        }
+        #endregion
+
         #region Oss
         static void Oss()
         {
