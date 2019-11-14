@@ -24,7 +24,7 @@ namespace CSharp
         {
             try
             {
-                ProtocolBuffer();
+                Date();
             }
             catch (Exception ex)
             {
@@ -32,6 +32,25 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+        #region Date
+        static void Date()
+        {
+            var date = DateTime.Now;
+
+            var prev = date.Date.AddDays(-1D);
+            Console.WriteLine(prev);
+        }
+        #endregion
+
+        #region TryParse
+        static void TryParse()
+        {
+            var iValue = 50;
+            int.TryParse("hehe", out iValue);
+            Console.WriteLine(iValue);
+        }
+        #endregion
+
         #region ProtocolBuffer
         static void ProtocolBuffer()
         {
