@@ -18,13 +18,46 @@ namespace CSharp
         {
             try
             {
-                QuesQues();
+                //var data = TrimByte(new byte[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 }, 0);
+                var data = TrimByte(new byte[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 }, 3, 5, 0);
+                //var data = TrimByte(new byte[] { 0, 0, 0, 0 }, 0);
+                //var data = TrimByte(new byte[] { 1, 2, 3, 0, 0, 5, 0, 0 }, 0);
+                foreach (var b in data)
+                {
+                    Console.Write(b);
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region TrimByte
+        private static byte[] TrimByte(byte[] data, int begin, int length, byte trim)
+        {
+            var data1 = new byte[length];
+            for (int i = 0; i < data1.Length; i++)
+            {
+                data1[i] = data[begin + i];
+            }
+            var index = data1.Length - 1;
+            while (index >= 0 && data1[index] == trim)
+                index--;
+            if (index < 0) return new byte[0];
+            return data1.Take(index + 1).ToArray();
+        }
+
+        private static byte[] TrimByte(byte[] data, byte trim)
+        {
+            return TrimByte(data, 0, data.Length, trim);
+            //var index = data.Length - 1;
+            //while (index >= 0 && data[index] == trim)
+            //    index--;
+            //if (index < 0) return new byte[0];
+            //return data.Take(index + 1).ToArray();
+        }
+        #endregion
 
         #region QuesQues
         static void QuesQues()
