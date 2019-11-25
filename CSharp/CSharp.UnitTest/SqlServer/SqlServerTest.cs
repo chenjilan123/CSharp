@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Xunit;
@@ -8,12 +9,13 @@ namespace CSharp.UnitTest
 {
     public class SqlServerTest
     {
+        private SqlServer.Sapphire sapphire = new SqlServer.Sapphire();
+
+
         #region Sapphire
         [Fact]
         public void Sapphire()
         {
-            var sapphire = new SqlServer.Sapphire();
-
             //链路断开信息测试
             const string userId = "cjl";
             foreach (var testData in TestData.GetTestData())
@@ -95,6 +97,54 @@ namespace CSharp.UnitTest
             public DateTime EndTime { get; set; }
             public int DisconnNum { get; set; }
             public int DisconnTime { get; set; }
+        }
+        #endregion
+
+        #region ExecuteOvertime
+        /// <summary>
+        /// 执行超时
+        /// </summary>
+        [Fact]
+        public void ExecuteOvertime()
+        {
+            var result = sapphire.Database.SqlQuery<int>(@"waitfor delay '00:00:05';
+select 1");
+            var array = result.ToArray();
+        }
+        #endregion
+
+        #region ExecuteOvertime1
+        /// <summary>
+        /// 执行超时
+        /// </summary>
+        [Theory]
+        [InlineData("00:00:15")]
+        [InlineData("00:00:25")]
+        [InlineData("00:00:35")]
+        [InlineData("00:00:45")]
+        [InlineData("00:00:55")]
+        [InlineData("00:01:05")]
+        public void ExecuteOvertime1(string delay)
+        {
+            try
+            {
+                var sql = $@"waitfor delay '{delay}';select 1";
+                sql = "insert into biz(i) values(1);";
+
+                var id = Guid.NewGuid();
+                sql = $"insert into TaskInsert(Id, CreateTime, UId) values(2000, GETDATE(), '{id.ToString()}');waitfor delay '00:00:31'";
+                var result = sapphire.Database.SqlQuery<int>(sql);
+                var array = result.ToArray();
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
         #endregion
     }
