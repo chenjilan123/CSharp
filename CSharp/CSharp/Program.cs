@@ -29,13 +29,20 @@ namespace CSharp
         {
             try
             {
-                OneNetSms();
+                TcpFile();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region TcpFile
+        private static void TcpFile()
+        {
+            new TcpFile().RunDemo();
+        }
+        #endregion
 
         #region OneNetSms
         static void OneNetSms()
