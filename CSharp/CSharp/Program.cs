@@ -30,6 +30,7 @@ namespace CSharp
         static void BitConvert()
         {
             Console.WriteLine($"IsBigEndian: {!BitConverter.IsLittleEndian}");
+            
             var bytes = BitConverter.GetBytes(111.54);
             Print(bytes);
             Console.WriteLine();
