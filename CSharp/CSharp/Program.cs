@@ -29,13 +29,20 @@ namespace CSharp
         {
             try
             {
-                TcpFile();
+                WebClient();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region WebClient
+        private static void WebClient()
+        {
+            new Http.HttpWebClient().RunDemo();
+        }
+        #endregion
 
         #region TcpFile
         private static void TcpFile()
