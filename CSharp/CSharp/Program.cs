@@ -18,14 +18,7 @@ namespace CSharp
         {
             try
             {
-                //var data = TrimByte(new byte[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 }, 0);
-                var data = TrimByte(new byte[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 }, 3, 5, 0);
-                //var data = TrimByte(new byte[] { 0, 0, 0, 0 }, 0);
-                //var data = TrimByte(new byte[] { 1, 2, 3, 0, 0, 5, 0, 0 }, 0);
-                foreach (var b in data)
-                {
-                    Console.Write(b);
-                }
+                ReadFile();
             }
             catch (Exception ex)
             {
@@ -33,7 +26,44 @@ namespace CSharp
             }
         }
 
+        #region ReadFile
+        private static void ReadFile()
+        {
+            var file = new FileInfo("source/111.db");
+            using (var fs = file.OpenRead())
+            {
+                var buffer = new byte[1024];
+                var data = new byte[fs.Length + 1024];
+                var index = 0;
+                var len = fs.Read(buffer, 0, buffer.Length);
+                while(len > 0)
+                {
+                    buffer.CopyTo(data, index);
+                    index += len;
+                    len = fs.Read(buffer, 0, buffer.Length);
+                }
+                for (int i = 0; i < index; i++)
+                {
+                    Console.Write(data[i]);
+                }
+            }
+        }
+        #endregion
+
         #region TrimByte
+        private static void TrimByte()
+        {
+
+            //var data = TrimByte(new byte[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 }, 0);
+            var data = TrimByte(new byte[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 }, 3, 5, 0);
+            //var data = TrimByte(new byte[] { 0, 0, 0, 0 }, 0);
+            //var data = TrimByte(new byte[] { 1, 2, 3, 0, 0, 5, 0, 0 }, 0);
+            foreach (var b in data)
+            {
+                Console.Write(b);
+            }
+        }
+
         private static byte[] TrimByte(byte[] data, int begin, int length, byte trim)
         {
             var data1 = new byte[length];
