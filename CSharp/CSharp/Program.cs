@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 
+using sb = System.Text.StringBuilder;
+
 namespace CSharp
 {
     class Program
@@ -18,7 +20,7 @@ namespace CSharp
         {
             try
             {
-                QuesQues();
+                sb s = new sb();
             }
             catch (Exception ex)
             {
