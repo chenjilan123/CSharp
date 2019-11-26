@@ -18,13 +18,36 @@ namespace CSharp
         {
             try
             {
-                ReadFile();
+                BitConvert();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region BitConvert
+        static void BitConvert()
+        {
+            Console.WriteLine($"IsBigEndian: {!BitConverter.IsLittleEndian}");
+            var bytes = BitConverter.GetBytes(111.54);
+            Print(bytes);
+            Console.WriteLine();
+            bytes = BitConverter.GetBytes(5);
+            Print(bytes);
+            void Print(byte[] data)
+            {
+                if (BitConverter.IsLittleEndian)
+                {
+                    Array.Reverse(data);
+                }
+                foreach (var b in data)
+                {
+                    Console.Write(b.ToString("X2"));
+                }
+            }
+        }
+        #endregion
 
         #region ReadFile
         private static void ReadFile()
