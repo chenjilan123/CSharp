@@ -13,10 +13,10 @@ namespace CSharp.Tcp
     /// </summary>
     public class NClient
     {
-        public TcpClient Client { get; set; }
+        public TcpClient Client { get; }
 
-        private PipeReader Reader { get; set; }
-        private PipeWriter Writer { get; set; }
+        private PipeReader ReceiveReader { get; set; }
+        private PipeWriter ReceiveWriter { get; set; }
         /// <summary>
         /// 发送管道
         /// </summary>
@@ -28,15 +28,19 @@ namespace CSharp.Tcp
 
         public NChannel Channel { get; }
 
-        public NClient(NChannel channel, PipeReader sendReader)
+        public NClient(TcpClient client)
         {
+            this.Client = client;
+            var pipeSend = new Pipe();
+            var handler = new NHandler(pipeSend.Writer, this);
+            var channel = new NChannel(handler, this);
             this.Channel = channel;
 
             var pipe = new Pipe();
-            this.Reader = pipe.Reader;
-            this.Writer = pipe.Writer;
+            this.ReceiveReader = pipe.Reader;
+            this.ReceiveWriter = pipe.Writer;
 
-            this.SendReader = sendReader;
+            this.SendReader = pipeSend.Reader;
         }
 
         public Task StartAsync()
@@ -68,27 +72,27 @@ namespace CSharp.Tcp
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"NClient.SendAsync: {ex.ToString()}");
+                Console.WriteLine($"NClient.SendAsync: {ex.Message}");
             }
             SendReader.Complete();
-            Console.WriteLine("Send completed.");
+            Console.WriteLine($"{Client.Client.RemoteEndPoint}-Send completed.");
         }
 
         private async Task PrepareHandleAsync()
         {
             while (true)
             {
-                var result = await Reader.ReadAsync();
+                var result = await ReceiveReader.ReadAsync();
                 var buffer = result.Buffer;
                 var position = buffer.Start;
                 while (buffer.TryGet(ref position, out var memory))
                 {
                     this.Channel.Push(memory.Span);
                 }
-                Reader.AdvanceTo(buffer.End);
+                ReceiveReader.AdvanceTo(buffer.End);
                 if (result.IsCanceled || result.IsCompleted) break;
             }
-            Console.WriteLine("Handler completed.");
+            Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}-{Client.Client.RemoteEndPoint}-Handler completed.");
         }
 
         public async Task ReceiveAsync()
@@ -102,10 +106,10 @@ namespace CSharp.Tcp
                     var count = await stream.ReadAsync(buffer, 0, buffer.Length);
                     if (count == 0) break;
 
-                    var memory = Writer.GetMemory(count);
+                    var memory = ReceiveWriter.GetMemory(count);
                     buffer.AsSpan(0, count).CopyTo(memory.Span);
-                    Writer.Advance(count);
-                    var result = await Writer.FlushAsync();
+                    ReceiveWriter.Advance(count);
+                    var result = await ReceiveWriter.FlushAsync();
                     if (result.IsCanceled || result.IsCompleted)
                     {
                         break;
@@ -114,15 +118,15 @@ namespace CSharp.Tcp
             }
             catch (IOException ex)
             {
-                Console.WriteLine("Client closed. " + ex.ToString());
+                Console.WriteLine("Client closed. " + ex.Message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine(ex.Message);
             }
             this.IsComplete = true;
-            Console.WriteLine("Receive completed.");
-            Writer.Complete();
+            Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}-{Client.Client.RemoteEndPoint}-Receive completed.");
+            ReceiveWriter.Complete();
         }
     }
 }

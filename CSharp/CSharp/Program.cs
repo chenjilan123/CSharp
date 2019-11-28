@@ -8,6 +8,7 @@ using CSharp.Ping;
 using CSharp.Server;
 using CSharp.Sms.OneNet;
 using CSharp.Tcp;
+using CSharp.Tcp.NTcpClient;
 using CSharp.Udp;
 using CSharp.Udp.Broadcast;
 using CSharp.Utility;
@@ -31,34 +32,43 @@ namespace CSharp
         {
             try
             {
-                PrintInfo("1");
-                TaskDemo();
-                PrintInfo("2");
-
-                Console.ReadLine();
+                NTcp();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
+            Console.ReadLine();
         }
 
         #region TaskDemo
-        static async void TaskDemo()
+        static void TaskDemo()
+        {
+            PrintInfo("1");
+            TaskDemoAsync();
+            PrintInfo("2");
+            Console.ReadLine();
+        }
+
+        static async void TaskDemoAsync()
         {
             PrintInfo("01");
-            var i = await GetResultAsync();
+            //var i = await GetResultAsync().ConfigureAwait(false);
+            var i = await GetResultAsync("1").ConfigureAwait(true);
             PrintInfo("04");
+            Console.WriteLine(i);
+            i = await GetResultAsync("2").ConfigureAwait(false);
+            PrintInfo("05");
             Console.WriteLine(i);
         }
 
-        static Task<int> GetResultAsync()
+        static Task<int> GetResultAsync(string i)
         {
-            PrintInfo("002");
+            PrintInfo($"0{i}2");
             var task = new Task<int>(() =>
             {
                 Thread.Sleep(500);
-                PrintInfo("003");
+                PrintInfo($"0{i}3");
                 return 5;
             });
             task.Start();
@@ -121,6 +131,35 @@ namespace CSharp
         static void Oss()
         {
             new AliYunOss().GetBucket();
+        }
+        #endregion
+
+        #region NTcp
+        static void NTcp()
+        {
+            var i = string.Empty;
+            while (true)
+            {
+                Console.WriteLine("请选择运行客户端还是服务端: 0-客户端, 1-服务端");
+                i = Console.ReadLine();
+                if (i == "0")
+                {
+                    NClient();
+                    break;
+                }
+                else if (i == "1")
+                {
+                    NServer();
+                    break;
+                }
+            }
+        }
+        #endregion
+
+        #region NClient
+        static void NClient()
+        {
+            new NTcpClient().Run();
         }
         #endregion
 

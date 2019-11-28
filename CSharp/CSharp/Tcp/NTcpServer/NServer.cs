@@ -25,7 +25,7 @@ namespace CSharp.Tcp
             while(true)
             {
                 var client = await server.AcceptTcpClientAsync();
-                Console.WriteLine("New client accepted");
+                Console.WriteLine($"New client accepted: {client.Client.RemoteEndPoint}");
                 var nClient = CreateClient(client);
                 await nClient.StartAsync();
             }
@@ -33,11 +33,7 @@ namespace CSharp.Tcp
 
         private NClient CreateClient(TcpClient client)
         {
-            var pipeSend = new Pipe();
-            var handler = new NHandler(pipeSend.Writer);
-            var channel = new NChannel(handler);
-            var nClient = new NClient(channel, pipeSend.Reader);
-            nClient.Client = client;
+            var nClient = new NClient(client);
             return nClient;
         }
     }

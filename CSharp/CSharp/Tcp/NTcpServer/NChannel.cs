@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace CSharp.Tcp
@@ -15,10 +16,14 @@ namespace CSharp.Tcp
         private bool _canStart = false;
 
         public NHandler Handler { get; }
+        public NClient Client { get; }
+        public EndPoint RemoteEndPoint { get; }
 
-        public NChannel(NHandler handler)
+        public NChannel(NHandler handler, NClient client)
         {
             this.Handler = handler;
+            this.Client = client;
+            this.RemoteEndPoint = client.Client.Client.RemoteEndPoint;
         }
 
         /// <summary>
@@ -34,7 +39,7 @@ namespace CSharp.Tcp
                 sb.Append(b.ToString("X2"));
             }
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Receive data. Content：{sb.ToString()}");
+            Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}-{RemoteEndPoint}-Receive data. Content：{sb.ToString()}");
             Console.ForegroundColor = ConsoleColor.White;
             Package(span);
         }

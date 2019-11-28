@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Pipelines;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,13 @@ namespace CSharp.Tcp
     public class NHandler
     {
         private PipeWriter Writer { get; }
-
-        public NHandler(PipeWriter writer)
+        private NClient Client { get; }
+        private EndPoint RemoteEndPoint { get; }
+        public NHandler(PipeWriter writer, NClient client)
         {
             this.Writer = writer;
+            this.Client = client;
+            this.RemoteEndPoint = client.Client.Client.RemoteEndPoint;
         }
 
         public void HandlePackage(ReadOnlyCollection<byte> data)
@@ -28,7 +32,7 @@ namespace CSharp.Tcp
                 sb.Append(b.ToString("X2"));
             }
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"      Receive package：{sb.ToString()}");
+            Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}-{RemoteEndPoint}-Receive package：{sb.ToString()}");
             Console.ForegroundColor = ConsoleColor.White;
 
 
