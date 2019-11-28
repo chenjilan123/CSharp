@@ -19,6 +19,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CSharp
 {
@@ -29,13 +31,47 @@ namespace CSharp
         {
             try
             {
-                WebClient();
+                PrintInfo("1");
+                TaskDemo();
+                PrintInfo("2");
+
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region TaskDemo
+        static async void TaskDemo()
+        {
+            PrintInfo("01");
+            var i = await GetResultAsync();
+            PrintInfo("04");
+            Console.WriteLine(i);
+        }
+
+        static Task<int> GetResultAsync()
+        {
+            PrintInfo("002");
+            var task = new Task<int>(() =>
+            {
+                Thread.Sleep(500);
+                PrintInfo("003");
+                return 5;
+            });
+            task.Start();
+            return task;
+        }
+
+        static void PrintInfo(string i)
+        {
+            var currentThread = Thread.CurrentThread;
+            Console.WriteLine($"{i}-CurrentThread: Id-{currentThread.ManagedThreadId}, Name-{currentThread.Name}" +
+                $", IsBackground-{currentThread.IsBackground}, IsThreadPool: {currentThread.IsThreadPoolThread}");
+        }
+        #endregion
 
         #region WebClient
         private static void WebClient()
