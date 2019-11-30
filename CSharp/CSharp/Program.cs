@@ -28,6 +28,93 @@ namespace CSharp
             }
         }
 
+        #region BitConvert
+        static void BitConvert()
+        {
+            Console.WriteLine($"IsBigEndian: {!BitConverter.IsLittleEndian}");
+            
+            var bytes = BitConverter.GetBytes(111.54);
+            Print(bytes);
+            Console.WriteLine();
+            bytes = BitConverter.GetBytes(5);
+            Print(bytes);
+            void Print(byte[] data)
+            {
+                if (BitConverter.IsLittleEndian)
+                {
+                    Array.Reverse(data);
+                }
+                foreach (var b in data)
+                {
+                    Console.Write(b.ToString("X2"));
+                }
+            }
+        }
+        #endregion
+
+        #region ReadFile
+        private static void ReadFile()
+        {
+            var file = new FileInfo("source/111.db");
+            using (var fs = file.OpenRead())
+            {
+                var buffer = new byte[1024];
+                var data = new byte[fs.Length + 1024];
+                var index = 0;
+                var len = fs.Read(buffer, 0, buffer.Length);
+                while(len > 0)
+                {
+                    buffer.CopyTo(data, index);
+                    index += len;
+                    len = fs.Read(buffer, 0, buffer.Length);
+                }
+                for (int i = 0; i < index; i++)
+                {
+                    Console.Write(data[i]);
+                }
+            }
+        }
+        #endregion
+
+        #region TrimByte
+        private static void TrimByte()
+        {
+
+            //var data = TrimByte(new byte[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 }, 0);
+            var data = TrimByte(new byte[] { 1, 2, 3, 4, 5, 0, 0, 0, 0 }, 3, 5, 0);
+            //var data = TrimByte(new byte[] { 0, 0, 0, 0 }, 0);
+            //var data = TrimByte(new byte[] { 1, 2, 3, 0, 0, 5, 0, 0 }, 0);
+            foreach (var b in data)
+            {
+                Console.Write(b);
+            }
+        }
+
+        private static byte[] TrimByte(byte[] data, int begin, int length, byte trim)
+        {
+            var data1 = new byte[length];
+            for (int i = 0; i < data1.Length; i++)
+            {
+                data1[i] = data[begin + i];
+            }
+            var index = data1.Length - 1;
+            while (index >= 0 && data1[index] == trim)
+                index--;
+            if (index < 0) return new byte[0];
+            return data1.Take(index + 1).ToArray();
+        }
+
+        private static byte[] TrimByte(byte[] data, byte trim)
+        {
+            return TrimByte(data, 0, data.Length, trim);
+            //var index = data.Length - 1;
+            //while (index >= 0 && data[index] == trim)
+            //    index--;
+            //if (index < 0) return new byte[0];
+            //return data.Take(index + 1).ToArray();
+        }
+        #endregion
+
         #region QuesQues
         static void QuesQues()
         {
