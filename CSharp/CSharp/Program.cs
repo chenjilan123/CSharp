@@ -21,6 +21,7 @@ namespace CSharp
             try
             {
                 sb s = new sb();
+                BitConvert();
             }
             catch (Exception ex)
             {
