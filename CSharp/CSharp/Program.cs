@@ -3,6 +3,7 @@ using CSharp.Client;
 using CSharp.Client.HEZD;
 using CSharp.Handler;
 using CSharp.Host;
+using CSharp.Http;
 using CSharp.Model;
 using CSharp.Ping;
 using CSharp.Server;
@@ -19,6 +20,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,7 +34,7 @@ namespace CSharp
         {
             try
             {
-                NTcp();
+                WebProxyClient();
             }
             catch (Exception ex)
             {
@@ -40,6 +42,48 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region ResolveUrl
+        static void ResolveUrl()
+        {
+            //var sUrl = "www.baidu.com:443";
+            //var sUri = "http://www.baidu.com";
+            var sUri = "http://www.baidu.com:443";
+            var uri = new Uri(sUri);
+            var ipHost = Dns.Resolve(uri.Host);
+            Console.WriteLine(ipHost.HostName);
+        }
+        #endregion
+
+        #region WebProxyClient
+        static void WebProxyClient()
+        {
+            new HttpProxyClient().HttpGetByProxy();
+        }
+        #endregion
+
+        #region WebProxy
+        static void WebProxy()
+        {
+            const int port = 8000;
+            //定义端口号  
+            TcpListener tcplistener = new TcpListener(port);
+            Console.WriteLine("侦听端口号： " + port.ToString());
+            tcplistener.Start();
+            //侦听端口号  
+            while (true)
+            {
+                Socket socket = tcplistener.AcceptSocket();
+                //并获取传送和接收数据的Scoket实例  
+                HttpProxyServer proxy = new HttpProxyServer(socket);
+                //Proxy类实例化  
+                Thread thread = new Thread(new ThreadStart(proxy.Run));
+                //创建线程  
+                thread.Start();
+                //启动线程  
+            }
+        }
+        #endregion
 
         #region TaskDemo
         static void TaskDemo()
