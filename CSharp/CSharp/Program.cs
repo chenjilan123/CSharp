@@ -1,6 +1,7 @@
 ﻿using CSharp.AliCloudOss;
 using CSharp.Client;
 using CSharp.Client.HEZD;
+using CSharp.Dns_;
 using CSharp.Handler;
 using CSharp.Host;
 using CSharp.Http;
@@ -35,7 +36,8 @@ namespace CSharp
         {
             try
             {
-                WebProxyClient();
+                //System.ComponentModel.Int64Converter.StandardValuesCollection a;
+                Dns_();
             }
             catch (Exception ex)
             {
@@ -43,6 +45,13 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Dns_
+        static void Dns_()
+        {
+            new DnsResolver().Resolve();
+        }
+        #endregion
 
         #region ResolveUrl
         static void ResolveUrl()
