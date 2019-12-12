@@ -29,6 +29,16 @@ namespace CSharp
             }
         }
 
+        #region Collection
+        static void Collection()
+        {
+            Queue<int> a = null;
+            SortedList<int, int> b;
+            LinkedList<int> c;
+
+        }
+        #endregion
+
         #region BitConvert
         static void BitConvert()
         {
