@@ -2,6 +2,7 @@
 using CSharp.BestPractice;
 using CSharp.Core;
 using CSharp.IO;
+using CSharp.Model;
 using CSharp.PLINQs;
 using CSharp.Rx;
 using CSharp.Tasks;
@@ -49,7 +50,7 @@ namespace CSharp
             //return;
             try
             {
-                AsyncIO();
+                Flags();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -58,6 +59,19 @@ namespace CSharp
                 Console.WriteLine(ex.ToString());
             }
         }
+        #region Flags
+        static void Flags()
+        {
+            {
+                var f = FlagBits1.B1 | FlagBits1.B2 | FlagBits1.B3 | FlagBits1.B4;
+                Console.WriteLine(f);
+            }
+            {
+                var f = FlagBits2.B1 | FlagBits2.B2 | FlagBits2.B3 | FlagBits2.B4;
+                Console.WriteLine(f);
+            }
+        }
+        #endregion
 
         #region Task
         private static async void RunTask()
