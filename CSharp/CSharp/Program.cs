@@ -20,14 +20,27 @@ namespace CSharp
         {
             try
             {
-                sb s = new sb();
-                BitConvert();
+                Flags();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region Flags
+        static void Flags()
+        {
+            {
+                var f = FlagBits1.B1 | FlagBits1.B2 | FlagBits1.B3 | FlagBits1.B4;
+                Console.WriteLine(f);
+            }
+            {
+                var f = FlagBits2.B1 | FlagBits2.B2 | FlagBits2.B3 | FlagBits2.B4;
+                Console.WriteLine(f);
+            }
+        }
+        #endregion
 
         #region Collection
         static void Collection()
