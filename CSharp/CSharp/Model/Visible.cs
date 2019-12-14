@@ -55,4 +55,13 @@ namespace CSharp.Model
         public sealed override void M1() { }
         //public sealed void M3() { }
     }
+
+    public static class Vid1
+    { 
+        //public virtual static void Run() { }
+    }
+    //public static class Vid2 : Vid1
+    //{
+
+    //}
 }
