@@ -37,7 +37,7 @@ namespace CSharp
             try
             {
                 //System.ComponentModel.Int64Converter.StandardValuesCollection a;
-                Dns_();
+                AliSms();
             }
             catch (Exception ex)
             {
