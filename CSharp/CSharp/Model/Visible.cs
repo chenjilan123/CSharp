@@ -4,11 +4,11 @@ using System.Text;
 using System.Runtime.CompilerServices;
 
 //指定友元程序集
-[assembly: InternalsVisibleTo("CSharp.Framework, PublicKey=19a16d15-e49e-478f-aa0c-a888a96ff0d4")]
+//[assembly: InternalsVisibleTo("CSharp.Framework, PublicKey=19a16d15-e49e-478f-aa0c-a888a96ff0d4")]
 
 namespace CSharp.Model
 {
-    public class Visible 
+    public class Visible
     {
         private void Method1() { }
         private protected void Method2() { }
@@ -28,8 +28,8 @@ namespace CSharp.Model
         internal void Method5() { }
         protected internal void Method6() { }
         internal protected void Method7() { }
-        public void Method8() 
-        { 
+        public void Method8()
+        {
 
         }
     }
@@ -44,7 +44,7 @@ namespace CSharp.Model
     public static class Void<T> { }
     public struct Viud<T> { }
 
-    public class Viud1 
+    public class Viud1
     {
         public virtual void M1() { }
         public void M2() { }
@@ -62,7 +62,7 @@ namespace CSharp.Model
     }
 
     public static class Vid1
-    { 
+    {
         //public virtual static void Run() { }
     }
     //public static class Vid2 : Vid1 { }
@@ -72,12 +72,12 @@ namespace CSharp.Model
         //public virtual void Run() { }
     }
 
-    public class V1 
+    public class V1
     {
         public virtual void M1() { }
         //public sealed void M2() { }
     }
-    public class V2 : V1 
+    public class V2 : V1
     {
         public sealed override void M1()
         //public override void M1()
@@ -89,17 +89,17 @@ namespace CSharp.Model
 
     public class V3 : V2
     {
-        public override void M1()
-        {
-            base.M1();
-            //无法直接访问V2.M1
-            //base.base.M1();
-        }
+        //public override void M1()
+        //{
+        //    base.M1();
+        //    //无法直接访问V2.M1
+        //    //base.base.M1();
+        //}
     }
 
     public class Vx1
     {
-        private int i1;
+        //private int i1;
         protected int i2;
         public int i3;
         protected void Run() { }
@@ -116,5 +116,50 @@ namespace CSharp.Model
             //可访问
             //v.i3;
         }
+    }
+
+    public struct S1
+    {
+        static S1()
+        {
+            Console.WriteLine("static constroctor from S1");
+        }
+        public static int Vs1;
+        public int V1;
+    }
+
+    public class S2
+    {
+        static S2()
+        {
+            Console.WriteLine("static constroctor from S2");
+
+            throw new Exception();
+        }
+
+        public int V2;
+    }
+
+    public class C1
+    {
+        static C1()
+        {
+            Console.WriteLine("Hello C1!");
+        }
+    }
+    public class C2 : C1
+    {
+        public static int Value = 5;
+        public void SayHello() { }
+        static C2()
+        {
+            Console.WriteLine("Hello C2!");
+        }
+    }
+
+    public interface I1
+    {
+        //.NET Core3.1(C#8.0)
+        //public static int Value = 5;
     }
 }

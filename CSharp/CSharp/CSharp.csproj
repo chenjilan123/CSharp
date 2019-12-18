@@ -4,7 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSharp.Utility\CSharp.Utility.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="source\111.db">

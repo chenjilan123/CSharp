@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -20,13 +21,51 @@ namespace CSharp
         {
             try
             {
-                Flags();
+                StaticConstructor();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
+            Console.ReadLine();
         }
+
+        #region AppDomain_
+        static void AppDomain_()
+        {
+            Console.WriteLine(AppDomain.CurrentDomain);
+        }
+        #endregion
+
+        #region ConstFromRefLib
+        static void ConstFromRefLib()
+        {
+            var s = CSharp.Utility.Const.HelloWorld;
+            s += 1;
+            //Console.WriteLine(s.ToString());
+            Console.WriteLine("{0}", s);
+
+        }
+        #endregion
+
+        #region StaticConstructor
+        static void StaticConstructor()
+        {
+            //var s1 = new S1();
+            ////Console.WriteLine(S1.Vs1);
+            //var s2 = new S2();
+            //不会调用C1类型构造器。
+            //Console.WriteLine(C2.Value);
+            //会调用C1类型构造器, 因为调用了基类构造函数
+            //var c2 = new C2();
+
+            //显式运行C2的类型构造器。
+            RuntimeTypeHandle t = typeof(C2).TypeHandle;
+            RuntimeHelpers.RunClassConstructor(t);
+
+            Console.WriteLine("{0}", Type.GetTypeFromHandle(t));
+        }
+        #endregion
 
         #region Flags
         static void Flags()
@@ -45,9 +84,9 @@ namespace CSharp
         #region Collection
         static void Collection()
         {
-            Queue<int> a = null;
-            SortedList<int, int> b;
-            LinkedList<int> c;
+            //Queue<int> a = null;
+            //SortedList<int, int> b;
+            //LinkedList<int> c;
 
         }
         #endregion
@@ -175,8 +214,8 @@ namespace CSharp
             //GenericClass<object> a2;
             //a2 = a1;
 
-            GenericInterface<string> c = null;
-            GenericInterface<object> d;
+            //GenericInterface<string> c = null;
+            //GenericInterface<object> d;
             //Error
             //d = c;
 
@@ -413,25 +452,25 @@ namespace CSharp
 
                 var sFullName = Path.Combine("D:\\Top7\\AttachFile", "20190313/1265292870/6502/37d4a31c-e6b4-4723-94f8-e811f7b2fc90/00_65_6502_0_37d4a31ce6b4472394f8e811f7b2fc90.jpg");
                 Console.WriteLine(sFullName);
-                return;
+                //return;
 
                 var s = "1A156FBC";
                 foreach (var c in StringToBCD(s))
                 {
                     Console.WriteLine(c);
                 }
-                return;
+                //return;
 
                 var fileInfo = new FileInfo("hahaha.jpg");
                 Console.WriteLine(fileInfo.Extension);
-                return;
+                //return;
 
                 var i = 5;
                 Console.WriteLine("0X" + i.ToString("X2"));
 
                 var d = 1090.50;
                 Console.WriteLine((byte)d);
-                return;
+                //return;
 
                 var list = new List<byte>();
                 list.Add(1);
@@ -506,7 +545,7 @@ namespace CSharp
                 var sb = new StringBuilder();
                 AppendInfoContent(sb, "TEST", arrByte);
                 Console.WriteLine(sb.ToString());
-                return;
+                //return;
 
                 var t = DateTime.Now.ToString("yyMMddHHmmss");
                 Console.WriteLine(t);
@@ -515,7 +554,7 @@ namespace CSharp
                 {
                     Console.WriteLine(c);
                 }
-                return;
+                //return;
                 var s = StringToBCD("0123456789");
                 foreach (var c in s)
                 {
@@ -596,7 +635,7 @@ namespace CSharp
             var t2 = new DateTime(1970, 1, 1).AddSeconds(1593734400);
             Console.WriteLine(t1);
             Console.WriteLine(t2);
-            return;
+            //return;
 
             string msg;
             msg = !DateTime.TryParse("16:00:00", out var tTest) ? "Parse failure" : tTest.ToODBC();
