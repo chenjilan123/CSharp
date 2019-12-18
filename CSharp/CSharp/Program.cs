@@ -24,7 +24,7 @@ namespace CSharp
         {
             try
             {
-                Date();
+                ProtocolBuffer();
             }
             catch (Exception ex)
             {
@@ -32,6 +32,7 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
         #region Date
         static void Date()
         {
