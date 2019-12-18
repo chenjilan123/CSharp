@@ -24,6 +24,7 @@ namespace CSharp.Pb
             listRecord = ProtoBufHelper.Deserialize<OTIpcList>(data);
             foreach (var item in listRecord.otpic)
             {
+                Console.WriteLine(item.CompanyId);
                 foreach (var order in item.orderCreate)
                 {
                     var type = order.GetType();
