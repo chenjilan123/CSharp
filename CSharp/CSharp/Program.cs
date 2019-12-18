@@ -37,7 +37,7 @@ namespace CSharp
             try
             {
                 //System.ComponentModel.Int64Converter.StandardValuesCollection a;
-                AliSms();
+                WebProxyClient();
             }
             catch (Exception ex)
             {
