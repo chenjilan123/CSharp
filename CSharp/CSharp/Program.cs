@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
-using sb = System.Text.StringBuilder;
+//using sb = System.Text.StringBuilder;
 
 namespace CSharp
 {
@@ -21,7 +21,7 @@ namespace CSharp
         {
             try
             {
-                StaticConstructor();
+                StringBuilderExtended();
             }
             catch (Exception ex)
             {
@@ -29,6 +29,44 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region IEnumerableExtended
+        static void IEnumerableExtended()
+        {
+            var lst = new[] { "1", "2", "3", "5" };
+            lst.Show();
+        }
+        #endregion
+
+        #region StringBuilderExtended
+        static void StringBuilderExtended()
+        {
+            var sb = new StringBuilder("Hello World!");
+
+            //callvirt
+            //调用时立即抛出异常, 因为callvirt检验null
+            //sb = null;
+            sb.Append("!");
+            //也可以这样调用, 就是静态方法的特化。
+            //call
+            var i = StringBuilderExtension.IndexOf(sb, '!');
+            //实例方法语法
+            //call
+            //sb = null;
+            //在方法内部抛出异常, 因为call不检验null
+            i = sb.IndexOf('!');
+            Console.WriteLine($"Index of '!': {i}");
+
+            //创建委托调用扩展方法
+            Func<char, int> d = sb.IndexOf;
+            i = d.Invoke('o');
+            Console.WriteLine($"Index of 'o': {i}");
+
+            Func<char, char, StringBuilder> f = sb.Replace;
+            f.Invoke('o', '0');
+            Console.WriteLine(sb.ToString());
+        }
+        #endregion
 
         #region AppDomain_
         static void AppDomain_()
