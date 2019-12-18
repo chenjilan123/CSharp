@@ -13,6 +13,9 @@ namespace CSharp.Http
         {
             while (true)
             {
+                //堡垒机Http代理端口：60.212.191.26:8089
+
+
                 Console.WriteLine("请输入访问地址: ");
                 Console.Write("  Ip: ");
                 var sIp = Console.ReadLine();
@@ -26,9 +29,12 @@ namespace CSharp.Http
                         Console.WriteLine("请输入正确的端口");
                     }
                     var ep = new IPEndPoint(ipAddress, port);
-                    string sUrl = string.Format("http://{0}/datadispatch/auth/{1}", $"{ep.ToString()}/networkcar-city", "371000");
+                    string sUrl = string.Format("http://{0}/datadispatch/auth/{1}", $"{ep.ToString()}", "371000");
                     //WebProxy proxyObject = new WebProxy(GlobalConfig.ProxyIP, GlobalConfig.ProxyPort);
-                    string sToken = WebHelper.TakeMethodPost(sUrl, "eyvoewCZ", null, "application/json", null);
+
+
+                    var webProxy = new WebProxy("60.212.191.26", 8089);
+                    string sToken = WebHelper.TakeMethodPost(sUrl, "eyvoewCZ", null, "application/json", webProxy);
                     Console.WriteLine(sToken);
                 }
                 catch (Exception ex)
@@ -58,6 +64,11 @@ namespace CSharp.Http
             //{
             //    Console.WriteLine(sr.ReadToEnd());
             //}
+        }
+
+        private void StartWebSocket()
+        {
+
         }
     }
 }

@@ -32,7 +32,7 @@ namespace CSharp.Net35
                         Console.WriteLine("请输入正确的端口");
                     }
                     var ep = new IPEndPoint(ipAddress, port);
-                    string sUrl = string.Format("http://{0}/datadispatch/auth/{1}", $"{ep.ToString()}/networkcar-city", "371000");
+                    string sUrl = string.Format("http://{0}/datadispatch/auth/{1}", $"{ep.ToString()}", "371000");
                     //WebProxy proxyObject = new WebProxy(GlobalConfig.ProxyIP, GlobalConfig.ProxyPort);
                     string sToken = WebHelper.TakeMethodPost(sUrl, "eyvoewCZ", null, "application/json", null);
                     Console.WriteLine(sToken);
