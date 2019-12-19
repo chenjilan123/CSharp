@@ -19,7 +19,7 @@ namespace CSharp
         {
             try
             {
-                Split();
+                AppDomain_();
             }
             catch (Exception ex)
             {
