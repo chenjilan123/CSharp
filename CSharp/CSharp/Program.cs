@@ -6,10 +6,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
 using sb = System.Text.StringBuilder;
+//using sb = System.Text.StringBuilder;
 
 namespace CSharp
 {
@@ -20,7 +22,11 @@ namespace CSharp
         {
             try
             {
+<<<<<<< HEAD
                 Split();
+=======
+                StringBuilderExtended();
+>>>>>>> 00ada4e4475776da53489db78f8993be501c64a6
             }
             catch (Exception ex)
             {
@@ -39,6 +45,80 @@ namespace CSharp
             {
                 Console.WriteLine($"Length: {item.Length}, Value: {item}");
             }
+=======
+        #region IEnumerableExtended
+        static void IEnumerableExtended()
+        {
+            var lst = new[] { "1", "2", "3", "5" };
+            lst.Show();
+        }
+        #endregion
+
+        #region StringBuilderExtended
+        static void StringBuilderExtended()
+        {
+            var sb = new StringBuilder("Hello World!");
+
+            //callvirt
+            //调用时立即抛出异常, 因为callvirt检验null
+            //sb = null;
+            sb.Append("!");
+            //也可以这样调用, 就是静态方法的特化。
+            //call
+            var i = StringBuilderExtension.IndexOf(sb, '!');
+            //实例方法语法
+            //call
+            //sb = null;
+            //在方法内部抛出异常, 因为call不检验null
+            i = sb.IndexOf('!');
+            Console.WriteLine($"Index of '!': {i}");
+
+            //创建委托调用扩展方法
+            Func<char, int> d = sb.IndexOf;
+            i = d.Invoke('o');
+            Console.WriteLine($"Index of 'o': {i}");
+
+            Func<char, char, StringBuilder> f = sb.Replace;
+            f.Invoke('o', '0');
+            Console.WriteLine(sb.ToString());
+        }
+        #endregion
+
+        #region AppDomain_
+        static void AppDomain_()
+        {
+            Console.WriteLine(AppDomain.CurrentDomain);
+        }
+        #endregion
+
+        #region ConstFromRefLib
+        static void ConstFromRefLib()
+        {
+            var s = CSharp.Utility.Const.HelloWorld;
+            s += 1;
+            //Console.WriteLine(s.ToString());
+            Console.WriteLine("{0}", s);
+
+        }
+        #endregion
+
+        #region StaticConstructor
+        static void StaticConstructor()
+        {
+            //var s1 = new S1();
+            ////Console.WriteLine(S1.Vs1);
+            //var s2 = new S2();
+            //不会调用C1类型构造器。
+            //Console.WriteLine(C2.Value);
+            //会调用C1类型构造器, 因为调用了基类构造函数
+            //var c2 = new C2();
+
+            //显式运行C2的类型构造器。
+            RuntimeTypeHandle t = typeof(C2).TypeHandle;
+            RuntimeHelpers.RunClassConstructor(t);
+
+            Console.WriteLine("{0}", Type.GetTypeFromHandle(t));
+>>>>>>> 00ada4e4475776da53489db78f8993be501c64a6
         }
         #endregion
 
@@ -59,9 +139,9 @@ namespace CSharp
         #region Collection
         static void Collection()
         {
-            Queue<int> a = null;
-            SortedList<int, int> b;
-            LinkedList<int> c;
+            //Queue<int> a = null;
+            //SortedList<int, int> b;
+            //LinkedList<int> c;
 
         }
         #endregion
@@ -189,8 +269,8 @@ namespace CSharp
             //GenericClass<object> a2;
             //a2 = a1;
 
-            GenericInterface<string> c = null;
-            GenericInterface<object> d;
+            //GenericInterface<string> c = null;
+            //GenericInterface<object> d;
             //Error
             //d = c;
 
@@ -427,25 +507,25 @@ namespace CSharp
 
                 var sFullName = Path.Combine("D:\\Top7\\AttachFile", "20190313/1265292870/6502/37d4a31c-e6b4-4723-94f8-e811f7b2fc90/00_65_6502_0_37d4a31ce6b4472394f8e811f7b2fc90.jpg");
                 Console.WriteLine(sFullName);
-                return;
+                //return;
 
                 var s = "1A156FBC";
                 foreach (var c in StringToBCD(s))
                 {
                     Console.WriteLine(c);
                 }
-                return;
+                //return;
 
                 var fileInfo = new FileInfo("hahaha.jpg");
                 Console.WriteLine(fileInfo.Extension);
-                return;
+                //return;
 
                 var i = 5;
                 Console.WriteLine("0X" + i.ToString("X2"));
 
                 var d = 1090.50;
                 Console.WriteLine((byte)d);
-                return;
+                //return;
 
                 var list = new List<byte>();
                 list.Add(1);
@@ -520,7 +600,7 @@ namespace CSharp
                 var sb = new StringBuilder();
                 AppendInfoContent(sb, "TEST", arrByte);
                 Console.WriteLine(sb.ToString());
-                return;
+                //return;
 
                 var t = DateTime.Now.ToString("yyMMddHHmmss");
                 Console.WriteLine(t);
@@ -529,7 +609,7 @@ namespace CSharp
                 {
                     Console.WriteLine(c);
                 }
-                return;
+                //return;
                 var s = StringToBCD("0123456789");
                 foreach (var c in s)
                 {
@@ -610,7 +690,7 @@ namespace CSharp
             var t2 = new DateTime(1970, 1, 1).AddSeconds(1593734400);
             Console.WriteLine(t1);
             Console.WriteLine(t2);
-            return;
+            //return;
 
             string msg;
             msg = !DateTime.TryParse("16:00:00", out var tTest) ? "Parse failure" : tTest.ToODBC();

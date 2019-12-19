@@ -674,54 +674,54 @@ namespace CSharp.Helper
             return rspByte.ToArray();
         }
 
-        public static byte[] DateToUTC(DateTime dt)
-        {
-            double dResult = 0;
-            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
-            dResult = (dt - startTime).TotalSeconds;
-            return GetBytes((long)dResult);
-            /*旧*/
-            //long tick = (dt.ToUniversalTime().Ticks - 621355968000000000) / 10000000;//- 8 * 60 * 60;
-            //return GetBytes(tick);
-        }
-        public static long DateToUTCTime(DateTime dt)
-        {
-            double dResult = 0;
-            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
-            dResult = (dt - startTime).TotalSeconds;
-            return (long)dResult;
-            /*旧*/
-            //long tick = (dt.ToUniversalTime().Ticks - 621355968000000000) / 10000000;//- 8 * 60 * 60;
-            //return GetBytes(tick);
-        }
-        public static DateTime UTCToDate(long tick)
-        {
-            DateTime dt;
-            try
-            {
-                //tick += 8 * 60 * 60;//东八区
-                DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
-                startTime = startTime.AddSeconds(tick);
-                dt = startTime;
-            }
-            catch
-            {
-                dt = default(DateTime);
-            }
+        //public static byte[] DateToUTC(DateTime dt)
+        //{
+        //    double dResult = 0;
+        //    System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+        //    dResult = (dt - startTime).TotalSeconds;
+        //    return GetBytes((long)dResult);
+        //    /*旧*/
+        //    //long tick = (dt.ToUniversalTime().Ticks - 621355968000000000) / 10000000;//- 8 * 60 * 60;
+        //    //return GetBytes(tick);
+        //}
+        //public static long DateToUTCTime(DateTime dt)
+        //{
+        //    double dResult = 0;
+        //    System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+        //    dResult = (dt - startTime).TotalSeconds;
+        //    return (long)dResult;
+        //    /*旧*/
+        //    //long tick = (dt.ToUniversalTime().Ticks - 621355968000000000) / 10000000;//- 8 * 60 * 60;
+        //    //return GetBytes(tick);
+        //}
+        //public static DateTime UTCToDate(long tick)
+        //{
+        //    DateTime dt;
+        //    try
+        //    {
+        //        //tick += 8 * 60 * 60;//东八区
+        //        DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+        //        startTime = startTime.AddSeconds(tick);
+        //        dt = startTime;
+        //    }
+        //    catch
+        //    {
+        //        dt = default(DateTime);
+        //    }
 
-            /*旧*/
-            //tick = (tick + 8 * 60 * 60) * 10000000 + 621355968000000000;
-            //DateTime dt;
-            //try
-            //{
-            //    //dt = new DateTime(tick);
-            //}
-            //catch
-            //{
-            //    dt = Variable.FAIL_DATETIME;
-            //}
-            return dt;
-        }
+        //    /*旧*/
+        //    //tick = (tick + 8 * 60 * 60) * 10000000 + 621355968000000000;
+        //    //DateTime dt;
+        //    //try
+        //    //{
+        //    //    //dt = new DateTime(tick);
+        //    //}
+        //    //catch
+        //    //{
+        //    //    dt = Variable.FAIL_DATETIME;
+        //    //}
+        //    return dt;
+        //}
         #endregion
 
         #region  填充数据

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharp", "CSharp\CSharp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Framework", "CSharp.Framework\CSharp.Framework.csproj", "{19A16D15-E49E-478F-AA0C-A888A96FF0D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Utility", "CSharp.Utility\CSharp.Utility.csproj", "{380D839A-6B6F-4540-A88B-081E5DDB31D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{19A16D15-E49E-478F-AA0C-A888A96FF0D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19A16D15-E49E-478F-AA0C-A888A96FF0D4}.Release|x86.ActiveCfg = Release|x86
 		{19A16D15-E49E-478F-AA0C-A888A96FF0D4}.Release|x86.Build.0 = Release|x86
+		{380D839A-6B6F-4540-A88B-081E5DDB31D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{380D839A-6B6F-4540-A88B-081E5DDB31D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{380D839A-6B6F-4540-A88B-081E5DDB31D8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{380D839A-6B6F-4540-A88B-081E5DDB31D8}.Debug|x86.Build.0 = Debug|Any CPU
+		{380D839A-6B6F-4540-A88B-081E5DDB31D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{380D839A-6B6F-4540-A88B-081E5DDB31D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{380D839A-6B6F-4540-A88B-081E5DDB31D8}.Release|x86.ActiveCfg = Release|Any CPU
+		{380D839A-6B6F-4540-A88B-081E5DDB31D8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
