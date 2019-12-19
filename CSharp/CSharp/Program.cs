@@ -20,13 +20,27 @@ namespace CSharp
         {
             try
             {
-                Flags();
+                Split();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region Split
+        static void Split()
+        {
+            var c = '0';
+            var s = "8774x0";
+            var sp = s.Split(c);
+            Console.WriteLine($"Total Length: {sp.Length}");
+            foreach (var item in sp)
+            {
+                Console.WriteLine($"Length: {item.Length}, Value: {item}");
+            }
+        }
+        #endregion
 
         #region Flags
         static void Flags()
