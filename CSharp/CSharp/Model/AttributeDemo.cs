@@ -35,7 +35,7 @@ namespace CSharp.Model
         [Invisible]
         public delegate void Delegate();
         [Invisible]
-        public InvisibleAttributeTarget() { }
+        public InvisibleAttributeTarget() { Event = null;Event(); }
         [Invisible]
         [return: Invisible] //定义返回值特性
         public int Method([Invisible]int parameter) { return -1; }

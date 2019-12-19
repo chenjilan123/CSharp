@@ -19,7 +19,7 @@ namespace CSharp
         {
             try
             {
-                AppDomain_();
+                PartialMethod();
             }
             catch (Exception ex)
             {
@@ -27,6 +27,15 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region PartialMethod
+        static void PartialMethod()
+        {
+            var pc = new PartialClass();
+            pc.Run();
+            pc.Print();
+        }
+        #endregion
 
         #region DefaultArray
         static void DefaultArray()
