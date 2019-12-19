@@ -50,10 +50,11 @@ namespace CSharp
             //    Console.WriteLine($"Length: {item.Length}, Value: {item}");
             //}
 
-            //sp = s.Split(c, -1);
+            //var sp = s.Split(c, -1);
             Action<Object> del = _ => s.Split(c, -1);
             del.InvokeAndCatch<ArgumentOutOfRangeException>(null);
-            //sp = s.Split(c, (StringSplitOptions)(-1));
+
+            var sp = s.Split(c, (StringSplitOptions)(-1));
             del = _ => s.Split(c, (StringSplitOptions)(-1));
             del.InvokeAndCatch<ArgumentException>(null);
         }
