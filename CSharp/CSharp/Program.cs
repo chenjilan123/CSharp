@@ -1,5 +1,6 @@
 ﻿using CSharp.Helper;
 using CSharp.Model;
+using CSharp.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +20,7 @@ namespace CSharp
         {
             try
             {
-                PartialMethod();
+                OptionalParameter();
             }
             catch (Exception ex)
             {
@@ -27,6 +28,30 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region OptionalParameter
+        static void OptionalParameter()
+        {
+            OptionalParameter(5);
+
+            OptionalParameter(5, s: "halo");
+
+            Const.Method();
+        }
+
+        static void OptionalParameter(int i, int j = 5, string s = "hello")
+        {
+            //可选参数的默认值必须是常量，在编译时确定。
+        }
+        #endregion
+
+        #region Version
+        static void Version()
+        {
+            var version = new Version(5656450, 51, 51, 500000);
+            Console.WriteLine(version);
+        }
+        #endregion
 
         #region PartialMethod
         static void PartialMethod()
