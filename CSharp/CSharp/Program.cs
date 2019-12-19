@@ -36,13 +36,16 @@ namespace CSharp
 
             OptionalParameter(5, s: "halo");
 
+            OptionalParameter(5, s: "halo", param: 1);
+
             Const.Method();
         }
 
-        static void OptionalParameter(int i, int j = 5, string s = "hello")
+        static void OptionalParameter(int i, int j = 5, string s = "hello", Guid guid = new Guid(), Guid guid1 = default(Guid), params int[] param)
         {
             //可选参数的默认值必须是常量，在编译时确定。
         }
+        delegate void MyDele001x5(int i = 5);
         #endregion
 
         #region Version
