@@ -10,8 +10,6 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
-//using sb = System.Text.StringBuilder;
-
 namespace CSharp
 {
     class Program
@@ -21,11 +19,7 @@ namespace CSharp
         {
             try
             {
-<<<<<<< HEAD
                 Split();
-=======
-                StringBuilderExtended();
->>>>>>> 00ada4e4475776da53489db78f8993be501c64a6
             }
             catch (Exception ex)
             {
@@ -34,7 +28,6 @@ namespace CSharp
             Console.ReadLine();
         }
 
-<<<<<<< HEAD
         #region Split
         static void Split()
         {
@@ -46,7 +39,9 @@ namespace CSharp
             {
                 Console.WriteLine($"Length: {item.Length}, Value: {item}");
             }
-=======
+        }
+        #endregion
+
         #region IEnumerableExtended
         static void IEnumerableExtended()
         {
@@ -119,7 +114,6 @@ namespace CSharp
             RuntimeHelpers.RunClassConstructor(t);
 
             Console.WriteLine("{0}", Type.GetTypeFromHandle(t));
->>>>>>> 00ada4e4475776da53489db78f8993be501c64a6
         }
         #endregion
 
@@ -151,7 +145,7 @@ namespace CSharp
         static void BitConvert()
         {
             Console.WriteLine($"IsBigEndian: {!BitConverter.IsLittleEndian}");
-            
+
             var bytes = BitConverter.GetBytes(111.54);
             Print(bytes);
             Console.WriteLine();
@@ -181,7 +175,7 @@ namespace CSharp
                 var data = new byte[fs.Length + 1024];
                 var index = 0;
                 var len = fs.Read(buffer, 0, buffer.Length);
-                while(len > 0)
+                while (len > 0)
                 {
                     buffer.CopyTo(data, index);
                     index += len;
