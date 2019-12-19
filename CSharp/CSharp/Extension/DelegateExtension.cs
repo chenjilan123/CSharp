@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CSharp.Extension
+namespace System
 {
     public static class DelegateExtension
     {
@@ -11,7 +11,10 @@ namespace CSharp.Extension
         {
             try
             { d(o); }
-            catch (TException) { }
+            catch (TException)
+            {
+                Console.WriteLine($"Catched {typeof(TException).FullName}");
+            }
         }
     }
 }

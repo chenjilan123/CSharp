@@ -28,17 +28,34 @@ namespace CSharp
             Console.ReadLine();
         }
 
+        #region DefaultArray
+        static void DefaultArray()
+        {
+            var array = default(string[]);
+            Console.WriteLine($"IsNull: {array == null}");
+            Console.WriteLine($"  Type: {typeof(string[]).FullName}");
+        }
+        #endregion
+
         #region Split
         static void Split()
         {
-            var c = '0';
-            var s = "8774x0";
-            var sp = s.Split(c);
-            Console.WriteLine($"Total Length: {sp.Length}");
-            foreach (var item in sp)
-            {
-                Console.WriteLine($"Length: {item.Length}, Value: {item}");
-            }
+            const char c = '0';
+            const string s = "8774x0";
+
+            //var sp = s.Split(c);
+            //Console.WriteLine($"Total Length: {sp.Length}");
+            //foreach (var item in sp)
+            //{
+            //    Console.WriteLine($"Length: {item.Length}, Value: {item}");
+            //}
+
+            //sp = s.Split(c, -1);
+            Action<Object> del = _ => s.Split(c, -1);
+            del.InvokeAndCatch<ArgumentOutOfRangeException>(null);
+            //sp = s.Split(c, (StringSplitOptions)(-1));
+            del = _ => s.Split(c, (StringSplitOptions)(-1));
+            del.InvokeAndCatch<ArgumentException>(null);
         }
         #endregion
 
