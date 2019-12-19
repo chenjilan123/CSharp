@@ -10,7 +10,6 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
-using sb = System.Text.StringBuilder;
 //using sb = System.Text.StringBuilder;
 
 namespace CSharp
@@ -32,8 +31,10 @@ namespace CSharp
             {
                 Console.WriteLine(ex.ToString());
             }
+            Console.ReadLine();
         }
 
+<<<<<<< HEAD
         #region Split
         static void Split()
         {
