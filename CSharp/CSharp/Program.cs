@@ -20,7 +20,7 @@ namespace CSharp
         {
             try
             {
-                OptionalParameter();
+                ConstStatic();
             }
             catch (Exception ex)
             {
@@ -28,6 +28,13 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region ConstStatic
+        static void ConstStatic()
+        {
+            Console.WriteLine($"S1: {Const1.S1}, C1: {Const1.C1}");
+        }
+        #endregion
 
         #region OptionalParameter
         static void OptionalParameter()
@@ -59,9 +66,11 @@ namespace CSharp
         #region PartialMethod
         static void PartialMethod()
         {
-            var pc = new PartialClass();
-            pc.Run();
-            pc.Print();
+            //var pc = new PartialClass();
+            //pc.Run();
+            //pc.Print();
+
+            new C1().Run();
         }
         #endregion
 
@@ -165,7 +174,7 @@ namespace CSharp
             //var c2 = new C2();
 
             //显式运行C2的类型构造器。
-            RuntimeTypeHandle t = typeof(C2).TypeHandle;
+            RuntimeTypeHandle t = typeof(C22).TypeHandle;
             RuntimeHelpers.RunClassConstructor(t);
 
             Console.WriteLine("{0}", Type.GetTypeFromHandle(t));

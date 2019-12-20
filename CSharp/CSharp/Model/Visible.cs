@@ -140,18 +140,18 @@ namespace CSharp.Model
         public int V2;
     }
 
-    public class C1
+    public class C11
     {
-        static C1()
+        static C11()
         {
             Console.WriteLine("Hello C1!");
         }
     }
-    public class C2 : C1
+    public class C22 : C11
     {
         public static int Value = 5;
         public void SayHello() { }
-        static C2()
+        static C22()
         {
             Console.WriteLine("Hello C2!");
         }

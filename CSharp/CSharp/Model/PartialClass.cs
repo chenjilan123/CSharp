@@ -47,4 +47,26 @@ namespace CSharp.Model
         }
     }
 
+
+    partial class C1
+    {
+        partial void M1(int i);
+        partial void M2(int i);
+
+        public void Run()
+        {
+            int i = 0;
+            int j = 0;
+            M1(i++);
+            M2(j++);
+
+            Console.WriteLine($"i: {i}, j: {j}");
+        }
+    }
+
+    partial class C1
+    {
+        partial void M1(int i) { }
+    }
+
 }

@@ -16,4 +16,10 @@ namespace CSharp.Utility
             Console.WriteLine("Hello");
         }
     }
+
+    public class Const1
+    {
+        public static readonly int S1 = 500;
+        public const int C1 = 200;
+    }
 }
