@@ -20,7 +20,7 @@ namespace CSharp
         {
             try
             {
-                ConstStatic();
+                OptionalParameter1();
             }
             catch (Exception ex)
             {
@@ -29,10 +29,37 @@ namespace CSharp
             Console.ReadLine();
         }
 
+        #region ExtensionMethod
+        static void ExtensionMethod()
+        {
+            var type = typeof(StringBuilderExtension);
+            //var type = typeof(InvisibleAttributeTarget<int>);
+
+            var staticMethods = type.GetMethods(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
+            foreach (var m in staticMethods)
+            {
+                Console.WriteLine($"Static Method: {m.Name}");
+            }
+            var instanceMethods = type.GetMethods(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+            foreach (var m in instanceMethods)
+            {
+                Console.WriteLine($"Instance Method: {m.Name}");
+            }
+        }
+        #endregion
+
         #region ConstStatic
         static void ConstStatic()
         {
             Console.WriteLine($"S1: {Const1.S1}, C1: {Const1.C1}");
+        }
+        #endregion
+
+
+        #region OptionalParameter1
+        static void OptionalParameter1()
+        {
+            new Class007().Print();
         }
         #endregion
 
@@ -174,9 +201,11 @@ namespace CSharp
             //var c2 = new C2();
 
             //显式运行C2的类型构造器。
+            //var cc2 = new C22();
             RuntimeTypeHandle t = typeof(C22).TypeHandle;
             RuntimeHelpers.RunClassConstructor(t);
 
+            Console.WriteLine(C22.Value);
             Console.WriteLine("{0}", Type.GetTypeFromHandle(t));
         }
         #endregion
