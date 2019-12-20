@@ -55,7 +55,6 @@ namespace CSharp
         }
         #endregion
 
-
         #region OptionalParameter1
         static void OptionalParameter1()
         {
