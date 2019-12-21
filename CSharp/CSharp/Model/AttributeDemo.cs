@@ -39,6 +39,8 @@ namespace CSharp.Model
         [Invisible]
         [return: Invisible] //定义返回值特性
         public int Method([Invisible]int parameter) { return -1; }
+        [Invisible]
+        public static int Method() { return 1; }
     }
     [Invisible]
     public struct IvisibleAttributeTarget { }
