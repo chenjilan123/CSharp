@@ -19,6 +19,13 @@ namespace CSharp.Helper
             obj2 = swap;
         }
 
+        public static void Swap(ref int i1, ref int i2)
+        {
+            var i = i1;
+            i1 = i2;
+            i2 = i;
+        }
+
         public static void Box(ref int i)
         {
             Console.WriteLine(i);

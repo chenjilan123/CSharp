@@ -21,7 +21,7 @@ namespace CSharp
         {
             try
             {
-                Swap();
+                Params();
             }
             catch (Exception ex)
             {
@@ -30,12 +30,33 @@ namespace CSharp
             Console.ReadLine();
         }
 
+        #region Params
+        static void Params()
+        {
+            //MyParams();//params不优先重载
+            MyParams(null); 
+            //MyParams(param: default); //default = null
+        }
+        static void MyParams(params int[] param)
+        {
+            var length = param == null ? -1 : param.Length;
+            Console.WriteLine($"IsNull: {param == null}, Length: {length}");
+        }
+
+        //签名是相同的
+        //static void MyParams(int[] param)
+        //{
+
+        //}
+        #endregion
+
         #region Box
         static void Box()
         {
-            //int i = 5;
-            //object obj = i;
-            //Object obj = new object();
+            int i = 5;
+            object obj = i;
+
+            //var obj = new Object();
             //SwapHelper.Box(ref obj);
 
             //int i = 5, j = 6;
@@ -46,9 +67,15 @@ namespace CSharp
         #region Swap
         static void Swap()
         {
+            int i = 5;
+            int j = 10;
+            SwapHelper.Swap(ref i, ref j);
+            Console.WriteLine($"i: {i}, j: {j}");
+
+
             var r1 = new Swapper(1);
             var r2 = new Swapper(2);
-            
+
             SwapHelper.Swap(ref r1, ref r2);
             Console.WriteLine($"r1: {r1.Value}, r2: {r2.Value}");
 
