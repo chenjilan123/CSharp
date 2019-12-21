@@ -36,7 +36,7 @@ namespace CSharp
 
             OptionalParameter(5, s: "halo");
 
-            OptionalParameter(5, s: "halo", param: 1);
+            OptionalParameter(5, s: "halo", param: default);
 
             Const.Method();
         }
