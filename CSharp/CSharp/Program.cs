@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 
 namespace CSharp
 {
@@ -20,7 +21,7 @@ namespace CSharp
         {
             try
             {
-                OptionalParameter1();
+                Swap();
             }
             catch (Exception ex)
             {
@@ -28,6 +29,46 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Box
+        static void Box()
+        {
+            //int i = 5;
+            //object obj = i;
+            //Object obj = new object();
+            //SwapHelper.Box(ref obj);
+
+            //int i = 5, j = 6;
+            //SwapHelper.Swap(ref i, ref j);
+        }
+        #endregion
+
+        #region Swap
+        static void Swap()
+        {
+            var r1 = new Swapper(1);
+            var r2 = new Swapper(2);
+            
+            SwapHelper.Swap(ref r1, ref r2);
+            Console.WriteLine($"r1: {r1.Value}, r2: {r2.Value}");
+
+            var v1 = new SwapperValue(1);
+            var v2 = new SwapperValue(2);
+            SwapHelper.Swap(ref v1, ref v2);
+            Console.WriteLine($"v1: {v1.Value}, v2: {v2.Value}");
+
+            Action<int> action1 = i => Console.WriteLine(i);
+            Action<int> action2 = i => Console.WriteLine(i + 1);
+            SwapHelper.Swap(ref action1, ref action2);
+            action1(1);
+            action2(1);
+
+            Interlocked.CompareExchange<Swapper>(ref r1, r2, null);
+            Console.WriteLine($"r1: {r1.Value}, r2: {r2.Value}");
+            r2 = Interlocked.Exchange(ref r1, r2);
+            Console.WriteLine($"r1: {r1.Value}, r2: {r2.Value}");
+        }
+        #endregion
 
         #region ExtensionMethod
         static void ExtensionMethod()
