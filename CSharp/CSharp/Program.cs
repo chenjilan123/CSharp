@@ -21,7 +21,7 @@ namespace CSharp
         {
             try
             {
-                Params();
+                TupleDemo();
             }
             catch (Exception ex)
             {
@@ -29,6 +29,85 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region TupleDemo
+        static void TupleDemo()
+        {
+            var t1 = new Tuple<int, string>(5, "Halo!");
+            Console.WriteLine(t1.ToString());
+
+            //var t2 = new Tuple<int, string>(5, "Halo!");
+            var t2 = Tuple.Create(5, "Halo!");
+            Console.WriteLine(t2.ToString());
+
+            var t4 = t2.ToValueTuple();
+            var t3 = (5, "Halo!");
+            Console.WriteLine($"t1==t2? {t1 == t2}");
+            Console.WriteLine($"t1 Equals t2? {t1.Equals(t2)}");
+            //Console.WriteLine($"t3==t2? {t3 == t2}"); //不能编译
+            Console.WriteLine($"t3 Equals t2? {t3.Equals(t2)}");
+            Console.WriteLine($"t3 Equals t4? {t3.Equals(t4)}");
+            Console.WriteLine($"t3==t4? {t3 == t4}");
+
+            //Tuple
+            var minmax = new TupleHelper().MinMax(1, 2);
+            //值
+            var maxmin = new TupleHelper().MaxMin(1, 2);
+
+            Console.WriteLine($"Item1: {minmax.Item1}, Item2: {minmax.Item2}");
+            Console.WriteLine($"Max: {maxmin.Max}, Min: {maxmin.Min}");
+
+            //多于8个Tuple
+            var t11 = Tuple.Create(8, 9);
+            var t10 = Tuple.Create(1, "2", "3", 4, 5, 6, 7, t11);
+
+            Console.WriteLine(t10.Rest);
+            Console.WriteLine(t10.Rest.Item1);
+            Console.WriteLine(t10);
+        }
+        #endregion
+
+        #region GetFileInfo
+        static void GetFileInfo()
+        {
+            new FolderHelper().GetChangedFileInMyDocument();
+        }
+        #endregion
+
+        #region Anonymous
+        static void Anonymous()
+        {
+            //匿名
+            var v = new { Name = "Brush", Price = 5.50D };
+            Console.WriteLine($"Name: {v.Name}, Price: {v.Price}");
+            Console.WriteLine($"v: {v.ToString()}");
+            Console.WriteLine($"Type: {v.GetType()}");
+
+            var j = new { Name = "Towel", Price = 7.50D };
+            Console.WriteLine($"j: {j}");
+            Console.WriteLine($"Type: {j.GetType()}");
+
+            var Price = 7.50D;
+            var k = new { Name = "Towel", Price };
+            Console.WriteLine($"v == j? {v == j}");
+            Console.WriteLine($"v Equals j? {v.Equals(j)}");
+            Console.WriteLine($"k == j? {k == j}");
+            Console.WriteLine($"k Equals j? {k.Equals(j)}");  //True
+            //每次运行生成的哈希码都不一样。
+            Console.WriteLine($"Hashcode, v:{v.GetHashCode()}, j:{j.GetHashCode()}, k:{k.GetHashCode()}");
+
+            v = j;
+            Console.WriteLine($"v: {v}");
+            Console.WriteLine($"v Equals j? {v.Equals(j)}");
+            Console.WriteLine($"Hashcode, v:{v.GetHashCode()}, j:{j.GetHashCode()}, k:{k.GetHashCode()}");
+
+            var array = new[]
+            {
+                new { Name = "j", Price = 4.5D },
+                new { Name = "k", Price = 5D },
+            };
+        }
+        #endregion
 
         #region Params
         static void Params()
