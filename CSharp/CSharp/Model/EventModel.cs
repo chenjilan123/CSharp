@@ -10,6 +10,16 @@ namespace CSharp.Model
         public event EventHandler<Event0EventArgs> Event0;
         //public event EventHandler<EventArgs> Event1;
 
+        //编译器生成的方法
+        //public void add_Event0(EventHandler<Event0EventArgs> e)
+        //{
+
+        //}
+        //public void remove_Event0(EventHandler<Event0EventArgs> e)
+        //{
+
+        //}
+
         protected virtual void OnEvent0(Event0EventArgs e)
         {
             //传统方式
