@@ -17,11 +17,12 @@ namespace CSharp
     class Program
     {
         private const int PadLength = 30;
+
         static void Main(string[] args)
         {
             try
             {
-                TupleDemo();
+                Eve();
             }
             catch (Exception ex)
             {
@@ -29,6 +30,27 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Eve
+        static event EventHandler eve;
+        static void Eve()
+        {
+            //eve += (_, e) => { Console.WriteLine("Hehe"); };
+            //eve?.Invoke(null, EventArgs.Empty);
+            //eve(null, EventArgs.Empty);
+
+            var eventHandler = new EventModel();
+            eventHandler.Event0 += (_, e) =>
+            {
+                Console.WriteLine("Hello!");
+            };
+            eventHandler.Event0 += (_, e) =>
+            {
+                Console.WriteLine("Halo!");
+            };
+            eventHandler.Run();
+        }
+        #endregion
 
         #region TupleDemo
         static void TupleDemo()
@@ -113,7 +135,7 @@ namespace CSharp
         static void Params()
         {
             //MyParams();//params不优先重载
-            MyParams(null); 
+            MyParams(null);
             //MyParams(param: default); //default = null
         }
         static void MyParams(params int[] param)
