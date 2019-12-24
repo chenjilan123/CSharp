@@ -58,7 +58,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -96,8 +98,19 @@
     <Compile Include="Helper\SerializeHelper.cs" />
     <Compile Include="Helper\UnityToolHelper.cs" />
     <Compile Include="Helper\WebHelper.cs" />
+    <Compile Include="Helper\WebSvc.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WebReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="公务车数据转发\AnalysisGDOCPosInfo.cs" />
     <Compile Include="公务车数据转发\GDOCCmdList.cs" />
     <Compile Include="公务车数据转发\GDOCSender.cs" />
@@ -151,6 +164,15 @@
     <None Include="AIDocs\ARCSOFT_FACE_DETECTION_DEVELOPER%27S_GUIDE_V1.1.pdf" />
     <None Include="AIDocs\ARCSOFT_FACE_RECOGNITION_DEVELOPER%27S_GUIDE_V1.1.pdf" />
     <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebReference\CYZY_ProxyESB_Service.wsdl" />
+    <None Include="Web References\WebReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="公务车数据转发\Docs\TaxiModel.json" />
     <None Include="公务车数据转发\Docs\TaxiType.json" />
     <None Include="公务车数据转发\Docs\广东省公务用车管理平台数据接入标准V1.6.020190319191656.pdf" />
@@ -166,6 +188,25 @@
     <Folder Include="Face\V2_0\" />
     <Folder Include="Face\V2_2\Lib\x86\" />
     <Folder Include="SqlTech\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://118.122.90.78:9080/esb//services/CYZY_ProxyESB_Service%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebReference\</RelPath>
+      <UpdateFromURL>http://118.122.90.78:9080/esb//services/CYZY_ProxyESB_Service%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CSharp_Framework_WebReference_BusinessOrderHttpService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

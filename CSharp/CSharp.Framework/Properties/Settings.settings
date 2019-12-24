@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CSharp.Framework.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CSharp_Framework_WebReference_BusinessOrderHttpService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://118.122.90.78:9080/esb//services/CYZY_ProxyESB_Service</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

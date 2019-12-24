@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="http://tobacco/ind/cyzy/proxyESB/Service" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://tobacco/ind/cyzy/proxyESB/Service" targetNamespace="http://tobacco/ind/cyzy/proxyESB/Service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tobacco/ind/cyzy/proxyESB/Service">
+      <xsd:element name="transServices">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="reqXml" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="transServicesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="status" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="transServicesRequest">
+    <wsdl:part name="parameters" element="impl:transServices" />
+  </wsdl:message>
+  <wsdl:message name="transServicesResponse">
+    <wsdl:part name="parameters" element="impl:transServicesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BusinessOrder">
+    <wsdl:operation name="transServices">
+      <wsdl:input name="transServicesRequest" message="impl:transServicesRequest" />
+      <wsdl:output name="transServicesResponse" message="impl:transServicesResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BusinessOrderHttpPortSoapBinding" type="impl:BusinessOrder">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="transServices">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="transServicesRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="transServicesResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BusinessOrderHttpService">
+    <wsdl:port name="BusinessOrderHttpPort" binding="impl:BusinessOrderHttpPortSoapBinding">
+      <wsdlsoap:address location="http://118.122.90.78:9080/esb//services/CYZY_ProxyESB_Service" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
