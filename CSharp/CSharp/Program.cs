@@ -49,6 +49,14 @@ namespace CSharp
                 Console.WriteLine("Halo!");
             };
             eventHandler.Run();
+
+            //事件信息
+            System.Reflection.EventInfo eventInfo = typeof(EventModel).GetEvent("Event0");
+            Console.WriteLine("EventInfo: ");
+            Console.WriteLine($"\t        Info: {eventInfo}");
+            Console.WriteLine($"\t   AddMethod: {eventInfo.AddMethod}");
+            Console.WriteLine($"\tRemoveMethod: {eventInfo.RemoveMethod}");
+            Console.WriteLine($"\t RaiseMethod: {eventInfo.RaiseMethod}");
         }
         #endregion
 
