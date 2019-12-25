@@ -2,6 +2,7 @@
 using CSharp.Model;
 using CSharp.Utility;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -22,7 +23,7 @@ namespace CSharp
         {
             try
             {
-                Eve();
+                UsedTime();
             }
             catch (Exception ex)
             {
@@ -30,6 +31,86 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+
+        #region PrintFormat
+        static void PrintFormat()
+        {
+            Console.WriteLine("{0}， {1, 4}, {2}, {3}", 1, 2, 3, 4, 5);
+        }
+        #endregion
+
+        #region UsedTime
+        static void UsedTime()
+        {
+            const int perfCount = 100000000;
+            //.NET Core比.NET Framework快
+            //添加了容量会快一点。 
+            //无需GC
+            using (new OperationTimer("List<int> with suitable capacity"))
+            {
+                var lst = new List<int>(perfCount + 1);
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(i);
+                    var t = lst[i];
+                }
+                lst = null;
+            }
+            //int: 泛型比非泛型快10倍。
+            using (new OperationTimer("List<int>"))
+            {
+                var lst = new List<int>();
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(i);
+                    var t = lst[i];
+                }
+                lst = null;
+            }
+            using (new OperationTimer("ArrayList with int"))
+            {
+                var lst = new ArrayList();
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(i);
+                    var t = (int)lst[i];
+                }
+                lst = null;
+            }
+
+            using (new OperationTimer("List<DateTime> with suitable capacity"))
+            {
+                var lst = new List<DateTime>(perfCount + 1);
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(DateTime.Now);
+                    var t = lst[i];
+                }
+                lst = null;
+            }
+            using (new OperationTimer("List<DateTime>"))
+            {
+                var lst = new List<DateTime>();
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(DateTime.Now);
+                    var t = lst[i];
+                }
+                lst = null;
+            }
+            using (new OperationTimer("ArrayList with DateTime"))
+            {
+                var lst = new ArrayList();
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(DateTime.Now);
+                    var t = (DateTime)lst[i];
+                }
+                lst = null;
+            }
+        }
+        #endregion
 
         #region Generic
         static void Generic()

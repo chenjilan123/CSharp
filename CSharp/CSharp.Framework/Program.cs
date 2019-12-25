@@ -27,7 +27,7 @@ namespace CSharp.Framework
         {
             try
             {
-                OpenFolder();
+                PerfGeneric();
             }
             catch (Exception ex)
             {
@@ -35,6 +35,78 @@ namespace CSharp.Framework
             }
             //Console.ReadLine();
         }
+
+        #region PerfGeneric
+        static void PerfGeneric()
+        {
+
+            const int perfCount = 100000000;
+            //添加了容量会快一点。 
+            //无需GC
+            using (new OperationTimer("List<int> with suitable capacity"))
+            {
+                var lst = new List<int>(perfCount + 1);
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(i);
+                    var t = lst[i];
+                }
+                lst = null;
+            }
+            //int: 泛型比非泛型快10倍。
+            using (new OperationTimer("List<int>"))
+            {
+                var lst = new List<int>();
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(i);
+                    var t = lst[i];
+                }
+                lst = null;
+            }
+            using (new OperationTimer("ArrayList with int"))
+            {
+                var lst = new ArrayList();
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(i);
+                    var t = (int)lst[i];
+                }
+                lst = null;
+            }
+
+            using (new OperationTimer("List<DateTime> with suitable capacity"))
+            {
+                var lst = new List<DateTime>(perfCount + 1);
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(DateTime.Now);
+                    var t = lst[i];
+                }
+                lst = null;
+            }
+            using (new OperationTimer("List<DateTime>"))
+            {
+                var lst = new List<DateTime>();
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(DateTime.Now);
+                    var t = lst[i];
+                }
+                lst = null;
+            }
+            using (new OperationTimer("ArrayList with DateTime"))
+            {
+                var lst = new ArrayList();
+                for (int i = 0; i < perfCount; i++)
+                {
+                    lst.Add(DateTime.Now);
+                    var t = (DateTime)lst[i];
+                }
+                lst = null;
+            }
+        }
+        #endregion
 
         #region OpenFolder
         static void OpenFolder()
