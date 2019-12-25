@@ -31,6 +31,14 @@ namespace CSharp
             Console.ReadLine();
         }
 
+        #region Generic
+        static void Generic()
+        {
+            var array = new EventModel[10];
+            array[1] = new EventModel();
+        }
+        #endregion
+
         #region Eve
         static event EventHandler eve;
         static void Eve()
