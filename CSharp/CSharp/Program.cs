@@ -23,7 +23,7 @@ namespace CSharp
         {
             try
             {
-                UsedTime();
+                GenericField();
             }
             catch (Exception ex)
             {
@@ -32,6 +32,56 @@ namespace CSharp
             Console.ReadLine();
         }
 
+        #region GenericField
+        static void GenericField()
+        {
+            var i = new GenericModel<int>();
+            GenericModel<int>.Count = 5;
+            Console.WriteLine($"{nameof(GenericModel<int>)}: {GenericModel<int>.Count}, {nameof(GenericModel<string>)}: {GenericModel<string>.Count}");
+
+            //GenericStaticConstrator
+            GenericModel<IList>.Count = 1;
+            GenericModel<int[]>.Count = 1;
+        }
+        #endregion
+
+        #region Hashcode
+        static void Hashcode()
+        {
+            var key1 = new EventKey();
+            var key2 = new EventKey();
+            //为什么哈希码会不一样？
+            Console.WriteLine($"Key1 code: {key1.GetHashCode()}, Key2 code: {key2.GetHashCode()}");
+        }
+        #endregion
+
+        #region DynamicInvoke
+        static void DynamicInvoke()
+        {
+            new DynamicDelegateSet().Invoke();
+        }
+        #endregion
+
+        #region ActivatorCreate
+        static void ActivatorCreate()
+        {
+            var type = typeof(ActivatorModel);
+            //自动进行类型安全的匹配
+            var obj1 = Activator.CreateInstance(type);
+            var obj2 = Activator.CreateInstance(type, 1);
+            var obj3 = Activator.CreateInstance(type, "");
+
+            //隐式类型转换的可以调用得到。
+            ushort i = 1;
+            var obj4 = Activator.CreateInstance(type, i);
+            //调用异常
+            //double d = 1D;
+            //var obj5 = Activator.CreateInstance(type, d);
+
+            var t = typeof(IList<>);
+            var obj = Activator.CreateInstance(t);
+        }
+        #endregion
 
         #region PrintFormat
         static void PrintFormat()
