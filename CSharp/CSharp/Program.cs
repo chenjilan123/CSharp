@@ -23,7 +23,7 @@ namespace CSharp
         {
             try
             {
-                GenericField();
+                Contravariant();
             }
             catch (Exception ex)
             {
@@ -31,6 +31,40 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Contravariant
+        static void Contravariant()
+        {
+            IContravariance<Object2, Object2> service1 = new Contravariance();
+
+            IContravariance<Object3, Object1> service2 = service1;
+            IContravariance<Object3, Object2> service21 = service1;
+            IContravariance<Object2, Object1> service22 = service1;
+
+            var obj2 = new Object2();
+            var obj3 = new Object3();
+            service1.GetValue(obj2);
+            service1.GetValue(obj3);
+            service2.GetValue(obj3);
+
+            //值类型无法使用转换
+            //IContravariance<int, int> service3 = new Contravariance1();
+            //IContravariance<int, object> service4 = service3;
+
+            //FCL
+            Func<int, int> func = (_) => { return _; };
+
+
+            var obj = new Object();
+            int i = (int)obj;
+            //无法编译
+            //var cls = new Object1();
+            //int i = (int)cls;
+            //值类型不可用as操作。
+            //int j = obj is int;
+
+        }
+        #endregion
 
         #region GenericField
         static void GenericField()
