@@ -32,6 +32,25 @@ namespace CSharp
             Console.ReadLine();
         }
 
+        #region CastString
+        static void CastString()
+        {
+            //需要Cast, 因为Environment.NewLine不是字面量。
+            var s1 = "Hi." + Environment.NewLine + "Siri.";
+            //需要Cast, 因为显示使用了+=操作符拼接字符串。
+            var s2 = "Hi.";
+            s2 += "Siri.";
+            //不会编译, 因为从未使用过s3。
+            var s3 = "Hi." + " " + "Siri.";
+            //不需要Cast
+            var s4 = "Hi." + " " + "Siri.";
+            Console.WriteLine(s4);
+            //先调用int.ToString, 再用Cast连接
+            var s5 = s4 + 1;
+            Console.WriteLine(s5);
+        }
+        #endregion
+
         #region Contravariant
         static void Contravariant()
         {
