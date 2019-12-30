@@ -23,7 +23,7 @@ namespace CSharp
         {
             try
             {
-                Contravariant();
+                StringDemo();
             }
             catch (Exception ex)
             {
@@ -31,6 +31,13 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region StringDemo
+        static void StringDemo()
+        {
+            new StringDemo().Run();
+        }
+        #endregion
 
         #region CastString
         static void CastString()
