@@ -23,11 +23,7 @@ namespace CSharp
         {
             try
             {
-<<<<<<< HEAD
-                PrintFormat();
-=======
                 Contravariant();
->>>>>>> f01f3c8f5010e313ec19fcd7b320ca8569197acf
             }
             catch (Exception ex)
             {
