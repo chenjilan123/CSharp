@@ -32,6 +32,109 @@ namespace CSharp
             Console.ReadLine();
         }
 
+        #region CastString
+        static void CastString()
+        {
+            //需要Cast, 因为Environment.NewLine不是字面量。
+            var s1 = "Hi." + Environment.NewLine + "Siri.";
+            //需要Cast, 因为显示使用了+=操作符拼接字符串。
+            var s2 = "Hi.";
+            s2 += "Siri.";
+            //不会编译, 因为从未使用过s3。
+            var s3 = "Hi." + " " + "Siri.";
+            //不需要Cast
+            var s4 = "Hi." + " " + "Siri.";
+            Console.WriteLine(s4);
+            //先调用int.ToString, 再用Cast连接
+            var s5 = s4 + 1;
+            Console.WriteLine(s5);
+        }
+        #endregion
+
+        #region Contravariant
+        static void Contravariant()
+        {
+            IContravariance<Object2, Object2> service1 = new Contravariance();
+
+            IContravariance<Object3, Object1> service2 = service1;
+            IContravariance<Object3, Object2> service21 = service1;
+            IContravariance<Object2, Object1> service22 = service1;
+
+            var obj2 = new Object2();
+            var obj3 = new Object3();
+            service1.GetValue(obj2);
+            service1.GetValue(obj3);
+            service2.GetValue(obj3);
+
+            //值类型无法使用转换
+            //IContravariance<int, int> service3 = new Contravariance1();
+            //IContravariance<int, object> service4 = service3;
+
+            //FCL
+            Func<int, int> func = (_) => { return _; };
+
+
+            var obj = new Object();
+            int i = (int)obj;
+            //无法编译
+            //var cls = new Object1();
+            //int i = (int)cls;
+            //值类型不可用as操作。
+            //int j = obj is int;
+
+        }
+        #endregion
+
+        #region GenericField
+        static void GenericField()
+        {
+            var i = new GenericModel<int>();
+            GenericModel<int>.Count = 5;
+            Console.WriteLine($"{nameof(GenericModel<int>)}: {GenericModel<int>.Count}, {nameof(GenericModel<string>)}: {GenericModel<string>.Count}");
+
+            //GenericStaticConstrator
+            GenericModel<IList>.Count = 1;
+            GenericModel<int[]>.Count = 1;
+        }
+        #endregion
+
+        #region Hashcode
+        static void Hashcode()
+        {
+            var key1 = new EventKey();
+            var key2 = new EventKey();
+            //为什么哈希码会不一样？
+            Console.WriteLine($"Key1 code: {key1.GetHashCode()}, Key2 code: {key2.GetHashCode()}");
+        }
+        #endregion
+
+        #region DynamicInvoke
+        static void DynamicInvoke()
+        {
+            new DynamicDelegateSet().Invoke();
+        }
+        #endregion
+
+        #region ActivatorCreate
+        static void ActivatorCreate()
+        {
+            var type = typeof(ActivatorModel);
+            //自动进行类型安全的匹配
+            var obj1 = Activator.CreateInstance(type);
+            var obj2 = Activator.CreateInstance(type, 1);
+            var obj3 = Activator.CreateInstance(type, "");
+
+            //隐式类型转换的可以调用得到。
+            ushort i = 1;
+            var obj4 = Activator.CreateInstance(type, i);
+            //调用异常
+            //double d = 1D;
+            //var obj5 = Activator.CreateInstance(type, d);
+
+            var t = typeof(IList<>);
+            var obj = Activator.CreateInstance(t);
+        }
+        #endregion
 
         #region PrintFormat
         static void PrintFormat()
