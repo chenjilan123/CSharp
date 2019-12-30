@@ -23,7 +23,7 @@ namespace CSharp
         {
             try
             {
-                UsedTime();
+                PrintFormat();
             }
             catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace CSharp
         #region PrintFormat
         static void PrintFormat()
         {
-            Console.WriteLine("{0}， {1, 4}, {2}, {3}", 1, 2, 3, 4, 5);
+            Console.WriteLine("{0}， {1,4}, {2}, {3}", 1, 2, 3, 4, 5);
         }
         #endregion
 
