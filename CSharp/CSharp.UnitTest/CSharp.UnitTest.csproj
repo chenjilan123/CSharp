@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SqlServer\ConnectionTest.cs" />
     <Compile Include="SqlServer\SqlServerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServer\Config.cs">
