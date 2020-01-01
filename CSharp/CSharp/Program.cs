@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace CSharp
 {
@@ -6,7 +7,11 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            while(true)
+            {
+                Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")}");
+                Task.Delay(TimeSpan.FromSeconds(1D)).Wait();
+            }
         }
     }
 }
