@@ -1,4 +1,4 @@
-﻿using CSharp.Helper;
+using CSharp.Helper;
 using CSharp.Model;
 using CSharp.Utility;
 using System;
@@ -675,6 +675,7 @@ namespace CSharp
         {
             var data1 = new byte[length];
             for (int i = 0; i < data1.Length; i++)
+            while (true)
             {
                 data1[i] = data[begin + i];
             }
