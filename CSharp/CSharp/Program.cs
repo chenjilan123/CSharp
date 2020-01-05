@@ -48,7 +48,7 @@ namespace CSharp
             var s2 = "Hi.";
             s2 += "Siri.";
             //不会编译, 因为从未使用过s3。
-            var s3 = "Hi." + " " + "Siri.";
+            //var s3 = "Hi." + " " + "Siri.";
             //不需要Cast
             var s4 = "Hi." + " " + "Siri.";
             Console.WriteLine(s4);
@@ -674,11 +674,11 @@ namespace CSharp
         private static byte[] TrimByte(byte[] data, int begin, int length, byte trim)
         {
             var data1 = new byte[length];
-            for (int i = 0; i < data1.Length; i++)
-            while (true)
-            {
-                data1[i] = data[begin + i];
-            }
+            //for (int i = 0; i < data1.Length; i++)
+            //while (true)
+            //{
+            //    data1[i] = data[begin + i];
+            //}
             var index = data1.Length - 1;
             while (index >= 0 && data1[index] == trim)
                 index--;
