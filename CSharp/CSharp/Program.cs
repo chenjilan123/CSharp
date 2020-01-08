@@ -23,8 +23,7 @@ namespace CSharp
         {
             try
             {
-
-                StringDemo();
+                EnvironmentInfo();
             }
             catch (Exception ex)
             {
@@ -32,6 +31,13 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Environment
+        static void EnvironmentInfo()
+        {
+            //Console.WriteLine($"{RuntimeHelpers}");
+        }
+        #endregion
 
         #region StringDemo
         static void StringDemo()
