@@ -23,6 +23,7 @@ namespace CSharp
         {
             try
             {
+
                 StringDemo();
             }
             catch (Exception ex)
@@ -392,11 +393,11 @@ namespace CSharp
             SwapHelper.Swap(ref v1, ref v2);
             Console.WriteLine($"v1: {v1.Value}, v2: {v2.Value}");
 
-            Action<int> action1 = i => Console.WriteLine(i);
-            Action<int> action2 = i => Console.WriteLine(i + 1);
-            SwapHelper.Swap(ref action1, ref action2);
-            action1(1);
-            action2(1);
+            //Action<int> action1 = i => Console.WriteLine(i);
+            //Action<int> action2 = i => Console.WriteLine(i + 1);
+            //SwapHelper.Swap(ref action1, ref action2);
+            //action1(1);
+            //action2(1);
 
             Interlocked.CompareExchange<Swapper>(ref r1, r2, null);
             Console.WriteLine($"r1: {r1.Value}, r2: {r2.Value}");
