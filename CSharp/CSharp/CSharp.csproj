@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="SqlServer\" />
-    <Folder Include="NETCore\" />
   </ItemGroup>
 
   <ItemGroup>
