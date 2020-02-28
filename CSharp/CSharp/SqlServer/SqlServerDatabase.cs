@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CSharp.SqlServer
 {
-    class SqlServerDatabase : IProgram
+    class SqlServerDatabase //: IProgram
     {
         public void Run()
         {

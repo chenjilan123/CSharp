@@ -24,7 +24,7 @@ namespace CSharp
         {
             try
             {
-                EnvironmentInfo();
+                Nullable();
             }
             catch (Exception ex)
             {
@@ -32,6 +32,34 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Nullable
+        private static void Nullable()
+        {
+            Nullable<int> v = null;
+            Console.WriteLine(v.HasValue);
+            //NullValue<int> value = null;
+            //Console.WriteLine(value.HasValue);
+
+            Nullable<int> v1 = null;
+            object o1 = v1;
+            int? i4 = (int?)o1;
+            Console.WriteLine(i4.HasValue ? i4.Value.ToString() : "null");
+            //NullReferenceException
+            //int i1 = (int)o1;
+            //Console.WriteLine(o1.GetType());
+            //Console.WriteLine(v1.GetType());
+            Console.WriteLine(v1.HasValue);
+
+            Nullable<int> v2 = 5;
+            object o2 = v2;
+            int i2 = (int)o2;
+            int? i3 = (int)o2;
+            Console.WriteLine(i2);
+            Console.WriteLine(i3.Value);
+            Console.WriteLine(o2.GetType());
+        }
+        #endregion
 
         #region Environment
         static void EnvironmentInfo()
