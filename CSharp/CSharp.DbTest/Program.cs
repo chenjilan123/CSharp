@@ -65,6 +65,11 @@ namespace CSharp.DbTest
                 }
             }
         }
+
+        static void SqlParam()
+        {
+            SqlTransaction v;
+        }
         #endregion
 
         #region TenMinTask
