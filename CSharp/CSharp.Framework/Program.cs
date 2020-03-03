@@ -1,6 +1,7 @@
 ﻿using CSharp.Framework.Email;
 using CSharp.Framework.Face;
 using CSharp.Framework.Face.V2_2;
+using CSharp.Framework.Model;
 using CSharp.Framework.Transfer;
 using CSharp.Helper;
 using System;
@@ -28,7 +29,7 @@ namespace CSharp.Framework
         {
             try
             {
-                PerfGeneric();
+                CER();
             }
             catch (Exception ex)
             {
@@ -36,6 +37,13 @@ namespace CSharp.Framework
             }
             //Console.ReadLine();
         }
+
+        #region CER
+        static void CER()
+        {
+            new CER().Demo();
+        }
+        #endregion
 
         #region Transaction
         static void Transaction()

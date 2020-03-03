@@ -24,10 +24,9 @@ namespace CSharp
 
         static void Main(string[] args)
         {
-            KillProcess();
             try
             {
-                //CustomException.ThreadException();
+                Exception();
             }
             catch (Exception ex)
             {
@@ -44,12 +43,16 @@ namespace CSharp
 
             //.NET Core无效
             //AppDomain.Unload(AppDomain.CurrentDomain);
+
+            //可靠性监控程序： 控制面板>系统与安全>安全和维护>查看可靠性历史记录
+            //throw new Exception("Hehehehehehehe");
         }
         #endregion
 
         #region Exception
         private static void Exception()
         {
+            new CER().Demo();
             try
             {
 
@@ -85,6 +88,8 @@ namespace CSharp
 
         private static void TryFinallyBlanket()
         {
+            //int.TryParse("", (System.Globalization.NumberStyles)999, null, out var result);
+
             //try-finally
             try
             {
@@ -99,9 +104,10 @@ namespace CSharp
             finally
             {
                 //Cover the exception from try blanket
-                throw new Exception("Hello");
+                throw new IOException("Hello");
             }
             //Console.WriteLine("Hello");
+
         }
         private static void ExceptionFilter()
         {

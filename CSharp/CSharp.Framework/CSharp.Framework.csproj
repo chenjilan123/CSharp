@@ -120,6 +120,7 @@
     <Compile Include="Helper\UnityToolHelper.cs" />
     <Compile Include="Helper\WebHelper.cs" />
     <Compile Include="Helper\WebSvc.cs" />
+    <Compile Include="Model\CER.cs" />
     <Compile Include="OperationTimer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
