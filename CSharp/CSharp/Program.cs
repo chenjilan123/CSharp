@@ -14,6 +14,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
+//非异常不包装到RuntimeWrappedException
+//[assembly: RuntimeCompatibility(WrapNonExceptionThrows = false)]
 namespace CSharp
 {
     class Program
@@ -24,7 +26,7 @@ namespace CSharp
         {
             try
             {
-                Nullable();
+                CustomException.ThreadException();
             }
             catch (Exception ex)
             {
@@ -32,6 +34,83 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Exception
+        private static void Exception()
+        {
+            try
+            {
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private static void ExceptionHandleMechanism()
+        {
+            try
+            {
+                //Code
+            }
+            catch
+            {
+                //Recover Code
+
+                //Throw new exception
+
+                //Rethrow
+                throw;
+            }
+            finally
+            {
+
+            }
+            //Execute code when there is not exception throw from catch blanket
+
+        }
+
+        private static void TryFinallyBlanket()
+        {
+            //try-finally
+            try
+            {
+                throw new Exception();
+            }
+            //catch(Exception e)
+            //{
+            //    Console.WriteLine(e.StackTrace);
+            //    Console.WriteLine();
+            //    throw e;
+            //}
+            finally
+            {
+                //Cover the exception from try blanket
+                throw new Exception("Hello");
+            }
+            //Console.WriteLine("Hello");
+        }
+        private static void ExceptionFilter()
+        {
+            try
+            {
+            }
+            //异常筛选器
+            catch (IOException e) when (e.Message.Contains("G"))
+            {
+
+            }
+            catch (IOException e) when (e.Message.Contains("E"))
+            {
+
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
+        }
+        #endregion
 
         #region Nullable
         private static void Nullable()
@@ -267,7 +346,7 @@ namespace CSharp
         #endregion
 
         #region Eve
-        static event EventHandler eve;
+        //static event EventHandler eve;
         static void Eve()
         {
             //eve += (_, e) => { Console.WriteLine("Hehe"); };
