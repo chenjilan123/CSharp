@@ -68,7 +68,8 @@ namespace CSharp.DbTest
 
         static void SqlParam()
         {
-            SqlTransaction v;
+            SqlTransaction v = null;
+            var c = v.Connection;
         }
         #endregion
 
