@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace CSharp.Framework
@@ -35,6 +36,16 @@ namespace CSharp.Framework
             }
             //Console.ReadLine();
         }
+
+        #region Transaction
+        static void Transaction()
+        {
+            using (TransactionScope ts = new TransactionScope())
+            {
+                
+            }
+        }
+        #endregion
 
         #region PerfGeneric
         static void PerfGeneric()

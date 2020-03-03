@@ -24,9 +24,10 @@ namespace CSharp
 
         static void Main(string[] args)
         {
+            KillProcess();
             try
             {
-                CustomException.ThreadException();
+                //CustomException.ThreadException();
             }
             catch (Exception ex)
             {
@@ -34,6 +35,17 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region KillProcess
+        static void KillProcess()
+        {
+            //Environment.FailFast("Done....!");
+            //Console.WriteLine("Heehe");
+
+            //.NET Core无效
+            //AppDomain.Unload(AppDomain.CurrentDomain);
+        }
+        #endregion
 
         #region Exception
         private static void Exception()
