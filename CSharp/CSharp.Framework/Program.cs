@@ -29,7 +29,7 @@ namespace CSharp.Framework
         {
             try
             {
-                CER();
+                AppDomainDemo();
             }
             catch (Exception ex)
             {
@@ -37,6 +37,13 @@ namespace CSharp.Framework
             }
             //Console.ReadLine();
         }
+
+        #region AppDomainDemo
+        static void AppDomainDemo()
+        {
+            CSharp.Framework.Model.AppDomainModel.Marshalling();
+        }
+        #endregion
 
         #region CER
         static void CER()

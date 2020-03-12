@@ -26,7 +26,7 @@ namespace CSharp
         {
             try
             {
-                Exception();
+
             }
             catch (Exception ex)
             {
@@ -34,6 +34,13 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region AppDomainDemo
+        static void AppDomainDemo()
+        {
+            AppDomainModel.Marshalling();
+        }
+        #endregion
 
         #region KillProcess
         static void KillProcess()
