@@ -46,8 +46,6 @@ namespace CSharp.Framework.Model
             AppDomain.Unload(ad2);
             value.Method();
 
-
-
             Console.ReadLine();
         }
 

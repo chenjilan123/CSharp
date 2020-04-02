@@ -29,14 +29,61 @@ namespace CSharp.Framework
         {
             try
             {
-                AppDomainDemo();
+                ThreadAbort();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
-            //Console.ReadLine();
         }
+
+        #region ThreadAbort
+        static void ThreadAbort()
+        {
+            var t0 = new Thread(() =>
+            {
+                try
+                {
+                    while (true)
+                    {
+                        Console.WriteLine($"{DateTime.Now.ToLongTimeString()}: Hello.");
+                        Thread.Sleep(TimeSpan.FromSeconds(1D));
+                    }
+
+                }
+                catch (ThreadAbortException e)
+                {
+                    //添加Microsoft.CSharp
+                    dynamic v = e.ExceptionState;
+                    Console.WriteLine($"{v.Id}: {v.Message}");
+                }
+            });
+            t0.Start();
+
+            Thread.Sleep(TimeSpan.FromSeconds(2.5D));
+            //t0.Abort("I just abort you....");
+            t0.Abort(new { Id = 5, Message = "Hello are you ok?" });
+        }
+        #endregion
+
+        #region ExceptionFlow
+        static void ExceptionFlow()
+        {
+            AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
+            ThrowException();
+        }
+
+        static void ThrowException()
+        {
+            throw new IOException();
+        }
+
+        private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
+        {
+            //堆栈追踪只有一层。
+            Console.WriteLine($"A exception occur: {e.Exception.ToString()}");
+        }
+        #endregion
 
         #region AppDomainDemo
         static void AppDomainDemo()
@@ -57,7 +104,7 @@ namespace CSharp.Framework
         {
             using (TransactionScope ts = new TransactionScope())
             {
-                
+
             }
         }
         #endregion
