@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -29,13 +30,30 @@ namespace CSharp.Framework
         {
             try
             {
-                ThreadAbort();
+                ShowInterfaceSpeedAndQueue();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        #region ShowInterfaceSpeedAndQueue
+        public static void ShowInterfaceSpeedAndQueue()
+        {
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in adapters)
+            {
+                IPInterfaceProperties properties = adapter.GetIPProperties();
+                IPv4InterfaceStatistics stats = adapter.GetIPv4Statistics();
+                Console.WriteLine(adapter.Description);
+                Console.WriteLine("     Speed .................................: {0}",
+                    adapter.Speed);
+                Console.WriteLine("     Output queue length....................: {0}",
+                    stats.OutputQueueLength);
+            }
+        }
+        #endregion
 
         #region ThreadAbort
         static void ThreadAbort()
