@@ -8,17 +8,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows.Forms;
+using System.Windows.Controls;
 
 namespace CSharp.Framework
 {
@@ -30,7 +34,7 @@ namespace CSharp.Framework
         {
             try
             {
-                ShowInterfaceSpeedAndQueue();
+                DependencyProperty();
             }
             catch (Exception ex)
             {
@@ -38,7 +42,67 @@ namespace CSharp.Framework
             }
         }
 
+        #region DependencyProperty
+
+        public static void DependencyProperty()
+        {
+            var p1 = new Personality() { Value = 1 };
+            var p2 = new Personality() { Value = 2 };
+            var p3 = new Personality() { Value = 3 };
+            var p4 = new Personality() { Value = 4 };
+            var p5 = new Personality() { Value = 5 };
+
+            Console.WriteLine(p1.Value);
+            Console.WriteLine(p2.Value);
+            Console.WriteLine(p3.Value);
+            Console.WriteLine(p4.Value);
+            Console.WriteLine(p5.Value);
+        }
+
+        #endregion
+
+        #region PropertyMachanism
+
+        public static void PropertyMachanism()
+        {
+            var x = InstanceModel.Instance;
+            var y = InstanceModel.Instance;
+        }
+
+        #endregion
+
         #region ShowInterfaceSpeedAndQueue
+        public static void GetSpeed()
+        {
+            Stopwatch stopwatch = new Stopwatch();
+
+            var count = 0;
+            while (true)
+            {
+                stopwatch.Reset();
+                stopwatch.Start();
+
+                WebClient webClient = new WebClient();
+                byte[] bytes = webClient.DownloadData("http://www.baidu.com");
+
+                stopwatch.Stop();
+
+                double seconds = stopwatch.Elapsed.TotalSeconds;
+
+                double speed = bytes.Count() / seconds;
+
+                Console.WriteLine(string.Format("Your download speed({1}): {0:#0.00} KB/s.", speed / 1024, ++count));
+
+                Thread.Sleep(500);
+            }
+        }
+
+        public static void GetSpeed1()
+        {
+            IPv4InterfaceStatistics v;
+            IPGlobalStatistics s;
+
+        }
         public static void ShowInterfaceSpeedAndQueue()
         {
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
@@ -52,6 +116,74 @@ namespace CSharp.Framework
                 Console.WriteLine("     Output queue length....................: {0}",
                     stats.OutputQueueLength);
             }
+        }
+        public static void ShowIPStatistics(NetworkInterfaceComponent version)
+        {
+            IPGlobalProperties properties = IPGlobalProperties.GetIPGlobalProperties();
+            IPGlobalStatistics ipstat = null;
+            switch (version)
+            {
+                case NetworkInterfaceComponent.IPv4:
+                    ipstat = properties.GetIPv4GlobalStatistics();
+                    Console.WriteLine("{0}IPv4 Statistics ", Environment.NewLine);
+                    break;
+                case NetworkInterfaceComponent.IPv6:
+                    ipstat = properties.GetIPv4GlobalStatistics();
+                    Console.WriteLine("{0}IPv6 Statistics ", Environment.NewLine);
+                    break;
+                default:
+                    throw new ArgumentException("version");
+                    //    break;
+            }
+            Console.WriteLine("  Forwarding enabled ...................... : {0}",
+                ipstat.ForwardingEnabled);
+            Console.WriteLine("  Interfaces .............................. : {0}",
+                ipstat.NumberOfInterfaces);
+            Console.WriteLine("  IP addresses ............................ : {0}",
+                ipstat.NumberOfIPAddresses);
+            Console.WriteLine("  Routes .................................. : {0}",
+                ipstat.NumberOfRoutes);
+            Console.WriteLine("  Default TTL ............................. : {0}",
+                ipstat.DefaultTtl);
+            Console.WriteLine("");
+            Console.WriteLine("  Inbound Packet Data:");
+            Console.WriteLine("      Received ............................ : {0}",
+                ipstat.ReceivedPackets);
+            Console.WriteLine("      Forwarded ........................... : {0}",
+                ipstat.ReceivedPacketsForwarded);
+            Console.WriteLine("      Delivered ........................... : {0}",
+                ipstat.ReceivedPacketsDelivered);
+            Console.WriteLine("      Discarded ........................... : {0}",
+                ipstat.ReceivedPacketsDiscarded);
+            Console.WriteLine("      Header Errors ....................... : {0}",
+                ipstat.ReceivedPacketsWithHeadersErrors);
+            Console.WriteLine("      Address Errors ...................... : {0}",
+                ipstat.ReceivedPacketsWithAddressErrors);
+            Console.WriteLine("      Unknown Protocol Errors ............. : {0}",
+                ipstat.ReceivedPacketsWithUnknownProtocol);
+            Console.WriteLine("");
+            Console.WriteLine("  Outbound Packet Data:");
+            Console.WriteLine("      Requested ........................... : {0}",
+                 ipstat.OutputPacketRequests);
+            Console.WriteLine("      Discarded ........................... : {0}",
+                ipstat.OutputPacketsDiscarded);
+            Console.WriteLine("      No Routing Discards ................. : {0}",
+                ipstat.OutputPacketsWithNoRoute);
+            Console.WriteLine("      Routing Entry Discards .............. : {0}",
+                ipstat.OutputPacketRoutingDiscards);
+            Console.WriteLine("");
+            Console.WriteLine("  Reassembly Data:");
+            Console.WriteLine("      Reassembly Timeout .................. : {0}",
+                ipstat.PacketReassemblyTimeout);
+            Console.WriteLine("      Reassemblies Required ............... : {0}",
+                ipstat.PacketReassembliesRequired);
+            Console.WriteLine("      Packets Reassembled ................. : {0}",
+                ipstat.PacketsReassembled);
+            Console.WriteLine("      Packets Fragmented .................. : {0}",
+                ipstat.PacketsFragmented);
+            Console.WriteLine("      Fragment Failures ................... : {0}",
+                ipstat.PacketFragmentFailures);
+            Console.WriteLine("");
         }
         #endregion
 
