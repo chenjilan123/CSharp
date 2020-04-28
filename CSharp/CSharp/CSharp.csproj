@@ -11,7 +11,7 @@
     <PackageReference Include="aliyun-net-sdk-dyvmsapi" Version="3.0.0" />
     <PackageReference Include="aliyun.oss.sdk.core" Version="2.5.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="System.IO.Pipelines" Version="4.5.3" />
+    <PackageReference Include="System.IO.Pipelines" Version="4.7.1" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
     <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\aliyun-net-sdk-core\aliyun-net-sdk-core.vs2017.csproj" />
     <ProjectReference Include="..\CSharp.Model\CSharp.Model.csproj" />
   </ItemGroup>
 
