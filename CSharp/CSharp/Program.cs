@@ -37,7 +37,7 @@ namespace CSharp
             try
             {
                 //System.ComponentModel.Int64Converter.StandardValuesCollection a;
-                WebProxyClient();
+                TimeSpanFormat();
             }
             catch (Exception ex)
             {
@@ -45,6 +45,16 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+        #region TimeSpanFormat
+
+        private static void TimeSpanFormat()
+        {
+            var ts = new TimeSpan(10, 0, 0);
+            Console.WriteLine(ts.ToString("dd\\.hh\\:mm\\:ss"));
+            Console.WriteLine($"{ts:hh\\:mm}");
+        }
+
+        #endregion
 
         #region Dns_
         static void Dns_()
