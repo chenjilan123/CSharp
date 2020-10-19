@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
@@ -31,13 +32,11 @@ namespace CSharp
 {
     class Program
     {
-        private const int PadLength = 30;
         static void Main(string[] args)
         {
             try
             {
-                //System.ComponentModel.Int64Converter.StandardValuesCollection a;
-                TimeSpanFormat();
+                Base64String();
             }
             catch (Exception ex)
             {
@@ -45,10 +44,60 @@ namespace CSharp
             }
             Console.ReadLine();
         }
+
+        #region Base64
+
+        public static void Base64String()
+        {
+            // Header
+
+            // Backward
+            {
+                Console.WriteLine("Header:");
+                var base64 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
+                var header = Encoding.UTF8.GetString(Convert.FromBase64String(base64));
+                Console.WriteLine(header);
+            }
+
+            // Forward
+            {
+                Console.WriteLine("Signature:");
+                var header = "{\"alg\":\"HS256\",\"typ\":\"JWT\"}";
+                var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(header));
+                Console.WriteLine(base64);
+            }
+
+            // Payload
+            Console.WriteLine();
+            Console.WriteLine("Header:");
+            PrintRaw("eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ==");
+            PrintBase64("{\"sub\":\"1234567890\",\"name\":\"John Doe\",\"iat\":1516239022}");
+
+            // Signature
+            //PrintRaw("cThIIoDvwdueQB468K5xDc5633seEFoqwxjF_xSJyQQ");
+
+            void PrintRaw(string base64)
+            {
+                var bytes = Convert.FromBase64String(base64);
+                var msg = Encoding.UTF8.GetString(bytes);
+                Console.WriteLine(msg);
+            }
+
+            void PrintBase64(string msg)
+            {
+                Console.WriteLine("Signature:");
+                var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(msg));
+                Console.WriteLine(base64);
+            }
+        }
+
+        #endregion
+
         #region TimeSpanFormat
 
         private static void TimeSpanFormat()
         {
+            //System.ComponentModel.Int64Converter.StandardValuesCollection a;
             var ts = new TimeSpan(10, 0, 0);
             Console.WriteLine(ts.ToString("dd\\.hh\\:mm\\:ss"));
             Console.WriteLine($"{ts:hh\\:mm}");
